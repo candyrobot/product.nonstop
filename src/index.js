@@ -1,25 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import ActionsBar from './component/ActionsBar';
+import LayerContent from './component/LayerContent';
+import LayerNavigation from './component/LayerNavigation';
+import LayerOverlay from './component/LayerOverlay';
+import LayerAppNotification from './component/LayerAppNotification';
 import * as serviceWorker from './serviceWorker';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
   palette: {
-    primary: {
-      main: '#880e4f',
-    },
-    secondary: {
-      main: '#f06292',
-    },
+	primary: {
+	  main: '#880e4f',
+	},
+	secondary: {
+	  main: '#f06292',
+	},
   },
 });
 
 ReactDOM.render(
-    <MuiThemeProvider theme={theme}>
-      <ActionsBar />
-    </MuiThemeProvider>
+	<MuiThemeProvider theme={theme}>
+		<LayerContent />
+		<LayerNavigation />
+		<LayerOverlay />
+		<LayerAppNotification />
+	</MuiThemeProvider>
 	,
 	document.getElementById('root')
 );
