@@ -1,8 +1,8 @@
-// import React, { Component } from 'react';
+import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Layer from './component/Layer';
-import ActionsBar from './component/ActionsBar';
+import Layer from './Layer';
+import ActionsBar from './ActionsBar';
 
 const styles = {
   root: {
@@ -15,9 +15,11 @@ class LayerNavigation extends Layer {
   	super();
   }
   render() {
-    <div>
-      <ActionsBar />
-    </div>
+    return (
+      <div>
+        <ActionsBar />
+      </div>
+    );
   }
 }
 

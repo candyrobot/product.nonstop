@@ -10,7 +10,9 @@ const styles = {
 
 class Layer extends Component {
   render() {
-    <div></div>
+    return (
+      <div></div>
+    );
   }
 }
 
@@ -18,4 +20,4 @@ class Layer extends Component {
 //   classes: PropTypes.object.isRequired,
 // };
 
-export default withStyles(styles)(Layer);
+export default (Layer);

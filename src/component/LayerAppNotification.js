@@ -1,7 +1,7 @@
-// import React, { Component } from 'react';
+import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Layer from './component/Layer';
+import Layer from './Layer';
 
 const styles = {
   root: {
@@ -11,12 +11,14 @@ const styles = {
 
 class LayerAppNotification extends Layer {
   constructor() {
-  	super();
+    super();
   }
   render() {
-    <div>
-    	{4}
-    </div>
+    return (
+      <div className="hoge">
+        4
+      </div>
+    );
   }
 }
 

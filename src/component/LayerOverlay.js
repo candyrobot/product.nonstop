@@ -1,7 +1,7 @@
-// import React, { Component } from 'react';
+import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Layer from './component/Layer';
+import Layer from './Layer';
 
 const styles = {
   root: {
@@ -14,9 +14,11 @@ class LayerOverlay extends Layer {
   	super();
   }
   render() {
-    <div>
-    	{3}
-    </div>
+    return (
+      <div>
+        {3}
+      </div>
+    );
   }
 }
 
