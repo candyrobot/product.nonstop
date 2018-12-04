@@ -35,6 +35,11 @@ class ActionsBar extends Component {
     this.setState({ value });
   };
 
+  // - 人気
+  // - 新着
+  // - お気入り
+  // - マイページ
+
   render() {
     const { classes } = this.props;
     const { value } = this.state;
@@ -47,12 +52,6 @@ class ActionsBar extends Component {
         className={classes.root}
       >
         <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
         <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
         <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
         <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />

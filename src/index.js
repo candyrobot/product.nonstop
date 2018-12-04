@@ -21,7 +21,10 @@ const theme = createMuiTheme({
 
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
+    <LayerContent />
     <LayerNavigation />
+    <LayerOverlay />
+    <LayerAppNotification />
   </MuiThemeProvider>
   ,
   document.getElementById('root')
@@ -31,8 +34,3 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();
-
-    // <LayerContent />
-    // <LayerNavigation />
-    // <LayerOverlay />
-    // <LayerAppNotification />
