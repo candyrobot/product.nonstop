@@ -10,27 +10,29 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
   palette: {
-	primary: {
-	  main: '#880e4f',
-	},
-	secondary: {
-	  main: '#f06292',
-	},
+  primary: {
+    main: '#880e4f',
+  },
+  secondary: {
+    main: '#f06292',
+  },
   },
 });
 
 ReactDOM.render(
-	<MuiThemeProvider theme={theme}>
-		<LayerContent />
-		<LayerNavigation />
-		<LayerOverlay />
-		<LayerAppNotification />
-	</MuiThemeProvider>
-	,
-	document.getElementById('root')
+  <MuiThemeProvider theme={theme}>
+    <LayerNavigation />
+  </MuiThemeProvider>
+  ,
+  document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+    // <LayerContent />
+    // <LayerNavigation />
+    // <LayerOverlay />
+    // <LayerAppNotification />

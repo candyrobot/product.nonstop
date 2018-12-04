@@ -1,30 +1,18 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Layer from './Layer';
 import ActionsBar from './ActionsBar';
 
-const styles = {
-  root: {
-    width: '100%',
-  },
-};
-
-class LayerNavigation extends Layer {
+class LayerNavigation extends Component {
   constructor() {
   	super();
   }
   render() {
     return (
-      <div>
+      <Layer className="LayerNavigation">
         <ActionsBar />
-      </div>
+      </Layer>
     );
   }
 }
 
-// LayerNavigation.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
-
-export default withStyles(styles)(LayerNavigation);
+export default LayerNavigation;

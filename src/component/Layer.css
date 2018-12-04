@@ -1,0 +1,12 @@
+.Layer {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  pointer-events: none;
+}
+
+.Layer *:not(.frombottom) {
+  pointer-events: initial;
+}

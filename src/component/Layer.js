@@ -1,23 +1,14 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-
-const styles = {
-  root: {
-    width: '100%',
-  },
-};
+import './Layer.css';
 
 class Layer extends Component {
   render() {
     return (
-      <div></div>
+      <div className={'Layer ' + this.props.className}>
+      	{this.props.children}
+      </div>
     );
   }
 }
 
-// Layer.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
-
-export default (Layer);
+export default Layer;

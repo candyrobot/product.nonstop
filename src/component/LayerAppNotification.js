@@ -1,29 +1,17 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Layer from './Layer';
 
-const styles = {
-  root: {
-    width: '100%',
-  },
-};
-
-class LayerAppNotification extends Layer {
+class LayerAppNotification extends Component {
   constructor() {
     super();
   }
   render() {
     return (
-      <div className="hoge">
+      <Layer>
         4
-      </div>
+      </Layer>
     );
   }
 }
 
-// LayerAppNotification.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
-
-export default withStyles(styles)(LayerAppNotification);
+export default LayerAppNotification;

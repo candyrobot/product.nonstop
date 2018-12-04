@@ -61,8 +61,8 @@ class ActionsBar extends Component {
   }
 }
 
-// ActionsBar.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
+ActionsBar.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
 export default withStyles(styles)(ActionsBar);
