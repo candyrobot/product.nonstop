@@ -12,13 +12,14 @@ const styles = theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
+    // justifyContent: 'space-around',
+    height: '100%',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
     width: 500,
-    height: 450,
+    height: '100%',
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: 'translateZ(0)',
   },
@@ -43,7 +44,7 @@ const styles = theme => ({
  *     img: image,
  *     title: 'Image',
  *     author: 'author',
- *     featured: true,
+ *     featured: false,
  *   },
  *   {
  *     [etc...]
@@ -52,18 +53,69 @@ const styles = theme => ({
  */
 const tileData = [
   {
-    img: image,
+    img: 'https://www.gravatar.com/avatar/a007be5a61f6aa8f3e85ae2fc18dd66e?s=32&d=identicon&r=PG',
     title: 'Image',
     author: 'author',
-    featured: true,
+    featured: false,
   },
   {
-    [etc...]
+    img: 'https://www.gravatar.com/avatar/a007be5a61f6aa8f3e85ae2fc18dd66e?s=32&d=identicon&r=PG',
+    title: 'Image',
+    author: 'author',
+    featured: false,
+  },
+  {
+    img: 'https://www.gravatar.com/avatar/a007be5a61f6aa8f3e85ae2fc18dd66e?s=32&d=identicon&r=PG',
+    title: 'Image',
+    author: 'author',
+    featured: false,
+  },
+  {
+    img: 'https://www.gravatar.com/avatar/a007be5a61f6aa8f3e85ae2fc18dd66e?s=32&d=identicon&r=PG',
+    title: 'Image',
+    author: 'author',
+    featured: false,
+  },
+  {
+    img: 'https://www.gravatar.com/avatar/a007be5a61f6aa8f3e85ae2fc18dd66e?s=32&d=identicon&r=PG',
+    title: 'Image',
+    author: 'author',
+    featured: false,
+  },
+  {
+    img: 'https://www.gravatar.com/avatar/a007be5a61f6aa8f3e85ae2fc18dd66e?s=32&d=identicon&r=PG',
+    title: 'Image',
+    author: 'author',
+    featured: false,
+  },
+  {
+    img: 'https://www.gravatar.com/avatar/a007be5a61f6aa8f3e85ae2fc18dd66e?s=32&d=identicon&r=PG',
+    title: 'Image',
+    author: 'author',
+    featured: false,
+  },
+  {
+    img: 'https://www.gravatar.com/avatar/a007be5a61f6aa8f3e85ae2fc18dd66e?s=32&d=identicon&r=PG',
+    title: 'Image',
+    author: 'author',
+    featured: false,
+  },
+  {
+    img: 'https://www.gravatar.com/avatar/a007be5a61f6aa8f3e85ae2fc18dd66e?s=32&d=identicon&r=PG',
+    title: 'Image',
+    author: 'author',
+    featured: false,
+  },
+  {
+    img: 'https://www.gravatar.com/avatar/a007be5a61f6aa8f3e85ae2fc18dd66e?s=32&d=identicon&r=PG',
+    title: 'Image',
+    author: 'author',
+    featured: false,
   },
 ];
 
 
-function AdvancedGridList(props) {
+function GridListAdvanced(props) {
   const { classes } = props;
 
   return (
@@ -90,8 +142,8 @@ function AdvancedGridList(props) {
   );
 }
 
-AdvancedGridList.propTypes = {
+GridListAdvanced.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(AdvancedGridList);
+export default withStyles(styles)(GridListAdvanced);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Layer from './Layer';
+import GridListAdvanced from './GridListAdvanced';
 
 class LayerContent extends Component {
   constructor() {
@@ -8,9 +9,7 @@ class LayerContent extends Component {
   render() {
     return (
       <Layer>
-        <div style={{ backgroundColor: 'blue' }}>
-          1
-        </div>
+        <GridListAdvanced />
       </Layer>
     );
   }

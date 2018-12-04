@@ -14,7 +14,8 @@ const styles = {
     position: 'fixed',
     justifyContent: 'initial',
     bottom: 0,
-    overflow: 'auto'
+    overflow: 'auto',
+    boxShadow: '0 0 50px rgba(0,0,0,.3)'
   },
 };
 
@@ -26,7 +27,7 @@ class ActionsBar extends Component {
       items: [1,2,3]
     };
   }
-  
+
   state = {
     value: 0,
   };
