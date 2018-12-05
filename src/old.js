@@ -3,7 +3,7 @@ import $ from 'jquery';
 var countUp, deleteFav, getHtmlFav, isAndroid, isEmpty, isInvalid, isShouldNotRender, isValidEmail, lazyShow, renderImage, renderImages, renderRecommendation, showWebview, sortByFrequency, startLoading, stopLoading, toast;
 
 window.initializeApp = function() {
-  return $.get('http://with-one-account-prd.herokuapp.com/application' + window.location.search, function(dat) {
+  return $.get('https://with-one-account-prd.herokuapp.com/application' + window.location.search, function(dat) {
     var b, imageID;
     console.log(dat);
     window.dat = dat;
@@ -33,7 +33,7 @@ window.initializeApp = function() {
             };
           })(this));
         } else {
-          $.post('http://with-one-account-prd.herokuapp.com/favorites', {
+          $.post('https://with-one-account-prd.herokuapp.com/favorites', {
             imageID: imageID
           }).fail(function(dat) {
             return toast(dat.responseJSON.toast);
@@ -43,7 +43,7 @@ window.initializeApp = function() {
             };
           })(this));
         }
-        return $.get('http://with-one-account-prd.herokuapp.com/images/list', {
+        return $.get('https://with-one-account-prd.herokuapp.com/images/list', {
           related: true,
           imageID: imageID
         }).done(renderRecommendation).always(function() {
@@ -68,7 +68,7 @@ window.initializeApp = function() {
 deleteFav = function(imageID) {
   return $.ajax({
     type: 'DELETE',
-    url: 'http://with-one-account-prd.herokuapp.com/favorites',
+    url: 'https://with-one-account-prd.herokuapp.com/favorites',
     data: {
       imageID: imageID
     }
@@ -85,7 +85,7 @@ window.signup = function() {
   if (isInvalid(dat)) {
     return;
   }
-  return $.post('http://with-one-account-prd.herokuapp.com/users/', dat).fail(function(dat) {
+  return $.post('https://with-one-account-prd.herokuapp.com/users/', dat).fail(function(dat) {
     return toast(dat.responseJSON.toast);
   }).done(function() {
     return window.login(dat);
@@ -93,7 +93,7 @@ window.signup = function() {
 };
 
 window.logout = function() {
-  return $.post('http://with-one-account-prd.herokuapp.com/users/logout').fail(function(dat) {
+  return $.post('https://with-one-account-prd.herokuapp.com/users/logout').fail(function(dat) {
     return toast(dat.responseJSON.toast);
   }).done(function() {
     return setTimeout('window.location.reload()', 1000);
@@ -109,7 +109,7 @@ window.login = function(dat) {
   if (isInvalid(dat)) {
     return;
   }
-  return $.post('http://with-one-account-prd.herokuapp.com/users/login', dat).fail(function(dat) {
+  return $.post('https://with-one-account-prd.herokuapp.com/users/login', dat).fail(function(dat) {
     return toast(dat.responseJSON.toast);
   }).done(function() {
     return setTimeout('window.location.reload()', 1000);
@@ -213,7 +213,7 @@ renderImages = function() {
         };
       })(this));
     } else {
-      return $.post('http://with-one-account-prd.herokuapp.com/favorites', {
+      return $.post('https://with-one-account-prd.herokuapp.com/favorites', {
         imageID: imageID
       }).fail(function(dat) {
         return toast(dat.responseJSON.toast);
@@ -249,7 +249,7 @@ renderImage = function(image) {
 window.post = function() {
   var url;
   url = $('#component-post input').val();
-  return $.post('http://with-one-account-prd.herokuapp.com/images/', {
+  return $.post('https://with-one-account-prd.herokuapp.com/images/', {
     url: url
   }).fail(function(dat) {
     return toast(dat.responseJSON.toast);
