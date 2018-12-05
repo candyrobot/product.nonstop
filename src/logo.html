@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--
+- logoをhtmlでつくるためのhtmlファイル
+- 300x300でデベロッパーツールでスクショをとればおｋ
+ -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<div></div>
+<style>
+html, body {
+  height: 100%;
+  overflow: hidden;
+  max-width: 300px;
+  max-height: 300px;
+}
+
+body {
+  /*BY: https://mycolor.space/gradient?ori=to+right+top&hex=%232453A5&hex2=%231F95F0&sub=1*/
+  background-image: -webkit-linear-gradient(bottom, #2453a5, #2563b8, #2473cb, #2284dd, #1f95f0);
+  background-image: -o-linear-gradient(bottom, #2453a5, #2563b8, #2473cb, #2284dd, #1f95f0);
+  background-image: linear-gradient(to top, #2453a5, #2563b8, #2473cb, #2284dd, #1f95f0);
+}
+
+div {
+    position: absolute;
+    left: -25%;
+    width: 200%;
+    top: -25%;
+    height: 100%;
+    overflow: hidden;
+    background-color: white;
+    transform: rotateZ(45deg);
+    transform-origin: 25%;
+/*background-image: linear-gradient(to right bottom, #ffffff, #fafafa, #f4f4f4, #efefef, #eaeaea);
+background-image: linear-gradient(to right bottom, #c3c3c3, #d2d2d2, #e1e1e1, #f0f0f0, #ffffff);
+*/}
+
+div:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: 0;
+    height: 200%;
+    transform: rotateZ(-45deg);
+background: #ffffff;
+background: -moz-linear-gradient(top, #ffffff 4%, #e2e2e2 67%);
+background: -webkit-linear-gradient(top, #ffffff 4%,#e2e2e2 67%);
+background: linear-gradient(to bottom, #ffffff 4%,#e2e2e2 67%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e2e2e2',GradientType=0 );
+
+
+
+}
+
+</style>
+</body>
+</html>
