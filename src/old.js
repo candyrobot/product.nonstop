@@ -188,7 +188,20 @@ renderImages = function() {
       return dat.id === parseInt(fav.imageID);
     }).length);
     t = (j + i) % 12 ? "" : "<div class=\"message\">\n	スマホのホーム画面にこのアプリを追加することができるのです\n	<i>(ここをタップ)</i>\n</div>";
-    return prev + (t + "\n<div class=\"outer fas fa-unlink\" data-imageID=\"" + dat.id + "\">\n	<a\n	class=\"inner\"\n	href=\"/images?imageID=" + dat.id + "\"\n	style=\"background-image: url(" + dat.url + ")\">\n	</a>\n	" + s + "\n	<div class=\"favoriteNum\">" + (dat.favorite ? dat.favorite : '') + "</div>\n</div>");
+    return prev + (t + `
+      <div
+        style="display: none"
+        class="outer fas fa-unlink"
+        data-imageID="${dat.id}">
+        <a
+          class="inner"
+          href="/images?imageID=${dat.id}"
+          style="background-image: url(${dat.url})">
+        </a>
+        ${s}
+        <div class="favoriteNum">${dat.favorite ? dat.favorite : ''}</div>
+      </div>
+    `);
   }, "");
   $('#component-images').html(html).find('.component-fav').on('click', function() {
     var imageID;
@@ -211,6 +224,12 @@ renderImages = function() {
       })(this));
     }
   });
+
+  $('#component-images > .outer').filter(isAlmostThere()).show();
+  $(document).on('scroll', function() {
+    $('#component-images > .outer').filter(isAlmostThere()).fadeIn();
+  });
+
   $('#component-images').find('.message').on('click', function() {
     if (isAndroid()) {
       return showWebview('https://www.youtube.com/embed/f9MsSWxJXhc');
@@ -295,9 +314,56 @@ isAndroid = function() {
 lazyShow = function(selector) {
   return $(selector).on('inview', function(e, isInView) {
     if (isInView) {
-      return $(this).nextAll(selector + ':first').nextAll(selector + ':first').nextAll(selector + ':first').nextAll(selector + ':first').nextAll(selector + ':first').nextAll(selector + ':first').nextAll(selector + ':first').nextAll(selector + ':first').fadeIn(500);
+      return $(this)
+      .nextAll(selector + ':first').nextAll(selector + ':first')
+      .nextAll(selector + ':first').nextAll(selector + ':first')
+      .nextAll(selector + ':first').nextAll(selector + ':first')
+      .nextAll(selector + ':first').nextAll(selector + ':first')
+      .fadeIn(500);
     }
   });
+};
+
+const isAlmostThere = function(threshold = 100) {
+  return function() {
+    var target = {
+      top: $(this).offset().top - threshold,
+      bottom: $(this).offset().top + $(this).outerHeight() + threshold,
+    };
+    var viewable = {
+      top: $(document).scrollTop(),
+      bottom: $(document).scrollTop() + $(window).innerHeight()
+    }
+    return target.top < viewable.bottom && target.bottom > viewable.top;
+  };
+};
+
+/**
+ - TODO: x軸の処理を書いていない
+ * @param  {Boolean} isEntire - trueで要素全体が入ったときにtrueを返す
+ * @return {Boolean}          [description]
+ */
+$.fn.isInview = function(isEntire = false) {
+  var target = {
+    top: $(this).offset().top,
+    bottom: $(this).offset().top + $(this).outerHeight(),
+  };
+  var viewable = {
+    top: $(document).scrollTop(),
+    bottom: $(document).scrollTop() + $(window).innerHeight()
+  }
+  return target.top < viewable.bottom && target.bottom > viewable.top;
+};
+$.fn.isAlmostThere = function(threshold = 100) {
+  var target = {
+    top: $(this).offset().top - threshold,
+    bottom: $(this).offset().top + $(this).outerHeight() + threshold,
+  };
+  var viewable = {
+    top: $(document).scrollTop(),
+    bottom: $(document).scrollTop() + $(window).innerHeight()
+  }
+  return target.top < viewable.bottom && target.bottom > viewable.top;
 };
 
 // ---

@@ -221,9 +221,6 @@ input, button {
   color: #005fc7;
   font-size: 40px;
 }
-#component-images > .outer:nth-child(n + 11) {
-  display: none;
-}
 #component-images > .outer > .inner {
   display: block;
   position: relative;
