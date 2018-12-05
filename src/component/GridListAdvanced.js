@@ -117,13 +117,13 @@ const tileData = [
 
 function GridListAdvanced(props) {
   const { classes } = props;
-
+  const dat = props.dat || { images: [] };
   return (
     <div className={classes.root}>
       <GridList cellHeight={200} spacing={1} className={classes.gridList}>
-        {tileData.map(tile => (
+        {dat.images.map(tile => (
           <GridListTile key={tile.img} cols={tile.featured ? 2 : 1} rows={tile.featured ? 2 : 1}>
-            <img src={tile.img} alt={tile.title} />
+            <img src={tile.url} alt={tile.title} />
             <GridListTileBar
               title={tile.title}
               titlePosition="top"

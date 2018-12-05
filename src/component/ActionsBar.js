@@ -44,7 +44,6 @@ class ActionsBar extends Component {
   render() {
     const { classes } = this.props;
     const { value } = this.state;
-    console.log(this.props)
     return (
       <BottomNavigation
         value={value}

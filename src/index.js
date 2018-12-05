@@ -8,6 +8,13 @@ import LayerAppNotification from './component/LayerAppNotification';
 import * as serviceWorker from './serviceWorker';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
+// import { createStore } from 'redux';
+// import { Provider } from 'react-redux';
+// import reducer from './reducers/index';
+import Gateway from './Gateway';
+
+import $ from 'jquery';
+
 const theme = createMuiTheme({
   // Docker's gradient #2453a5 -> #1f95f0
   palette: {
@@ -23,16 +30,35 @@ const theme = createMuiTheme({
   },
 });
 
-ReactDOM.render(
-  <MuiThemeProvider theme={theme}>
-    <LayerContent />
-    <LayerNavigation />
-    <LayerOverlay />
-    <LayerAppNotification />
-  </MuiThemeProvider>
-  ,
-  document.getElementById('root')
-);
+// const store = createStore(reducer);
+
+class App extends React.Component {
+  state = {}
+  constructor() {
+    super();
+    $.get('http://with-one-account-prd.herokuapp.com/application')
+    .done((dat)=> {
+      this.setState({ dat: dat });
+      console.log(dat)
+      console.log("setState")
+      this.render();
+    });
+  }
+  render() {
+    return (
+      <div className="App">
+        <MuiThemeProvider theme={theme}>
+          <LayerContent dat={this.state.dat} />
+          <LayerNavigation dat={this.state.dat} />
+          <LayerOverlay dat={this.state.dat} />
+          <LayerAppNotification dat={this.state.dat} />
+        </MuiThemeProvider>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render( <App />, document.getElementById('root') );
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

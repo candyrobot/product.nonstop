@@ -9,7 +9,7 @@ class LayerContent extends Component {
   render() {
     return (
       <Layer>
-        <GridListAdvanced />
+        <GridListAdvanced dat={this.props.dat} />
       </Layer>
     );
   }
