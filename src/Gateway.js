@@ -31,6 +31,10 @@ class Gateway {
 	getImages() {
 		return this.dat.images
 	}
+
+	getImagesReversed() {
+		return this.dat.images.clone().reverse()
+	}
 }
 
 // INFO: https://qiita.com/NeGI1009/items/f8b17d856a4b15b1ecbc

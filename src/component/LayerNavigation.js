@@ -11,7 +11,7 @@ class LayerNavigation extends Component {
     return (
       <Layer className="LayerNavigation">
         <Conspicuous />
-        <ActionsBar />
+        <ActionsBar update={this.props.update} />
       </Layer>
     );
   }

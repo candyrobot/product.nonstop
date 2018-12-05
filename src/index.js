@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './object/Array';
 import LayerContent from './component/LayerContent';
 import LayerNavigation from './component/LayerNavigation';
 import LayerOverlay from './component/LayerOverlay';
@@ -40,12 +41,17 @@ class App extends React.Component {
       console.log("setState")
     });
   }
+
+  update(name) {
+    this.setState({ images: Gateway[name]() });
+  }
+
   render() {
     return (
       <div className="App">
         <MuiThemeProvider theme={theme}>
           <LayerContent images={this.state.images} />
-          <LayerNavigation />
+          <LayerNavigation update={this.update.bind(this)} />
           <LayerOverlay />
           <LayerAppNotification />
         </MuiThemeProvider>

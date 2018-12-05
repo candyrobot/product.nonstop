@@ -22,24 +22,23 @@ const styles = {
 class ActionsBar extends Component {
   constructor() {
     super();
-    this.hoge = 1;
-    this.state = {
-      items: [1,2,3]
-    };
   }
 
   state = {
     value: 0,
   };
 
-  handleChange = (event, value) => {
-    this.setState({ value });
+  handleChange = (event, index) => {
+    var a = [
+      'getImages',
+      'getImagesReversed',
+      'getImages',
+      'getImagesReversed'
+    ];
+    this.props.update(a[index]);
+    
+    this.setState({ index });
   };
-
-  // - 人気
-  // - 新着
-  // - お気入り
-  // - マイページ
 
   render() {
     const { classes } = this.props;
@@ -51,10 +50,10 @@ class ActionsBar extends Component {
         showLabels
         className={classes.root}
       >
-        <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+        <BottomNavigationAction label="人気" icon={<RestoreIcon />} />
+        <BottomNavigationAction label="新着" icon={<FavoriteIcon />} />
+        <BottomNavigationAction label="お気入り" icon={<FavoriteIcon />} />
+        <BottomNavigationAction label="マイページ" icon={<LocationOnIcon />} />
       </BottomNavigation>
     );
   }
