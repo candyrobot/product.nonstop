@@ -9,13 +9,17 @@ import * as serviceWorker from './serviceWorker';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
+  // Docker's gradient #2453a5 -> #1f95f0
   palette: {
-  primary: {
-    main: '#880e4f',
-  },
-  secondary: {
-    main: '#f06292',
-  },
+    primary: {
+      main: '#36465d',
+      light: '#608ba4', // Tumblr's light original color
+      // dark: '#002884',
+      contrastText: '#fff',
+    },
+    // secondary: {
+      // main: '#608ba4',
+    // },
   },
 });
 

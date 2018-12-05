@@ -12,3 +12,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/*INFO: original*/
+
+html, body {
+  height: 100%;
+}
+
+body {
+  /*BY: https://mycolor.space/gradient?ori=to+right+top&hex=%232453A5&hex2=%231F95F0&sub=1*/
+  background-image: -webkit-linear-gradient(bottom left, #2453a5, #2563b8, #2473cb, #2284dd, #1f95f0);
+  background-image: -o-linear-gradient(bottom left, #2453a5, #2563b8, #2473cb, #2284dd, #1f95f0);
+  background-image: linear-gradient(to top right, #2453a5, #2563b8, #2473cb, #2284dd, #1f95f0);
+}
+body:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  background: url(./img/logotext.png) no-repeat center;
+  background-size: 40%;
+}

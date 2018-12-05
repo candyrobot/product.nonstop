@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Conspicuous.css';
+// import './Conspicuous.css';
 
 class Conspicuous extends Component {
   constructor() {
