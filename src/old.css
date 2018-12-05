@@ -5,6 +5,28 @@
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+html, body {
+  height: 100%;
+}
+
+body {
+  /*BY: https://mycolor.space/gradient?ori=to+right+top&hex=%232453A5&hex2=%231F95F0&sub=1*/
+  background-image: -webkit-linear-gradient(bottom left, #2453a5, #2563b8, #2473cb, #2284dd, #1f95f0);
+  background-image: -o-linear-gradient(bottom left, #2453a5, #2563b8, #2473cb, #2284dd, #1f95f0);
+  background-image: linear-gradient(to top right, #2453a5, #2563b8, #2473cb, #2284dd, #1f95f0);
+}
+body:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  background: url(./img/logotext.png) no-repeat center;
+  background-size: 55%;
+}
+
 body {
   margin: 0;
   margin-top: 53px;
@@ -160,14 +182,18 @@ input, button {
 #component-post {
   height: 55px;
   padding: 10px;
-  background-color: rgba(230, 230, 230, .8);
+  /*background-color: rgba(230, 230, 230, .8);*/
 }
-#component-post > input {
+#component-post > div {
   display: inline-block;
   background-color: white;
-  border: none;
+  border-radius: 3px;
   width: calc(100% - 70px);
   box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+}
+#component-post > div > input {
+  display: block;
+  border: none;
 }
 #component-post > button {
   display: inline-block;
@@ -192,7 +218,7 @@ input, button {
   top: 50%;
   left: 50%;
   transform: translateY(-50%) translateX(-50%);
-  color: #666;
+  color: #005fc7;
   font-size: 40px;
 }
 #component-images > .outer:nth-child(n + 11) {
@@ -203,7 +229,7 @@ input, button {
   position: relative;
   background-size: cover;
   background-position: center;
-  background-color: rgba(0, 0, 0, .09);
+  background-color: rgba(255,255,255,.09);
 }
 #component-images > .outer > .inner:after {
   content: "";
@@ -301,7 +327,7 @@ input, button {
   text-decoration: none;
 }
 .component-fav {
-  color: #888;
+  color: rgba(0,0,0,.5);
   text-align: center;
   border-radius: 100%;
 }
@@ -381,4 +407,7 @@ input, button {
   height: calc(100% - 55px);
   background-color: black;
   box-shadow: 0 0px 10px rgba(0, 0, 0, .4);
+}
+.layer-1 {
+  position: relative;
 }

@@ -37,7 +37,9 @@ $(`
   <div id="component-post">
     <!-- - 頭に "http" から始まっているURLは全て受け付けられます -->
     <!-- - "data:"と書かれてあるURLは当サービスでは受け付けられません -->
-    <input type="text" placeholder="画像のURL">
+    <div>
+      <input type="text" placeholder="画像のURL">
+    </div>
     <button onclick="post()">投稿</button>
   </div>
   <div class="frombottom">
