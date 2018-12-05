@@ -13,8 +13,6 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 // import reducer from './reducers/index';
 import Gateway from './Gateway';
 
-import $ from 'jquery';
-
 const theme = createMuiTheme({
   // Docker's gradient #2453a5 -> #1f95f0
   palette: {
@@ -36,22 +34,20 @@ class App extends React.Component {
   state = {}
   constructor() {
     super();
-    $.get('http://with-one-account-prd.herokuapp.com/application')
-    .done((dat)=> {
-      this.setState({ dat: dat });
-      console.log(dat)
+    Gateway.done(()=> {
+      this.setState({ images: Gateway.getImages() });
+      console.log(this.state)
       console.log("setState")
-      this.render();
     });
   }
   render() {
     return (
       <div className="App">
         <MuiThemeProvider theme={theme}>
-          <LayerContent dat={this.state.dat} />
-          <LayerNavigation dat={this.state.dat} />
-          <LayerOverlay dat={this.state.dat} />
-          <LayerAppNotification dat={this.state.dat} />
+          <LayerContent images={this.state.images} />
+          <LayerNavigation />
+          <LayerOverlay />
+          <LayerAppNotification />
         </MuiThemeProvider>
       </div>
     );
