@@ -42,7 +42,7 @@ $(`
     </div>
     <button onclick="post()">投稿</button>
   </div>
-  <div id="component-conspicuous">
+  <div id="component-conspicuous" style="display: none">
     <h3 class="title">
       TwitterやTumblrより効率的に画像を収集しませんか？
     </h3>

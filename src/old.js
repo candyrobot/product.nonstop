@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import 'jquery.transit';
 import {
 	sortByFrequency,
 	deleteFav,
