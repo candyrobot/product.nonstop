@@ -34,7 +34,7 @@ $(`
 </div>
 
 <div class="component-layer layer-2">
-  <div id="component-post">
+  <div id="component-post" style="display: none">
     <!-- - 頭に "http" から始まっているURLは全て受け付けられます -->
     <!-- - "data:"と書かれてあるURLは当サービスでは受け付けられません -->
     <div>
@@ -42,7 +42,7 @@ $(`
     </div>
     <button onclick="post()">投稿</button>
   </div>
-  <div class="Conspicuous">
+  <div id="component-conspicuous">
     <h3 class="title">
       TwitterやTumblrより効率的に画像を収集しませんか？
     </h3>

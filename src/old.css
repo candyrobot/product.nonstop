@@ -29,7 +29,6 @@ body:before {
 
 body {
   margin: 0;
-  margin-top: 53px;
   font-family: sans-serif;
 }
 input {
@@ -413,7 +412,7 @@ input, button {
   position: relative;
 }
 
-.Conspicuous {
+#component-conspicuous {
   background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
   border: 0;
   border-radius: 5px;
@@ -424,12 +423,12 @@ input, button {
   text-align: center;
 }
 
-.Conspicuous .title {
+#component-conspicuous .title {
   margin: .25em 0;
   /*font-size: 30px;*/
 }
 
-.Conspicuous > p {
+#component-conspicuous > p {
   margin: .5em 0;
   font-size: 11px;
   line-height: 1.2em;

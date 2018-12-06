@@ -10,6 +10,7 @@ $.ajaxSetup({
 });
 
 window.initializeApp = function() {
+  $('body').css({ marginTop: $('#component-conspicuous').outerHeight(true) });
   return $.get(domain + '/application' + window.location.search, function(dat) {
     var b, imageID;
     console.log(dat);

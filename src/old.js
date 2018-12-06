@@ -21,12 +21,11 @@ window.renderImages = function() {
       </div>
     </div>
     ` : '';
+    window.dat.session && i++;
 
     var s = window.getHtmlFav(!!window.dat.favorites.filter(function(fav) {
       return dat.id === parseInt(fav.imageID);
     }).length);
-
-    window.dat.session && i++;
 
     var t = i % 12 ? "" : `
     <div class="message">
