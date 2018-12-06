@@ -11,36 +11,34 @@ import {
 	lazyShow
 } from './old.child';
 
-window.renderRecommendation = function(images) {
-  var html;
-  html = sortByFrequency(images.serialize()).reduce(function(prev, image) {
-    return prev + (isShouldNotRender(image) ? "" : "<a\nhref=\"/images?imageID=" + image.id + "\"\nstyle=\"background-image: url(" + image.url + ")\"></a>");
-  }, "");
-  if (!html) {
-    return;
-  }
-  return $('.component-images-horizontal').html(html).closest('.area-recommendation').show(300);
-};
-
-window.getHtmlFav = function(isTrue) {
-  return "<div class=\"component-fav " + isTrue + "\">\n	<span>♡</span>\n	<span>♥</span>\n</div>";
-};
-
 window.renderImages = function() {
-  var html, j;
-  j = 0;
-  html = "";
-  if (window.dat.session) {
-    html = "<div class=\"outer additional\">\n	<div class=\"inner\">\n		<i class=\"fas fa-plus\"></i>\n	</div>\n</div>";
-    j++;
-  }
-  html += window.dat.images.reduce(function(prev, dat, i) {
-    var s, t;
-    s = window.getHtmlFav(!!window.dat.favorites.filter(function(fav) {
+  var html = window.dat.images.reduce(function(prev, dat, i) {
+
+    var u = window.dat.session && i === 0 ? `
+    <div class="outer additional">
+      <div class="inner">
+        <i class="fas fa-plus"></i>
+      </div>
+    </div>
+    ` : '';
+
+    var s = window.getHtmlFav(!!window.dat.favorites.filter(function(fav) {
       return dat.id === parseInt(fav.imageID);
     }).length);
-    t = (j + i) % 12 ? "" : "<div class=\"message\">\n	スマホのホーム画面にこのアプリを追加することができるのです\n	<i>(ここをタップ)</i>\n</div>";
-    return prev + (t + `
+
+    window.dat.session && i++;
+
+    var t = i % 12 ? "" : `
+    <div class="message">
+      スマホのホーム画面にこのアプリを追加することができるのです
+      <i>(ここをタップ)</i>
+    </div>
+    `;
+
+    return `
+      ${prev}
+      ${t}
+      ${u}
       <div
         style="display: none"
         class="outer fas fa-unlink"
@@ -53,8 +51,9 @@ window.renderImages = function() {
         ${s}
         <div class="favoriteNum">${dat.favorite ? dat.favorite : ''}</div>
       </div>
-    `);
-  }, "");
+    `;
+  }, '');
+
   $('#component-images').html(html).find('.component-fav').on('click', function() {
     var imageID;
     imageID = $(this).closest('.outer').data('imageid');
@@ -90,6 +89,21 @@ window.renderImages = function() {
     }
   });
   return lazyShow('#component-images .outer');
+};
+
+window.renderRecommendation = function(images) {
+  var html;
+  html = sortByFrequency(images.serialize()).reduce(function(prev, image) {
+    return prev + (isShouldNotRender(image) ? "" : "<a\nhref=\"/images?imageID=" + image.id + "\"\nstyle=\"background-image: url(" + image.url + ")\"></a>");
+  }, "");
+  if (!html) {
+    return;
+  }
+  return $('.component-images-horizontal').html(html).closest('.area-recommendation').show(300);
+};
+
+window.getHtmlFav = function(isTrue) {
+  return "<div class=\"component-fav " + isTrue + "\">\n	<span>♡</span>\n	<span>♥</span>\n</div>";
 };
 
 window.renderImage = function(image) {
