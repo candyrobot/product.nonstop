@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { 
+import {
 	sortByFrequency,
 	deleteFav,
 	isShouldNotRender,
@@ -27,11 +27,10 @@ window.getHtmlFav = function(isTrue) {
 };
 
 window.renderImages = function() {
-	return;
   var html, j;
   j = 0;
   html = "";
-  if (window.dat.session.userID) {
+  if (window.dat.session) {
     html = "<div class=\"outer additional\">\n	<div class=\"inner\">\n		<i class=\"fas fa-plus\"></i>\n	</div>\n</div>";
     j++;
   }
@@ -49,7 +48,7 @@ window.renderImages = function() {
         <a
           class="inner"
           href="/images?imageID=${dat.id}"
-          style="background-image: url(${dat.url})">
+          style="background-image: url(${dat.url && ''})">
         </a>
         ${s}
         <div class="favoriteNum">${dat.favorite ? dat.favorite : ''}</div>

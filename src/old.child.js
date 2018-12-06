@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 // export const domain = "http://0.0.0.0:3000";
-const domain = "https://with-one-account-prd.herokuapp.com";
+export const domain = "https://with-one-account-prd.herokuapp.com";
 
 $.ajaxSetup({
   headers: {
@@ -67,7 +67,7 @@ window.initializeApp = function() {
       $('#component-actions .newPosts').hide();
       window.renderImages();
     }
-    $('#component-logout h1').text(window.dat.session.userID);
+    $('#component-logout h1').text(window.dat.session.id);
     return $('#component-logout h5').text(window.dat.session.email);
   });
 };
