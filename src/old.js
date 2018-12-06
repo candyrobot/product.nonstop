@@ -3,15 +3,20 @@ import $ from 'jquery';
 // const domain = "http://0.0.0.0:3000";
 const domain = "https://with-one-account-prd.herokuapp.com";
 
+$.ajaxSetup({
+  headers: {
+  	'X-CSRF-Token': localStorage.getItem('app.nonstop.session.token')
+  }
+});
+
 var countUp, deleteFav, getHtmlFav, isAndroid, isEmpty, isInvalid, isShouldNotRender, isValidEmail, lazyShow, renderImage, renderImages, renderRecommendation, showWebview, sortByFrequency, startLoading, stopLoading, toast;
 
 window.initializeApp = function() {
   return $.get(domain + '/application' + window.location.search, function(dat) {
     var b, imageID;
     console.log(dat);
-    dat.session = dat.session || {};
     window.dat = dat;
-    if (dat.session.userID) {
+    if (dat.session) {
       $('#component-actions .login').hide();
       $('#component-actions .signup').hide();
     } else {
@@ -113,9 +118,12 @@ window.login = function(dat) {
   if (isInvalid(dat)) {
     return;
   }
-  return $.post(domain + '/users/login', dat).fail(function(dat) {
+  return $.post(domain + '/users/login', dat)
+  .fail(function(dat) {
     return toast(dat.responseJSON.toast);
-  }).done(function() {
+  })
+  .done(function(dat) {
+  	localStorage.setItem('app.nonstop.session.token', dat.session.token);
     return setTimeout('window.location.reload()', 1000);
   });
 };
