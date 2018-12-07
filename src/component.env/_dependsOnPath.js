@@ -10,17 +10,18 @@ import {
 	toast
 } from './_util';
 import Toggle from './Toggle';
+import { renderImage, renderImages } from './gridList';
 
 export default ()=> {
 
   if (existParameter('imageID')) {
   	var imageID = getUrlParameter('imageID');
-    window.renderImage(window.dat.images[imageID]);
-    
+    renderImage(window.dat.images[imageID]);
+
     var b = !!window.dat.favorites.filter(function(fav) {
       return imageID === parseInt(fav.imageID);
     }).length;
-    
+
     $('.row').html(`
       ${countUp('x') > 3 ? '' : `
         <div class="balloon">
@@ -59,12 +60,12 @@ export default ()=> {
     });
   } else if (existParameter('most')) {
     $('#component-actions .most').hide();
-    window.renderImages();
+    renderImages();
   } else if (existParameter('favorite')) {
     $('#component-actions .favorite').hide();
-    window.renderImages();
+    renderImages();
   } else {
     $('#component-actions .newPosts').hide();
-    window.renderImages();
+    renderImages();
   }
 };

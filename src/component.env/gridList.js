@@ -17,7 +17,6 @@ import {
 	lazyShow
 } from './_util';
 import Toggle from './Toggle';
-import dependsOnPath from './_dependsOnPath';
 
 export default `
 <div id="component-images" class="gridList">
@@ -25,7 +24,7 @@ export default `
 </div>
 `;
 
-window.renderImages = function() {
+export const renderImages = function() {
   var html = window.dat.images.reduce(function(prev, dat, i) {
 
     var u = window.dat.session && i === 0 ? `
@@ -58,8 +57,8 @@ window.renderImages = function() {
         data-imageID="${dat.id}">
         <a
           class="inner"
-          href="/images?imageID=${dat.id}"
-          style="background-image: url(${dat.url && ''})">
+          onclick="Route.images(${dat.id})"
+          style="background-image: url(${dat.url})">
         </a>
         ${s}
         <div class="favoriteNum">${dat.favorite ? dat.favorite : ''}</div>
@@ -104,7 +103,7 @@ window.renderImages = function() {
   return lazyShow('#component-images .outer');
 };
 
-window.renderImage = function(image) {
+export const renderImage = function(image) {
   $('#component-images').html(`
   <div class="fluid" data-imageID="${image.id}">
     <img src="${image.url}">

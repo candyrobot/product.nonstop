@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import './old';
 import './old.css';
+import './component.env/Route';
 import drawer from './component.env/drawer';
 import _overlays from './component.env/_overlays';
 import gridList from './component.env/gridList';
