@@ -1,0 +1,18 @@
+
+.component-fav {
+  color: rgba(0,0,0,.5);
+  text-align: center;
+  border-radius: 100%;
+}
+.component-fav span:nth-child(2) {
+  display: none;
+}
+.component-fav.true {
+  color: #ff7878;
+}
+.component-fav.true span:nth-child(1) {
+  display: none;
+}
+.component-fav.true span:nth-child(2) {
+  display: block;
+}

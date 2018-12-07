@@ -11,6 +11,7 @@ import {
 	showWebview,
 	lazyShow
 } from '../old.child';
+import Toggle from './Toggle';
 
 export default `
 <div id="component-images" class="gridList">
@@ -30,9 +31,9 @@ window.renderImages = function() {
     ` : '';
     window.dat.session && i++;
 
-    var s = window.getHtmlFav(!!window.dat.favorites.filter(function(fav) {
+    var s = new Toggle(window.dat.favorites.filter(function(fav) {
       return dat.id === parseInt(fav.imageID);
-    }).length);
+    }).length).html();
 
     var t = i % 12 ? '' : `
     <div class="message">

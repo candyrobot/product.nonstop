@@ -23,10 +23,6 @@ window.renderRecommendation = function(images) {
   return $('.component-images-horizontal').html(html).closest('.area-recommendation').show(300);
 };
 
-window.getHtmlFav = function(isTrue) {
-  return "<div class=\"component-fav " + isTrue + "\">\n	<span>♡</span>\n	<span>♥</span>\n</div>";
-};
-
 window.renderImage = function(image) {
   var html;
   html = "<div class=\"fluid\" data-imageID=\"" + image.id + "\">\n	<img src=\"" + image.url + "\">\n</div>";

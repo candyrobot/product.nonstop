@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Toggle from './component.env/Toggle';
 
 // export const domain = "http://0.0.0.0:3000";
 export const domain = "https://with-one-account-prd.herokuapp.com";
@@ -31,7 +32,17 @@ window.initializeApp = function() {
       b = !!window.dat.favorites.filter(function(fav) {
         return imageID === parseInt(fav.imageID);
       }).length;
-      $('.row').html("			" + (countUp('x') > 3 ? "" : "<div class=\"balloon\">\n	タップして \"お気入り\" に入れると…　👉\n</div>") + ("<div class=\"fav-area\" onclick=\"$(this).prev().hide()\">" + (window.getHtmlFav(b)) + "</div>")).find('.component-fav').on('click', function() {
+      $('.row').html(`
+        ${countUp('x') > 3 ? '' : `
+          <div class="balloon">
+            タップして "お気入り" に入れると…　👉
+          </div>
+        `}
+        <div class="fav-area" onclick="$(this).prev().hide()">
+          ${new Toggle(b).html()}
+        </div>
+      `)
+      .find('.component-fav').on('click', function() {
         startLoading();
         if ($(this).is('.true')) {
           deleteFav(imageID).done((function(_this) {
