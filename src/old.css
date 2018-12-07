@@ -11,10 +11,18 @@ html, body {
 }
 
 body {
-  /*BY: https://mycolor.space/gradient?ori=to+right+top&hex=%232453A5&hex2=%231F95F0&sub=1*/
-  background-image: -webkit-linear-gradient(bottom left, #2453a5, #2563b8, #2473cb, #2284dd, #1f95f0);
-  background-image: -o-linear-gradient(bottom left, #2453a5, #2563b8, #2473cb, #2284dd, #1f95f0);
-  background-image: linear-gradient(to top right, #2453a5, #2563b8, #2473cb, #2284dd, #1f95f0);
+/*BY: https://mycolor.space/gradient?ori=to+right+top&hex=%232453A5&hex2=%231F95F0&sub=1*/
+/*background-image: linear-gradient(to top right, #2453a5, #2563b8, #2473cb, #2284dd, #1f95f0);*/
+
+/*background-image: linear-gradient(to top right, #293958, #313e5f, #3a4366, #43496d, #4c4e74);*/
+
+/*background-image: linear-gradient(to right top, #293958, #354464, #415071, #4e5c7d, #5a688a);*/
+
+/*background-image: linear-gradient(to right top, #293958, #303c58, #363f57, #3c4357, #414656);*/
+
+/*background-image: linear-gradient(to right top, #293958, #324161, #3b4a6b, #455374, #4e5c7e);*/
+
+background-image: linear-gradient(to right top, #000000, #293958);
 }
 body:before {
   content: '';
