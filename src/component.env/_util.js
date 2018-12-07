@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import Toggle from './component.env/Toggle';
+import dependsOnPath from './_dependsOnPath';
 
 // export const domain = "http://0.0.0.0:3000";
 export const domain = "https://with-one-account-prd.herokuapp.com";
@@ -26,72 +26,9 @@ window.initializeApp = function() {
         return false;
       });
     }
-    if (window.location.search.indexOf('imageID') !== -1) {
-      window.renderImage(dat.images[0]);
-      imageID = dat.images[0].id;
-      b = !!window.dat.favorites.filter(function(fav) {
-        return imageID === parseInt(fav.imageID);
-      }).length;
-      $('.row').html(`
-        ${countUp('x') > 3 ? '' : `
-          <div class="balloon">
-            タップして "お気入り" に入れると…　👉
-          </div>
-        `}
-        <div class="fav-area" onclick="$(this).prev().hide()">
-          ${new Toggle('favorites', 'imageID', b).html()}
-        </div>
-      `)
-      .find('.component-fav').on('click', function() {
-        startLoading();
-        if ($(this).is('.true')) {
-          deleteFav(imageID).done((function(_this) {
-            return function() {
-              return $(_this).removeClass('true');
-            };
-          })(this));
-        } else {
-          $.post(domain + '/favorites', {
-            imageID: imageID
-          }).fail(function(dat) {
-            return toast(dat.responseJSON.toast);
-          }).done((function(_this) {
-            return function() {
-              return $(_this).addClass('true');
-            };
-          })(this));
-        }
-        return $.get(domain + '/images/list', {
-          related: true,
-          imageID: imageID
-        }).done(window.renderRecommendation).always(function() {
-          return stopLoading();
-        });
-      });
-    } else if (window.location.search.indexOf('most') !== -1) {
-      $('#component-actions .most').hide();
-      window.renderImages();
-    } else if (window.location.search.indexOf('favorite') !== -1) {
-      $('#component-actions .favorite').hide();
-      window.renderImages();
-    } else {
-      $('#component-actions .newPosts').hide();
-      window.renderImages();
-    }
+    dependsOnPath();
     $('#component-logout h1').text(window.dat.session.id);
     return $('#component-logout h5').text(window.dat.session.email);
-  });
-};
-
-export const deleteFav = function(imageID) {
-  return $.ajax({
-    type: 'DELETE',
-    url: domain + '/favorites',
-    data: {
-      imageID: imageID
-    }
-  }).fail(function(dat) {
-    return toast(dat.responseJSON.toast);
   });
 };
 
@@ -189,30 +126,6 @@ window.post = function() {
   });
 };
 
-export const toast = function(txt) {
-  if (!txt) {
-    return;
-  }
-  return $("<div>" + txt + "</div>").appendTo('#layer-appMessages .alerts').hide().show(300, function() {
-    return setTimeout((function(_this) {
-      return function() {
-        return $(_this).hide(300);
-      };
-    })(this), 2000);
-  });
-};
-
-const countUp = function(key) {
-  var a;
-  a = [];
-  a[key] = JSON.parse(localStorage.getItem(key));
-  if (a[key] === null) {
-    a[key] = 0;
-  }
-  localStorage.setItem(key, JSON.stringify(++a[key]));
-  return a[key];
-};
-
 export const showWebview = function(url) {
   startLoading();
   $('#webview').fadeIn(400);
@@ -227,15 +140,6 @@ export const showWebview = function(url) {
   return $('#webview iframe').on('load', function() {
     return stopLoading();
   });
-};
-
-const startLoading = function() {
-  $('.loadingLine').show(300);
-  return setTimeout('stopLoading()', 5000);
-};
-
-const stopLoading = function() {
-  return $('.loadingLine').hide(300);
 };
 
 export const isAndroid = function() {
@@ -267,6 +171,78 @@ export const isAlmostThere = function(threshold = 100) {
     }
     return target.top < viewable.bottom && target.bottom > viewable.top;
   };
+};
+
+/**
+
+@param {string} name - 引数にURLクエリのkeyをいれると、jsが評価できる値を返す
+
+例)クエリが次の場合: `?hoge={}&foo=[1,2]&bar=true&piyo&fuga=hensu`
+- getUrlParameter('hoge') // {}
+- getUrlParameter('foo') // [1,2]
+- getUrlParameter('bar') // true
+- getUrlParameter('piyo') // null
+- getUrlParameter('fuga') // エラー
+- getUrlParameter('hogera') // null
+*/
+export function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(window.location.search);
+    return results === null ? null : JSON.parse(decodeURIComponent( results[1].replace(/\+/g, ' ') ));
+}
+
+/**
+@return {boolean} - そのkeyがあるかないか
+*/
+export function existParameter(name) {
+    var v = window.location.search.match(name)
+    return v ? true : false;
+}
+
+export const countUp = function(key) {
+  var a;
+  a = [];
+  a[key] = JSON.parse(localStorage.getItem(key));
+  if (a[key] === null) {
+    a[key] = 0;
+  }
+  localStorage.setItem(key, JSON.stringify(++a[key]));
+  return a[key];
+};
+
+export const startLoading = function() {
+  $('.loadingLine').show(300);
+  return setTimeout('stopLoading()', 5000);
+};
+
+export const stopLoading = function() {
+  return $('.loadingLine').hide(300);
+};
+
+export const deleteFav = function(imageID) {
+  return $.ajax({
+    type: 'DELETE',
+    url: domain + '/favorites',
+    data: {
+      imageID: imageID
+    }
+  }).fail(function(dat) {
+    return toast(dat.responseJSON.toast);
+  });
+};
+
+export const toast = function(txt) {
+  if (!txt) {
+    return;
+  }
+  return $("<div>" + txt + "</div>").appendTo('#layer-appMessages .alerts').hide().show(300, function() {
+    return setTimeout((function(_this) {
+      return function() {
+        return $(_this).hide(300);
+      };
+    })(this), 2000);
+  });
 };
 
 /**

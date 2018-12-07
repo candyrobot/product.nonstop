@@ -1,8 +1,13 @@
 import $ from 'jquery';
 import './gridList.css';
-import { 
-	sortByFrequency,
+import {
+	getUrlParameter,
+	existParameter,
+	countUp,
+	startLoading,
+	stopLoading,
 	deleteFav,
+	sortByFrequency,
 	isShouldNotRender,
 	domain,
 	toast,
@@ -10,8 +15,9 @@ import {
 	isAndroid,
 	showWebview,
 	lazyShow
-} from '../old.child';
+} from './_util';
 import Toggle from './Toggle';
+import dependsOnPath from './_dependsOnPath';
 
 export default `
 <div id="component-images" class="gridList">
@@ -96,4 +102,11 @@ window.renderImages = function() {
     }
   });
   return lazyShow('#component-images .outer');
+};
+
+window.renderImage = function(image) {
+  $('#component-images').html(`
+  <div class="fluid" data-imageID="${image.id}">
+    <img src="${image.url}">
+  </div>`);
 };

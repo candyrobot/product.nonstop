@@ -15,6 +15,7 @@ export default class Toggle {
   }
 
   toggle() {
+    // onclick="window.hoge(${id})"
     // if (this.isTrue) {
     //   deleteFav(imageID)
     //   .done((function(_this) {

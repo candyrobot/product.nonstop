@@ -10,7 +10,7 @@ import {
 	isAndroid,
 	showWebview,
 	lazyShow
-} from './old.child';
+} from './component.env/_util';
 
 window.renderRecommendation = function(images) {
   var html;
@@ -21,10 +21,4 @@ window.renderRecommendation = function(images) {
     return;
   }
   return $('.component-images-horizontal').html(html).closest('.area-recommendation').show(300);
-};
-
-window.renderImage = function(image) {
-  var html;
-  html = "<div class=\"fluid\" data-imageID=\"" + image.id + "\">\n	<img src=\"" + image.url + "\">\n</div>";
-  return $('#component-images').html(html);
 };
