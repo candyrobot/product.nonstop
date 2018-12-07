@@ -103,7 +103,8 @@ export const renderImages = function() {
   return lazyShow('#component-images .outer');
 };
 
-export const renderImage = function(image) {
+export const renderImage = function(id) {
+  const image = window.dat.images.filter((image)=> image.id == id)[0];
   $('#component-images').html(`
   <div class="fluid" data-imageID="${image.id}">
     <img src="${image.url}">
