@@ -36,7 +36,7 @@ export const renderImages = function() {
     ` : '';
     window.dat.session && i++;
 
-    var s = new Toggle('favorites', { imageID: dat.id }, window.dat.favorites.filter(function(fav) {
+    var s = new Toggle('favorites', { imageID: dat.id }, !!window.dat.favorites.filter(function(fav) {
       return dat.id === parseInt(fav.imageID);
     }).length).html();
 
@@ -66,26 +66,10 @@ export const renderImages = function() {
     `;
   }, '');
 
-  $('#component-images').html(html).find('.component-fav').on('click', function() {
-    var imageID;
-    imageID = $(this).closest('.outer').data('imageid');
-    if ($(this).is('.true')) {
-      return deleteFav(imageID).done((function(_this) {
-        return function() {
-          return $(_this).removeClass('true');
-        };
-      })(this));
-    } else {
-      return $.post(domain + '/favorites', {
-        imageID: imageID
-      }).fail(function(dat) {
-        return toast(dat.responseJSON.toast);
-      }).done((function(_this) {
-        return function() {
-          return $(_this).addClass('true');
-        };
-      })(this));
-    }
+  $('#component-images').html(html)
+  .find('.component-fav').on('click', function() {
+    var imageID = $(this).closest('.outer').data('imageid');
+    Toggle.toggle(this, imageID);
   });
 
   $('#component-images > .outer').filter(isAlmostThere()).show();

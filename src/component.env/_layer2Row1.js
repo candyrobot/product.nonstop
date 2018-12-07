@@ -30,29 +30,15 @@ export function renderLayer2Row1(imageID) {
   `);
 
   $('#layer2-row1 .component-fav').on('click', function() {
+
+    Toggle.toggle(this, imageID);
+
     startLoading();
-    if ($(this).is('.true')) {
-      deleteFav(imageID).done((function(_this) {
-        return function() {
-          return $(_this).removeClass('true');
-        };
-      })(this));
-    } else {
-      $.post(domain + '/favorites', {
-        imageID: imageID
-      }).fail(function(dat) {
-        return toast(dat.responseJSON.toast);
-      }).done((function(_this) {
-        return function() {
-          return $(_this).addClass('true');
-        };
-      })(this));
-    }
-    return $.get(domain + '/images/list', {
+    $.get(domain + '/images/list', {
       related: true,
       imageID: imageID
     }).done(window.renderRecommendation).always(function() {
-      return stopLoading();
+      stopLoading();
     });
   });
 }

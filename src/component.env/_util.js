@@ -134,10 +134,10 @@ export const showWebview = function(url) {
   }, 500);
   $('#webview .close').on('click', function() {
     $('#webview iframe').removeAttr('style');
-    return $('#webview iframe').removeAttr('src');
+    $('#webview iframe').removeAttr('src');
   });
-  return $('#webview iframe').on('load', function() {
-    return stopLoading();
+  $('#webview iframe').on('load', function() {
+    stopLoading();
   });
 };
 
@@ -218,6 +218,8 @@ export const startLoading = function() {
 export const stopLoading = function() {
   return $('.loadingLine').hide(300);
 };
+
+window.stopLoading = stopLoading;
 
 export const deleteFav = function(imageID) {
   return $.ajax({

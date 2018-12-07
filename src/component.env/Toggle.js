@@ -1,4 +1,14 @@
 import $ from 'jquery';
+import {
+  getUrlParameter,
+  existParameter,
+  countUp,
+  startLoading,
+  stopLoading,
+  deleteFav,
+  domain,
+  toast
+} from './_util';
 import './toggle.css';
 export default class Toggle {
   constructor(dbTableName, columnName, isTrue = false) {
@@ -14,8 +24,7 @@ export default class Toggle {
     `;
   }
 
-  toggle() {
-    // onclick="window.hoge(${id})"
+  toggle(el, imageID) {
     // if (this.isTrue) {
     //   deleteFav(imageID)
     //   .done((function(_this) {
@@ -36,3 +45,15 @@ export default class Toggle {
     // }
   }
 }
+
+Toggle.toggle = (el, imageID)=> {
+  if ($(el).is('.true')) {
+    deleteFav(imageID).done(()=> $(el).removeClass('true'));
+  } else {
+    $.post(domain + '/favorites', {
+      imageID: imageID
+    }).fail((dat)=> {
+      toast(dat.responseJSON.toast);
+    }).done(()=> $(el).addClass('true'));
+  }
+};
