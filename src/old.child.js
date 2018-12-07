@@ -39,7 +39,7 @@ window.initializeApp = function() {
           </div>
         `}
         <div class="fav-area" onclick="$(this).prev().hide()">
-          ${new Toggle(b).html()}
+          ${new Toggle('favorites', 'imageID', b).html()}
         </div>
       `)
       .find('.component-fav').on('click', function() {

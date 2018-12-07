@@ -31,7 +31,7 @@ window.renderImages = function() {
     ` : '';
     window.dat.session && i++;
 
-    var s = new Toggle(window.dat.favorites.filter(function(fav) {
+    var s = new Toggle('favorites', { imageID: dat.id }, window.dat.favorites.filter(function(fav) {
       return dat.id === parseInt(fav.imageID);
     }).length).html();
 

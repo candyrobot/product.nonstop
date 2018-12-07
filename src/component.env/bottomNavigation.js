@@ -10,3 +10,16 @@ export default `
     </div>
 </div>
 `;
+
+window.doWhenClickMost = ()=> {
+
+};
+window.doWhenClickNewPosts = ()=> {
+
+};
+window.doWhenClickFavorite = ()=> {
+
+};
+window.doWhenClickMypage = ()=> {
+
+};
