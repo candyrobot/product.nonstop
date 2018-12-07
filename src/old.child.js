@@ -111,11 +111,8 @@ window.signup = function() {
 };
 
 window.logout = function() {
-  return $.post(domain + '/users/logout').fail(function(dat) {
-    return toast(dat.responseJSON.toast);
-  }).done(function() {
-    return setTimeout('window.location.reload()', 1000);
-  });
+  localStorage.removeItem('app.nonstop.session.token')
+  setTimeout('window.location.reload()', 1000);
 };
 
 window.login = function(dat) {
@@ -129,11 +126,11 @@ window.login = function(dat) {
   }
   return $.post(domain + '/users/login', dat)
   .fail(function(dat) {
-    return toast(dat.responseJSON.toast);
+    toast(dat.responseJSON.toast);
   })
   .done(function(dat) {
   	localStorage.setItem('app.nonstop.session.token', dat.session.token);
-    return setTimeout('window.location.reload()', 1000);
+    setTimeout('window.location.reload()', 1000);
   });
 };
 
