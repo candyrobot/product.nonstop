@@ -2,6 +2,7 @@ import $ from 'jquery';
 import './old';
 import './old.css';
 import drawer from './component.env/drawer';
+import gridList from './component.env/gridList';
 import bottomNavigation from './component.env/bottomNavigation';
 
 // INFO: https://qiita.com/peutes/items/d74e5758a36478fbc039
@@ -32,7 +33,7 @@ window.$ = $;
 
 $(`
 <div class="layer-1">
-  <div id="component-images"></div>
+  ${gridList}
 </div>
 
 <div class="component-layer layer-2">

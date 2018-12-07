@@ -1,0 +1,103 @@
+
+#component-images {
+  padding: 1px;
+}
+#component-images > .outer {
+  position: relative;
+  float: left;
+  width: 50%;
+  padding: 1px;
+}
+#component-images > .outer:before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  color: #0050a7a8;
+  font-size: 40px;
+}
+#component-images > .outer > .inner {
+  display: block;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(255,255,255,.09);
+}
+#component-images > .outer > .inner:after {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+#component-images > .outer > .favoriteNum {
+  position: absolute;
+  right: 35px;
+  bottom: 9px;
+  color: white;
+  font-size: 10px;
+  text-shadow: 0 0 10px black;
+}
+#component-images > .outer > .component-fav {
+  position: absolute;
+  right: 11px;
+  bottom: 8px;
+  font-size: 25px;
+}
+#component-images > .fluid {
+  display: flex;
+  height: calc(100vh - 150px);
+  align-items: center;
+}
+#component-images > .fluid > img {
+  display: block;
+  width: 100%;
+}
+#component-images > .message {
+  clear: both;
+  position: relative;
+  top: 1px;
+  margin: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+  padding: 10px;
+  padding-left: 54px;
+  font-size: 11px;
+  color: #888;
+  font-weight: bold;
+  border-radius: 3px;
+  background-color: rgba(28, 161, 242, .8);
+  color: white;
+}
+#component-images > .message:before {
+  content: "\f3cd";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  overflow: hidden;
+  font-size: 58px;
+  text-indent: 85%;
+  text-indent: 11px;
+  line-height: 21px;
+  opacity: 0.5;
+  font-family: "Font Awesome 5 Free";
+}
+#component-images > .additional {
+  padding: 10px;
+}
+#component-images > .additional .inner {
+  position: relative;
+  background-color: #a7d9f9;
+  border-radius: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+}
+#component-images > .additional .inner i {
+  content: "\f067";
+  font-family: "Font Awesome 5 Free";
+  position: absolute;
+  left: 50%;
+  margin-left: -25px;
+  top: 50%;
+  font-size: 58px;
+  margin-top: -28px;
+  color: #4fb4f3;
+}
