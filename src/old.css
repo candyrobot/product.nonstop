@@ -109,32 +109,6 @@ input, button {
     width: 100%;
   }
 }
-.component-overlay {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: rgba(28, 161, 242, .8);
-  color: white;
-}
-.component-overlay > h1 {
-  color: white;
-  font-family: impact;
-  text-align: center;
-  font-size: 55px;
-}
-.component-overlay input, .component-overlay button {
-  display: inline-block;
-  width: calc(100% - 40px);
-  margin: 5px 20px;
-}
-.component-overlay .small {
-  font-size: 11px;
-  margin: 5px;
-  text-align: center;
-}
 .frombottom {
   position: absolute;
   left: 0;
@@ -210,13 +184,6 @@ input, button {
   background-size: cover;
   background-position: center;
 }
-#component-logout {
-  color: white;
-  text-align: center;
-}
-#component-logout > h1 {
-  margin-bottom: -20px;
-}
 #layer-appMessages .alerts {
   margin-top: 55px;
 }
@@ -229,19 +196,6 @@ input, button {
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, .3);
-}
-#webview p {
-  padding-left: 10px;
-  font-weight: bold;
-}
-#webview iframe {
-  position: relative;
-  top: 100%;
-  /* アニメーション用 */
-  display: block;
-  height: calc(100% - 55px);
-  background-color: black;
-  box-shadow: 0 0px 10px rgba(0, 0, 0, .4);
 }
 .layer-1 {
   position: relative;
