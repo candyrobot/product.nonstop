@@ -55,11 +55,11 @@ export const renderImages = function() {
         style="display: none"
         class="outer fas fa-unlink"
         data-imageID="${dat.id}">
-        <a
+        <div
           class="inner"
           onclick="Route.images(${dat.id})"
           style="background-image: url(${dat.url})">
-        </a>
+        </div>
         ${s}
         <div class="favoriteNum">${dat.favorite ? dat.favorite : ''}</div>
       </div>

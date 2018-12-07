@@ -41,7 +41,7 @@ $(`
 <div class="component-layer layer-2">
   ${drawer}
   <div class="frombottom">
-    <div class="row"></div>
+    <div class="row" id="layer2-row1"></div>
     <div class="area-recommendation" style="display: none">
       <h4>関連</h4>
       <div class="component-images-horizontal"></div>

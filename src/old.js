@@ -13,12 +13,14 @@ import {
 } from './component.env/_util';
 
 window.renderRecommendation = function(images) {
-  var html;
-  html = sortByFrequency(images.serialize()).reduce(function(prev, image) {
-    return prev + (isShouldNotRender(image) ? "" : "<a\nhref=\"/images?imageID=" + image.id + "\"\nstyle=\"background-image: url(" + image.url + ")\"></a>");
-  }, "");
-  if (!html) {
+  const html = sortByFrequency(images.serialize())
+  .reduce((prev, image)=> {
+    return prev + isShouldNotRender(image) ? '' : `
+    <a
+      onclick="Route.images(${image.id})"
+      style="background-image: url(${image.url})"></a>`;
+  }, '');
+  if (!html)
     return;
-  }
-  return $('.component-images-horizontal').html(html).closest('.area-recommendation').show(300);
+  $('.component-images-horizontal').html(html).closest('.area-recommendation').show(300);
 };

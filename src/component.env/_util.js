@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import dependsOnPath from './_dependsOnPath';
 
 // export const domain = "http://0.0.0.0:3000";
 export const domain = "https://with-one-account-prd.herokuapp.com";
@@ -26,9 +25,9 @@ window.initializeApp = function() {
         return false;
       });
     }
-    dependsOnPath();
+    window.Route.refresh();
     $('#component-logout h1').text(window.dat.session.id);
-    return $('#component-logout h5').text(window.dat.session.email);
+    $('#component-logout h5').text(window.dat.session.email);
   });
 };
 
@@ -40,10 +39,10 @@ window.signup = function() {
   if (isInvalid(dat)) {
     return;
   }
-  return $.post(domain + '/users/', dat).fail(function(dat) {
-    return toast(dat.responseJSON.toast);
+  $.post(domain + '/users/', dat).fail(function(dat) {
+    toast(dat.responseJSON.toast);
   }).done(function() {
-    return window.login(dat);
+    window.login(dat);
   });
 };
 
