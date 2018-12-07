@@ -10,16 +10,6 @@ $.ajaxSetup({
 });
 
 window.initializeApp = function() {
-  setTimeout(()=> {
-    $('#component-conspicuous').show().css({ y: -100 }).transit({
-      y: 0
-    }, 500, 'easeOutBack');
-    $('body').css({
-      marginTop: 165
-      // marginTop: $('#component-conspicuous').outerHeight(true)
-    });
-  }, 1000);
-
   return $.get(domain + '/application' + window.location.search, function(dat) {
     var b, imageID;
     console.log(dat);

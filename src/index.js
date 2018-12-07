@@ -1,6 +1,8 @@
 import $ from 'jquery';
 import './old';
 import './old.css';
+import drawer from './component.env/drawer';
+import bottomNavigation from './component.env/bottomNavigation';
 
 // INFO: https://qiita.com/peutes/items/d74e5758a36478fbc039
 // document.addEventListener('touchend', event => {
@@ -34,22 +36,7 @@ $(`
 </div>
 
 <div class="component-layer layer-2">
-  <div id="component-post" style="display: none">
-    <!-- - 頭に "http" から始まっているURLは全て受け付けられます -->
-    <!-- - "data:"と書かれてあるURLは当サービスでは受け付けられません -->
-    <div>
-      <input type="text" placeholder="画像のURL">
-    </div>
-    <button onclick="post()">投稿</button>
-  </div>
-  <div id="component-conspicuous" style="display: none">
-    <h3 class="title">
-      TwitterやTumblrより効率的に画像を収集しませんか？
-    </h3>
-    <p>※Tumblrは12/17以降、<br>成人向けの画像は一切投稿できなくなります</p>
-    <p>百聞は一見にしかず。</p>
-    <p>まずは使ってみて下さい！</p>
-  </div>
+  ${drawer}
   <div class="frombottom">
     <div class="row"></div>
     <div class="area-recommendation" style="display: none">
@@ -57,13 +44,7 @@ $(`
       <div class="component-images-horizontal"></div>
       <div class="close" onclick="$(this).parent().hide(300)">×</div>
     </div>
-    <div id="component-actions">
-      <a class="most" href="/images?most">人気</a>
-      <a class="newPosts" href="/images">新着</a>
-      <a class="favorite" href="/images?favorite=true">お気入り一覧</a>
-      <button class="mypage" onclick="$('#component-logout').show(300)">マイページ</button>
-      <button class="login poyooon" onclick="$('#component-login').show(300)">ログイン</button>
-    </div>
+    ${bottomNavigation}
   </div>
 </div>
 
