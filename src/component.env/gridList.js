@@ -37,7 +37,8 @@ export const renderImages = function() {
     window.dat.session && i++;
 
     var s = new Toggle('favorites', { imageID: dat.id }, !!window.dat.favorites.filter(function(fav) {
-      return dat.id === parseInt(fav.imageID);
+      return dat.id === parseInt(fav.imageID)
+      && parseInt(fav.userID) === window.dat.session.id;
     }).length).html();
 
     var t = i % 12 ? '' : `

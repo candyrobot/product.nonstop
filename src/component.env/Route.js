@@ -36,16 +36,14 @@ class Route {
   }
 
   refresh() {
-    const method = getUrlParameter('method') || 'root';
+    const method = getUrlParameter('method') || 'images';
     const param = getUrlParameter('param') || undefined;
     this[method](param);
   }
 
-  root() {
-    renderImages();
-  }
-
   images(id) {
+    // 初期化
+    $('.area-recommendation').hide(300);
     if(id) {
       const url = `/?method="images"&param=${id}`;
       const title = `画像 ID: ${id}`;
@@ -55,6 +53,8 @@ class Route {
       renderImage(id);
       renderLayer2Row1(id);
     }
+    else
+      renderImages();
   }
 }
 

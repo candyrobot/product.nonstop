@@ -16,7 +16,8 @@ import Toggle from './Toggle';
 export function renderLayer2Row1(imageID) {
 
   var isFavorite = !!window.dat.favorites.filter(function(fav) {
-    return imageID === parseInt(fav.imageID);
+    return imageID === parseInt(fav.imageID)
+    && parseInt(fav.userID) === window.dat.session.id;
   }).length;
 
   $('#layer2-row1').html(`
