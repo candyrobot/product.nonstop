@@ -21,11 +21,16 @@ import { renderLayer2Row1 } from './_layer2Row1';
 
 // INFO: "imageIDが3かつuserIDが4"のような指定ができるようにするために、すべてクエリで表現。パスにはしない。
 class Route {
+  currentUrl = '';
+
   constructor() {
     $(window).on('popstate', (e)=> {
       console.log(e);
-      // INFO: 進むボタンが反応していないのか戻れなくなる。その対策。URLの差分がなければ
-      // window.history.go(-2);
+      // INFO: 進む/戻るボタンが反応していないのか戻れなくなる。その対策。URLが前と同じなら
+      if(window.history.state && window.history.state.url === this.currentUrl)
+        window.history.go(-1);
+      // INFO: don't forget.
+      this.currentUrl = window.history.state ? window.history.state.url : '';
       this.refresh();
     });
   }
@@ -45,6 +50,8 @@ class Route {
       const url = `/?method="images"&param=${id}`;
       const title = `画像 ID: ${id}`;
       window.history.pushState({url: url, title: title}, title, url);
+      // INFO: don't forget.
+      // this.currentUrl = window.history.state ? window.history.state.url : '';
       renderImage(id);
       renderLayer2Row1(id);
     }
