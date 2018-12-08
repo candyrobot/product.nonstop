@@ -1,13 +1,14 @@
 import $ from 'jquery';
 import {
-	getUrlParameter,
-	existParameter,
-	countUp,
-	startLoading,
-	stopLoading,
-	deleteFav,
-	domain,
-	toast
+  sortByFrequency,
+  getUrlParameter,
+  existParameter,
+  countUp,
+  startLoading,
+  stopLoading,
+  deleteFav,
+  domain,
+  toast
 } from './_util';
 import Toggle from './Toggle';
 // import { renderImage, renderImages } from './gridList';
@@ -33,12 +34,34 @@ export function renderLayer2Row1(imageID) {
 
     Toggle.toggle(this, imageID);
 
-    startLoading();
-    $.get(domain + '/images/list', {
-      related: true,
-      imageID: imageID
-    }).done(window.renderRecommendation).always(function() {
-      stopLoading();
+    var images = window.dat.favorites.map((dat)=> {
+      return window.dat.favorites.filter((datB)=> datB.userID === dat.userID)
+      .map((datB)=> window.dat.images.find(datB.imageID));
     });
+    renderRecommendation(images);
   });
 }
+
+const renderRecommendation = function(images) {
+  const html = sortByFrequency(images.serialize())
+  .reduce((prev, image)=> {
+    console.log(prev)
+    console.log(image)
+    return prev + (isShouldNotRender(image) ? '' : `
+    <a
+      onclick="Route.images(${image.id})"
+      style="background-image: url(${image.url})"></a>`);
+  }, '');
+  if (!html)
+    return;
+  $('.component-images-horizontal').html(html).closest('.area-recommendation').show(300);
+};
+
+const isShouldNotRender = function(image) {
+  return image.id === parseInt($('.fluid').attr('data-imageID'))
+  // INFO: 既にfavしてあるやつ
+  || window.dat.favorites.filter(function(fav) {
+    return parseInt(fav.imageID) === image.id
+    && parseInt(fav.userID) === window.dat.session.id;
+  }).length;
+};

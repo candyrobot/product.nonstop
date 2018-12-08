@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import './old';
+import './object/Array';
 import './old.css';
 import './component.env/Route';
 import drawer from './component.env/drawer';

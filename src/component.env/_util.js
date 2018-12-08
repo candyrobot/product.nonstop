@@ -82,12 +82,6 @@ const isEmpty = function(dat) {
   return false;
 };
 
-export const isShouldNotRender = function(image) {
-  return image.id === parseInt($('.fluid').attr('data-imageID')) || window.dat.favorites.filter(function(fav) {
-    return parseInt(fav.imageID) === image.id;
-  }).length;
-};
-
 export const sortByFrequency = function(array) {
   var frequency, uniques;
   frequency = {};

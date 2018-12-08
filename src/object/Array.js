@@ -93,3 +93,14 @@ Array.prototype.mapAll = function(fn) {
 Array.prototype.turn = function() {
   return this.mapAll((_, p, a)=> this[this.length-1-p.x][p.y]);
 };
+
+// @param {object} - { key: value }
+Array.prototype.where = function() {
+
+};
+
+// rubyでいうfind
+Array.prototype.find = function(id) {
+  return this.filter((dat)=> dat.id == id )[0];
+};
+
