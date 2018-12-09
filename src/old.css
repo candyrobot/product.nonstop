@@ -46,6 +46,7 @@ button {
   background-color: #70c9ff;
   color: white;
   font-weight: bold;
+  box-shadow: 0 1px 5px #009fff85;
 }
 input, button {
   padding: 0 10px;
@@ -53,6 +54,13 @@ input, button {
   font-size: 15px;
   border-radius: 3px;
   border: none;
+}
+.paper {
+  padding: 1px; /*子孫要素のmarginが影響されるのを防ぐ*/
+  padding: 1em;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 1px 20px rgba(0,0,0,.5);
 }
 .close {
   position: absolute;

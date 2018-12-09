@@ -10,6 +10,7 @@ export default `
     </div>
     <button onclick="post()">投稿</button>
   </div>
+
   <div id="component-conspicuous" style="display: none">
     <h3 class="title">
       TwitterやTumblrより効率的に画像を収集しませんか？
@@ -17,6 +18,14 @@ export default `
     <p>※Tumblrは12/17以降、<br>成人向けの画像は一切投稿できなくなります</p>
     <p>百聞は一見にしかず。</p>
     <p>まずは使ってみて下さい！</p>
+  </div>
+
+  <div id="component-suggestionLogin" class="paper">
+    <h3>登録してあなただけのお気入りBOXを🌟</h3>
+    <p>
+      <span class="small" onclick="$('#component-login').show(300)">ログイン</span>
+      <button onclick="$('#component-login').show(300).find('.toSwitchSignUp').click()">アカウント作成</button>
+    </p>
   </div>
 </div>
 `;

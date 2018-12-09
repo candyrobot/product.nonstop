@@ -7,7 +7,7 @@ export default `
   <input type="password" class="password" name="password" placeholder="password">
   <div class="">
     <button onclick="login()">ログイン</button>
-    <div class="small"
+    <div class="small toSwitchSignUp"
     onclick="$(this).parent().hide(300); $(this).parent().next().show(300)">
     　新規登録 ＞
     </div>
@@ -16,7 +16,7 @@ export default `
     <button onclick="signup()">サインアップ</button>
     <div class="small"
     onclick="$(this).parent().hide(300); $(this).parent().prev().show(300)">
-    ＜ 戻る　
+    ＜ ログイン　
     </div>
   </div>
   <div class="close" onclick="$(this).parent().hide(300)">×</div>
