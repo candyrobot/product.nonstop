@@ -1,5 +1,9 @@
+.bottomNavigation {
+  height: 55px;
+}
 
 #component-actions {
+  height: 100px; /*safariのUIで、下部のバーが下がったときに一瞬醜くなるのを防ぐ*/
   padding: 10px;
   background-color: #293958cc;
   text-align: right;
