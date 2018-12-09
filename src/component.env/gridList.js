@@ -35,10 +35,11 @@ function getViewableData(opt) {
   else if(opt.filter === 'favorite') {
     return window.dat.images.filter((i)=> window.dat.favorites.where({ imageID: i.id, userID: window.dat.session.id }).length);
   }
-  else if(opt.sort === 'newer')
+  else if(opt.sort === 'newer') {
     return window.dat.images.sort((iA, iB)=> {
       return parseInt(iA.created_at.replace( /\D/g , '')) > parseInt(iB.created_at.replace( /\D/g , '')) ? -1 : 1;
     });
+  }
   else
     return window.dat.images;
 };
