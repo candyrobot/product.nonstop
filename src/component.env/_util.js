@@ -20,10 +20,10 @@ window.initializeApp = function() {
     } else {
       $('#component-actions .mypage').hide();
       $('#component-actions .favorite').hide();
-      $('.component-images-horizontal').on('click', 'a', function() {
-        toast('ログインすると見れます。　最高のエロ画像を探そう!🌟');
-        return false;
-      });
+      // $('.component-images-horizontal').on('click', 'a', function() {
+      //   toast('ログインすると見れます。　最高のエロ画像を探そう!🌟');
+      //   return false;
+      // });
     }
     window.Route.refresh();
     $('#component-logout h1').text(window.dat.session.id);

@@ -54,24 +54,24 @@
   line-height: 1.2em;
 }
 
-#component-suggestionLogin {
+.component-suggestion {
+  position: relative;
   margin: 10px;
   /* border: 4px solid #90d5ff; */
+  color: #666;
 }
-
-#component-suggestionLogin h3 {
+.component-suggestion h3 {
   margin: .25em 0;
   font-size: 14px;
   text-align: center;
   color: #202d47b5;
 }
-
-#component-suggestionLogin p {
+.component-suggestion p {
   margin-bottom: 5px;
   text-align: center;
+  font-size: 12px;
 }
-
-#component-suggestionLogin .small {
+.component-suggestion .small {
   display: inline-block;
   color: #888;
   padding: 0 20px;
@@ -80,7 +80,7 @@
   border-radius: 3px;
   border: none;
 }
-#component-suggestionLogin .small:active {
+.component-suggestion .small:active {
   background: #e0e0e0;
 }
 

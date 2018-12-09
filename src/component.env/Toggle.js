@@ -48,12 +48,16 @@ export default class Toggle {
 
 Toggle.toggle = (el, imageID)=> {
   if ($(el).is('.true')) {
-    deleteFav(imageID).done(()=> $(el).removeClass('true'));
+    deleteFav(imageID)
+    .done(()=> $(el).removeClass('true'))
+    .fail(()=> toast('ログインするとお気入りに保存できます'));
   } else {
     $.post(domain + '/favorites', {
       imageID: imageID
     }).fail((dat)=> {
       toast(dat.responseJSON.toast);
-    }).done(()=> $(el).addClass('true'));
+    })
+    .done(()=> $(el).addClass('true'))
+    .fail(()=> toast('ログインするとお気入りに保存できます'));
   }
 };

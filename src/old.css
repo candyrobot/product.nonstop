@@ -66,8 +66,7 @@ input, button {
   position: absolute;
   right: 10px;
   top: 0px;
-  font-size: 30px;
-  color: white;
+  font-size: 25px;
 }
 .poyooon {
   animation: poyooon 1.8s linear 0s infinite;
