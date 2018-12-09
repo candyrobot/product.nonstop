@@ -94,9 +94,14 @@ Array.prototype.turn = function() {
   return this.mapAll((_, p, a)=> this[this.length-1-p.x][p.y]);
 };
 
+// TODO: まだチューニングできると思う
 // @param {object} - { key: value }
-Array.prototype.where = function() {
-
+Array.prototype.where = function(hash) {
+  var a = this;
+  for (const key in hash) {
+    a = a.filter((a)=> a[key] == hash[key]);
+  }
+  return a;
 };
 
 // rubyでいうfind

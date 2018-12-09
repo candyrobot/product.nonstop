@@ -50,7 +50,7 @@ const renderRecommendation = function(images) {
     console.log(image)
     return prev + (isShouldNotRender(image) ? '' : `
     <a
-      onclick="Route.images(${image.id})"
+      onclick="Route.push('images', { id: ${image.id} }).refresh()"
       style="background-image: url(${image.url})"></a>`);
   }, '');
   if (!html)

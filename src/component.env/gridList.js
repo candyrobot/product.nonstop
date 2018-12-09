@@ -20,12 +20,32 @@ import Toggle from './Toggle';
 
 export default `
 <div id="component-images" class="gridList">
-
 </div>
 `;
 
-export const renderImages = function() {
-  var html = window.dat.images.reduce(function(prev, dat, i) {
+function getViewableData(opt) {
+  if(opt.sort === 'most') {
+    return window.dat.images
+    .map((i)=> {
+      i.favorites = window.dat.favorites.filter((f)=> f.imageID == i.id);
+      return i;
+    })
+    .sort((iA, iB)=> iA.favorites.length > iB.favorites.length ? -1 : 1 );
+  }
+  else if(opt.filter === 'favorite') {
+    return window.dat.images.filter((i)=> window.dat.favorites.where({ imageID: i.id, userID: window.dat.session.id }).length);
+  }
+  else if(opt.sort === 'newer')
+    return window.dat.images.sort((iA, iB)=> {
+      return parseInt(iA.created_at.replace( /\D/g , '')) > parseInt(iB.created_at.replace( /\D/g , '')) ? -1 : 1;
+    });
+  else
+    return window.dat.images;
+};
+
+export const renderImages = function(opt) {
+
+  var html = getViewableData(opt).reduce(function(prev, dat, i) {
 
     var u = window.dat.session && i === 0 ? `
     <div class="outer additional">
@@ -58,7 +78,7 @@ export const renderImages = function() {
         data-imageID="${dat.id}">
         <div
           class="inner"
-          onclick="Route.images(${dat.id})"
+          onclick="Route.push('images', { id: ${dat.id} }).refresh()"
           style="background-image: url(${dat.url})">
         </div>
         ${s}

@@ -4,7 +4,7 @@
   background-color: #293958cc;
   text-align: right;
 }
-#component-actions > a {
+#component-actions > span {
   display: inline-block;
   padding: 0 10px;
   border-radius: 3px;

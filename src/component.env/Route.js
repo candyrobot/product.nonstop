@@ -41,20 +41,24 @@ class Route {
     this[method](param);
   }
 
-  images(id) {
+  push(method, opt = {}) {
+    const url = `/?method="${method}"&param=${JSON.stringify(opt)}`;
+    const title = `${method} param: ${JSON.stringify(opt)}`;
+    window.history.pushState({url: url, title: title}, title, url);
+    // INFO: don't forget.
+    // this.currentUrl = window.history.state ? window.history.state.url : '';
+    return this;
+  }
+
+  images(opt = {}) {
     // 初期化
     $('.area-recommendation').hide(300);
-    if(id) {
-      const url = `/?method="images"&param=${id}`;
-      const title = `画像 ID: ${id}`;
-      window.history.pushState({url: url, title: title}, title, url);
-      // INFO: don't forget.
-      // this.currentUrl = window.history.state ? window.history.state.url : '';
-      renderImage(id);
-      renderLayer2Row1(id);
+    if(opt.id) {
+      renderImage(opt.id);
+      renderLayer2Row1(opt.id);
     }
     else
-      renderImages();
+      renderImages(opt);
   }
 }
 
