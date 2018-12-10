@@ -1,16 +1,10 @@
 import $ from 'jquery';
 import './drawer.css';
+import {
+  getCount
+} from './_util';
 export default `
 <div class="drawer">
-  <div id="component-post" style="display: none">
-    <!-- - 頭に "http" から始まっているURLは全て受け付けられます -->
-    <!-- - "data:"と書かれてあるURLは当サービスでは受け付けられません -->
-    <div>
-      <input type="text" placeholder="画像のURL">
-    </div>
-    <button onclick="post()">投稿</button>
-  </div>
-
   <div id="component-conspicuous" style="display: none">
     <h3 class="title">
       TwitterやTumblrより効率的に画像を収集しませんか？
@@ -29,7 +23,16 @@ export default `
     <div class="close" onclick="$(this).parent().hide(300)">×</div>
   </div>
 
-  <div class="component-suggestion paper">
+  <div id="component-post" style="display: none">
+    <!-- - 頭に "http" から始まっているURLは全て受け付けられます -->
+    <!-- - "data:"と書かれてあるURLは当サービスでは受け付けられません -->
+    <div>
+      <input type="text" placeholder="画像のURL">
+    </div>
+    <button onclick="post()">投稿</button>
+  </div>
+
+  <div class="component-suggestion paper" style="display: none">
     <h3 style="font-size: 18px; text-indent: .5em">拡散希望🌟</h3>
     <p>
       画像不足！<br>
@@ -43,10 +46,26 @@ export default `
 </div>
 `;
 
-window.drawer = (index)=> {
+window.showDrawer = (i)=> {
+  if(i === undefined) {
+    if(window.dat.session)
+      i = 3;
+    else if(2 < getCount('showRecommendation') && 2 < getCount('clickRecommend'))
+      i = 1;
+    else
+      i = 0;
+  }
+  if($('.drawer > *:visible').index() == i)
+    return;
   $('.drawer > *').hide(300, ()=> {
-    $('.drawer > *').eq(index).show(300)
+    $('.drawer > *').eq(i).show(300)
   })
 
   // xxx.show().css({ y: -100 }).transit({ y: 0 }, 500, 'easeOutBack');
 };
+
+
+
+
+
+

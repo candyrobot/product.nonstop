@@ -25,6 +25,7 @@ window.initializeApp = function() {
       //   return false;
       // });
     }
+    setTimeout('window.showDrawer()', 1000);
     window.Route.refresh();
     $('#component-logout h1').text(window.dat.session.id);
     $('#component-logout h5').text(window.dat.session.email);
@@ -202,6 +203,11 @@ export const countUp = function(key) {
   }
   localStorage.setItem(key, JSON.stringify(++a[key]));
   return a[key];
+};
+window.countUp = countUp;
+export const getCount = (key)=> {
+  const v = localStorage.getItem(key);
+  return v === null ? 0 : JSON.parse(v);
 };
 
 export const startLoading = function() {

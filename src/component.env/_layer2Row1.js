@@ -32,7 +32,6 @@ export function renderLayer2Row1(imageID) {
   `);
 
   $('#layer2-row1 .component-fav').on('click', function() {
-
     Toggle.toggle(this, imageID);
 
     var images = window.dat.favorites.map((dat)=> {
@@ -50,11 +49,17 @@ const renderRecommendation = function(images) {
     console.log(image)
     return prev + (isShouldNotRender(image) ? '' : `
     <a
-      onclick="Route.push('images', { id: ${image.id} }).refresh()"
+      onclick="
+        countUp('clickRecommend');
+        window.showDrawer();
+        Route.push('images', { id: ${image.id} }).refresh()
+      "
       style="background-image: url(${image.url})"></a>`);
   }, '');
   if (!html)
     return;
+  countUp('showRecommendation');
+  window.showDrawer();
   $('.component-images-horizontal').html(html).closest('.area-recommendation').show(300);
 };
 
