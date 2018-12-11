@@ -86,9 +86,9 @@ export const renderImages = function(opt) {
     Toggle.toggle(this, imageID);
   });
 
-  $('#component-images > .outer').filter(isAlmostThere()).show();
+  $('#component-images > .outer').inAlmostThere().show();
   $(document).on('scroll', function() {
-    $('#component-images > .outer').filter(isAlmostThere()).fadeIn();
+    $('#component-images > .outer').inAlmostThere().fadeIn();
   });
 
   $('#component-images').find('.message').on('click', function() {

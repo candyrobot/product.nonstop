@@ -6,19 +6,6 @@ import {
 import { renderImage, renderImages } from './gridList';
 import { renderLayer2Row1 } from './_layer2Row1';
 
-
-//   } else if (existParameter('most')) {
-//     $('#component-actions .most').hide();
-//     renderImages();
-//   } else if (existParameter('favorite')) {
-//     $('#component-actions .favorite').hide();
-//     renderImages();
-//   } else {
-//     $('#component-actions .newPosts').hide();
-//     renderImages();
-//   }
-
-
 // INFO: "imageIDが3かつuserIDが4"のような指定ができるようにするために、すべてクエリで表現。パスにはしない。
 class Route {
   currentUrl = '';

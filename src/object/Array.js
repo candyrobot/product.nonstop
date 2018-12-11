@@ -117,3 +117,27 @@ Array.prototype.exclude = function(hash) {
   }
   return a;
 };
+
+Array.prototype.sortByFrequency = function() {
+  const frequency = {};
+  this.forEach((v)=> {
+    return frequency[v.id] = 0;
+  });
+  const uniques = this.filter((v)=> {
+    return ++frequency[v.id] === 1;
+  });
+  return uniques.sort((a, b)=> {
+    return frequency[b.id] - frequency[a.id];
+  });
+};
+
+Array.prototype.removeDuplicate = function() {
+  return Array.from(new Set(this));
+};
+
+Array.prototype.serialize = function() {
+  return this.reduce(function(pre, current) {
+    pre.push.apply(pre, current);
+    return pre;
+  }, []);
+};
