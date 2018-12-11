@@ -3,31 +3,53 @@ import './bottomNavigation.css';
 export default `
 <div class="bottomNavigation">
 	<div id="component-actions">
-		<span 
-			onclick="Route.push('images', { sort: 'favorites' }).refresh()"
-			class="most fas fa-award"
+		<div
+			onclick="
+			Route.push('images', { sort: 'newer' }).refresh();
+      $('#component-actions > *').removeClass('current');
+      $('#component-actions > .sort-newer').addClass('current');
+			"
+			class="sort-newer"
 			>
-			人気順
-		</span>
-		<span 
-			onclick="Route.push('images', { sort: 'newer' }).refresh()"
-			class="newPosts far fa-images"
+			<i class="far fa-images"></i>
+			<small>新着順</small>
+		</div>
+		<div
+			onclick="
+			Route.push('images', { sort: 'favorites' }).refresh();
+      $('#component-actions > *').removeClass('current');
+      $('#component-actions > .sort-favorites').addClass('current');
+			"
+			class="sort-favorites"
 			>
-			新着順
-		</span>
-		<span 
-			onclick="Route.push('images', { filter: 'myFavorite' }).refresh()"
-			class="favorite fas fa-heart"
+			<i class="fas fa-award"></i>
+			<small>人気順</small>
+		</div>
+		<div
+			onclick="
+			Route.push('images', { filter: 'myFavorite' }).refresh();
+      $('#component-actions > *').removeClass('current');
+      $('#component-actions > .filter-myFavorite').addClass('current');
+			"
+			class="filter-myFavorite"
 			>
-			お気入り一覧
-		</span>
-		<span
+			<i class="fas fa-heart"></i>
+			<small>お気入り</small>
+		</div>
+		<div
 			onclick="$('#component-logout').show(300)"
-			class="mypage fas fa-user-circle"
+			class="mypage"
 			>
-			マイページ
-		</span>
-		<button class="login poyooon" onclick="$('#component-login').show(300)">ログイン</button>
+			<i class="fas fa-user-circle"></i>
+			<small>マイページ</small>
+		</div>
+		<div
+			onclick="$('#component-login').show(300)"
+			class="login poyooon"
+			>
+			<i class="fas fa-play"></i>
+			<small>ログイン</small>
+		</div>
 	</div>
 </div>
 `;
@@ -37,7 +59,7 @@ window.bottomNavigation.scroll = ()=> {
 	const w = $('#component-actions > *').reduce(function(w, el) {
 		return w + $(el).outerWidth(true);
 	}, 0);
-	$('#component-actions').animate({ 
+	$('#component-actions').animate({
 		scrollLeft: w - $('#component-actions').outerWidth()
 	}, 800);
 };
