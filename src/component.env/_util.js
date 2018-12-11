@@ -14,13 +14,6 @@ window.initializeApp = function() {
     var b, imageID;
     console.log(dat);
     window.dat = dat;
-    if (dat.session) {
-      $('#component-actions .login').hide();
-      $('#component-actions .signup').hide();
-    } else {
-      $('#component-actions .mypage').hide();
-      $('#component-actions .favorite').hide();
-    }
     window.Route.refresh();
     setTimeout('window.showDrawer()', 1000);
     setTimeout('window.bottomNavigation.scroll()', 1000);
