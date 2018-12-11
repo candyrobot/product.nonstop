@@ -104,8 +104,9 @@ Array.prototype.serialize = function() {
 };
 
 window.post = function() {
-  var url;
-  url = $('#component-post input').val();
+  const url = $('#component-post input').val();
+  if(url.match(/^http/) === null)
+    toast('httpから始まるURLで入力して下さい。不正な値は後日削除されます', 3500);
   return $.post(domain + '/images/', {
     url: url
   }).fail(function(dat) {
@@ -228,16 +229,15 @@ export const deleteFav = function(imageID) {
   });
 };
 
-export const toast = function(txt) {
+export const toast = function(txt, millisec = 2500) {
   if (!txt) {
     return;
   }
-  return $("<div>" + txt + "</div>").appendTo('#layer-appMessages .alerts').hide().show(300, function() {
-    return setTimeout((function(_this) {
-      return function() {
-        return $(_this).hide(300);
-      };
-    })(this), 2000);
+  return $("<div>" + txt + "</div>").appendTo('#layer-appMessages .alerts')
+  .hide().show(300, function() {
+    setTimeout(()=> {
+      $(this).hide(300);
+    }, millisec);
   });
 };
 

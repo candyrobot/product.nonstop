@@ -24,8 +24,6 @@ export default `
   </div>
 
   <div id="component-post" style="display: none">
-    <!-- - 頭に "http" から始まっているURLは全て受け付けられます -->
-    <!-- - "data:"と書かれてあるURLは当サービスでは受け付けられません -->
     <div>
       <input type="text" placeholder="画像のURL">
     </div>
