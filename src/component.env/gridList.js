@@ -16,6 +16,7 @@ import {
 	showWebview,
 	lazyShow
 } from './_util';
+import Image from '../model/Image';
 import Toggle from './Toggle';
 
 export default `
@@ -24,22 +25,12 @@ export default `
 `;
 
 function getViewableData(opt) {
-  if(opt.sort === 'most') {
-    return window.dat.images
-    .map((i)=> {
-      i.favorites = window.dat.favorites.filter((f)=> f.imageID == i.id);
-      return i;
-    })
-    .sort((iA, iB)=> iA.favorites.length > iB.favorites.length ? -1 : 1 );
-  }
-  else if(opt.filter === 'favorite') {
-    return window.dat.images.filter((i)=> window.dat.favorites.where({ imageID: i.id, userID: window.dat.session.id }).length);
-  }
-  else if(opt.sort === 'newer') {
-    return window.dat.images.sort((iA, iB)=> {
-      return parseInt(iA.created_at.replace( /\D/g , '')) > parseInt(iB.created_at.replace( /\D/g , '')) ? -1 : 1;
-    });
-  }
+  if(opt.sort === 'favorites')
+    return Image.sortByFavorites();
+  else if(opt.filter === 'myFavorite')
+    return Image.filterByMyFavorite();
+  else if(opt.sort === 'newer')
+    return Image.sortByNewer();
   else
     return window.dat.images;
 };

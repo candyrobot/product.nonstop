@@ -83,16 +83,15 @@ const isEmpty = function(dat) {
   return false;
 };
 
-export const sortByFrequency = function(array) {
-  var frequency, uniques;
-  frequency = {};
-  array.forEach(function(v) {
+Array.prototype.sortByFrequency = function() {
+  const frequency = {};
+  this.forEach((v)=> {
     return frequency[v.id] = 0;
   });
-  uniques = array.filter(function(v) {
+  const uniques = this.filter((v)=> {
     return ++frequency[v.id] === 1;
   });
-  return uniques.sort(function(a, b) {
+  return uniques.sort((a, b)=> {
     return frequency[b.id] - frequency[a.id];
   });
 };

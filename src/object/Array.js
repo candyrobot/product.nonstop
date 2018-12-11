@@ -109,3 +109,11 @@ Array.prototype.find = function(id) {
   return this.filter((dat)=> dat.id == id )[0];
 };
 
+// INFO: whereの逆。除く
+Array.prototype.exclude = function(hash) {
+  var a = this;
+  for (const key in hash) {
+    a = a.filter((a)=> a[key] != hash[key]);
+  }
+  return a;
+};
