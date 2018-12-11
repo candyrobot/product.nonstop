@@ -20,10 +20,6 @@ window.initializeApp = function() {
     } else {
       $('#component-actions .mypage').hide();
       $('#component-actions .favorite').hide();
-      // $('.component-images-horizontal').on('click', 'a', function() {
-      //   toast('ログインすると見れます。　最高のエロ画像を探そう!🌟');
-      //   return false;
-      // });
     }
     setTimeout('window.showDrawer()', 1000);
     window.Route.refresh();
