@@ -1,6 +1,7 @@
 .bottomNavigation {
   position: relative;
   height: 100px;
+  margin-top: -45px;
   overflow: hidden;
 }
 .bottomNavigation:before {
@@ -34,4 +35,10 @@
   font-size: 15px;
   line-height: 35px;
   text-decoration: none;
+}
+
+#layer2-row1,
+.area-recommendation {
+  position: relative;
+  z-index: 1;
 }
