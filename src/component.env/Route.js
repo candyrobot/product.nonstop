@@ -51,14 +51,15 @@ class Route {
   }
 
   images(opt = {}) {
-    // 初期化
-    $('.area-recommendation').hide(300);
     if(opt.id) {
       renderImage(opt.id);
       renderLayer2Row1(opt.id);
     }
-    else
+    else {
+      // 初期化
+      $('.area-recommendation').hide(300);
       renderImages(opt);
+    }
   }
 }
 
