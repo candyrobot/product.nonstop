@@ -1,4 +1,6 @@
 import $ from 'jquery';
+// import 'jquery.transit';
+import './object/$';
 import './object/Array';
 import './old.css';
 import './component.env/Route';

@@ -21,8 +21,9 @@ window.initializeApp = function() {
       $('#component-actions .mypage').hide();
       $('#component-actions .favorite').hide();
     }
-    setTimeout('window.showDrawer()', 1000);
     window.Route.refresh();
+    setTimeout('window.showDrawer()', 1000);
+    setTimeout('window.bottomNavigation.scroll()', 1000);
     $('#component-logout h1').text(window.dat.session.id);
     $('#component-logout h5').text(window.dat.session.email);
   });
@@ -200,37 +201,5 @@ export const toast = function(txt, millisec = 2500) {
     setTimeout(()=> {
       $(this).hide(300);
     }, millisec);
-  });
-};
-
-/**
- - TODO: x軸の処理を書いていない
- * @param  {Boolean} isEntire - trueで要素全体が入ったときにtrueを返す
- * @return {Boolean}          [description]
- */
-$.fn.inView = function(isEntire = false) {
-  return $(this).filter(function() {
-    const target = {
-      top: $(this).offset().top,
-      bottom: $(this).offset().top + $(this).outerHeight(),
-    };
-    const viewable = {
-      top: $(document).scrollTop(),
-      bottom: $(document).scrollTop() + $(window).innerHeight()
-    }
-    return target.top < viewable.bottom && target.bottom > viewable.top;
-  });
-};
-$.fn.inAlmostThere = function(threshold = 100) {
-  return $(this).filter(function() {
-    const target = {
-      top: $(this).offset().top - threshold,
-      bottom: $(this).offset().top + $(this).outerHeight() + threshold,
-    };
-    const viewable = {
-      top: $(document).scrollTop(),
-      bottom: $(document).scrollTop() + $(window).innerHeight()
-    }
-    return target.top < viewable.bottom && target.bottom > viewable.top;
   });
 };

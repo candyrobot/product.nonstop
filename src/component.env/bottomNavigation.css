@@ -1,12 +1,27 @@
 .bottomNavigation {
-  height: 55px;
+  position: relative;
+  height: 100px;
+  overflow: hidden;
+}
+.bottomNavigation:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 45px;
+  height: 100px;
+  background-color: #293958cc;
 }
 
 #component-actions {
+  position: relative;
   height: 100px; /*safariのUIで、下部のバーが下がったときに一瞬醜くなるのを防ぐ*/
   padding: 10px;
-  background-color: #293958cc;
+  padding-top: 55px;
   text-align: right;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: visible;
 }
 #component-actions > span {
   display: inline-block;
