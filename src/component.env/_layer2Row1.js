@@ -47,6 +47,7 @@ const renderRecommendation = function(images) {
       onclick="
         countUp('clickRecommend');
         window.showDrawer();
+
         Route.push('images', { id: ${image.id} }).refresh()
       "
       style="background-image: url(${image.url})"></a>`;

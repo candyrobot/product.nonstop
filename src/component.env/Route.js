@@ -26,6 +26,7 @@ class Route {
     const method = getUrlParameter('method') || 'images';
     const param = getUrlParameter('param') || undefined;
     this[method](param);
+    $('#component-actions .login')[window.dat.session ? 'hide' : 'show']();
   }
 
   push(method, opt = {}) {
@@ -43,8 +44,6 @@ class Route {
       renderLayer2Row1(opt.id);
     }
     else {
-      // 初期化
-      $('.area-recommendation').hide(300);
       $('#layer2-row1').html('');
       renderImages(opt);
     }

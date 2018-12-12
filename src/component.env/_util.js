@@ -11,6 +11,7 @@ $.ajaxSetup({
 
 window.initializeApp = function() {
   $('#component-actions > .sort-newer').addClass('current');
+  alert('begin connection');
   return $.get(domain + '/application' + window.location.search, function(dat) {
     var b, imageID;
     console.log(dat);

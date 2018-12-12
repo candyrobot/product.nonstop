@@ -1,14 +1,14 @@
 .bottomNavigation {
   position: relative;
   height: 100px;
-  margin-top: -45px;
+  margin-top: -20px;
 }
 .bottomNavigation:before {
   content: '';
   position: absolute;
   left: 0;
   width: 100%;
-  top: 35px;
+  top: 20px;
   height: 100px;
   background-color: #293958cc;
 }
@@ -18,7 +18,7 @@
   display: flex;
   height: 100px; /*safariのUIで、下部のバーが下がったときに一瞬醜くなるのを防ぐ*/
   padding:1px;
-  padding-top: 36px;
+  padding-top: 21px;
   justify-content: space-between;
   overflow-x: auto;
   overflow-y: visible;

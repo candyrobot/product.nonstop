@@ -16,6 +16,7 @@ export default `
 		</div>
 		<div
 			onclick="
+			if(!dat.session) { toast('ログインしたユーザーのみ使えます'); return false; };
 			Route.push('images', { sort: 'favorites' }).refresh();
 			$('#component-actions > *').removeClass('current');
 			$('#component-actions > .sort-favorites').addClass('current');
@@ -38,7 +39,10 @@ export default `
 			<small>お気入り</small>
 		</div>
 		<div
-			onclick="$('#component-logout').show(300)"
+			onclick="
+			if(!dat.session) { toast('ログインしたユーザーのみ使えます'); return false; }
+			$('#component-logout').show(300);
+			"
 			class="mypage"
 			>
 			<i class="fas fa-user-circle"></i>
