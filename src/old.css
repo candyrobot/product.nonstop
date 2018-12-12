@@ -179,10 +179,10 @@ input, button {
 .area-recommendation {
   position: relative;
   background-color: rgba(0, 0, 0, 1);
+  color: white;
 }
 .area-recommendation > h4 {
   margin: 10px 10px 0;
-  color: white;
 }
 .component-images-horizontal {
   overflow: auto;
