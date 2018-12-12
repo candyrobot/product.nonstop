@@ -45,6 +45,7 @@ class Route {
     else {
       // 初期化
       $('.area-recommendation').hide(300);
+      $('#layer2-row1').html('');
       renderImages(opt);
     }
   }
