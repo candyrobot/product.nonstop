@@ -76,7 +76,7 @@ const isEmpty = function(dat) {
 };
 
 window.promptToUpload = ()=> {
-  window.post(window.prompt('新しい画像を投稿して下さい。（「http」から始まる画像のURLを入力）\n※近日アップロードできるようになります'));
+  window.post(window.prompt('新しい画像を投稿して下さい。（httpから始まる画像のURLを入力）\n※近日アップロードもできるようになります'));
 };
 window.post = function(url) {
   if(url === null)
