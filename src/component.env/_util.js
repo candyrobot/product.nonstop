@@ -1,4 +1,9 @@
 import $ from 'jquery';
+import {
+  DrawerConspicuous,
+  DrawerLetsSignup,
+  DrawerLetsShare
+} from './drawer';
 
 // export const domain = "http://0.0.0.0:3000";
 export const domain = "https://with-one-account-prd.herokuapp.com";
@@ -16,10 +21,21 @@ window.initializeApp = function() {
     console.log(dat);
     window.dat = dat;
     window.Route.refresh();
-    setTimeout('window.showDrawer()', 1000);
     setTimeout('window.bottomNavigation.scroll()', 1000);
     $('#component-logout h1').text(window.dat.session.id);
     $('#component-logout h5').text(window.dat.session.email);
+    if(window.dat.session) {
+      new DrawerLetsShare().create();
+      setInterval(()=> {
+        new DrawerLetsShare().create();
+      }, 1000 * 20);
+    }
+    else {
+      new DrawerConspicuous().create();
+      setTimeout(()=> {
+        new DrawerLetsSignup().create();
+      }, 1000 * 10);
+    }
   });
 };
 

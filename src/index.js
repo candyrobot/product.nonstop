@@ -4,7 +4,6 @@ import './object/$';
 import './object/Array';
 import './old.css';
 import './component.env/Route';
-import drawer from './component.env/drawer';
 import _overlays from './component.env/_overlays';
 import gridList from './component.env/gridList';
 import bottomNavigation from './component.env/bottomNavigation';
@@ -41,7 +40,7 @@ $(`
 </div>
 
 <div class="component-layer layer-2">
-  ${drawer}
+  <div id="drawer"></div>
   <div class="frombottom">
     <div class="row" id="layer2-row1"></div>
     <div class="area-recommendation" style="display: none">
