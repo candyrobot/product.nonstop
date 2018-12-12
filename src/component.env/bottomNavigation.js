@@ -6,8 +6,8 @@ export default `
 		<div
 			onclick="
 			Route.push('images', { sort: 'newer' }).refresh();
-      $('#component-actions > *').removeClass('current');
-      $('#component-actions > .sort-newer').addClass('current');
+			$('#component-actions > *').removeClass('current');
+			$('#component-actions > .sort-newer').addClass('current');
 			"
 			class="sort-newer"
 			>
@@ -17,8 +17,8 @@ export default `
 		<div
 			onclick="
 			Route.push('images', { sort: 'favorites' }).refresh();
-      $('#component-actions > *').removeClass('current');
-      $('#component-actions > .sort-favorites').addClass('current');
+			$('#component-actions > *').removeClass('current');
+			$('#component-actions > .sort-favorites').addClass('current');
 			"
 			class="sort-favorites"
 			>
@@ -28,8 +28,8 @@ export default `
 		<div
 			onclick="
 			Route.push('images', { filter: 'myFavorite' }).refresh();
-      $('#component-actions > *').removeClass('current');
-      $('#component-actions > .filter-myFavorite').addClass('current');
+			$('#component-actions > *').removeClass('current');
+			$('#component-actions > .filter-myFavorite').addClass('current');
 			"
 			class="filter-myFavorite"
 			>
