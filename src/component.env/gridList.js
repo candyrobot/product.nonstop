@@ -41,7 +41,7 @@ export const renderImages = function(opt) {
 
     // var u = '';
     var u = window.dat.session && i === 0 ? `
-    <div 
+    <div
       class="outer additional"
       onclick="window.promptToUpload()"
       >
@@ -61,6 +61,22 @@ export const renderImages = function(opt) {
     <div class="message">
       スマホのホーム画面にこのアプリを追加することができるのです
       <i>(ここをタップ)</i>
+    </div>
+    <div class="starbacks">
+      <div>
+        <div class="title">
+          20枚投稿でもれなくスターバックス券もらえる！
+        </div>
+        <div class="small">
+          🌟達成した時点でメールをお送りします
+        </div>
+        <div class="small">
+          🌟但し、同じ画像、当サービスのコンセプトにあっていない画像は対象外です<br>
+        </div>
+        <div class="small">
+          🌟20枚毎に何回でも入手可能です！
+        </div>
+      </div>
     </div>
     `;
 
@@ -101,7 +117,7 @@ export const renderImages = function(opt) {
       return showWebview('https://www.youtube.com/embed/8iueP5sRQ-Y');
     }
   });
-  return lazyShow('#component-images .outer');
+  // lazyShow('#component-images .outer');
 };
 
 export const renderImage = function(id) {

@@ -238,3 +238,37 @@ input, button {
 .component-mediabox .desc {
   font-size: 14px;
 }
+
+.starbacks {
+  background: url(./img/starbacks.jpg) center red;
+  background-size: cover;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  margin: 1px;
+  border-radius: 3px;
+}
+.starbacks > div {
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #ff000088;
+  box-shadow: 0 2px 10px #771c1c;
+}
+.starbacks .title {
+  margin-bottom: 7px;
+  font-size: 20px;
+  line-height: 1.4em;
+}
+.starbacks .small {
+  font-size: 10px;
+  padding-left: 1.5em;
+  text-indent: -14px;
+}
+
+
+
+
+
+
+
+
