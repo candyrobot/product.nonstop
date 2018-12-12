@@ -27,6 +27,7 @@ export default `
 		</div>
 		<div
 			onclick="
+			if(!dat.session) { toast('ログインしたユーザーのみ使えます'); return false; }
 			Route.push('images', { filter: 'myFavorite' }).refresh();
 			$('#component-actions > *').removeClass('current');
 			$('#component-actions > .filter-myFavorite').addClass('current');

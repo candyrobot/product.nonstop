@@ -40,7 +40,7 @@ window.signup = function() {
 
 window.logout = function() {
   localStorage.removeItem('app.nonstop.session.token')
-  setTimeout('window.location.reload()', 1000);
+  setTimeout('window.location.href = "/"', 1000);
 };
 
 window.login = function(dat) {
@@ -197,3 +197,4 @@ export const toast = function(txt, millisec = 2500) {
     }, millisec);
   });
 };
+window.toast = toast;
