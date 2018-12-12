@@ -75,16 +75,20 @@ const isEmpty = function(dat) {
   return false;
 };
 
-window.post = function() {
-  const url = $('#component-post input').val();
+window.promptToUpload = ()=> {
+  window.post(window.prompt('新しい画像を投稿して下さい。（「http」から始まる画像のURLを入力）\n※近日アップロードできるようになります'));
+};
+window.post = function(url) {
+  if(url === null)
+    return;
   if(url.match(/^http/) === null)
-    toast('httpから始まるURLで入力して下さい。不正な値は後日削除されます', 3500);
+    return toast('httpから始まるURLで入力して下さい。不正な値は後日削除されます', 3500);
   return $.post(domain + '/images/', {
     url: url
   }).fail(function(dat) {
-    return toast(dat.responseJSON.toast);
+    toast(dat.responseJSON.toast);
   }).done(function() {
-    return setTimeout('window.location.reload()', 1000);
+    setTimeout('window.location.reload()', 1000);
   });
 };
 

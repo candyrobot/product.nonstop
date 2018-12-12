@@ -29,7 +29,7 @@ export default `
     <div>
       <input type="text" placeholder="画像のURL">
     </div>
-    <button onclick="post()">投稿</button>
+    <button onclick="post($('#component-post input').val())">投稿</button>
   </div>
 
   <div class="component-suggestion paper" style="display: none">

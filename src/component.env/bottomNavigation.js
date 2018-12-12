@@ -49,11 +49,20 @@ export default `
 			<small>マイページ</small>
 		</div>
 		<div
+			style="display: none"
 			onclick="$('#component-login').show(300)"
 			class="login poyooon"
 			>
 			<i class="fas fa-play"></i>
 			<small>ログイン</small>
+		</div>
+		<div
+			style="display: none"
+			onclick="window.promptToUpload()"
+			class="upload"
+			>
+			<i class="far fa-plus-square"></i>
+			<small>アップロード</small>
 		</div>
 	</div>
 </div>

@@ -39,15 +39,18 @@ export const renderImages = function(opt) {
 
   var html = getViewableData(opt).reduce(function(prev, dat, i) {
 
-    var u = '';
-    // var u = window.dat.session && i === 0 ? `
-    // <div class="outer additional">
-    //   <div class="inner">
-    //     <i class="fas fa-plus"></i>
-    //   </div>
-    // </div>
-    // ` : '';
-    // window.dat.session && i++;
+    // var u = '';
+    var u = window.dat.session && i === 0 ? `
+    <div 
+      class="outer additional"
+      onclick="window.promptToUpload()"
+      >
+      <div class="inner">
+        <i class="fas fa-plus"></i>
+      </div>
+    </div>
+    ` : '';
+    window.dat.session && i++;
 
     var s = new Toggle('favorites', { imageID: dat.id }, !!window.dat.favorites.filter(function(fav) {
       return dat.id === parseInt(fav.imageID)

@@ -27,6 +27,7 @@ class Route {
     const param = getUrlParameter('param') || undefined;
     this[method](param);
     $('#component-actions .login')[window.dat.session ? 'hide' : 'show']();
+    $('#component-actions .upload')[window.dat.session ? 'show' : 'hide']();
   }
 
   push(method, opt = {}) {
