@@ -5,17 +5,6 @@ export default `
 	<div id="component-actions">
 		<div
 			onclick="
-			Route.push('images', { sort: 'newer' }).refresh();
-			$('#component-actions > *').removeClass('current');
-			$('#component-actions > .sort-newer').addClass('current');
-			"
-			class="sort-newer"
-			>
-			<i class="far fa-images"></i>
-			<small>新着順</small>
-		</div>
-		<div
-			onclick="
 			if(!dat.session) { toast('ログインしたユーザーのみ使えます'); return false; };
 			Route.push('images', { sort: 'favorites' }).refresh();
 			$('#component-actions > *').removeClass('current');
@@ -25,6 +14,17 @@ export default `
 			>
 			<i class="fas fa-award"></i>
 			<small>人気順</small>
+		</div>
+		<div
+			onclick="
+			Route.push('images', { sort: 'newer' }).refresh();
+			$('#component-actions > *').removeClass('current');
+			$('#component-actions > .sort-newer').addClass('current');
+			"
+			class="sort-newer"
+			>
+			<i class="far fa-images"></i>
+			<small>新着順</small>
 		</div>
 		<div
 			onclick="
