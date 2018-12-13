@@ -16,6 +16,7 @@ import {
 	showWebview,
 	lazyShow
 } from './_util';
+import Pic from './Pic';
 import Image from '../model/Image';
 import Toggle from './Toggle';
 
@@ -37,10 +38,10 @@ function getViewableData(opt) {
 
 export const renderImages = function(opt) {
 
-  var html = getViewableData(opt).reduce(function(prev, dat, i) {
+  var html = getViewableData(opt).reduce(function(prev, image, i) {
 
-    // var u = '';
-    var u = window.dat.session && i === 0 ? `
+    // var htmlAdditional = '';
+    var htmlAdditional = window.dat.session && i === 0 ? `
     <div
       class="outer additional"
       onclick="window.promptToUpload()"
@@ -52,12 +53,7 @@ export const renderImages = function(opt) {
     ` : '';
     window.dat.session && i++;
 
-    var s = new Toggle('favorites', { imageID: dat.id }, !!window.dat.favorites.filter(function(fav) {
-      return dat.id === parseInt(fav.imageID)
-      && parseInt(fav.userID) === window.dat.session.id;
-    }).length).html();
-
-    var t = i % 12 ? '' : `
+    var htmlBanners = i % 12 ? '' : `
     <div class="message">
       スマホのホーム画面にこのアプリを追加することができるのです
       <i>(ここをタップ)</i>
@@ -82,20 +78,9 @@ export const renderImages = function(opt) {
 
     return `
       ${prev}
-      ${t}
-      ${u}
-      <div
-        style="display: none"
-        class="outer fas fa-unlink"
-        data-imageID="${dat.id}">
-        <div
-          class="inner"
-          onclick="Route.push('images', { id: ${dat.id} }).refresh()"
-          style="background-image: url(${dat.url})">
-        </div>
-        ${s}
-        <div class="favoriteNum">${dat.favorite ? dat.favorite : ''}</div>
-      </div>
+      ${htmlBanners}
+      ${htmlAdditional}
+      ${new Pic().html(image)}
     `;
   }, '');
 
