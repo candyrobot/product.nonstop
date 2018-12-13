@@ -22,3 +22,18 @@
   display: block;
   padding-top: 100%;
 }
+
+.Pic > .favoriteNum {
+  position: absolute;
+  right: 35px;
+  bottom: 9px;
+  color: white;
+  font-size: 10px;
+  text-shadow: 0 0 10px black;
+}
+.Pic > .component-fav {
+  position: absolute;
+  right: 11px;
+  bottom: 8px;
+  font-size: 25px;
+}

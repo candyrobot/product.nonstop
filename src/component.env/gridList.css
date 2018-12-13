@@ -7,20 +7,6 @@
   float: left;
   width: 50%;
 }
-#component-images > .Pic > .favoriteNum {
-  position: absolute;
-  right: 35px;
-  bottom: 9px;
-  color: white;
-  font-size: 10px;
-  text-shadow: 0 0 10px black;
-}
-#component-images > .Pic > .component-fav {
-  position: absolute;
-  right: 11px;
-  bottom: 8px;
-  font-size: 25px;
-}
 #component-images > .fluid {
   display: flex;
   height: calc(100vh - 150px);
