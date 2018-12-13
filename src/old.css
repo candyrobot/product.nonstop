@@ -169,15 +169,6 @@ input, button {
   color: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, .3);
 }
-.layer-2 .component-fav {
-  margin: 0 10px 10px auto;
-  width: 55px;
-  height: 55px;
-  background-color: white;
-  line-height: 58px;
-  font-size: 25px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, .4);
-}
 .area-recommendation {
   position: relative;
   background-color: rgba(0, 0, 0, 1);
@@ -193,7 +184,7 @@ input, button {
   padding: 5px;
   white-space: nowrap;
 }
-.component-images-horizontal > a {
+.component-images-horizontal > div {
   display: inline-block;
   width: 150px;
   height: 150px;

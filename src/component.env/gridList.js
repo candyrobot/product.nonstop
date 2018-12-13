@@ -43,10 +43,10 @@ export const renderImages = function(opt) {
     // var htmlAdditional = '';
     var htmlAdditional = window.dat.session && i === 0 ? `
     <div
-      class="outer additional"
+      class="Pic additional"
       onclick="window.promptToUpload()"
       >
-      <div class="inner">
+      <div class="background">
         <i class="fas fa-plus"></i>
       </div>
     </div>
@@ -86,13 +86,13 @@ export const renderImages = function(opt) {
 
   $('#component-images').html(html)
   .find('.component-fav').on('click', function() {
-    var imageID = $(this).closest('.outer').data('imageid');
+    var imageID = $(this).closest('.Pic').data('imageid');
     Toggle.toggle(this, imageID);
   });
 
-  $('#component-images > .outer').inAlmostThere().show();
+  $('#component-images > .Pic').inAlmostThere().show();
   $(document).on('scroll', function() {
-    $('#component-images > .outer').inAlmostThere().fadeIn();
+    $('#component-images > .Pic').inAlmostThere().fadeIn();
   });
 
   $('#component-images').find('.message').on('click', function() {
@@ -102,7 +102,7 @@ export const renderImages = function(opt) {
       return showWebview('https://www.youtube.com/embed/8iueP5sRQ-Y');
     }
   });
-  // lazyShow('#component-images .outer');
+  // lazyShow('#component-images .Pic');
 };
 
 export const renderImage = function(id) {

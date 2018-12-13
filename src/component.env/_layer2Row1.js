@@ -12,6 +12,7 @@ import {
 } from './_util';
 import Image from '../model/Image';
 import Toggle from './Toggle';
+import Pic from './Pic';
 // import { renderImage, renderImages } from './gridList';
 
 export function renderLayer2Row1(imageID) {
@@ -23,7 +24,12 @@ export function renderLayer2Row1(imageID) {
       </div>
     `}
     <div class="fav-area" onclick="$(this).prev().hide()">
-      ${new Toggle('favorites', 'imageID', Image.isIFavorited(imageID)).html()}
+      ${new Toggle(
+        'favorites',
+        'imageID',
+        Image.isIFavorited(imageID),
+        { isRounded: true }
+      ).html()}
     </div>
   `);
 
@@ -36,25 +42,12 @@ export function renderLayer2Row1(imageID) {
 
     images = Image.excludeIFavorited(images.exclude({ id: imageID }));
 
-    renderRecommendation(images);
+    const html = images.reduce((p, i)=> p + new Pic().html(i), '');
+    $('.component-images-horizontal').html(html);
+    if(html === '')
+      return;
+    $('.area-recommendation').show(300);
+    $('.component-images-horizontal .Pic').show();
+    ;
   });
 }
-
-const renderRecommendation = function(images) {
-  const html = images.reduce((html, image)=> {
-    return html + `
-    <a
-      onclick="
-        countUp('clickRecommend');
-        window.showDrawer();
-
-        Route.push('images', { id: ${image.id} }).refresh()
-      "
-      style="background-image: url(${image.url})"></a>`;
-  }, '');
-  if (!html)
-    return;
-  countUp('showRecommendation');
-  window.showDrawer();
-  $('.component-images-horizontal').html(html).closest('.area-recommendation').show(300);
-};

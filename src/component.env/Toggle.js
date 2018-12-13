@@ -11,13 +11,14 @@ import {
 } from './_util';
 import './toggle.css';
 export default class Toggle {
-  constructor(dbTableName, columnName, isTrue = false) {
+  constructor(dbTableName, columnName, isTrue = false, opt = {}) {
     this.isTrue = isTrue;
+    this.isRounded = !!opt.isRounded || false;
   }
 
   html() {
     return `
-    <div class="component-fav ${this.isTrue}">
+    <div class="component-fav ${this.isTrue} ${this.isRounded ? 'isRounded' : ''}">
       <span>♡</span>
       <span>♥</span>
     </div>

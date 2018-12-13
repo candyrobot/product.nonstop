@@ -2,33 +2,12 @@
 #component-images {
   padding: 1px;
 }
-#component-images > .outer {
+#component-images > .Pic {
   position: relative;
   float: left;
   width: 50%;
-  padding: 1px;
 }
-#component-images > .outer:before {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateY(-50%) translateX(-50%);
-  color: #0050a7a8;
-  font-size: 40px;
-}
-#component-images > .outer > .inner {
-  display: block;
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  background-color: rgba(255,255,255,.09);
-}
-#component-images > .outer > .inner:after {
-  content: "";
-  display: block;
-  padding-top: 100%;
-}
-#component-images > .outer > .favoriteNum {
+#component-images > .Pic > .favoriteNum {
   position: absolute;
   right: 35px;
   bottom: 9px;
@@ -36,7 +15,7 @@
   font-size: 10px;
   text-shadow: 0 0 10px black;
 }
-#component-images > .outer > .component-fav {
+#component-images > .Pic > .component-fav {
   position: absolute;
   right: 11px;
   bottom: 8px;
@@ -84,13 +63,13 @@
 #component-images > .additional {
   padding: 10px;
 }
-#component-images > .additional .inner {
+#component-images > .additional .background {
   position: relative;
   background-color: #a7d9f9;
   border-radius: 15px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
 }
-#component-images > .additional .inner i {
+#component-images > .additional .background i {
   content: "\f067";
   font-family: "Font Awesome 5 Free";
   position: absolute;
