@@ -50,13 +50,14 @@ body {
 input {
   color: #444;
 }
-button {
+button, .button {
   background-color: #70c9ff;
   color: white;
   font-weight: bold;
   box-shadow: 0 1px 5px #009fff85;
+  text-decoration: none;
 }
-input, button {
+input, button, .button {
   padding: 0 10px;
   line-height: 35px;
   font-size: 15px;

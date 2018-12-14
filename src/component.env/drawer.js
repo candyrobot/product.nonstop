@@ -68,16 +68,33 @@ export class DrawerPost extends Drawer {
 }
 
 export class DrawerLetsShare extends Drawer {
+  // INFO: https://blog.ikunaga0.com/twitter-com-intent-tweet/
   html() {
+    const t = encodeURI('Tumblrより画像収拾が8.3倍捗ると話題『nonStop』　pic.twitter.com/WREvim9ydM　リンク: ');
+    const u = encodeURI('https://nonstop-vr.firebaseapp.com/');
+    const h = encodeURI('nonstop');
+    const o = encodeURI(window.location.href);
     return `
     <div id="component-LetsShare" class="component-suggestion paper" style="display: none">
-      <h3 style="font-size: 18px; text-indent: .5em">拡散希望🌟</h3>
+      <h3 style="font-size: 18px; text-indent: .5em">
+        拡散希望🌟
+      </h3>
       <p>
         画像不足！<br>
         拡散してもっと画像を投稿してもらおう！
       </p>
       <p text-align="center">
-        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="Tumblrより画像収拾が8.3倍捗ると話題『nonStop』　" data-url="https://nonstop-vr.firebaseapp.com/?utm_source=twitter" data-hashtags="nonstop" data-related="rivalknockout,rivalknockout2" data-lang="ja" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <a
+          target="_blank"
+          style="padding: .5em 1em"
+          class="button"
+          href="
+          https://twitter.com/intent/tweet?text=${t}&url=${u}&original_referer=${o}&hashtags=${h}
+          "
+          >
+          <i class="fab fa-twitter"></i>
+          画像を増やす🌟
+        </a>
       </p>
       <div class="close" onclick="$(this).parent().hide(300)">×</div>
     </div>`
