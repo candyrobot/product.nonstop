@@ -9,13 +9,25 @@ export default class PaperUser {
     <div class="PaperUser">
       <div class="user">
         <i class="fas fa-user-circle"></i>
-        <small
-        style="
-        vertical-align: super;
-        padding-left: 0.25em;
-        font-size: 12px;
-        "
-        >このユーザーのお気入り💛</small>
+        <div
+          style="padding-left: 0.35em;"
+          >
+          <div
+            style="
+            font-size: 10px;
+            "
+            >
+            ${user.created_at.replace('T', ' ').replace(/\..*$/, '')}
+          </div>
+          <div
+            style="
+            font-size: 11px;
+            font-weight: bold;
+            "
+            >
+            ？？？？　このユーザーのお気入り▼
+          </div>
+        </div>
       </div>
       <div>
         ${window.dat.favorites.where({ userID: user.id }).reduce((prev, f, i)=> {
