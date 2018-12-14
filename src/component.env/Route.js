@@ -57,7 +57,11 @@ class Route {
     $('#component-actions > .users').addClass('current');
 
     $('.layer-1').html(
-    window.dat.users.reduce((prev, user)=> {
+    window.dat.users.sort((uA, uB)=> {
+      const a = window.dat.favorites.where({userID: uA.id}).length;
+      const b = window.dat.favorites.where({userID: uB.id}).length;
+      return a > b ? -1 : 1;
+    }).reduce((prev, user)=> {
       return prev + new PaperUser().html(user);
     }, '')
     );
