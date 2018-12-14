@@ -52,6 +52,9 @@ class Route {
   }
 
   users() {
+    $('#component-actions > *').removeClass('current');
+    $('#component-actions > .users').addClass('current');
+
     $('.layer-1').html(
     window.dat.users.reduce((prev, user)=> {
       return prev + new PaperUser().html(user);
@@ -60,6 +63,8 @@ class Route {
   }
 
   images(opt = {}) {
+    $('#component-actions > *').removeClass('current');
+
     if(opt.id) {
       renderLayer2Row1(opt.id);
 
@@ -75,8 +80,26 @@ class Route {
       });
     }
     else {
+      let images;
+      if(opt.sort === 'favorites') {
+        images = Image.sortByFavorites();
+        $('#component-actions > .sort-favorites').addClass('current');
+      }
+      else if(opt.filter === 'myFavorite') {
+        images = Image.filterByMyFavorite();
+        $('#component-actions > .filter-myFavorite').addClass('current');
+      }
+      else if(opt.sort === 'newer') {
+        images = Image.sortByNewer();
+        $('#component-actions > .sort-newer').addClass('current');
+      }
+      else {
+        images = window.dat.images;
+        $('#component-actions > .sort-newer').addClass('current');
+      }
+
       $('.layer-1').html(
-        GridList.html(getViewableData(opt))
+        GridList.html(images)
       ).each(function() {
         GridList.run(this)
       });
@@ -85,14 +108,3 @@ class Route {
 }
 
 window.Route = new Route();
-
-function getViewableData(opt = {}) {
-  if(opt.sort === 'favorites')
-    return Image.sortByFavorites();
-  else if(opt.filter === 'myFavorite')
-    return Image.filterByMyFavorite();
-  else if(opt.sort === 'newer')
-    return Image.sortByNewer();
-  else
-    return window.dat.images;
-};

@@ -7,8 +7,6 @@ export default `
 			onclick="
 			if(!dat.session) { toast('ログインしたユーザーのみ使えます'); return false; };
 			Route.push('images', { sort: 'favorites' }).refresh();
-			$('#component-actions > *').removeClass('current');
-			$('#component-actions > .sort-favorites').addClass('current');
 			"
 			class="sort-favorites"
 			>
@@ -18,8 +16,6 @@ export default `
 		<div
 			onclick="
 			Route.push('images', { sort: 'newer' }).refresh();
-			$('#component-actions > *').removeClass('current');
-			$('#component-actions > .sort-newer').addClass('current');
 			"
 			class="sort-newer"
 			>
@@ -30,8 +26,6 @@ export default `
 			onclick="
 			if(!dat.session) { toast('ログインしたユーザーのみ使えます'); return false; }
 			Route.push('images', { filter: 'myFavorite' }).refresh();
-			$('#component-actions > *').removeClass('current');
-			$('#component-actions > .filter-myFavorite').addClass('current');
 			"
 			class="filter-myFavorite"
 			>
@@ -49,11 +43,7 @@ export default `
 			<small>マイページ</small>
 		</div>
 		<div
-			onclick="
-			Route.push('users').refresh();
-			$('#component-actions > *').removeClass('current');
-			$('#component-actions > .users').addClass('current');
-			"
+			onclick="Route.push('users').refresh();"
 			class="users"
 			>
 			<i class="fas fa-user-friends"></i>

@@ -73,8 +73,6 @@ $(`
 (function initializeApp() {
   $(window).on('scroll', loadImage);
 
-  $('#component-actions > .sort-newer').addClass('current');
-
   $.get(domain + '/application' + window.location.search, function(dat) {
     console.log(dat);
     window.dat = dat;
