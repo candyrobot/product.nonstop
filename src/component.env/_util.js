@@ -10,7 +10,7 @@ $.ajaxSetup({
 });
 
 export const loadImage = ()=> {
-  $('[data-load-image]:not([style*="background"])').inAlmostThere().each(function() {
+  $('[data-load-image]:not([style*="background"])').inView().each(function() {
     var url = $(this).data('load-image');
     console.log(url);
     $(this).css({
@@ -105,19 +105,6 @@ export const showWebview = function(url) {
 
 export const isAndroid = function() {
   return navigator.userAgent.indexOf('Android') > 0;
-};
-
-export const lazyShow = function(selector) {
-  return $(selector).on('inview', function(e, isInView) {
-    if (isInView) {
-      return $(this)
-      .nextAll(selector + ':first').nextAll(selector + ':first')
-      .nextAll(selector + ':first').nextAll(selector + ':first')
-      .nextAll(selector + ':first').nextAll(selector + ':first')
-      .nextAll(selector + ':first').nextAll(selector + ':first')
-      .fadeIn(500);
-    }
-  });
 };
 
 /**

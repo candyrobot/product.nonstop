@@ -80,9 +80,6 @@ $(`
     console.log(dat);
     window.dat = dat;
     window.Route.refresh();
-    
-    loadImage();
-    $(window).on('scroll', loadImage);
 
     $('#component-logout h1').text(window.dat.session.id);
     $('#component-logout h5').text(window.dat.session.email);

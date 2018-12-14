@@ -14,7 +14,7 @@ import {
 	isAlmostThere,
 	isAndroid,
 	showWebview,
-	lazyShow
+	loadImage
 } from './_util';
 import Pic from './Pic';
 import Image from '../model/Image';
@@ -90,10 +90,8 @@ export const renderImages = function(opt) {
     Toggle.toggle(this, imageID);
   });
 
-  $('#component-images > .Pic').inAlmostThere().show();
-  $(document).on('scroll', function() {
-    $('#component-images > .Pic').inAlmostThere().fadeIn();
-  });
+  loadImage();
+  $(window).on('scroll', loadImage);
 
   $('#component-images').find('.message').on('click', function() {
     if (isAndroid()) {
@@ -102,7 +100,6 @@ export const renderImages = function(opt) {
       return showWebview('https://www.youtube.com/embed/8iueP5sRQ-Y');
     }
   });
-  // lazyShow('#component-images .Pic');
 };
 
 export const renderImage = function(id) {
