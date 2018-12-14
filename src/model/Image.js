@@ -1,4 +1,4 @@
-// TODO: Arrayをextendsして 
+// TODO: Arrayをextendsして
 // window.images = new Image(...dat.images);
 // window.images.sortByNewer()と使えるようにしたい
 class Image {
@@ -7,16 +7,11 @@ class Image {
 	sortByRelated(imageID) {
 		return window.dat.images
 		.map((i)=> {
-			return i.relatedScore = window.dat.favorites.where({imageID: i.id})
+			return i.relatedScore = window.dat.favorites.where({imageID: imageID})
 			.reduce((n, f)=> {
-				return n + window.dat.favorites.where({ userID: f.userID }).length;
-			}, 0), i;
+				return n + window.dat.favorites.where({imageID: i.id, userID: f.userID}).length;
+			}, 0), console.log(i.relatedScore), i;
 		}).sort((iA, iB)=> iA.relatedScore > iB.relatedScore ? -1 : 1);
-
-		// return window.dat.favorites.where({imageID: imageID}).map((f)=> {
-		// 	return window.dat.favorites.where({userID: f.userID})
-		// 	.map((f)=> window.dat.images.find(f.imageID));
-		// }).serialize().sortByFrequency();
 	}
 
 	sortByNewer() {
@@ -35,9 +30,11 @@ class Image {
 	}
 
 	sortByRelatedEffort(imageID) {
-		let images = this.sortByRelated(imageID);
-		if(images.length === 0)
-			images = this.sortByNewer();
+		let images;
+		if(window.dat.favorites.where({imageID: imageID}).length > 3)
+			images = this.sortByRelated(imageID);
+		else
+			images = window.dat.images.shuffle();
 		return this.excludeIFavorited(images.exclude({ id: imageID }));
 	}
 

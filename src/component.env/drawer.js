@@ -80,7 +80,7 @@ export class DrawerLetsShare extends Drawer {
         拡散希望🌟
       </h3>
       <p>
-        画像不足！<br>
+        まだまだ画像不足！<br>
         拡散してもっと画像を投稿してもらおう！
       </p>
       <p text-align="center">

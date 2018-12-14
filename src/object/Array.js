@@ -141,3 +141,14 @@ Array.prototype.serialize = function() {
     return pre;
   }, []);
 };
+
+// INFO: https://qiita.com/komaji504/items/62a0f8ea43053e90555a
+Array.prototype.shuffle = function() {
+  for(var i = this.length - 1; i > 0; i--){
+      var r = Math.floor(Math.random() * (i + 1));
+      var tmp = this[i];
+      this[i] = this[r];
+      this[r] = tmp;
+  }
+  return this;
+};
