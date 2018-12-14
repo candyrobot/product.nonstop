@@ -1,6 +1,6 @@
 .bottomNavigation {
   position: relative;
-  height: 70px;
+  height: 90px;
 }
 .bottomNavigation:before {
   content: '';

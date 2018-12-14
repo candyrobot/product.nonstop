@@ -28,6 +28,7 @@ window.signup = function() {
   if (isInvalid(dat)) {
     return;
   }
+  startLoading();
   $.post(domain + '/users/', dat).fail(function(dat) {
     toast(dat.responseJSON.toast);
   }).done(function() {
@@ -49,6 +50,7 @@ window.login = function(dat) {
   if (isInvalid(dat)) {
     return;
   }
+  startLoading();
   return $.post(domain + '/users/login', dat)
   .fail(function(dat) {
     toast(dat.responseJSON.toast);

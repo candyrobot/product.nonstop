@@ -84,7 +84,7 @@ $(`
       new DrawerLetsShare().create();
       setInterval(()=> {
         new DrawerLetsShare().create();
-      }, 1000 * 40);
+      }, 1000 * 60 * 2);
     }
     else {
       new DrawerConspicuous().create();
