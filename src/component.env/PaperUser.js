@@ -40,7 +40,7 @@ export default class PaperUser {
           style="height: initial"
           >
           <h2 style="margin-bottom: -10px">
-            …他${n ? n : 2}件！
+            …他${n > 0 ? n : 2}件！
           </h2>
           <p class="small">（全部見るには登録する必要があります）</p>
         </div>

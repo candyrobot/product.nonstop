@@ -1,5 +1,6 @@
 import $ from 'jquery';
 
+// ！！！！！注意間違えて本番にやらないように！！！！！
 // export const domain = "http://0.0.0.0:3000";
 export const domain = "https://with-one-account-prd.herokuapp.com";
 

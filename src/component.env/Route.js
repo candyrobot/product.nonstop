@@ -29,6 +29,7 @@ class Route {
     const method = getUrlParameter('method') || 'images';
     const param = getUrlParameter('param') || undefined;
 
+    $(window).scrollTop(0);
     $('.area-recommendation').hide();
     $('.layer-1').html('');
     $('#layer2-row1').html('');
