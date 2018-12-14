@@ -12,7 +12,6 @@ export default class Pic {
 
 		return `
 			<div
-				style="display: none"
 				class="Pic fas fa-unlink"
 				data-imageID="${image.id}">
 				<div
