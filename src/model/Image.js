@@ -34,6 +34,13 @@ class Image {
 		.sort((iA, iB)=> iA.favorites.length > iB.favorites.length ? -1 : 1 );
 	}
 
+	sortByRelatedEffort(imageID) {
+		let images = this.sortByRelated(imageID);
+		if(images.length === 0)
+			images = this.sortByNewer();
+		return this.excludeIFavorited(images.exclude({ id: imageID }));
+	}
+
 	filterByMyFavorite() {
 		return window.dat.images.filter((i)=> window.dat.favorites.where({ imageID: i.id, userID: window.dat.session.id }).length);
 	}

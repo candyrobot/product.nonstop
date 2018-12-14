@@ -44,9 +44,7 @@ function disableUsersZoom() {
 window.$ = $;
 
 $(`
-<div class="layer-1">
-  ${gridList}
-</div>
+<div class="layer-1"></div>
 
 <div class="component-layer layer-2">
   <div id="drawer"></div>
@@ -74,6 +72,8 @@ $(`
 `).appendTo('body');
 
 (function initializeApp() {
+  $(window).on('scroll', loadImage);
+
   $('#component-actions > .sort-newer').addClass('current');
 
   $.get(domain + '/application' + window.location.search, function(dat) {

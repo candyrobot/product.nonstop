@@ -271,10 +271,12 @@ input, button {
   text-indent: -14px;
 }
 
-
-
-
-
-
-
-
+.fluid {
+  display: flex;
+  height: calc(100vh - 150px);
+  align-items: center;
+}
+.fluid > img {
+  display: block;
+  width: 100%;
+}

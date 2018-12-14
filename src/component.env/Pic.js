@@ -1,7 +1,7 @@
 import Toggle from './Toggle';
 import './Pic.css';
 
-export default class Pic {
+export default class {
 	html(image, opt = {}) {
 		const htmlFav = new Toggle(
 			'favorites',

@@ -4,7 +4,8 @@ import {
   existParameter,
   loadImage
 } from './_util';
-import { renderImage, renderImages } from './gridList';
+import Image from '../model/Image';
+import GridList from './GridList';
 import { renderLayer2Row1 } from './_layer2Row1';
 
 // INFO: "imageIDが3かつuserIDが4"のような指定ができるようにするために、すべてクエリで表現。パスにはしない。
@@ -42,16 +43,42 @@ class Route {
   }
 
   images(opt = {}) {
+
     if(opt.id) {
-      renderImage(opt.id);
       renderLayer2Row1(opt.id);
+
+      var image = window.dat.images.find(opt.id);
+      $('.layer-1').html(
+        `
+        <div class="fluid" data-imageID="${image.id}">
+          <img src="${image.url}">
+        </div>`
+        + GridList.html(Image.sortByRelatedEffort(opt.id))
+      ).each(function() {
+        GridList.run(this)
+      });
     }
     else {
       $('#layer2-row1').html('');
-      renderImages(opt);
+
+      $('.layer-1').html(
+        GridList.html(getViewableData(opt))
+      ).each(function() {
+        GridList.run(this)
+      });
     }
-    loadImage();
   }
 }
 
 window.Route = new Route();
+
+function getViewableData(opt = {}) {
+  if(opt.sort === 'favorites')
+    return Image.sortByFavorites();
+  else if(opt.filter === 'myFavorite')
+    return Image.filterByMyFavorite();
+  else if(opt.sort === 'newer')
+    return Image.sortByNewer();
+  else
+    return window.dat.images;
+};

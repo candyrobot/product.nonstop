@@ -7,15 +7,6 @@
   float: left;
   width: 50%;
 }
-#component-images > .fluid {
-  display: flex;
-  height: calc(100vh - 150px);
-  align-items: center;
-}
-#component-images > .fluid > img {
-  display: block;
-  width: 100%;
-}
 #component-images > .message {
   clear: both;
   position: relative;

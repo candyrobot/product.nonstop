@@ -36,13 +36,7 @@ export function renderLayer2Row1(imageID) {
   $('#layer2-row1 .component-fav').on('click', function() {
     Toggle.toggle(this, imageID);
 
-    let images = Image.sortByRelated(imageID);
-    if(images.length === 0)
-      images = Image.sortByNewer();
-
-    images = Image.excludeIFavorited(images.exclude({ id: imageID }));
-
-    const html = images.reduce((p, i)=> p + new Pic().html(i), '');
+    const html = Image.sortByRelatedEffort(imageID).reduce((p, i)=> p + new Pic().html(i), '');
     $('.component-images-horizontal').html(html);
     if(html === '')
       return;
