@@ -47,9 +47,3 @@
   display: block;
   font-size: 10px;
 }
-
-#layer2-row1,
-.area-recommendation {
-  position: relative;
-  z-index: 1;
-}

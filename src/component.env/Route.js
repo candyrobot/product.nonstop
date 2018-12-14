@@ -1,7 +1,8 @@
 import $ from 'jquery';
 import {
   getUrlParameter,
-  existParameter
+  existParameter,
+  loadImage
 } from './_util';
 import { renderImage, renderImages } from './gridList';
 import { renderLayer2Row1 } from './_layer2Row1';
@@ -48,6 +49,7 @@ class Route {
       $('#layer2-row1').html('');
       renderImages(opt);
     }
+    loadImage();
   }
 }
 

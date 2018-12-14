@@ -169,6 +169,12 @@ input, button {
   color: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, .3);
 }
+
+#layer2-row1,
+.area-recommendation {
+  position: relative;
+  z-index: 1;
+}
 .area-recommendation {
   position: relative;
   background-color: rgba(0, 0, 0, 1);
@@ -177,6 +183,7 @@ input, button {
 .area-recommendation > h4 {
   margin: 10px 10px 0;
 }
+
 .component-images-horizontal {
   overflow: auto;
   -webkit-overflow-scrolling: touch;

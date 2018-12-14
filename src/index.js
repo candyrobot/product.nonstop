@@ -5,7 +5,8 @@ import './object/Array';
 import './old.css';
 import './component.env/Route';
 import {
-  domain
+  domain,
+  loadImage
 } from './component.env/_util';
 import {
   DrawerConspicuous,
@@ -74,19 +75,22 @@ $(`
 
 (function initializeApp() {
   $('#component-actions > .sort-newer').addClass('current');
-  return $.get(domain + '/application' + window.location.search, function(dat) {
-    var b, imageID;
+
+  $.get(domain + '/application' + window.location.search, function(dat) {
     console.log(dat);
     window.dat = dat;
     window.Route.refresh();
-    setTimeout('window.bottomNavigation.scroll()', 1000);
+    
+    loadImage();
+    $(window).on('scroll', loadImage);
+
     $('#component-logout h1').text(window.dat.session.id);
     $('#component-logout h5').text(window.dat.session.email);
     if(window.dat.session) {
       new DrawerLetsShare().create();
       setInterval(()=> {
         new DrawerLetsShare().create();
-      }, 1000 * 20);
+      }, 1000 * 40);
     }
     else {
       new DrawerConspicuous().create();

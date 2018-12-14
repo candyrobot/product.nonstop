@@ -8,7 +8,7 @@ import {
   stopLoading,
   deleteFav,
   domain,
-  toast
+  loadImage
 } from './_util';
 import Image from '../model/Image';
 import Toggle from './Toggle';
@@ -48,6 +48,9 @@ export function renderLayer2Row1(imageID) {
       return;
     $('.area-recommendation').show(300);
     $('.component-images-horizontal .Pic').show();
+
+    loadImage();
+    $('.component-images-horizontal').on('scroll', loadImage);
     ;
   });
 }

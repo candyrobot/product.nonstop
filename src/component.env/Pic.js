@@ -17,8 +17,9 @@ export default class Pic {
 				data-imageID="${image.id}">
 				<div
 					class="background"
+					data-load-image="${image.url}"
 					onclick="Route.push('images', { id: ${image.id} }).refresh()"
-					style="background-image: url(${image.url})">
+					>
 				</div>
 				${htmlFav}
 				` + (image.favorites ? `

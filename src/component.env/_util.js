@@ -9,6 +9,16 @@ $.ajaxSetup({
   }
 });
 
+export const loadImage = ()=> {
+  $('[data-load-image]:not([style*="background"])').inAlmostThere().each(function() {
+    var url = $(this).data('load-image');
+    console.log(url);
+    $(this).css({
+      backgroundImage: `url(${url})`
+    });
+  });
+};
+
 window.signup = function() {
   var dat;
   dat = {};
