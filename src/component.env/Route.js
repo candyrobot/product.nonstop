@@ -29,6 +29,7 @@ class Route {
     this[method](param);
     $('#component-actions .login')[window.dat.session ? 'hide' : 'show']();
     $('#component-actions .upload')[window.dat.session ? 'show' : 'hide']();
+    $('.area-recommendation').hide();
   }
 
   push(method, opt = {}) {
