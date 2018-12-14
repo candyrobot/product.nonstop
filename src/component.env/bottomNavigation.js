@@ -49,6 +49,17 @@ export default `
 			<small>マイページ</small>
 		</div>
 		<div
+			onclick="
+			Route.push('users').refresh();
+			$('#component-actions > *').removeClass('current');
+			$('#component-actions > .users').addClass('current');
+			"
+			class="users"
+			>
+			<i class="fas fa-user-friends"></i>
+			<small>みんな</small>
+		</div>
+		<div
 			style="display: none"
 			onclick="$('#component-login').show(300)"
 			class="login poyooon"

@@ -6,6 +6,7 @@ import {
 } from './_util';
 import Image from '../model/Image';
 import GridList from './GridList';
+import PaperUser from './PaperUser';
 import { renderLayer2Row1 } from './_layer2Row1';
 
 // INFO: "imageIDが3かつuserIDが4"のような指定ができるようにするために、すべてクエリで表現。パスにはしない。
@@ -27,10 +28,18 @@ class Route {
   refresh() {
     const method = getUrlParameter('method') || 'images';
     const param = getUrlParameter('param') || undefined;
+
+    $('.area-recommendation').hide();
+    $('.layer-1').html('');
+    $('#layer2-row1').html('');
+
     this[method](param);
+
     $('#component-actions .login')[window.dat.session ? 'hide' : 'show']();
     $('#component-actions .upload')[window.dat.session ? 'show' : 'hide']();
-    $('.area-recommendation').hide();
+
+    $('#component-actions .users')[window.dat.session ? 'hide' : 'show']();
+    $('#component-actions .mypage')[window.dat.session ? 'show' : 'hide']();
   }
 
   push(method, opt = {}) {
@@ -42,8 +51,15 @@ class Route {
     return this;
   }
 
-  images(opt = {}) {
+  users() {
+    $('.layer-1').html(
+    window.dat.users.reduce((prev, user)=> {
+      return prev + new PaperUser().html(user);
+    }, '')
+    );
+  }
 
+  images(opt = {}) {
     if(opt.id) {
       renderLayer2Row1(opt.id);
 
@@ -59,8 +75,6 @@ class Route {
       });
     }
     else {
-      $('#layer2-row1').html('');
-
       $('.layer-1').html(
         GridList.html(getViewableData(opt))
       ).each(function() {

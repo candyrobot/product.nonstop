@@ -222,6 +222,7 @@ input, button {
 }
 .layer-1 {
   position: relative;
+  padding-bottom: 100px;
 }
 
 .component-mediabox {

@@ -14,7 +14,6 @@ import {
   DrawerLetsShare
 } from './component.env/drawer';
 import _overlays from './component.env/_overlays';
-import gridList from './component.env/gridList';
 import bottomNavigation from './component.env/bottomNavigation';
 
 // INFO: https://qiita.com/peutes/items/d74e5758a36478fbc039
