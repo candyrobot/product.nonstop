@@ -202,8 +202,7 @@ input, button, .button {
 }
 .component-images-horizontal > div {
   display: inline-block;
-  width: 150px;
-  height: 150px;
+  width: 38vw;
   margin: 5px;
   background-size: cover;
   background-position: center;

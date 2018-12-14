@@ -40,6 +40,9 @@ export function renderLayer2Row1(imageID) {
     $('.component-images-horizontal').html(html);
     if(html === '')
       return;
+
+    loadImage();
+    $('.component-images-horizontal').scrollLeft(0);
     $('.area-recommendation').show(300);
 
     loadImage();
