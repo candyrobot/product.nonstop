@@ -42,8 +42,9 @@ export function renderLayer2Row1(imageID) {
       return;
 
     loadImage();
-    $('.component-images-horizontal').scrollLeft(0);
-    $('.area-recommendation').show(300);
+    $('.area-recommendation').show(300, ()=> {
+      $('.component-images-horizontal').scrollLeft(0);
+    });
 
     loadImage();
     $('.component-images-horizontal').on('scroll', loadImage);

@@ -81,10 +81,9 @@ $(`
     $('#component-logout h1').text(window.dat.session.id);
     $('#component-logout h5').text(window.dat.session.email);
     if(window.dat.session) {
-      new DrawerLetsShare().create();
       setInterval(()=> {
         new DrawerLetsShare().create();
-      }, 1000 * 60 * 2);
+      }, 1000 * 60 * 1);
     }
     else {
       new DrawerConspicuous().create();
