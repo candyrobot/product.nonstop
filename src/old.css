@@ -1,3 +1,11 @@
+
+@viewport {
+  zoom: 1;
+  min-zoom: 1;
+  max-zoom: 1;
+  user-zoom: fixed;
+}
+
 *, *:before, *:after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
