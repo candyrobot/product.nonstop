@@ -1,9 +1,4 @@
 import $ from 'jquery';
-import {
-  DrawerConspicuous,
-  DrawerLetsSignup,
-  DrawerLetsShare
-} from './drawer';
 
 // export const domain = "http://0.0.0.0:3000";
 export const domain = "https://with-one-account-prd.herokuapp.com";
@@ -13,31 +8,6 @@ $.ajaxSetup({
   	'X-CSRF-Token': localStorage.getItem('app.nonstop.session.token')
   }
 });
-
-window.initializeApp = function() {
-  $('#component-actions > .sort-newer').addClass('current');
-  return $.get(domain + '/application' + window.location.search, function(dat) {
-    var b, imageID;
-    console.log(dat);
-    window.dat = dat;
-    window.Route.refresh();
-    setTimeout('window.bottomNavigation.scroll()', 1000);
-    $('#component-logout h1').text(window.dat.session.id);
-    $('#component-logout h5').text(window.dat.session.email);
-    if(window.dat.session) {
-      new DrawerLetsShare().create();
-      setInterval(()=> {
-        new DrawerLetsShare().create();
-      }, 1000 * 20);
-    }
-    else {
-      new DrawerConspicuous().create();
-      setTimeout(()=> {
-        new DrawerLetsSignup().create();
-      }, 1000 * 10);
-    }
-  });
-};
 
 window.signup = function() {
   var dat;

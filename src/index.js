@@ -4,6 +4,14 @@ import './object/$';
 import './object/Array';
 import './old.css';
 import './component.env/Route';
+import {
+  domain
+} from './component.env/_util';
+import {
+  DrawerConspicuous,
+  DrawerLetsSignup,
+  DrawerLetsShare
+} from './component.env/drawer';
 import _overlays from './component.env/_overlays';
 import gridList from './component.env/gridList';
 import bottomNavigation from './component.env/bottomNavigation';
@@ -62,8 +70,29 @@ $(`
   </div>
   <div class="alerts"></div>
 </div>
-
-<script>
-  initializeApp()
-</script>
 `).appendTo('body');
+
+(function initializeApp() {
+  $('#component-actions > .sort-newer').addClass('current');
+  return $.get(domain + '/application' + window.location.search, function(dat) {
+    var b, imageID;
+    console.log(dat);
+    window.dat = dat;
+    window.Route.refresh();
+    setTimeout('window.bottomNavigation.scroll()', 1000);
+    $('#component-logout h1').text(window.dat.session.id);
+    $('#component-logout h5').text(window.dat.session.email);
+    if(window.dat.session) {
+      new DrawerLetsShare().create();
+      setInterval(()=> {
+        new DrawerLetsShare().create();
+      }, 1000 * 20);
+    }
+    else {
+      new DrawerConspicuous().create();
+      setTimeout(()=> {
+        new DrawerLetsSignup().create();
+      }, 1000 * 10);
+    }
+  });
+})();
