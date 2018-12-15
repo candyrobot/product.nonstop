@@ -89,7 +89,7 @@ $(`
       new DrawerConspicuous().create();
       setTimeout(()=> {
         new DrawerLetsSignup().create();
-      }, 1000 * 10);
+      }, 1000 * 30);
     }
   });
 })();

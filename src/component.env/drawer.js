@@ -72,7 +72,7 @@ export class DrawerLetsShare extends Drawer {
   html() {
     const t = encodeURI('Tumblrより画像収拾が8.3倍捗ると話題『nonStop』　pic.twitter.com/WREvim9ydM　リンク: ');
     const u = encodeURI('https://nonstop-vr.firebaseapp.com/');
-    const h = encodeURI('nonstop-vr');
+    const h = encodeURI('nonstopVr');
     const o = encodeURI(window.location.href);
     return `
     <div id="component-LetsShare" class="component-suggestion paper" style="display: none">

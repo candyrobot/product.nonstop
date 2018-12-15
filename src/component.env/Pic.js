@@ -22,7 +22,12 @@ export default class {
 				</div>
 				${htmlFav}
 				` + (image.favorites ? `
-					<div class="favoriteNum">${image.favorites.length ? image.favorites.length : ''}</div>
+					<div
+						style="display: none"
+						class="favoriteNum"
+						>
+						${image.favorites.length ? image.favorites.length : ''}
+					</div>
 				` : '') + `
 			</div>
 		`

@@ -95,11 +95,13 @@ class Route {
         $('#component-actions > .filter-myFavorite').addClass('current');
       }
       else if(opt.sort === 'newer') {
-        images = Image.sortByNewer();
+        // images = Image.sortByNewer();
+        images = window.dat.images.shuffle();
         $('#component-actions > .sort-newer').addClass('current');
       }
       else {
-        images = window.dat.images;
+        // images = window.dat.images;
+        images = window.dat.images.shuffle();
         $('#component-actions > .sort-newer').addClass('current');
       }
 
