@@ -14,7 +14,7 @@ import {
   DrawerLetsShare
 } from './component.env/drawer';
 import _overlays from './component.env/_overlays';
-import bottomNavigation from './component.env/bottomNavigation';
+import BottomNavigation from './component.env/bottomNavigation';
 
 // INFO: https://qiita.com/peutes/items/d74e5758a36478fbc039
 // document.addEventListener('touchend', event => {
@@ -57,7 +57,7 @@ export default class extends Component {
             <div className="component-images-horizontal"></div>
             <div className="close" onClick={function() { $(this).parent().hide(300) }}>×</div>
           </div>
-          <bottomNavigation />
+          <BottomNavigation />
         </div>
       </div>
 

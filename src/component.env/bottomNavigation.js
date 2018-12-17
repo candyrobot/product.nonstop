@@ -57,7 +57,7 @@ export default class extends Component {
 					<small>みんな</small>
 				</div>
 				<div
-					style="display: none"
+					style={{ display: 'none' }}
 					onClick={()=> $('#component-login').show(300)}
 					className="login poyooon"
 					>
@@ -65,7 +65,7 @@ export default class extends Component {
 					<small>ログイン</small>
 				</div>
 				<div
-					style="display: none"
+					style={{ display: 'none' }}
 					onClick={()=> window.promptToUpload()}
 					className="upload"
 					>
