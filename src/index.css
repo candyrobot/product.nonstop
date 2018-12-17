@@ -15,15 +15,38 @@ code {
 
 /*INFO: original*/
 
+@viewport {
+  zoom: 1;
+  min-zoom: 1;
+  max-zoom: 1;
+  user-zoom: fixed;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 html, body {
   height: 100%;
 }
 
 body {
-  /*BY: https://mycolor.space/gradient?ori=to+right+top&hex=%232453A5&hex2=%231F95F0&sub=1*/
-  background-image: -webkit-linear-gradient(bottom left, #2453a5, #2563b8, #2473cb, #2284dd, #1f95f0);
-  background-image: -o-linear-gradient(bottom left, #2453a5, #2563b8, #2473cb, #2284dd, #1f95f0);
-  background-image: linear-gradient(to top right, #2453a5, #2563b8, #2473cb, #2284dd, #1f95f0);
+/*BY: https://mycolor.space/gradient?ori=to+right+top&hex=%232453A5&hex2=%231F95F0&sub=1*/
+/*background-image: linear-gradient(to top right, #2453a5, #2563b8, #2473cb, #2284dd, #1f95f0);*/
+
+/*background-image: linear-gradient(to top right, #293958, #313e5f, #3a4366, #43496d, #4c4e74);*/
+
+/*background-image: linear-gradient(to right top, #293958, #354464, #415071, #4e5c7d, #5a688a);*/
+
+/*background-image: linear-gradient(to right top, #293958, #303c58, #363f57, #3c4357, #414656);*/
+
+/*background-image: linear-gradient(to right top, #293958, #324161, #3b4a6b, #455374, #4e5c7e);*/
+
+background-image: linear-gradient(to right top, #000000, #293958);
 }
 body:before {
   content: '';
@@ -34,4 +57,243 @@ body:before {
   height: 100%;
   background: url(./img/logotext.png) no-repeat center;
   background-size: 55%;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+input {
+  color: #444;
+}
+button, .button {
+  background-color: #70c9ff;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 1px 5px #009fff85;
+  text-decoration: none;
+}
+input, button, .button {
+  padding: 0 10px;
+  line-height: 35px;
+  font-size: 15px;
+  border-radius: 3px;
+  border: none;
+}
+.paper {
+  padding: 1px; /*子孫要素のmarginが影響されるのを防ぐ*/
+  padding: 1em;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 1px 20px rgba(0,0,0,.5);
+}
+.close {
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  font-size: 1.3em;
+}
+.poyooon {
+  animation: poyooon 1.8s linear 0s infinite;
+}
+@keyframes poyooon {
+  0% {
+    transform: scale(1, 1) translate(0%, 0%);
+  }
+  5% {
+    transform: scale(1.1, 0.9) translate(0%, 5%);
+  }
+  20% {
+    transform: scale(1.2, 0.8) translate(0%, 15%);
+  }
+  25% {
+    transform: scale(1, 1) translate(0%, 0%);
+  }
+  30% {
+    transform: scale(0.9, 1.2) translate(0%, -100%);
+  }
+  38% {
+    transform: scale(0.9, 1.2) translate(0%, -20%);
+  }
+  43% {
+    transform: scale(1.2, 0.8) translate(0%, 15%);
+  }
+  50% {
+    transform: scale(1, 1) translate(0%, 0%);
+  }
+  100% {
+    transform: scale(1, 1) translate(0%, 0%);
+  }
+}
+.loadingLine {
+  display: none;
+  position: relative;
+  height: 3px;
+  /*background-color: white;*/
+  background-color: black;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+}
+.loadingLine .expand {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  /*background-color: #fffb0d;*/
+  background-color: #55b6ff;
+  position: absolute;
+  -moz-animation: fullexpand 0.3s ease-out infinite;
+  -webkit-animation: fullexpand 0.3s ease-out infinite;
+}
+@keyframes fullexpand {
+  0% {
+    width: 0px;
+  }
+  100% {
+    width: 100%;
+  }
+}
+.frombottom {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.frombottom * {
+  pointer-events: initial;
+}
+.component-layer {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  pointer-events: none;
+}
+.component-layer *:not(.frombottom) {
+  pointer-events: initial;
+}
+.component-layer .row {
+  text-align: right;
+}
+.component-layer .row > * {
+  display: inline-block;
+}
+.component-layer .row .balloon {
+  margin-right: 10px;
+  padding: 0 10px;
+  font-weight: bold;
+  vertical-align: super;
+  line-height: 32px;
+  font-size: 11px;
+  border-radius: 3px;
+  background-color: #455c6b;
+  color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .3);
+}
+
+#layer2-row1,
+.area-recommendation {
+  position: relative;
+  z-index: 1;
+}
+.area-recommendation {
+  position: relative;
+  background-color: rgba(0, 0, 0, 1);
+  color: white;
+}
+.area-recommendation > h4 {
+  margin: 10px 10px 0;
+}
+
+.component-images-horizontal {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+  padding: 5px;
+  white-space: nowrap;
+}
+.component-images-horizontal > div {
+  display: inline-block;
+  width: 38vw;
+  margin: 5px;
+  background-size: cover;
+  background-position: center;
+}
+#layer-appMessages .alerts {
+  margin-top: 45%;
+}
+#layer-appMessages .alerts > div {
+  margin: 10px;
+  padding: 10px 13px;
+  color: #444;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, .3);
+}
+.layer-1 {
+  position: relative;
+  padding-bottom: 100px;
+}
+
+.component-mediabox {
+  position: relative;
+  padding: 20px;
+  padding-left: 110px;
+}
+.component-mediabox img {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 75px;
+  height: 75px;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px #0074bb;
+}
+.component-mediabox .title {
+  margin: 0 0 5px;
+}
+.component-mediabox .desc {
+  font-size: 14px;
+}
+
+.starbacks {
+  background: url(./img/starbacks.jpg) center red;
+  background-size: cover;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  margin: 1px;
+  border-radius: 3px;
+}
+.starbacks > div {
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #ff000088;
+  box-shadow: 0 2px 10px #771c1c;
+}
+.starbacks .title {
+  margin-bottom: 7px;
+  font-size: 20px;
+  line-height: 1.4em;
+}
+.starbacks .small {
+  font-size: 10px;
+  padding-left: 1.5em;
+  text-indent: -14px;
+}
+
+.fluid {
+  display: flex;
+  height: calc(100vh - 150px);
+  align-items: center;
+}
+.fluid > img {
+  display: block;
+  width: 100%;
 }
