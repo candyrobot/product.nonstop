@@ -57,7 +57,7 @@ export default class extends Component {
             <div className="component-images-horizontal"></div>
             <div className="close" onClick={function() { $(this).parent().hide(300) }}>×</div>
           </div>
-          <div dangerouslySetInnerHTML={{ __html: bottomNavigation }}></div>
+          <bottomNavigation />
         </div>
       </div>
 

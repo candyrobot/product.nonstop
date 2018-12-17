@@ -115,3 +115,5 @@ class Route {
 }
 
 window.Route = new Route();
+
+export default window.Route;
