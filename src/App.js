@@ -13,7 +13,7 @@ import {
   DrawerLetsSignup,
   DrawerLetsShare
 } from './component.env/drawer';
-import _overlays from './component.env/_overlays';
+import Overlays from './component.env/_overlays';
 import BottomNavigation from './component.env/bottomNavigation';
 
 // INFO: https://qiita.com/peutes/items/d74e5758a36478fbc039
@@ -55,15 +55,13 @@ export default class extends Component {
           <div className="area-recommendation" style={{display: 'none'}}>
             <h4>関連</h4>
             <div className="component-images-horizontal"></div>
-            <div className="close" onClick={function() { $(this).parent().hide(300) }}>×</div>
+            <div className="close" onClick={(e)=> $(e.target).parent().hide(300)}>×</div>
           </div>
           <BottomNavigation />
         </div>
       </div>
 
-      <div className="component-layer"
-        dangerouslySetInnerHTML={{ __html: _overlays }}>
-      </div>
+      <Overlays />
 
       <div id="layer-appMessages" className="component-layer">
         <div className="loadingLine">

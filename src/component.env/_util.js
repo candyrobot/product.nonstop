@@ -20,7 +20,7 @@ export const loadImage = ()=> {
   });
 };
 
-window.signup = function() {
+export const signup = function() {
   var dat;
   dat = {};
   dat.email = $('#component-login .email').val();
@@ -36,12 +36,12 @@ window.signup = function() {
   });
 };
 
-window.logout = function() {
+export const logout = function() {
   localStorage.removeItem('app.nonstop.session.token')
   setTimeout('window.location.href = "/"', 1000);
 };
 
-window.login = function(dat) {
+export const login = function(dat) {
   if (dat == null) {
     dat = {};
   }
@@ -73,10 +73,10 @@ const isEmpty = function(dat) {
   return false;
 };
 
-window.promptToUpload = ()=> {
+export const promptToUpload = ()=> {
   window.post(window.prompt('新しい画像を投稿して下さい。（httpから始まる画像のURLを入力）\n※近日アップロードもできるようになります'));
 };
-window.post = function(url) {
+export const post = function(url) {
   if(url === null)
     return;
   if(url.match(/^http/) === null)
@@ -147,7 +147,7 @@ export const countUp = function(key) {
   localStorage.setItem(key, JSON.stringify(++a[key]));
   return a[key];
 };
-window.countUp = countUp;
+
 export const getCount = (key)=> {
   const v = localStorage.getItem(key);
   return v === null ? 0 : JSON.parse(v);
@@ -161,8 +161,6 @@ export const startLoading = function() {
 export const stopLoading = function() {
   return $('.loadingLine').hide(300);
 };
-
-window.stopLoading = stopLoading;
 
 export const deleteFav = function(imageID) {
   return $.ajax({
@@ -187,4 +185,3 @@ export const toast = function(txt, millisec = 2500) {
     }, millisec);
   });
 };
-window.toast = toast;
