@@ -43,6 +43,16 @@ function disableUsersZoom() {
 window.$ = $;
 
 export default class extends Component {
+  hoge = 1;
+  constructor() {
+    super();
+    this.state = {
+      foo: 1
+    };
+    $(window).on('popstate', (e)=> {
+      this.setState({});
+    });
+  }
   render() {
     return (
     <div className="App">
@@ -57,7 +67,9 @@ export default class extends Component {
             <div className="component-images-horizontal"></div>
             <div className="close" onClick={(e)=> $(e.target).parent().hide(300)}>×</div>
           </div>
-          <BottomNavigation />
+          <BottomNavigation setState={(v)=> {
+            this.setState(v);
+          }} />
         </div>
       </div>
 

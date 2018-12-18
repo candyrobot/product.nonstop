@@ -31,6 +31,8 @@
 #component-actions > *:active {
   background-color: #052b42a3;
 }
+#component-actions > *.on,
+/*廃止予定セレクタ*/
 #component-actions > *.current {
   color: #bfe7ff47;
 }

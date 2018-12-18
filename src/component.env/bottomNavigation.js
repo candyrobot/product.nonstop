@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import Route from './Route';
+import Route, {
+	popular,
+	newer
+} from './Route';
 import './bottomNavigation.css';
 import {
   toast,
@@ -15,9 +18,11 @@ export default class extends Component {
 				<div
 					onClick={()=> {
 						if(!window.dat.session) { toast('ログインしたユーザーのみ使えます'); return false; };
-						Route.push('images', { sort: 'favorites' }).refresh();
+						popular.push();
+						this.props.setState({});
+						// Route.push('images', { sort: 'favorites' }).refresh();
 					}}
-					className="sort-favorites"
+					className={`sort-favorites ${popular.current()? 'on' : ''}`}
 					>
 					<i className="fas fa-award"></i>
 					<small>人気順</small>
