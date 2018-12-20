@@ -76,10 +76,14 @@ export class DrawerLetsShare extends Drawer {
     const o = encodeURI(window.location.href);
     return `
     <div id="component-LetsShare" class="component-suggestion paper" style="display: none">
+      ${true ? `
+      <input type="file" />
+      ` : `
       <h3 style="font-size: 18px; text-indent: .5em">
         拡散希望🌟
       </h3>
       <p>
+      `}
         まだまだ画像不足！<br>
         拡散してもっと画像を投稿してもらおう！
       </p>
@@ -98,5 +102,24 @@ export class DrawerLetsShare extends Drawer {
       </p>
       <div class="close" onclick="$(this).parent().hide(300)">×</div>
     </div>`
+  }
+  
+  run() {
+    $('.component-LetsShare input').on('change', function(e) {
+      const f = e.target.files[0];
+      var uploadRef = firebase.storage().ref().child('upload.png');
+      uploadRef.put(f).then(function(snapshot) {
+        console.log('Uploaded a blob or file!');
+
+        //アップロードしたファイルを表示してみる
+        uploadRef.getDownloadURL().then(function(url){
+          console.log("imgSample "+url);
+          document.getElementById("imgSample").style.backgroundImage = "url("+url+")";
+        }).catch(function(error) {
+          // Handle any errors
+          console.log(error);
+        });
+      });
+    });
   }
 }
