@@ -13,6 +13,7 @@ class Drawer {
     //   return;
     $('#drawer > *').length ?
       $('#drawer > *').hide(300, ()=> this.render()) : this.render();
+    return this;
   }
 
   render() {
@@ -77,7 +78,7 @@ export class DrawerLetsShare extends Drawer {
     return `
     <div id="component-LetsShare" class="component-suggestion paper" style="display: none">
       ${true ? `
-      <input type="file" />
+      <input type="file" accept="image/*,video/*" multiple />
       ` : `
       <h3 style="font-size: 18px; text-indent: .5em">
         拡散希望🌟
@@ -103,23 +104,33 @@ export class DrawerLetsShare extends Drawer {
       <div class="close" onclick="$(this).parent().hide(300)">×</div>
     </div>`
   }
-  
-  run() {
-    $('.component-LetsShare input').on('change', function(e) {
-      const f = e.target.files[0];
-      var uploadRef = firebase.storage().ref().child('upload.png');
-      uploadRef.put(f).then(function(snapshot) {
-        console.log('Uploaded a blob or file!');
 
-        //アップロードしたファイルを表示してみる
-        uploadRef.getDownloadURL().then(function(url){
-          console.log("imgSample "+url);
-          document.getElementById("imgSample").style.backgroundImage = "url("+url+")";
-        }).catch(function(error) {
-          // Handle any errors
-          console.log(error);
-        });
-      });
+  run() {
+    // INFO: type=fileのcssの変更 http://proengineer.internous.co.jp/content/columnfeature/7605#1
+    $('#component-LetsShare input').on('change', function(e) {
+      for(let i=0;i<e.target.files.length;i++) {
+        hoge(e.target.files[i]);
+      }
     });
   }
 }
+
+function hoge(f) {
+  var uploadRef = window.firebase.storage().ref().child('uploadedByUser/' + f.name);
+  uploadRef.put(f).then(function(snapshot) {
+    console.log('Uploaded a blob or file!');
+
+    //アップロードしたファイルを表示してみる
+    uploadRef.getDownloadURL().then(function(url){
+      console.log("imgSample "+url);
+      // document.getElementById("imgSample").style.backgroundImage = "url("+url+")";
+    }).catch(function(error) {
+      // Handle any errors
+      console.log(error);
+    });
+  });
+}
+
+
+
+
