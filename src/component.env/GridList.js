@@ -31,7 +31,7 @@ export default new class {
         var htmlAdditional = window.dat.session && i === 0 ? `
         <div
           class="Pic additional"
-          onclick="window.promptToUpload()"
+          onclick="new DrawerToUpload().create().run()"
           >
           <div class="background">
             <i class="fas fa-plus"></i>

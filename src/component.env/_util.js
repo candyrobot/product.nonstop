@@ -73,22 +73,22 @@ const isEmpty = function(dat) {
   return false;
 };
 
-export const promptToUpload = ()=> {
-  window.post(window.prompt('新しい画像を投稿して下さい。（httpから始まる画像のURLを入力）\n※近日アップロードもできるようになります'));
-};
-export const post = function(url) {
-  if(url === null)
-    return;
-  if(url.match(/^http/) === null)
-    return toast('httpから始まるURLで入力して下さい。不正な値は後日削除されます', 3500);
-  return $.post(domain + '/images/', {
-    url: url
-  }).fail(function(dat) {
-    toast(dat.responseJSON.toast);
-  }).done(function() {
-    setTimeout('window.location.reload()', 1000);
-  });
-};
+// export const promptToUpload = ()=> {
+//   window.post(window.prompt('新しい画像を投稿して下さい。（httpから始まる画像のURLを入力）\n※近日アップロードもできるようになります'));
+// };
+// export const post = function(url) {
+//   if(url === null)
+//     return;
+//   if(url.match(/^http/) === null)
+//     return toast('httpから始まるURLで入力して下さい。不正な値は後日削除されます', 3500);
+//   return $.post(domain + '/images/', {
+//     url: url
+//   }).fail(function(dat) {
+//     toast(dat.responseJSON.toast);
+//   }).done(function() {
+//     setTimeout('window.location.reload()', 1000);
+//   });
+// };
 
 export const showWebview = function(url) {
   startLoading();

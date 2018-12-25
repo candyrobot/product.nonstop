@@ -80,6 +80,9 @@ input, button, .button {
   border-radius: 3px;
   border: none;
 }
+.small {
+  font-size: 10px;
+}
 .paper {
   padding: 1px; /*子孫要素のmarginが影響されるのを防ぐ*/
   padding: 1em;

@@ -1,8 +1,23 @@
+import $ from 'jquery';
+import {
+  toast,
+  domain
+} from '../component.env/_util';
+
 // TODO: Arrayをextendsして
 // window.images = new Image(...dat.images);
 // window.images.sortByNewer()と使えるようにしたい
 class Image {
 	constructor() {}
+
+	// INFO: CRUDから命名
+	create(files) {
+
+	}
+
+	// 命名だけよかった
+	// saveUrl(url) {
+	// }
 
 	sortByRelated(imageID) {
 		return window.dat.images

@@ -3,6 +3,8 @@ import $ from 'jquery';
 // import 'jquery.transit';
 import './object/$';
 import './object/Array';
+import './object/FileList';
+import './object/firebase';
 import './component.env/Route';
 import {
   domain,
@@ -97,9 +99,9 @@ export default class extends Component {
     $('#component-logout h1').text(window.dat.session.id);
     $('#component-logout h5').text(window.dat.session.email);
     if(window.dat.session) {
-      setInterval(()=> {
-        new DrawerLetsShare().create();
-      }, 1000 * 60 * 1);
+      // setInterval(()=> {
+      //   new DrawerLetsShare().create();
+      // }, 1000 * 60 * 1);
     }
     else {
       new DrawerConspicuous().create();

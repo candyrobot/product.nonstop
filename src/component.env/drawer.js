@@ -1,7 +1,9 @@
 import $ from 'jquery';
 import './drawer.css';
 import {
-  getCount
+  getCount,
+  toast,
+  domain
 } from './_util';
 
 let showingHtml = '';
@@ -48,7 +50,7 @@ export class DrawerLetsSignup extends Drawer {
     <div id="component-letsSignup" class="component-suggestion paper" style="display: none">
       <h3>登録してあなただけのお気入りBOXを🌟</h3>
       <p>
-        <span class="small" onclick="$('#component-login').show(300)">ログイン</span>
+        <span class="button-plane" onclick="$('#component-login').show(300)">ログイン</span>
         <button onclick="$('#component-login').show(300).find('.toSwitchSignUp').click()">アカウント作成</button>
       </p>
       <div class="close" onclick="$(this).parent().hide(300)">×</div>
@@ -77,14 +79,10 @@ export class DrawerLetsShare extends Drawer {
     const o = encodeURI(window.location.href);
     return `
     <div id="component-LetsShare" class="component-suggestion paper" style="display: none">
-      ${true ? `
-      <input type="file" accept="image/*,video/*" multiple />
-      ` : `
       <h3 style="font-size: 18px; text-indent: .5em">
         拡散希望🌟
       </h3>
       <p>
-      `}
         まだまだ画像不足！<br>
         拡散してもっと画像を投稿してもらおう！
       </p>
@@ -104,33 +102,55 @@ export class DrawerLetsShare extends Drawer {
       <div class="close" onclick="$(this).parent().hide(300)">×</div>
     </div>`
   }
+}
+
+// TODO: drawerは消されるよほかのそれに
+export class DrawerToUpload extends Drawer {
+  html() {
+    return `
+    <div id="component-ToUpload" class="component-suggestion paper" style="display: none">
+      <h3>画像を投稿</h3>
+      <div class="small">🌟複数アップロード可能</div>
+      <div class="small">🌟コンセプトに不当な画像は後日削除されます</div>
+      <input type="file" accept="image/*,video/*" multiple />
+      <div class="close" onclick="$(this).parent().hide(300)">×</div>
+    </div>
+    `;
+  }
 
   run() {
     // INFO: type=fileのcssの変更 http://proengineer.internous.co.jp/content/columnfeature/7605#1
-    $('#component-LetsShare input').on('change', function(e) {
-      for(let i=0;i<e.target.files.length;i++) {
-        hoge(e.target.files[i]);
-      }
+    $('#component-ToUpload input').on('change', function(e) {
+      const files = e.target.files;
+      let n = 1;
+      files.forEach((f)=> {
+        window.firebase.storage().upload(f)
+        .done((dat)=> {
+          $.post(domain + '/images/', { url: dat.url })
+          .done(function() {
+            if(n === files.length)
+              setTimeout('window.location.reload()', 1000);
+            n++;
+          })
+          .fail(function(dat) {
+            toast(dat.responseJSON.toast);
+          });
+
+          // Heroku.post('/images', { url })
+          // .done(function() {
+          //   if(n === files.length)
+          //     setTimeout('window.location.reload()', 1000);
+          //   n++;
+          // })
+          // .fail(function(dat) {
+          //   toast(dat.responseJSON.toast);
+          // })
+        });
+      });
+
+      // Image.create(e.target.files);
     });
   }
 }
 
-function hoge(f) {
-  var uploadRef = window.firebase.storage().ref().child('uploadedByUser/' + f.name);
-  uploadRef.put(f).then(function(snapshot) {
-    console.log('Uploaded a blob or file!');
-
-    //アップロードしたファイルを表示してみる
-    uploadRef.getDownloadURL().then(function(url){
-      console.log("imgSample "+url);
-      // document.getElementById("imgSample").style.backgroundImage = "url("+url+")";
-    }).catch(function(error) {
-      // Handle any errors
-      console.log(error);
-    });
-  });
-}
-
-
-
-
+window.DrawerToUpload = DrawerToUpload;

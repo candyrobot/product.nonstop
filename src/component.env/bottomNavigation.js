@@ -6,9 +6,12 @@ import Route, {
 } from './Route';
 import './bottomNavigation.css';
 import {
-  toast,
-  loadImage
+	toast,
+	loadImage
 } from './_util';
+import {
+	DrawerToUpload
+} from './drawer';
 
 export default class extends Component {
 	render() {
@@ -64,15 +67,15 @@ export default class extends Component {
 				<div
 					style={{ display: 'none' }}
 					onClick={()=> $('#component-login').show(300)}
-					className="login poyooon"
+					className="login poyooon fill"
 					>
 					<i className="fas fa-play"></i>
 					<small>ログイン</small>
 				</div>
 				<div
 					style={{ display: 'none' }}
-					onClick={()=> window.promptToUpload()}
-					className="upload"
+					onClick={()=> new DrawerToUpload().create().run()}
+					className="upload poyooon fill"
 					>
 					<i className="far fa-plus-square"></i>
 					<small>アップロード</small>
