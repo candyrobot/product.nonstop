@@ -18,3 +18,22 @@ window.firebase.storage().upload = (f)=> {
     done: (callback)=> { promise = callback }
   }
 };
+
+
+const firestore = window.firebase.firestore();
+firestore.settings({/* your settings... */ timestampsInSnapshots: true});
+firestore.getImages = ()=> {
+  // Initialize Cloud Firestore through Firebase
+  var db = firestore;
+  db.collection("images").get().then((querySnapshot) => {
+    debugger;
+    // const timestamp = querySnapshot.get('created_at');
+    // const date = timestamp.toDate();
+    console.log(date);
+    querySnapshot.forEach((doc) => {
+        console.log(doc.data());
+        console.log(doc.data().filePath);
+    });
+  });
+  // getDownloadURL = ()=> `https://firebasestorage.googleapis.com/v0/b/${bucketName}/o/${encodeURIComponent(filePath)}?alt=media`,
+};

@@ -12,17 +12,30 @@
     </script>
 
     <!-- INFO: firebase -->
-    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-storage.js"></script>
     <script>
-      // Initialize Firebase
+      // Initialize Firebase for PRD
+      // var config = {
+      //   apiKey: "AIzaSyBJcu20_YZ0b4N8wgRtuvlSoP3yPi7cMMs",
+      //   authDomain: "nonstop-vr.firebaseapp.com",
+      //   databaseURL: "https://nonstop-vr.firebaseio.com",
+      //   projectId: "nonstop-vr",
+      //   storageBucket: "nonstop-vr.appspot.com",
+      //   messagingSenderId: "319965006170"
+      // };
+
+      // Initialize Firebase for STG
       var config = {
-        apiKey: "AIzaSyBJcu20_YZ0b4N8wgRtuvlSoP3yPi7cMMs",
-        authDomain: "nonstop-vr.firebaseapp.com",
-        databaseURL: "https://nonstop-vr.firebaseio.com",
-        projectId: "nonstop-vr",
-        storageBucket: "nonstop-vr.appspot.com",
-        messagingSenderId: "319965006170"
+        apiKey: "AIzaSyCW7zdtb_7xYKRPHIH_TE8QxpmZ5nM7iBo",
+        authDomain: "mindful-acre-142405.firebaseapp.com",
+        databaseURL: "https://mindful-acre-142405.firebaseio.com",
+        projectId: "mindful-acre-142405",
+        storageBucket: "mindful-acre-142405.appspot.com",
+        messagingSenderId: "587681664710"
       };
+
       firebase.initializeApp(config);
     </script>
 

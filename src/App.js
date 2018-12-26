@@ -18,6 +18,8 @@ import {
 import Overlays from './component.env/_overlays';
 import BottomNavigation from './component.env/bottomNavigation';
 
+console.log(5, window.firebase.firestore().getImages());
+
 // INFO: https://qiita.com/peutes/items/d74e5758a36478fbc039
 // document.addEventListener('touchend', event => {
 //   event.preventDefault();
