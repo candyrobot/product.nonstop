@@ -12,7 +12,8 @@ exports.writeUrl = functions.storage.object().onFinalize((object) => {
 
   db.collection('images').add({
     filePath,
+    created_at: new Date()
   })
   .then(() => console.log('Done'))
-  .catch((e)=> console.log(e)); 
+  .catch((e)=> console.log(e));
 });
