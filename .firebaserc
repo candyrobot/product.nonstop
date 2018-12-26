@@ -1,5 +1,6 @@
 {
   "projects": {
-    "production": "nonstop-vr"
+    "production": "nonstop-vr",
+    "staging": "mindful-acre-142405"
   }
 }
