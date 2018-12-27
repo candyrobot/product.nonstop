@@ -8,6 +8,7 @@ import './object/firebase';
 import './component.env/Route';
 import {
   domain,
+  getUrlParameter,
   loadImage
 } from './component.env/_util';
 import {
@@ -96,9 +97,25 @@ export default class extends Component {
   }
 
   render() {
+    let image;
+    if (getUrlParameter('method') === 'images')
+      image = getUrlParameter('param');
+
     return (
     <div className="App">
       <div className="layer-1">
+        {
+          image
+          && image.id
+          && this.state.images.find(image.id)
+          ?
+          (
+          <div class="fluid" data-imageID={image.id}>
+            <img src={this.state.images.find(image.id).url} />
+          </div>
+          )
+          :undefined
+        }
         <GridListImage images={this.state.images} />
       </div>
 
