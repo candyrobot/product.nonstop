@@ -64,7 +64,8 @@ export default class extends Component {
     });
 
     window.firebase.firestore().getImages((images)=> {
-      // this.setState(...); or this.state....
+      this.state.images = this.state.images.concat(images);
+      this.setState({});
     });
   }
 
@@ -110,7 +111,7 @@ export default class extends Component {
           && this.state.images.find(image.id)
           ?
           (
-          <div class="fluid" data-imageID={image.id}>
+          <div className="fluid" testImageId={image.id}>
             <img src={this.state.images.find(image.id).url} />
           </div>
           )
