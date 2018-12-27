@@ -19,12 +19,9 @@ window.firebase.storage().upload = (f)=> {
   }
 };
 
-// INFO: https://qiita.com/teramotodaiki/items/b3592326579166003102
-const firestore = window.firebase.firestore();
-firestore.settings({/* your settings... */ timestampsInSnapshots: true});
-firestore.getImages = ()=> {
+window.firebase.firestore().getImages = ()=> {
   // Initialize Cloud Firestore through Firebase
-  var db = firestore;
+  var db = window.firebase.firestore();
   db.collection("images").get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
       const timestamp = doc.get('created_at');

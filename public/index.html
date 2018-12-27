@@ -37,6 +37,9 @@
       };
 
       firebase.initializeApp(config);
+
+      // INFO: https://qiita.com/teramotodaiki/items/b3592326579166003102
+      firebase.firestore().settings({/* your settings... */ timestampsInSnapshots: true});
     </script>
 
     <meta charset="utf-8">
