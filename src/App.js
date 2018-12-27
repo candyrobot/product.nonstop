@@ -16,9 +16,8 @@ import {
   DrawerLetsShare
 } from './component.env/drawer';
 import Overlays from './component.env/_overlays';
+import GridList from './component.env/GridList';
 import BottomNavigation from './component.env/bottomNavigation';
-
-console.log(5, window.firebase.firestore().getImages());
 
 // INFO: https://qiita.com/peutes/items/d74e5758a36478fbc039
 // document.addEventListener('touchend', event => {
@@ -47,20 +46,57 @@ function disableUsersZoom() {
 window.$ = $;
 
 export default class extends Component {
-  hoge = 1;
   constructor() {
     super();
+
+    window.app = this;
+
     this.state = {
-      foo: 1
+      images: []
     };
+
+    this.initializeApp();
+
     $(window).on('popstate', (e)=> {
       this.setState({});
     });
+
+    window.firebase.firestore().getImages((images)=> {
+      // this.setState(...); or this.state....
+    });
   }
+
+  initializeApp() {
+    $(window).on('scroll', loadImage);
+
+    $.get(domain + '/application' + window.location.search, (dat)=> {
+      console.log(dat);
+      window.dat = dat;
+      this.setState({ images: dat.images });
+      window.Route.refresh();
+
+      $('#component-logout h1').text(window.dat.session.id);
+      $('#component-logout h5').text(window.dat.session.email);
+      if(window.dat.session) {
+        // setInterval(()=> {
+        //   new DrawerLetsShare().create();
+        // }, 1000 * 60 * 1);
+      }
+      else {
+        new DrawerConspicuous().create();
+        setTimeout(()=> {
+          new DrawerLetsSignup().create();
+        }, 1000 * 30);
+      }
+    });
+  }
+
   render() {
     return (
     <div className="App">
-      <div className="layer-1"></div>
+      <div className="layer-1">
+        <GridList images={this.state.images} />
+      </div>
 
       <div className="component-layer layer-2">
         <div id="drawer"></div>
@@ -89,27 +125,3 @@ export default class extends Component {
     );
   }
 };
-
-(function initializeApp() {
-  $(window).on('scroll', loadImage);
-
-  $.get(domain + '/application' + window.location.search, function(dat) {
-    console.log(dat);
-    window.dat = dat;
-    window.Route.refresh();
-
-    $('#component-logout h1').text(window.dat.session.id);
-    $('#component-logout h5').text(window.dat.session.email);
-    if(window.dat.session) {
-      // setInterval(()=> {
-      //   new DrawerLetsShare().create();
-      // }, 1000 * 60 * 1);
-    }
-    else {
-      new DrawerConspicuous().create();
-      setTimeout(()=> {
-        new DrawerLetsSignup().create();
-      }, 1000 * 30);
-    }
-  });
-})();
