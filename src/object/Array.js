@@ -97,6 +97,12 @@ Array.prototype.turn = function() {
 // TODO: まだチューニングできると思う
 // @param {object} - { key: value }
 Array.prototype.where = function(hash) {
+  // return this.filter((o)=> {
+  //   return Object.keys(hash).filter((k)=> {
+  //     return hash[k] == o[k];
+  //   }).length === Object.keys(hash).length;
+  // });
+
   var a = this;
   for (const key in hash) {
     a = a.filter((a)=> a[key] == hash[key]);
@@ -111,12 +117,24 @@ Array.prototype.find = function(id) {
 
 // INFO: whereの逆。除く
 Array.prototype.exclude = function(hash) {
-  var a = this;
-  for (const key in hash) {
-    a = a.filter((a)=> a[key] != hash[key]);
-  }
-  return a;
+  return this.filter((o)=> {
+    return Object.keys(hash).filter((k)=> {
+      return hash[k] == o[k];
+    }).length !== Object.keys(hash).length;
+
+    // for (const k in hash) {
+    //   hash[k] == o[k]
+    // }
+  });
 };
+
+// INFO: 要素を消すには？
+// - a = a.exclude(...)
+// - deleteなどで要素を消すなどがある
+//   - https://www.sejuku.net/blog/22295#filter
+// - Railsの場合
+//     favorites = Favorite.where imageID: params[:imageID], userID: user.id
+//     favorites[0].destroy
 
 Array.prototype.sortByFrequency = function() {
   const frequency = {};
