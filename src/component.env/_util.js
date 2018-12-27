@@ -145,15 +145,3 @@ export const startLoading = function() {
 export const stopLoading = window.stopLoading = function() {
   return $('.loadingLine').hide(300);
 };
-
-export const deleteFav = function(imageID) {
-  return $.ajax({
-    type: 'DELETE',
-    url: domain + '/favorites',
-    data: {
-      imageID: imageID
-    }
-  }).fail(function(dat) {
-    return new Toast(dat.responseJSON.toast, true);
-  });
-};
