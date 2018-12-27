@@ -17,7 +17,7 @@ export default class extends Component {
         <input type="text" className="email" name="email" placeholder="email" />
         <input type="password" className="password" name="password" placeholder="password" />
         <div className="">
-          <button onClick={()=> login()}>ログイン</button>
+          <button className="button" onClick={()=> login()}>ログイン</button>
           <div className="small toSwitchSignUp"
           onClick={(e)=> {
             $(e.target).parent().hide(300);
@@ -27,7 +27,7 @@ export default class extends Component {
           </div>
         </div>
         <div className="" style={{ display: 'none' }}>
-          <button onClick={()=> signup()}>サインアップ</button>
+          <button className="button" onClick={()=> signup()}>サインアップ</button>
           <div className="small"
           onClick={(e)=> {
             $(e.target).parent().hide(300);
@@ -42,7 +42,7 @@ export default class extends Component {
       <div id="component-logout" className="component-overlay flex-justify-center" style={{ display: 'none' }}>
         <h1>＼(^o^)／</h1>
         <h5>xxxxxxxxxx@xxxxx.xxx</h5>
-        <button onClick={()=> logout()}>ログアウト</button>
+        <button className="button" onClick={()=> logout()}>ログアウト</button>
         <div className="close" onClick={(e)=> $(e.target).parent().hide(300)}>×</div>
       </div>
 

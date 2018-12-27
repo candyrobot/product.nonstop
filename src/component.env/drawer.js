@@ -51,7 +51,7 @@ export class DrawerLetsSignup extends Drawer {
       <h3>登録してあなただけのお気入りBOXを🌟</h3>
       <p>
         <span class="button-plane" onclick="$('#component-login').show(300)">ログイン</span>
-        <button onclick="$('#component-login').show(300).find('.toSwitchSignUp').click()">アカウント作成</button>
+        <button class="button" onclick="$('#component-login').show(300).find('.toSwitchSignUp').click()">アカウント作成</button>
       </p>
       <div class="close" onclick="$(this).parent().hide(300)">×</div>
     </div>`
@@ -65,7 +65,7 @@ export class DrawerPost extends Drawer {
       <div>
         <input type="text" placeholder="画像のURL">
       </div>
-      <button onclick="post($('#component-post input').val())">投稿</button>
+      <button class="button" onclick="post($('#component-post input').val())">投稿</button>
     </div>`
   }
 }
