@@ -27,6 +27,7 @@ class Route {
 
   refresh() {
     window.app.setState({});
+    loadImage();
 
     const method = getUrlParameter('method') || 'images';
     const param = getUrlParameter('param') || undefined;

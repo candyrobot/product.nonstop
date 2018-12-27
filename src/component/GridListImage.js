@@ -8,6 +8,9 @@ import Favorite from '../model/Favorite';
 
 export default class extends Component {
   render() {
+    if (!window.dat || !window.dat.favorites || !window.dat.favorites.length)
+      return null;
+
     return (
     <GridList
       id="component-images" className="gridList"

@@ -66,6 +66,7 @@ export default class extends Component {
     window.firebase.firestore().getImages((images)=> {
       this.state.images = this.state.images.concat(images);
       this.setState({});
+      loadImage();
     });
   }
 
@@ -117,7 +118,8 @@ export default class extends Component {
           )
           :undefined
         }
-        <GridListImage images={this.state.images} />
+        {/*TODO: 日付で並び替えること*/}
+        <GridListImage images={this.state.images.reverse()} />
       </div>
 
       <div className="component-layer layer-2">
