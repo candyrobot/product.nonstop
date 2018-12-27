@@ -10,14 +10,14 @@
   color: #0050a7a8;
   font-size: 40px;
 }
-.Pic > .background {
+.Pic .background {
   display: block;
   position: relative;
   background-size: cover;
   background-position: center;
   background-color: rgba(255,255,255,.09);
 }
-.Pic > .background:after {
+.Pic .background:after {
   content: "";
   display: block;
   padding-top: 100%;
