@@ -7,7 +7,7 @@ import {
 // TODO: Arrayをextendsして
 // window.images = new Image(...dat.images);
 // window.images.sortByNewer()と使えるようにしたい
-class Image {
+export default window.Image = new class {
 	constructor() {}
 
 	// INFO: CRUDから命名
@@ -68,5 +68,3 @@ class Image {
 		return !!window.dat.favorites.where({imageID: imageID, userID: window.dat.session.id}).length;
 	}
 }
-
-export default new Image();
