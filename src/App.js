@@ -16,7 +16,8 @@ import {
   DrawerLetsShare
 } from './component.env/drawer';
 import Overlays from './component.env/_overlays';
-import GridList from './component.env/GridList';
+// import GridList from './component.env/GridList';
+import GridListImage from './component/GridListImage';
 import BottomNavigation from './component.env/bottomNavigation';
 
 // INFO: https://qiita.com/peutes/items/d74e5758a36478fbc039
@@ -72,7 +73,10 @@ export default class extends Component {
     $.get(domain + '/application' + window.location.search, (dat)=> {
       console.log(dat);
       window.dat = dat;
+
       this.setState({ images: dat.images });
+      loadImage();
+
       window.Route.refresh();
 
       $('#component-logout h1').text(window.dat.session.id);
@@ -95,7 +99,7 @@ export default class extends Component {
     return (
     <div className="App">
       <div className="layer-1">
-        <GridList images={this.state.images} />
+        <GridListImage images={this.state.images} />
       </div>
 
       <div className="component-layer layer-2">
