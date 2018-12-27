@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Toast from '../object/Toast';
 
 // ！！！！！注意間違えて本番にやらないように！！！！！
 // export const domain = "http://0.0.0.0:3000";
@@ -30,7 +31,7 @@ export const signup = function() {
   }
   startLoading();
   $.post(domain + '/users/', dat).fail(function(dat) {
-    toast(dat.responseJSON.toast);
+    new Toast(dat.responseJSON.toast, true);
   }).done(function() {
     window.login(dat);
   });
@@ -53,7 +54,7 @@ export const login = function(dat) {
   startLoading();
   return $.post(domain + '/users/login', dat)
   .fail(function(dat) {
-    toast(dat.responseJSON.toast);
+    new Toast(dat.responseJSON.toast, true);
   })
   .done(function(dat) {
   	localStorage.setItem('app.nonstop.session.token', dat.session.token);
@@ -72,23 +73,6 @@ const isValidEmail = function(email) {
 const isEmpty = function(dat) {
   return false;
 };
-
-// export const promptToUpload = ()=> {
-//   window.post(window.prompt('新しい画像を投稿して下さい。（httpから始まる画像のURLを入力）\n※近日アップロードもできるようになります'));
-// };
-// export const post = function(url) {
-//   if(url === null)
-//     return;
-//   if(url.match(/^http/) === null)
-//     return toast('httpから始まるURLで入力して下さい。不正な値は後日削除されます', 3500);
-//   return $.post(domain + '/images/', {
-//     url: url
-//   }).fail(function(dat) {
-//     toast(dat.responseJSON.toast);
-//   }).done(function() {
-//     setTimeout('window.location.reload()', 1000);
-//   });
-// };
 
 export const showWebview = function(url) {
   startLoading();
@@ -158,7 +142,7 @@ export const startLoading = function() {
   return setTimeout('stopLoading()', 5000);
 };
 
-export const stopLoading = function() {
+export const stopLoading = window.stopLoading = function() {
   return $('.loadingLine').hide(300);
 };
 
@@ -170,18 +154,6 @@ export const deleteFav = function(imageID) {
       imageID: imageID
     }
   }).fail(function(dat) {
-    return toast(dat.responseJSON.toast);
-  });
-};
-
-export const toast = function(txt, millisec = 2500) {
-  if (!txt) {
-    return;
-  }
-  return $("<div>" + txt + "</div>").appendTo('#layer-appMessages .alerts')
-  .hide().show(300, function() {
-    setTimeout(()=> {
-      $(this).hide(300);
-    }, millisec);
+    return new Toast(dat.responseJSON.toast, true);
   });
 };

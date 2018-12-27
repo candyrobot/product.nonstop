@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Toast from '../object/Toast';
 import {
   getUrlParameter,
   existParameter,
@@ -6,8 +7,7 @@ import {
   startLoading,
   stopLoading,
   deleteFav,
-  domain,
-  toast
+  domain
 } from './_util';
 import './toggle.css';
 export default class Toggle {
@@ -37,7 +37,7 @@ export default class Toggle {
     //   return $.post(domain + '/favorites', {
     //     imageID: imageID
     //   }).fail(function(dat) {
-    //     return toast(dat.responseJSON.toast);
+    //     return new Toast(dat.responseJSON.toast, true);
     //   }).done((function(_this) {
     //     return function() {
     //       return $(_this).addClass('true');
@@ -52,16 +52,16 @@ Toggle.toggle = (el, imageID)=> {
   if ($(el).is('.true')) {
     deleteFav(imageID)
     .done(()=> $(el).removeClass('true'))
-    .fail(()=> toast('ログインするとお気入りに保存できます'))
+    .fail(()=> new Toast('ログインするとお気入りに保存できます', true))
     .always(stopLoading);
   } else {
     $.post(domain + '/favorites', {
       imageID: imageID
     }).fail((dat)=> {
-      toast(dat.responseJSON.toast);
+      new Toast(dat.responseJSON.toast, true);
     })
     .done(()=> $(el).addClass('true'))
-    .fail(()=> toast('ログインするとお気入りに保存できます'))
+    .fail(()=> new Toast('ログインするとお気入りに保存できます', true))
     .always(stopLoading);
   }
 };

@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
+import Device from '../object/Device';
+import Toast from '../object/Toast';
 import Route, {
 	popular,
 	newer
 } from './Route';
 import './bottomNavigation.css';
 import {
-	toast,
 	loadImage
 } from './_util';
-import {
-	DrawerToUpload
-} from './drawer';
 
 export default class extends Component {
 	render() {
@@ -20,7 +18,7 @@ export default class extends Component {
 			<div id="component-actions">
 				<div
 					onClick={()=> {
-						if(!window.dat.session) { toast('ログインしたユーザーのみ使えます'); return false; };
+						if(!window.dat.session) { new Toast('ログインしたユーザーのみ使えます', true); return false; };
 						popular.push();
 						this.props.setState({});
 						// Route.push('images', { sort: 'favorites' }).refresh();
@@ -39,7 +37,7 @@ export default class extends Component {
 				</div>
 				<div
 					onClick={()=> {
-						if(!window.dat.session) { toast('ログインしたユーザーのみ使えます'); return false; }
+						if(!window.dat.session) { new Toast('ログインしたユーザーのみ使えます', true); return false; }
 						Route.push('images', { filter: 'myFavorite' }).refresh();
 					}}
 					className="filter-myFavorite"
@@ -49,7 +47,7 @@ export default class extends Component {
 				</div>
 				<div
 					onClick={()=> {
-						if(!window.dat.session) { toast('ログインしたユーザーのみ使えます'); return false; }
+						if(!window.dat.session) { new Toast('ログインしたユーザーのみ使えます', true); return false; }
 						$('#component-logout').show(300);
 					}}
 					className="mypage"
@@ -74,7 +72,7 @@ export default class extends Component {
 				</div>
 				<div
 					style={{ display: 'none' }}
-					onClick={()=> new DrawerToUpload().create().run()}
+					onClick={()=> new Device.Album()}
 					className="upload poyooon fill"
 					>
 					<i className="far fa-plus-square"></i>
