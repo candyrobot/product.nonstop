@@ -26,12 +26,14 @@ class Route {
   }
 
   refresh() {
+    window.app.setState({});
+
     const method = getUrlParameter('method') || 'images';
     const param = getUrlParameter('param') || undefined;
 
     $(window).scrollTop(0);
     $('.area-recommendation').hide();
-    $('.layer-1').html('');
+    // $('.layer-1').html('');
     $('#layer2-row1').html('');
 
     this[method](param);
@@ -74,15 +76,15 @@ class Route {
       renderLayer2Row1(opt.id);
 
       var image = window.dat.images.find(opt.id);
-      $('.layer-1').html(
-        `
-        <div class="fluid" data-imageID="${image.id}">
-          <img src="${image.url}">
-        </div>`
-        + GridList.html(Image.sortByRelatedEffort(opt.id))
-      ).each(function() {
-        GridList.run(this)
-      });
+      // $('.layer-1').html(
+      //   `
+      //   <div class="fluid" data-imageID="${image.id}">
+      //     <img src="${image.url}">
+      //   </div>`
+      //   + GridList.html(Image.sortByRelatedEffort(opt.id))
+      // ).each(function() {
+      //   GridList.run(this)
+      // });
     }
     else {
       let images;
@@ -105,11 +107,11 @@ class Route {
         $('#component-actions > .sort-newer').addClass('current');
       }
 
-      $('.layer-1').html(
-        GridList.html(images)
-      ).each(function() {
-        GridList.run(this)
-      });
+      // $('.layer-1').html(
+      //   GridList.html(images)
+      // ).each(function() {
+      //   GridList.run(this)
+      // });
     }
   }
 }
