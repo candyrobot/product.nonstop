@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Toast from '../object/Toast';
 import {
 	getCount,
 	countUp,
@@ -30,13 +31,17 @@ export default window.Device = {
 		}
 
 		upload(files) {
+			const toast = new Toast('アップロードを開始します');
 			let n = 1;
 			files.forEach((f)=> {
 				window.firebase.storage().upload(f)
 				.done((dat)=> {
 						// TODO: ひとつずつsetStateしていきたい
-						if(n === files.length)
+						if(n === files.length) {
 							setTimeout('window.location.reload()', 1000);
+							toast.destroy();
+						}
+						toast.html(`アップロード中 ${n}/${files.length}個完了`);
 						n++;
 				});
 			});

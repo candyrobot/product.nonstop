@@ -4,6 +4,7 @@ import $ from 'jquery';
 
 // Usage2
 // 	const o = new Toast('message');
+// 	o.html('更新');
 // 	$('body').on('click', ()=> o.destroy());
 
 export default class {
@@ -31,5 +32,9 @@ export default class {
 		.css({ x: '100%' })
 		.show()
 		.transit({ x: '0%' });
+	}
+
+	html(html) {
+		this.$el.html(html);
 	}
 }
