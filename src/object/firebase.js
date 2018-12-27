@@ -19,19 +19,31 @@ window.firebase.storage().upload = (f)=> {
   }
 };
 
-window.firebase.firestore().getImages = ()=> {
+window.firebase.firestore().getImages = (fn)=> {
   // Initialize Cloud Firestore through Firebase
   var db = window.firebase.firestore();
   db.collection("images").get().then((querySnapshot) => {
+    const a = [];
     querySnapshot.forEach((doc) => {
-      const timestamp = doc.get('created_at');
-      console.log(timestamp);
-      const date = timestamp.toDate();
-      console.log(date);
+      a.push({
+        id: doc.id,
+        url: window.firebase.firestore().getDownloadURL(doc.get('filePath')),
+        created_at: doc.get('created_at')
+      });
+      // const timestamp = doc.get('created_at');
+      // console.log(timestamp);
+      // const date = timestamp.toDate();
+      // console.log(date);
 
-      console.log(doc.data());
-      console.log(doc.data().filePath);
+      // console.log(doc.data());
+      // console.log(doc.data().filePath);
     });
+    fn(a);
   });
-  // getDownloadURL = ()=> `https://firebasestorage.googleapis.com/v0/b/${bucketName}/o/${encodeURIComponent(filePath)}?alt=media`,
+  // getDownloadURL = ()=> ,
+};
+
+window.firebase.firestore().getDownloadURL = (filePath)=> {
+  const bucketName = window.config.projectId + '.appspot.com';
+  return `https://firebasestorage.googleapis.com/v0/b/${bucketName}/o/${encodeURIComponent(filePath)}?alt=media`;
 };
