@@ -26,9 +26,10 @@ export default class {
 
 	create() {
 		this.$el = 
-		$(`<div>${this.txt}</div>`)
+		$(`<div style="display: none">${this.txt}</div>`)
 		.appendTo('#layer-appMessages .alerts')
-		.hide()
-		.show(300);
+		.css({ x: '100%' })
+		.show()
+		.transit({ x: '0%' });
 	}
 }

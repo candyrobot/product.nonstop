@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-// import 'jquery.transit';
+import 'jquery.transit';
 import './object/$';
 import './object/Array';
 import './object/FileList';

@@ -227,7 +227,6 @@ input, button, .button {
   background-position: center;
 }
 #layer-appMessages .alerts {
-  margin-top: 45%;
 }
 #layer-appMessages .alerts > div {
   margin: 10px;
