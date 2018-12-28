@@ -23,7 +23,7 @@ function upload() {
 
   setTimeout("$('#addOfflineTaskBut').click()", 500);
 
-  var t = setInterval(()=> {
+  var t = window.t = setInterval(()=> {
     if (get$Modal().length === 0) {
       clearInterval(t);
       i++;
