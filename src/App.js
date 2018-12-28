@@ -54,20 +54,15 @@ export default class extends Component {
 
     window.app = this;
 
-    this.state = {
-      images: []
-    };
+    // INFO: .stateは使わない方針のほうが良いかもしれない
+    // this.state = {
+    //   images: []
+    // };
 
     this.initializeApp();
 
     $(window).on('popstate', (e)=> {
       this.setState({});
-    });
-
-    window.firebase.firestore().getImages((images)=> {
-      this.state.images = this.state.images.concat(images);
-      this.setState({});
-      loadImage();
     });
   }
 
@@ -75,12 +70,26 @@ export default class extends Component {
     $(window).on('scroll', loadImage);
 
     $.get(domain + '/application' + window.location.search, (dat)=> {
+
+      // INFO: firebaseと統一しておく
+      dat.images = dat.images.map((i)=> (i.created_at = new Date(i.created_at), i));
+
       console.log(dat);
       window.dat = dat;
 
-      this.state.images = this.state.images.concat(dat.images);
       this.setState({});
       loadImage();
+
+      window.firebase.firestore().getImages((images)=> {
+        // INFO: .stateは使わない方針のほうが良いかもしれない
+        // this.state.images = this.state.images.concat(images);
+
+        // TODO: for dev
+        window.dat.images = window.dat.images.concat(images);
+
+        this.setState({});
+        loadImage();
+      });
 
       window.Route.refresh();
 
@@ -109,13 +118,11 @@ export default class extends Component {
     <div className="App">
       <div className="layer-1">
         {
-          image
-          && image.id
-          && this.state.images.find(image.id)
+          image && image.id
           ?
           (
           <div className="fluid" testImageId={image.id}>
-            <img src={this.state.images.find(image.id).url} />
+            <img src={window.dat.images.find(image.id).url} />
           </div>
           )
           :undefined
