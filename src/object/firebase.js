@@ -19,6 +19,12 @@ window.firebase.storage().upload = (f)=> {
   }
 };
 
+// INFO:
+// rails
+// - new Date(created_at).getTime()
+// firestore
+// - created_at.toDate().getTime()
+
 window.firebase.firestore().getImages = (fn)=> {
   // Initialize Cloud Firestore through Firebase
   var db = window.firebase.firestore();
@@ -28,7 +34,7 @@ window.firebase.firestore().getImages = (fn)=> {
       a.push({
         id: doc.id,
         url: window.firebase.firestore().getDownloadURL(doc.get('filePath')),
-        created_at: doc.get('created_at')
+        created_at: doc.get('created_at').toDate()
       });
       // const timestamp = doc.get('created_at');
       // console.log(timestamp);
