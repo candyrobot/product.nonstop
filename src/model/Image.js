@@ -30,8 +30,10 @@ export default window.Image = new class {
 	}
 
 	sortByNewer() {
+		if (!window.dat || !window.dat.images)
+			return;
 		return window.dat.images.sort((iA, iB)=> {
-			return parseInt(iA.created_at.replace( /\D/g , '')) > parseInt(iB.created_at.replace( /\D/g , '')) ? -1 : 1;
+			return iA.created_at.getTime() > iB.created_at.getTime() ? -1 : 1;
 		});
 	}
 
