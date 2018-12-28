@@ -6,6 +6,7 @@ import './object/Array';
 import './object/FileList';
 import './object/firebase';
 import './component.env/Route';
+import Image from './model/Image';
 import {
   domain,
   getUrlParameter,
@@ -119,8 +120,7 @@ export default class extends Component {
           )
           :undefined
         }
-        {/*TODO: 日付で並び替えること*/}
-        <GridListImage images={this.state.images.reverse()} />
+        <GridListImage images={Image.sortByNewer()} />
       </div>
 
       <div className="component-layer layer-2">
