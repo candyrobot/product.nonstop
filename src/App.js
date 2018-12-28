@@ -77,7 +77,8 @@ export default class extends Component {
       console.log(dat);
       window.dat = dat;
 
-      this.setState({ images: dat.images });
+      this.state.images = this.state.images.concat(dat.images);
+      this.setState({});
       loadImage();
 
       window.Route.refresh();

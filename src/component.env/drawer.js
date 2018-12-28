@@ -36,7 +36,7 @@ export class DrawerConspicuous extends Drawer {
       <h3 class="title">
         TwitterやTumblrより効率的に画像を収集しませんか？
       </h3>
-      <p>※Tumblrは12/17以降、<br>成人向けの一切の画像が削除されます</p>
+      <p>※Tumblrは12/17以降、<br>成人向けの一切の画像が削除されました</p>
       <p>百聞は一見にしかず。</p>
       <p>まずは使ってみて下さい！</p>
       <div class="close" onclick="$(this).parent().hide(300)">×</div>
@@ -96,7 +96,7 @@ export class DrawerLetsShare extends Drawer {
           "
           >
           <i class="fab fa-twitter"></i>
-          画像を増やす🌟
+          画像を増やしてもらう🌟
         </a>
       </p>
       <div class="close" onclick="$(this).parent().hide(300)">×</div>
