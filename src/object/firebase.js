@@ -33,7 +33,7 @@ window.firebase.firestore().getImages = (fn)=> {
     querySnapshot.forEach((doc) => {
       a.push({
         id: doc.id,
-        url: window.firebase.firestore().getDownloadURL(doc.get('filePath')),
+        url: doc.get('url') || window.firebase.firestore().getDownloadURL(doc.get('filePath')),
         created_at: doc.get('created_at').toDate()
       });
       // const timestamp = doc.get('created_at');
