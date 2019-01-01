@@ -7,7 +7,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 
 export default class extends React.Component {
 
@@ -39,21 +38,39 @@ export default class extends React.Component {
       >
         <div className={classes.list}>
           <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
+            <ListItem button>{/*
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>*/}
+              <ListItemText primary="新着" />
+            </ListItem>
+            <ListItem button>{/*
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>*/}
+              <ListItemText>
+                みんな
+                <small style={{ fontWeight: 'bold' }}>（利用者数 1,520人）</small>
+              </ListItemText>
+            </ListItem>
+            <ListItem button>{/*
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>*/}
+              <ListItemText primary="お気入り" />
+            </ListItem>
+            <ListItem button>{/*
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>*/}
+              <ListItemText primary="アップロードした画像" />
+            </ListItem>
           </List>
           <Divider />
           <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
+            <ListItem button>
+              <ListItemText primary={'ログアウト'} />
+            </ListItem>
           </List>
         </div>
       </div>
