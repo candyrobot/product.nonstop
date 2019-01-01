@@ -29,7 +29,10 @@ export default class extends Component {
 					<small>人気順</small>
 				</div>
 				<div
-					onClick={()=> Route.push('images', { sort: 'newer' }).refresh()}
+					onClick={()=> {
+						Route.push('images', { sort: 'newer' }).refresh();
+						this.props.setState({});
+					}}
 					className="sort-newer"
 					>
 					<i className="far fa-images"></i>
@@ -39,6 +42,7 @@ export default class extends Component {
 					onClick={()=> {
 						if(!window.dat.session) { new Toast('ログインしたユーザーのみ使えます', true); return false; }
 						Route.push('images', { filter: 'myFavorite' }).refresh();
+						this.props.setState({});
 					}}
 					className="filter-myFavorite"
 					>
@@ -56,7 +60,10 @@ export default class extends Component {
 					<small>マイページ</small>
 				</div>
 				<div
-					onClick={()=> Route.push('users').refresh()}
+					onClick={()=> {
+						Route.push('users').refresh();
+						this.props.setState({});
+					}}
 					className="users"
 					>
 					<i className="fas fa-user-friends"></i>
