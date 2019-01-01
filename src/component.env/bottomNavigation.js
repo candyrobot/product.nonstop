@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import Device from '../object/Device';
 import Toast from '../object/Toast';
-import Route, {
-	popular,
-	newer
-} from './Route';
+import Route from './Route';
+import route from '../object/Route';
 import './bottomNavigation.css';
 import {
 	loadImage
@@ -19,19 +17,16 @@ export default class extends Component {
 				<div
 					onClick={()=> {
 						if(!window.dat.session) { new Toast('ログインしたユーザーのみ使えます', true); return false; };
-						popular.push();
-						this.props.setState({});
-						// Route.push('images', { sort: 'favorites' }).refresh();
+						route.push('popular');
 					}}
-					className={`sort-favorites ${popular.current()? 'on' : ''}`}
+					className={`sort-favorites ${route.is('popular')? 'on' : ''}`}
 					>
 					<i className="fas fa-award"></i>
 					<small>人気順</small>
 				</div>
 				<div
 					onClick={()=> {
-						Route.push('images', { sort: 'newer' }).refresh();
-						this.props.setState({});
+						route.push('image.newer');
 					}}
 					className="sort-newer"
 					>
