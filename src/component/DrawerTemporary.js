@@ -12,6 +12,7 @@ export default class extends React.Component {
 
   state = {
     left: false,
+    selectedIndex: 0,
   };
 
   constructor() {
@@ -38,13 +39,19 @@ export default class extends React.Component {
       >
         <div className={classes.list}>
           <List>
-            <ListItem button>{/*
+            <ListItem
+              button
+              selected={this.state.selectedIndex === 0}
+            >{/*
               <ListItemIcon>
                 <InboxIcon />
               </ListItemIcon>*/}
               <ListItemText primary="新着" />
             </ListItem>
-            <ListItem button>{/*
+            <ListItem
+              button
+              selected={this.state.selectedIndex === 1}
+            >{/*
               <ListItemIcon>
                 <InboxIcon />
               </ListItemIcon>*/}
@@ -53,22 +60,36 @@ export default class extends React.Component {
                 <small style={{ fontWeight: 'bold' }}>（利用者数 1,520人）</small>
               </ListItemText>
             </ListItem>
-            <ListItem button>{/*
+          </List>
+          <Divider />
+          <List>
+            <ListItem color="lightgray">
+              <small style={{ color: '#808080' }}>
+                Me: {window.dat && window.dat.session.email}
+              </small>
+            </ListItem>
+            <ListItem
+              button
+              selected={this.state.selectedIndex === 2}
+            >{/*
               <ListItemIcon>
                 <InboxIcon />
               </ListItemIcon>*/}
               <ListItemText primary="お気入り" />
             </ListItem>
-            <ListItem button>{/*
+            <ListItem
+              button
+              selected={this.state.selectedIndex === 3}
+            >{/*
               <ListItemIcon>
                 <InboxIcon />
               </ListItemIcon>*/}
               <ListItemText primary="アップロードした画像" />
             </ListItem>
-          </List>
-          <Divider />
-          <List>
-            <ListItem button>
+            <ListItem
+              button
+              selected={this.state.selectedIndex === 4}
+            >
               <ListItemText primary={'ログアウト'} />
             </ListItem>
           </List>
