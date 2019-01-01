@@ -106,11 +106,11 @@ export const isAndroid = function() {
 - getUrlParameter('fuga') // エラー
 - getUrlParameter('hogera') // null
 */
-export function getUrlParameter(name) {
+export const getUrlParameter = window.getUrlParameter = function(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
     var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
     var results = regex.exec(window.location.search);
-    return results === null ? null : JSON.parse(decodeURIComponent( results[1].replace(/\+/g, ' ') ));
+    return results === null ? undefined : JSON.parse(decodeURIComponent( results[1].replace(/\+/g, ' ') ));
 }
 
 /**
