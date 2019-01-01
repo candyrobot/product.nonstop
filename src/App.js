@@ -20,6 +20,8 @@ import {
 import Overlays from './component.env/_overlays';
 // import GridList from './component.env/GridList';
 import GridListImage from './component/GridListImage';
+import DrawerTemporary from './component/DrawerTemporary';
+import AppBar from './component/AppBar';
 import BottomNavigation from './component.env/bottomNavigation';
 
 // INFO: https://qiita.com/peutes/items/d74e5758a36478fbc039
@@ -117,17 +119,20 @@ export default class extends Component {
     return (
     <div className="App">
       <div className="layer-1">
-        {
-          image && image.id
-          ?
-          (
-          <div className="fluid" testImageId={image.id}>
-            <img src={window.dat.images.find(image.id).url} />
-          </div>
-          )
-          :undefined
-        }
-        <GridListImage images={Image.sortByNewer()} />
+        <AppBar />
+        <div class="forAppBar">
+          {
+            image && image.id
+            ?
+            (
+            <div className="fluid" testImageId={image.id}>
+              <img src={window.dat.images.find(image.id).url} />
+            </div>
+            )
+            :undefined
+          }
+          <GridListImage images={Image.sortByNewer()} />
+        </div>
       </div>
 
       <div className="component-layer layer-2">
@@ -153,6 +158,7 @@ export default class extends Component {
         </div>
         <div className="alerts"></div>
       </div>
+      <DrawerTemporary classes={{}} />
     </div>
     );
   }
