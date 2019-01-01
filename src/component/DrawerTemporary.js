@@ -7,6 +7,12 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import Toast from '../object/Toast';
+import {
+  logout
+} from '../component.env/_util';
+import route from '../object/Route';
 
 export default class extends React.Component {
 
@@ -20,6 +26,7 @@ export default class extends React.Component {
     window.drawer = this;
   }
 
+  // 公式にあったけどこれtoggleしてなくない？
   toggleDrawer = (side, open) => () => {
     this.setState({
       [side]: open,
@@ -34,14 +41,16 @@ export default class extends React.Component {
       <div
         tabIndex={0}
         role="button"
-        onClick={this.toggleDrawer('left', false)}
-        onKeyDown={this.toggleDrawer('left', false)}
       >
         <div className={classes.list}>
           <List>
             <ListItem
               button
-              selected={this.state.selectedIndex === 0}
+              selected={route.is('image.newer')}
+              onClick={()=> {
+                route.push('image.newer');
+                this.setState({ left: false });
+              }}
             >{/*
               <ListItemIcon>
                 <InboxIcon />
@@ -50,26 +59,53 @@ export default class extends React.Component {
             </ListItem>
             <ListItem
               button
-              selected={this.state.selectedIndex === 1}
-            >{/*
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>*/}
+              selected={route.is('users')}
+              onClick={()=> {
+                route.push('users');
+                this.setState({ left: false });
+              }}
+            >
               <ListItemText>
                 みんな
                 <small style={{ fontWeight: 'bold' }}>（利用者数 1,520人）</small>
               </ListItemText>
             </ListItem>
+            {!(window.dat && window.dat.session) && (
+              <ListItem
+                button
+                disabled
+                selected={this.state.selectedIndex === 2}
+                onClick={()=> new Toast('ログインしたユーザーのみ使えます', true)}
+              >
+                <ListItemText>
+                  人気順
+                </ListItemText>
+              </ListItem>
+            )}
           </List>
           <Divider />
           <List>
-            <ListItem color="lightgray">
-              <small style={{ color: '#808080' }}>
-                Me: {window.dat && window.dat.session.email}
-              </small>
+            <ListItem>
+              {window.dat && window.dat.session ? (
+                <small style={{ color: '#808080' }}>
+                  Me: {window.dat && window.dat.session.email}
+                </small>
+              ) : (
+                <small>
+                  ログイン後利用できます！
+                  <RadioButtonUncheckedIcon
+                    style={{
+                      color: '#85d632e0',
+                      verticalAlign: '-6px',
+                      marginLeft: '2px'
+                    }}
+                  />
+                </small>
+              )}
             </ListItem>
             <ListItem
               button
+              disabled={!(window.dat && window.dat.session)}
               selected={this.state.selectedIndex === 2}
             >{/*
               <ListItemIcon>
@@ -79,6 +115,7 @@ export default class extends React.Component {
             </ListItem>
             <ListItem
               button
+              disabled={!(window.dat && window.dat.session)}
               selected={this.state.selectedIndex === 3}
             >{/*
               <ListItemIcon>
@@ -88,7 +125,8 @@ export default class extends React.Component {
             </ListItem>
             <ListItem
               button
-              selected={this.state.selectedIndex === 4}
+              disabled={!(window.dat && window.dat.session)}
+              onClick={()=> logout()}
             >
               <ListItemText primary={'ログアウト'} />
             </ListItem>
