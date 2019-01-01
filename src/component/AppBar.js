@@ -11,15 +11,15 @@ export default class extends React.Component {
   render() {
     const toggleDrawer = window.drawer && window.drawer.toggleDrawer || function() {};
     return (
-    <AppBar position="static">
+    <AppBar position="static" style={{ zIndex: 'inherit' }}>
       <Toolbar style={{ padding: 0 }}>
         <IconButton color="inherit" aria-label="Menu">
           <MenuIcon onClick={toggleDrawer('left', true)} />
         </IconButton>
         <Typography
           style={{ width: '100%' }}
-          variant="h7" color="inherit"
-          onClick={()=> alert('みんな がでてくる')}
+          variant="inherit" color="inherit"
+          onClick={()=> console.log('みんな がでてくる')}
         >
           利用者数 1,520人突破!!
         </Typography>

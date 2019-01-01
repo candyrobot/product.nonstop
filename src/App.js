@@ -135,7 +135,7 @@ export default class extends Component {
         </div>
       </div>
 
-      <div className="component-layer layer-2">
+      <div className="component-layer layer-2" style={{ top: 55 }}>
         <div id="drawer"></div>
         <div className="frombottom">
           <div className="row" id="layer2-row1"></div>
