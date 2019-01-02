@@ -6,7 +6,6 @@ import {
 } from './_util';
 import Image from '../model/Image';
 import GridList from './GridList';
-import PaperUser from './PaperUser';
 import { renderLayer2Row1 } from './_layer2Row1';
 
 // INFO: "imageIDが3かつuserIDが4"のような指定ができるようにするために、すべてクエリで表現。パスにはしない。
@@ -58,16 +57,6 @@ class Route {
   users() {
     $('#component-actions > *').removeClass('current');
     $('#component-actions > .users').addClass('current');
-
-    $('.layer-1').html(
-    window.dat.users.sort((uA, uB)=> {
-      const a = window.dat.favorites.where({userID: uA.id}).length;
-      const b = window.dat.favorites.where({userID: uB.id}).length;
-      return a > b ? -1 : 1;
-    }).reduce((prev, user)=> {
-      return prev + new PaperUser().html(user);
-    }, '')
-    );
   }
 
   images(opt = {}) {
