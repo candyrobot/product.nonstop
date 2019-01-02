@@ -106,9 +106,9 @@ export const isAndroid = function() {
 - getUrlParameter('hoge') // {}
 - getUrlParameter('foo') // [1,2]
 - getUrlParameter('bar') // true
-- getUrlParameter('piyo') // null
+- getUrlParameter('piyo') // undefined
 - getUrlParameter('fuga') // エラー
-- getUrlParameter('hogera') // null
+- getUrlParameter('hogera') // undefined
 */
 export const getUrlParameter = window.getUrlParameter = function(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
