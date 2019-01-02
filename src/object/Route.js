@@ -1,5 +1,6 @@
 import {
-  getUrlParameter
+  getUrlParameter,
+  loadImage
 } from '../component.env/_util';
 
 class Route {
@@ -39,6 +40,7 @@ class Route {
 const route = new Route({
   doAfterPushing: function() {
     window.app.setState({});
+    setTimeout(()=> loadImage(), 500);
   }
 });
 
