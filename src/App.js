@@ -25,7 +25,7 @@ import GridListImage from './component/GridListImage';
 import DrawerTemporary from './component/DrawerTemporary';
 import AppBar from './component/AppBar';
 import BottomNavigation from './component.env/bottomNavigation';
-import route from './object/Route';
+import Route from './object/Route';
 
 // INFO: https://qiita.com/peutes/items/d74e5758a36478fbc039
 // document.addEventListener('touchend', event => {
@@ -124,18 +124,18 @@ export default class extends Component {
       <div className="layer-1">
         <AppBar />
         <div className="forAppBar" onScroll={()=> loadImage()}>
-          {route.is('users') ? (
+          {Route.is('users') ? (
             User.sortByMostHavingFavorites().map((user, i)=> {
               return <PaperUser key={i} user={user} />
             })
-          ) : (
-            image && image.id && (
+          ) : ([
+            image && image.id && window.dat && (
             <div className="fluid" testImageId={image.id}>
               <img src={window.dat.images.find(image.id).url} />
             </div>
             ),
             <GridListImage images={Image.sortByNewer()} />
-          )}
+          ])}
         </div>
       </div>
 

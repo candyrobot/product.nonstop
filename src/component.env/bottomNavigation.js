@@ -17,16 +17,16 @@ export default class extends Component {
 				<div
 					onClick={()=> {
 						if(!window.dat.session) { new Toast('ログインしたユーザーのみ使えます', true); return false; };
-						route.push('popular');
+						route.push('imagesSortedByPopular');
 					}}
-					className={`sort-favorites ${route.is('popular')? 'on' : ''}`}
+					className={`sort-favorites ${route.is('imagesSortedByPopular')? 'on' : ''}`}
 					>
 					<i className="fas fa-award"></i>
 					<small>人気順</small>
 				</div>
 				<div
 					onClick={()=> {
-						route.push('image.newer');
+						route.push('imagesSortedByNewer');
 					}}
 					className="sort-newer"
 					>
@@ -56,7 +56,7 @@ export default class extends Component {
 				</div>
 				<div
 					onClick={()=> {
-						Route.push('users').refresh();
+						route.push('users');
 						this.props.setState({});
 					}}
 					className="users"

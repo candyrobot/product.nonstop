@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Grow from '@material-ui/core/Grow';
 import Favorite from '../model/Favorite';
+import Route from '../object/Route';
 
 export default class extends Component {
   render() {
@@ -17,8 +18,8 @@ export default class extends Component {
       id="component-images" className="gridList"
       cellHeight='auto' spacing={1}>
       {/*INFO: https://material-ui.com/utils/transitions/*/}
-      {this.props.images.map(tile => (
-        <Grow in={true}
+      {this.props.images.map((tile, i) => (
+        <Grow in={true} key={i}
           style={{ transformOrigin: '0 0 0' }}
         >
             {/*ref={(node)=> $(node).inView().length}*/}
@@ -29,7 +30,7 @@ export default class extends Component {
             <div
               className="background"
               data-load-image={tile.url}
-              onClick={()=> window.Route.push('images', { id: tile.id }).refresh()}
+              onClick={()=> Route.push('image', { id: tile.id })}
             >
             </div>
             {/*<img src={tile.url} alt={tile.title} />*/}

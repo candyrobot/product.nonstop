@@ -19,11 +19,16 @@ class Route {
     );
   }
 
-  push(variable) {
+  /**
+   * @param  {string} variable [description]
+   * @param  {object} param    [description]
+   */
+  push(variable, param) {
     const { query, doAfterPushing } = this.routes.where({ variable })[0];
     let url = '';
-    query.method && ( url += `/?method="${query.method}"` )
-    query.param && ( url += `&param=${JSON.stringify(query.param)}` )
+    query.method && ( url += `/?method="${query.method}"` );
+    param && ( query.param = Object.assign(query.param || {}, param) );
+    query.param && ( url += `&param=${JSON.stringify(query.param)}` );
     const title = url;
     window.history.pushState({url: url, title: title}, title, url);
     doAfterPushing ? doAfterPushing(this.doAfterPushing) : this.doAfterPushing();
@@ -58,7 +63,7 @@ const route = new Route({
 // });
 
 route.set({
-  variable: 'image.newer',
+  variable: 'imagesSortedByNewer',
   query: { method: 'images' },
   doAfterPushing: function(inherit) {
     // TODO: images sorted by created_at
@@ -68,25 +73,22 @@ route.set({
 });
 
 route.set({
-  variable: 'popular',
+  variable: 'imagesSortedByPopular',
   query: { method: 'images', param: { sortBy: 'favorite' } },
-  doAfterPushing: function(inherit) {
-    inherit();
-    // inheritを実行しなければ、上記newした時に設定した値(関数リテラル)を実行しない。
-  }
+});
+
+route.set({
+  variable: 'image',
+  query: { method: 'images' },
 });
 
 route.set({
   variable: 'users',
   query: { method: 'users' },
-  doAfterPushing: function(inherit) {
-    // TODO: sortBy most having favorites.
-    inherit();
-    // inheritを実行しなければ、上記newした時に設定した値(関数リテラル)を実行しない。
-  }
 });
 
-// 使い方: route.push('popular');
-// 使い方: route.is('popular')
+// 使い方: route.push('imagesSortedByPopular');
+// 使い方: route.push('image', { id: 1 });
+// 使い方: route.is('imagesSortedByPopular')
 
 export default route;

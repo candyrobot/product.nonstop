@@ -12,7 +12,7 @@ import Toast from '../object/Toast';
 import {
   logout
 } from '../component.env/_util';
-import route from '../object/Route';
+import Route from '../object/Route';
 
 export default class extends React.Component {
 
@@ -46,9 +46,9 @@ export default class extends React.Component {
           <List>
             <ListItem
               button
-              selected={route.is('image.newer')}
+              selected={Route.is('imagesSortedByNewer')}
               onClick={()=> {
-                route.push('image.newer');
+                Route.push('imagesSortedByNewer');
                 this.setState({ left: false });
               }}
             >{/*
@@ -60,9 +60,9 @@ export default class extends React.Component {
             {!(window.dat && window.dat.session) && (
               <ListItem
                 button
-                selected={route.is('users')}
+                selected={Route.is('users')}
                 onClick={()=> {
-                  route.push('users');
+                  Route.push('users');
                   this.setState({ left: false });
                 }}
               >
