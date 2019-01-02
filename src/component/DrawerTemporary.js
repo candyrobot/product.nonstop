@@ -57,19 +57,21 @@ export default class extends React.Component {
               </ListItemIcon>*/}
               <ListItemText primary="新着" />
             </ListItem>
-            <ListItem
-              button
-              selected={route.is('users')}
-              onClick={()=> {
-                route.push('users');
-                this.setState({ left: false });
-              }}
-            >
-              <ListItemText>
-                みんな
-                <small style={{ fontWeight: 'bold' }}>（利用者数 1,520人）</small>
-              </ListItemText>
-            </ListItem>
+            {!(window.dat && window.dat.session) && (
+              <ListItem
+                button
+                selected={route.is('users')}
+                onClick={()=> {
+                  route.push('users');
+                  this.setState({ left: false });
+                }}
+              >
+                <ListItemText>
+                  みんな
+                  <small style={{ fontWeight: 'bold' }}>（利用者数 1,520人）</small>
+                </ListItemText>
+              </ListItem>
+            )}
             {!(window.dat && window.dat.session) && (
               <ListItem
                 button
