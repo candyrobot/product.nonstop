@@ -7,6 +7,7 @@ import './object/FileList';
 import './object/firebase';
 import './component.env/Route';
 import Image from './model/Image';
+import User from './model/User';
 import {
   domain,
   getUrlParameter,
@@ -17,12 +18,14 @@ import {
   DrawerLetsSignup,
   DrawerLetsShare
 } from './component.env/drawer';
+import PaperUser from './component.env/PaperUser';
 import Overlays from './component.env/_overlays';
 // import GridList from './component.env/GridList';
 import GridListImage from './component/GridListImage';
 import DrawerTemporary from './component/DrawerTemporary';
 import AppBar from './component/AppBar';
 import BottomNavigation from './component.env/bottomNavigation';
+import route from './object/Route';
 
 // INFO: https://qiita.com/peutes/items/d74e5758a36478fbc039
 // document.addEventListener('touchend', event => {
@@ -93,7 +96,7 @@ export default class extends Component {
         loadImage();
       });
 
-      window.Route.refresh();
+      // window.Route.refresh();
 
       $('#component-logout h1').text(window.dat.session.id);
       $('#component-logout h5').text(window.dat.session.email);
@@ -120,18 +123,19 @@ export default class extends Component {
     <div className="App">
       <div className="layer-1">
         <AppBar />
-        <div class="forAppBar">
-          {
-            image && image.id
-            ?
-            (
+        <div className="forAppBar" onScroll={()=> loadImage()}>
+          {route.is('users') ? (
+            User.sortByMostHavingFavorites().map((user, i)=> {
+              return <PaperUser key={i} user={user} />
+            })
+          ) : (
+            image && image.id && (
             <div className="fluid" testImageId={image.id}>
               <img src={window.dat.images.find(image.id).url} />
             </div>
-            )
-            :undefined
-          }
-          <GridListImage images={Image.sortByNewer()} />
+            ),
+            <GridListImage images={Image.sortByNewer()} />
+          )}
         </div>
       </div>
 
@@ -143,10 +147,10 @@ export default class extends Component {
             <h4>関連</h4>
             <div className="component-images-horizontal"></div>
             <div className="close" onClick={(e)=> $(e.target).parent().hide(300)}>×</div>
-          </div>
+          </div>{/*
           <BottomNavigation setState={(v)=> {
             this.setState(v);
-          }} />
+          }} />*/}
         </div>
       </div>
 
