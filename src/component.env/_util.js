@@ -11,6 +11,10 @@ $.ajaxSetup({
   }
 });
 
+// TODO:
+// 1. visibility: hiddenをvisibleに
+// 2. transitionを
+// 3. backgroundを持ってる自分or子孫要素にloadImage
 export const loadImage = ()=> {
   $('[data-load-image]:not([style*="background"])').inView().each(function() {
     var url = $(this).data('load-image');
