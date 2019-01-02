@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
-import './PaperUser.css';
+import Grow from '@material-ui/core/Grow';
 import Route from './Route';
+import './PaperUser.css';
 
 // TODO: 他... の部分を黒グラデ白文字にしたい
 
 export default class extends Component {
+  isDisplayImages = false;
   render() {
     const user = this.props.user;
     const favorites = window.dat.favorites.where({ userID: user.id });
     if(favorites.length === 0)
       return null;
+    setTimeout(()=> {
+      this.isDisplayImages = true;
+      this.setState({});
+    }, 2000);
     return (
     <div className="PaperUser">
       <div className="user">
@@ -30,19 +36,22 @@ export default class extends Component {
           </div>
         </div>
       </div>
-      <div>
+      <div style={{ display: this.isDisplayImages ? 'block' : 'none' }}>
         {/*.splice(0, 5)*/}
         {window.dat.favorites.where({ userID: user.id })
         .map((f, i)=> {
           const image = window.dat.images.find(f.imageID);
           return (
-          <div
-            key={i}
-            className="image"
-            onClick={()=> Route.push('images', { id: image.id }).refresh()}
-            style={{ backgroundImage: `url(${image.url})` }}
-            >
-          </div>
+          <Grow in={this.isDisplayImages} key={i}
+          timeout={3000}
+          >
+            <div
+              className="image"
+              onClick={()=> Route.push('images', { id: image.id }).refresh()}
+              style={{ backgroundImage: `url(${image.url})` }}
+              >
+            </div>
+          </Grow>
           )
         })}
 
@@ -53,7 +62,7 @@ export default class extends Component {
           <h3 style={{ marginBottom: -10 }}>
             …他{favorites.length}件
           </h3>
-          <p className="small">（全部見るには登録する必要があります）</p>
+          <p className="small">（全部見るには？: ログイン）</p>
         </div>
       </div>
     </div>
