@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 import {
   getUrlParameter,
   loadImage
@@ -65,11 +67,6 @@ const route = new Route({
 route.set({
   variable: 'imagesSortedByNewer',
   query: { method: 'images' },
-  doAfterPushing: function(inherit) {
-    // TODO: images sorted by created_at
-    inherit();
-    // inheritを実行しなければ、上記newした時に設定した値(関数リテラル)を実行しない。
-  }
 });
 
 route.set({
@@ -79,7 +76,12 @@ route.set({
 
 route.set({
   variable: 'image',
-  query: { method: 'images' },
+  query: { method: 'images', id: -1 },
+  doAfterPushing: function(inherit) {
+    $('.forAppBar').scrollTop(0);
+    inherit();
+    // inheritを実行しなければ、上記newした時に設定した値(関数リテラル)を実行しない。
+  }
 });
 
 route.set({
