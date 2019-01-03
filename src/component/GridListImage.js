@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import Grow from '@material-ui/core/Grow';
-import Favorite from '../model/Favorite';
 import Route from '../object/Route';
+
+import '../component.env/Pic.css';
+import ButtonToggleFavorite from '../component.env/ButtonToggleFavorite';
 
 export default class extends Component {
   render() {
@@ -38,21 +38,7 @@ export default class extends Component {
               style={{ background: 'inherit', pointerEvents: 'none' }}
               title={tile.title}
               titlePosition="bottom"
-              actionIcon={
-                !! window.dat.favorites.where({imageID: tile.id, userID: window.dat.session.id}).length
-                ?
-                <IconButton
-                  style={{ pointerEvents: 'initial', color: 'rgba(255, 0, 0, 0.8)' }}
-                  onClick={()=> Favorite.delete(tile.id)}>
-                  <FavoriteIcon />
-                </IconButton>
-                :
-                <IconButton
-                  style={{ pointerEvents: 'initial' }}
-                  onClick={()=> Favorite.create(tile.id)}>
-                  <FavoriteIcon />
-                </IconButton>
-              }
+              actionIcon={<ButtonToggleFavorite imageID={tile.id} />}
               actionPosition="right"
             />
           </GridListTile>
