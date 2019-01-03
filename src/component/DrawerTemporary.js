@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import React from 'react';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
@@ -44,6 +45,17 @@ export default class extends React.Component {
       >
         <div className={classes.list}>
           <List>
+            {!(window.dat && window.dat.session) && (
+              <ListItem
+                button
+                onClick={()=> {
+                  $('#component-login').show(300);
+                  this.setState({ left: false });
+                }}
+              >
+                <ListItemText primary="ログイン" />
+              </ListItem>
+            )}
             <ListItem
               button
               selected={Route.is('imagesSortedByNewer')}

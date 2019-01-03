@@ -173,16 +173,16 @@ export default class extends Component {
         </Fab>
       </div>
 
+      <DrawerTemporary classes={{}} />
+
       <Overlays />
 
-      <div id="layer-appMessages" className="component-layer">
+      <div id="layer-appMessages" className="component-layer" style={{ zIndex: 1301 }}>
         <div className="loadingLine">
           <span className="expand"></span>
         </div>
         <div className="alerts"></div>
       </div>
-
-      <DrawerTemporary classes={{}} />
     </div>
     );
   }

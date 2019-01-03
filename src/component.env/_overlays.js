@@ -10,7 +10,7 @@ import './overlay.css';
 export default class extends Component {
   render() {
     return (
-    <div className="component-layer">
+    <div className="component-layer" style={{ zIndex: 1301 }}>
       <div id="component-login"
         className="component-overlay flex-justify-center" style={{ display: 'none' }}>
         <div className="small">忘れないようにメモを。</div>
