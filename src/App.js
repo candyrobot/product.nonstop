@@ -11,6 +11,7 @@ import './object/firebase';
 import './component.env/Route';
 import Image from './model/Image';
 import User from './model/User';
+// import './component.env/Route';
 import {
   domain,
   getUrlParameter,
@@ -27,8 +28,8 @@ import Overlays from './component.env/_overlays';
 import GridListImage from './component/GridListImage';
 import DrawerTemporary from './component/DrawerTemporary';
 import AppBar from './component/AppBar';
-import BottomNavigation from './component.env/bottomNavigation';
 import Route from './object/Route';
+// import BottomNavigation from './component.env/bottomNavigation';
 
 // INFO: https://qiita.com/peutes/items/d74e5758a36478fbc039
 // document.addEventListener('touchend', event => {

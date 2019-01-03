@@ -12,7 +12,7 @@ import {
 } from './_util';
 import Image from '../model/Image';
 import Toggle from './Toggle';
-import Pic from './Pic';
+// import Pic from './Pic';
 // import { renderImage, renderImages } from './gridList';
 
 export function renderLayer2Row1(imageID) {

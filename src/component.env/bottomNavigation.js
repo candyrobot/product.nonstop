@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import Device from '../object/Device';
 import Toast from '../object/Toast';
-import Route from './Route';
+// import Route from './Route';
 import route from '../object/Route';
 import './bottomNavigation.css';
 import {

@@ -5,8 +5,8 @@ import {
   loadImage
 } from './_util';
 import Image from '../model/Image';
-import GridList from './GridList';
-import { renderLayer2Row1 } from './_layer2Row1';
+// import GridList from './GridList';
+// import { renderLayer2Row1 } from './_layer2Row1';
 
 // INFO: "imageIDが3かつuserIDが4"のような指定ができるようにするために、すべてクエリで表現。パスにはしない。
 class Route {
