@@ -14,6 +14,7 @@ import './object/firebase';
 import Image from './model/Image';
 
 import DrawerTemporary from './component/DrawerTemporary';
+import './component/balloon.css';
 
 // import './component.env/Route';
 import {

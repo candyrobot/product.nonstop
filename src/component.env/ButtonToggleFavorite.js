@@ -6,6 +6,7 @@ import Favorite from '../model/Favorite';
 export default class extends Component {
   render() {
     const imageID = this.props.imageID;
+    const guide = this.props.guide;
     return (
     !! window.dat.favorites.where({imageID, userID: window.dat.session.id}).length
     ?
@@ -16,9 +17,14 @@ export default class extends Component {
     </IconButton>
     :
     <IconButton
-      style={{ pointerEvents: 'initial' }}
+      style={{ pointerEvents: 'initial', position: 'relative' }}
       onClick={()=> Favorite.create(imageID)}>
       <FavoriteIcon />
+      {guide && (
+        <div className="balloon" position="left">
+          タップして "お気入り" に入れると…　👉
+        </div>
+      )}
     </IconButton>
     )
   }

@@ -33,7 +33,7 @@ export default class extends Component {
 					}
 					else if (image.id) {
 						return window.dat && ([
-						<GridListTileImage image={window.dat.images.find(image.id)} />,
+						<GridListTileImage guide={true} image={window.dat.images.find(image.id)} />,
 						<h5
 							style={{
 								color: 'white',

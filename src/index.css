@@ -190,37 +190,6 @@ input, .button {
   display: inline-block;
 }
 
-.balloon {
-  padding: 4px 10px;
-  font-weight: bold;
-  vertical-align: super;
-  font-size: 11px;
-  border-radius: 3px;
-  background-color: #455c6b;
-  color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, .3);
-  line-height: normal;
-  white-space: pre;
-}
-.balloon[position="top"] {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translate(-50%, -150%);
-}
-.balloon[position="top"]:after {
-  content: '';
-  position: absolute;
-  margin-left: -4px;
-  bottom: -8px;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 8px 8px 0 8px;
-  border-color: #455c6b transparent transparent transparent;
-}
-
 .component-layer .row .balloon {
   margin-right: 10px;
   line-height: 32px;
