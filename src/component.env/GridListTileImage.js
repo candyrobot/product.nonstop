@@ -33,7 +33,7 @@ export default class extends Component {
           style={{ background: 'inherit', pointerEvents: 'none' }}
           title={image.title}
           titlePosition="bottom"
-          actionIcon={<ButtonToggleFavorite {...this.props} imageID={image.id} />}
+          actionIcon={<ButtonToggleFavorite {...this.props} />}
           actionPosition="right"
         />
       </GridListTile>

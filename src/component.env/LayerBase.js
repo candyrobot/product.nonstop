@@ -9,7 +9,8 @@ import GridListImage from '../component/GridListImage';
 
 import {
 	loadImage,
-	getUrlParameter
+	getUrlParameter,
+	countUp
 } from '../component.env/_util';
 import PaperUser from '../component.env/PaperUser';
 import ButtonToggleFavorite from '../component.env/ButtonToggleFavorite';
@@ -33,7 +34,10 @@ export default class extends Component {
 					}
 					else if (image.id) {
 						return window.dat && ([
-						<GridListTileImage guide={true} image={window.dat.images.find(image.id)} />,
+						<GridListTileImage
+							guide={countUp('GridListTileImage.guide') < 4}
+							image={window.dat.images.find(image.id)}
+						/>,
 						<h5
 							style={{
 								color: 'white',

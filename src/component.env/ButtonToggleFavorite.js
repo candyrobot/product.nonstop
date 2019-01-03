@@ -5,20 +5,20 @@ import Favorite from '../model/Favorite';
 
 export default class extends Component {
   render() {
-    const imageID = this.props.imageID;
+    const image = this.props.image;
     const guide = this.props.guide;
     return (
-    !! window.dat.favorites.where({imageID, userID: window.dat.session.id}).length
+    !! window.dat.favorites.where({imageID: image.id, userID: window.dat.session.id}).length
     ?
     <IconButton
       style={{ pointerEvents: 'initial', color: 'rgba(255, 0, 0, 0.8)' }}
-      onClick={()=> Favorite.delete(imageID)}>
+      onClick={()=> Favorite.delete(image.id)}>
       <FavoriteIcon />
     </IconButton>
     :
     <IconButton
       style={{ pointerEvents: 'initial', position: 'relative' }}
-      onClick={()=> Favorite.create(imageID)}>
+      onClick={()=> Favorite.create(image.id)}>
       <FavoriteIcon />
       {guide && (
         <div className="balloon" position="left">
