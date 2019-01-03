@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Fab from '@material-ui/core/Fab';
+import Tooltip from '@material-ui/core/Tooltip';
+import SettingsCellIcon from '@material-ui/icons/SettingsCell';
 import $ from 'jquery';
 import 'jquery.transit';
 import './object/$';
@@ -129,12 +132,13 @@ export default class extends Component {
               return <PaperUser key={i} user={user} />
             })
           ) : ([
-            image && image.id && window.dat && (
+            image && image.id && window.dat && ([
             <div className="fluid" testImageId={image.id}>
               <img src={window.dat.images.find(image.id).url} />
-            </div>
-            ),
-            <GridListImage images={Image.sortByNewer()} />
+            </div>,
+            <h5>関連</h5>
+            ]),
+            <GridListImage key="1" images={Image.sortByNewer()} />
           ])}
         </div>
       </div>
@@ -152,6 +156,21 @@ export default class extends Component {
             this.setState(v);
           }} />*/}
         </div>
+
+        {/*新しい画像 毎日20枚以上更新！*/}
+        <Fab
+          onClick={()=> $('#component-login').show(300).find('.toSwitchSignUp').click()}
+          variant="extended"
+          size="medium"
+          className="button"
+          aria-label="Add"
+          style={{
+            position: 'absolute', bottom: 50, left: 10, width: 'calc( 100% - 20px )' }}
+        >
+          <SettingsCellIcon className="poyooon" />
+          アカウント作成
+          <div className="balloon" position="top">👇登録してアプリのようにホーム画面に追加しよう！</div>
+        </Fab>
       </div>
 
       <Overlays />
@@ -162,6 +181,7 @@ export default class extends Component {
         </div>
         <div className="alerts"></div>
       </div>
+
       <DrawerTemporary classes={{}} />
     </div>
     );
