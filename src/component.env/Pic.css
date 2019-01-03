@@ -1,6 +1,7 @@
 .Pic {
   position: relative;
   padding: 1px;
+  display: block;
 }
 .Pic:before {
   position: absolute;

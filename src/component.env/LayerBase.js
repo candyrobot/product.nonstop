@@ -12,6 +12,8 @@ import {
 	getUrlParameter
 } from '../component.env/_util';
 import PaperUser from '../component.env/PaperUser';
+import ButtonToggleFavorite from '../component.env/ButtonToggleFavorite';
+import GridListTileImage from '../component.env/GridListTileImage';
 
 export default class extends Component {
 	render() {
@@ -29,10 +31,18 @@ export default class extends Component {
 					})
 				) : ([
 					image && image.id && window.dat && ([
-					<div className="fluid" testImageId={image.id}>
-						<img src={window.dat.images.find(image.id).url} />
-					</div>,
-					<h5>関連</h5>
+					<GridListTileImage image={window.dat.images.find(image.id)} />,
+					<h5
+						style={{
+							color: 'white',
+							marginTop: 5,
+							marginBottom: 0,
+							padding: 10,
+							backgroundColor: '#ffffff14'
+						}}
+					>
+						関連
+					</h5>
 					]),
 					<GridListImage key="1" images={Image.sortByNewer()} />
 				])}
