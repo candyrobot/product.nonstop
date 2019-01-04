@@ -59,6 +59,9 @@ function disableUsersZoom() {
 
 window.$ = $;
 
+// TODO:
+// - シングルのときの画像リンク切れのアイコンの位置が変
+
 export default class extends Component {
 
   // INFO: 子コンポーネント
@@ -68,11 +71,6 @@ export default class extends Component {
     super();
 
     window.app = this;
-
-    // INFO: .stateは使わない方針のほうが良いかもしれない
-    // this.state = {
-    //   images: []
-    // };
 
     this.initializeApp();
 
@@ -108,14 +106,10 @@ export default class extends Component {
         loadImage();
       });
 
-      // window.Route.refresh();
-
-      $('#component-logout h1').text(window.dat.session.id);
-      $('#component-logout h5').text(window.dat.session.email);
       if(window.dat.session) {
-        // setInterval(()=> {
-        //   new DrawerLetsShare().create();
-        // }, 1000 * 60 * 1);
+        setInterval(()=> {
+          new DrawerLetsShare().create();
+        }, 1000 * 60 * 1);
       }
       else {
         new DrawerConspicuous().create();

@@ -29,14 +29,6 @@
   text-align: center;
 }
 
-#component-logout {
-  color: white;
-  text-align: center;
-}
-#component-logout > h1 {
-  margin-bottom: -20px;
-}
-
 #webview p {
   padding-left: 10px;
   font-weight: bold;
