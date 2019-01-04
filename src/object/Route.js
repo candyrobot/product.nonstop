@@ -47,6 +47,7 @@ class Route {
 const route = new Route({
   doAfterPushing: function() {
     window.app.setState({});
+    window.app.recommendation.setState({ open: false });
     setTimeout(()=> loadImage(), 500);
   }
 });
