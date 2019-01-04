@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 import {
-  getUrlParameter,
+  query,
   loadImage
 } from '../component.env/_util';
 
@@ -14,10 +14,10 @@ class Route {
   }
 
   is(variable) {
-    const { query } = this.routes.where({ variable })[0];
+    const route = this.routes.where({ variable })[0];
     return (
-      getUrlParameter('method') == query.method
-      && JSON.stringify(getUrlParameter('param')) == JSON.stringify(query.param)
+      query('method') == route.query.method
+      && JSON.stringify(query('param')) == JSON.stringify(route.query.param)
     );
   }
 
@@ -26,14 +26,14 @@ class Route {
    * @param  {object} param    [description]
    */
   push(variable, param) {
-    const { query, doAfterPushing } = this.routes.where({ variable })[0];
+    const route = this.routes.where({ variable })[0];
     let url = '';
-    query.method && ( url += `/?method="${query.method}"` );
-    param && ( query.param = Object.assign(query.param || {}, param) );
-    query.param && ( url += `&param=${JSON.stringify(query.param)}` );
+    route.query.method && ( url += `/?method="${route.query.method}"` );
+    param && ( route.query.param = Object.assign(route.query.param || {}, param) );
+    route.query.param && ( url += `&param=${JSON.stringify(query.param)}` );
     const title = url;
     window.history.pushState({url: url, title: title}, title, url);
-    doAfterPushing ? doAfterPushing(this.doAfterPushing) : this.doAfterPushing();
+    route.doAfterPushing ? route.doAfterPushing(this.doAfterPushing) : this.doAfterPushing();
     return this;
   }
 

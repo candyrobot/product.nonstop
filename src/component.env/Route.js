@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import {
-  getUrlParameter,
+  query,
   existParameter,
   loadImage
 } from './_util';
@@ -28,8 +28,8 @@ class Route {
     window.app.setState({});
     loadImage();
 
-    const method = getUrlParameter('method') || 'images';
-    const param = getUrlParameter('param') || undefined;
+    const method = query('method') || 'images';
+    const param = query('param') || undefined;
 
     $(window).scrollTop(0);
     $('.area-recommendation').hide();

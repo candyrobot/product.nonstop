@@ -103,14 +103,14 @@ export const isAndroid = function() {
 @param {string} name - 引数にURLクエリのkeyをいれると、jsが評価できる値を返す
 
 例)クエリが次の場合: `?hoge={}&foo=[1,2]&bar=true&piyo&fuga=hensu`
-- getUrlParameter('hoge') // {}
-- getUrlParameter('foo') // [1,2]
-- getUrlParameter('bar') // true
-- getUrlParameter('piyo') // undefined
-- getUrlParameter('fuga') // エラー
-- getUrlParameter('hogera') // undefined
+- query('hoge') // {}
+- query('foo') // [1,2]
+- query('bar') // true
+- query('piyo') // undefined
+- query('fuga') // エラー
+- query('hogera') // undefined
 */
-export const getUrlParameter = window.getUrlParameter = function(name) {
+export const query = window.query = function(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
     var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
     var results = regex.exec(window.location.search);

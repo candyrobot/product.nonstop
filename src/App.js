@@ -20,7 +20,7 @@ import './component/balloon.css';
 import {
   loadImage,
   domain,
-  getUrlParameter
+  query
 } from './component.env/_util';
 import {
   DrawerConspicuous,
@@ -123,11 +123,11 @@ export default class extends Component {
   render() {
     let image;
     if (window.dat
-      && getUrlParameter('method') === 'images'
-      && getUrlParameter('param')
-      && getUrlParameter('param').id
+      && query('method') === 'images'
+      && query('param')
+      && query('param').id
     )
-      image = window.dat.images.find(getUrlParameter('param').id);
+      image = window.dat.images.find(query('param').id);
     return (
     <div className="App">
       <LayerBase image={image} />

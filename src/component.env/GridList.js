@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import './GridList.css';
 import {
-	getUrlParameter,
+	query,
 	existParameter,
 	countUp,
 	startLoading,
