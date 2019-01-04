@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-
-import {
-  countUp
-} from '../component.env/_util';
+import IconButton from '@material-ui/core/IconButton';
 
 import Favorite from '../model/Favorite';
 
 import {
   DrawerLetsSignup
 } from '../component.env/drawer';
+import {
+  countUp
+} from '../component.env/_util';
 
 export default class extends Component {
   render() {
@@ -20,17 +19,19 @@ export default class extends Component {
     !! window.dat.favorites.where({imageID: image.id, userID: window.dat.session.id}).length
     ?
     <IconButton
-      style={{ pointerEvents: 'initial', color: 'rgba(255, 0, 0, 0.8)' }}
+      className="IconButton IconButton-skeleton on"
       onClick={()=> Favorite.delete(image.id)}>
       <FavoriteIcon />
     </IconButton>
     :
     <IconButton
-      style={{ pointerEvents: 'initial', position: 'relative' }}
-      onClick={()=> {
+      className="IconButton IconButton-skeleton"
+      style={{ position: 'relative' }}
+      onClick={(e)=> {
         Favorite.create(image.id);
         window.app.recommendation.setState({ open: true });
         countUp('favoriteCount') % 3 === 0 && new DrawerLetsSignup().create();
+        e.stopPropagation();
       }}>
       <FavoriteIcon />
       {guide && (

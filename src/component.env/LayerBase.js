@@ -22,7 +22,7 @@ export default class extends Component {
 		<div className="layer-1">
 			<AppBar />
 			<div className="forAppBar" onScroll={()=> loadImage()}>
-				{(()=> {
+				{window.dat && window.dat.images && (()=> {
 					if (Route.is('users')) {
 						return User.sortByMostHavingFavorites().map((user, i)=> {
 							return <PaperUser key={i} user={user} />
@@ -33,7 +33,7 @@ export default class extends Component {
 						<GridListTileImage
 							onClick={(inherit)=> console.log('TODO: 全画面で見る')}
 							style={{ height: '80vh' }}
-							guide={countUp('GridListTileImage.guide') < 4}
+							guide={!window.dat.session}
 							image={image}
 						/>,
 						<h5

@@ -183,6 +183,19 @@ input, .button {
 .component-layer *:not(.frombottom) {
   pointer-events: initial;
 }
+
+.IconButton.IconButton-skeleton {
+  color: rgba(255, 255, 255, 1);
+  /*background-color: rgba(0,0,0,.25);*/
+}
+.IconButton.IconButton-skeleton.on {
+  color: rgba(255, 0, 0, 0.8);
+}
+
+
+/*ここからapp依存*/
+
+
 .component-layer .row {
   text-align: right;
 }
@@ -194,6 +207,7 @@ input, .button {
   margin-right: 10px;
   line-height: 32px;
 }
+
 
 #layer2-row1,
 .area-recommendation {
@@ -224,6 +238,8 @@ input, .button {
   background-size: cover;
   background-position: center;
 }
+
+
 #layer-appMessages .alerts {
 }
 #layer-appMessages .alerts > div {

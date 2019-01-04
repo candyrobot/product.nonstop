@@ -36,7 +36,7 @@ export default class extends Component {
           onClick={()=> onClick ? onClick(this.pushRoute) : this.pushRoute()}
         >
           <GridListTileBar
-            style={{ background: 'initial', pointerEvents: 'none' }}
+            style={{ background: 'initial' }}
             title={image.title}
             titlePosition="bottom"
             actionIcon={<ButtonToggleFavorite {...this.props} />}
