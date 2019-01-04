@@ -16,7 +16,7 @@ export default class extends Component {
       className="IconButton IconButton-skeleton on"
       onClick={(e)=> {
         e.stopPropagation();
-        Favorite.delete(image.id);
+        Favorite.delete(image.id, this);
         onClick(this);
       }}>
       <FavoriteIcon />
@@ -27,7 +27,7 @@ export default class extends Component {
       style={{ position: 'relative' }}
       onClick={(e)=> {
         e.stopPropagation();
-        Favorite.create(image.id);
+        Favorite.create(image.id, this);
         onClick(this);
       }}>
       <FavoriteIcon />

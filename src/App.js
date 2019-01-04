@@ -16,7 +16,6 @@ import Image from './model/Image';
 import DrawerTemporary from './component/DrawerTemporary';
 import './component/balloon.css';
 
-// import './component.env/Route';
 import {
   loadImage,
   domain,
@@ -57,6 +56,7 @@ function disableUsersZoom() {
 }
 
 window.$ = $;
+window.randomValue = Math.random();
 
 // TODO:
 // - シングルのときの画像リンク切れのアイコンの位置が変

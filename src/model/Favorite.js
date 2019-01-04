@@ -7,7 +7,7 @@ import {
 } from '../component.env/_util';
 
 export default new class {
-  create(imageID) {
+  create(imageID, instance) {
     if (!window.dat.session) {
       new Toast('ログインするとお気入りに保存できます', true);
       return;
@@ -19,12 +19,12 @@ export default new class {
     })
     .done((favorites)=> {
       window.dat.favorites.push(favorites[0]);
-      window.app.setState({});
+      instance.setState({});
     })
     .always(stopLoading);
   }
 
-  delete(imageID) {
+  delete(imageID, instance) {
     if (!window.dat.session) {
       new Toast('ログインするとお気入りに保存できます', true);
       return;
@@ -37,7 +37,7 @@ export default new class {
     })
     .done(()=> {
       window.dat.favorites = window.dat.favorites.exclude({ imageID, userID: window.dat.session.id });
-      window.app.setState({});
+      instance.setState({});
     })
     .fail(function(dat) {
       return new Toast(dat.responseJSON.toast, true);
