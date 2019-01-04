@@ -18,7 +18,7 @@ $.ajaxSetup({
 export const loadImage = ()=> {
   $('[data-load-image]:not([style*="background"])').inView().each(function() {
     var url = $(this).data('load-image');
-    console.log(url);
+    // console.log(url);
     $(this).css({
       backgroundImage: `url(${url})`
     });

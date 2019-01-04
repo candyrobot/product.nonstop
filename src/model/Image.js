@@ -25,7 +25,7 @@ export default window.Image = new class {
 			return i.relatedScore = window.dat.favorites.where({imageID: imageID})
 			.reduce((n, f)=> {
 				return n + window.dat.favorites.where({imageID: i.id, userID: f.userID}).length;
-			}, 0), console.log(i.relatedScore), i;
+			}, 0), i;
 		}).sort((iA, iB)=> iA.relatedScore > iB.relatedScore ? -1 : 1);
 	}
 

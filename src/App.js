@@ -24,7 +24,6 @@ import {
 } from './component.env/_util';
 import {
   DrawerConspicuous,
-  DrawerLetsSignup,
   DrawerLetsShare
 } from './component.env/drawer';
 import Overlays from './component.env/_overlays';
@@ -113,9 +112,6 @@ export default class extends Component {
       }
       else {
         new DrawerConspicuous().create();
-        setTimeout(()=> {
-          new DrawerLetsSignup().create();
-        }, 1000 * 30);
       }
     });
   }

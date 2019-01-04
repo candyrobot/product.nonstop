@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+
+import {
+  countUp
+} from '../component.env/_util';
+
 import Favorite from '../model/Favorite';
+
+import {
+  DrawerLetsSignup
+} from '../component.env/drawer';
 
 export default class extends Component {
   render() {
@@ -21,6 +30,7 @@ export default class extends Component {
       onClick={()=> {
         Favorite.create(image.id);
         window.app.recommendation.setState({ open: true });
+        countUp('favoriteCount') % 3 === 0 && new DrawerLetsSignup().create();
       }}>
       <FavoriteIcon />
       {guide && (
