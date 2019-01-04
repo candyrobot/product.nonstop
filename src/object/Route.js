@@ -30,7 +30,7 @@ class Route {
     let url = '';
     route.query.method && ( url += `/?method="${route.query.method}"` );
     param && ( route.query.param = Object.assign(route.query.param || {}, param) );
-    route.query.param && ( url += `&param=${JSON.stringify(query.param)}` );
+    route.query.param && ( url += `&param=${JSON.stringify(route.query.param)}` );
     const title = url;
     window.history.pushState({url: url, title: title}, title, url);
     route.doAfterPushing ? route.doAfterPushing(this.doAfterPushing) : this.doAfterPushing();
@@ -76,7 +76,7 @@ route.set({
 
 route.set({
   variable: 'image',
-  query: { method: 'images', id: -1 },
+  query: { method: 'images', param: { id: -1 } },
   doAfterPushing: function(inherit) {
     $('.forAppBar').scrollTop(0);
     inherit();
