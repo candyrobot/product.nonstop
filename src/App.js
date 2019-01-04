@@ -75,6 +75,7 @@ export default class extends Component {
 
     $(window).on('popstate', (e)=> {
       this.setState({});
+      loadImage();
     });
   }
 
