@@ -31,9 +31,10 @@ export default class extends Component {
 					else if (image) {
 						return [
 						<GridListTileImage
+							onClick={(inherit)=> console.log('TODO: 全画面で見る')}
 							style={{ height: '80vh' }}
 							guide={countUp('GridListTileImage.guide') < 4}
-							image={image.id}
+							image={image}
 						/>,
 						<h5
 							style={{
