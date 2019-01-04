@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-// import {
-// 	loadImage
-// } from './_util';
+import {
+	loadImage
+} from './_util';
 import GridListTileImage from '../component.env/GridListTileImage';
-
-// TODO:
-//     $('.area-recommendation').show(300, ()=> {
-//       $('.component-images-horizontal').scrollLeft(0);
-//     });
-
-//     loadImage();
-//     $('.component-images-horizontal').on('scroll', loadImage);
 
 export default class extends Component {
 	constructor(props) {
@@ -28,16 +20,22 @@ export default class extends Component {
 
 		return (
 		<div
-			ref={(el)=> this.state.open ? $(el).show(300) : $(el).hide(300)}
+			ref={(el)=> this.state.open ? this.open(el) : $(el).hide(300)}
 			className="area-recommendation"
 		>
 			<h4>関連</h4>
-			<div className="component-images-horizontal">
+			<div className="component-images-horizontal" onScroll={()=> loadImage()}>
 				{Image.sortByRelatedEffort(image.id).map((image)=> <GridListTileImage image={image} />)}
 			</div>
 			<div className="close" onClick={()=> this.close()}>×</div>
 		</div>
 		);
+	}
+	open(el) {
+		$(el).show(300, ()=> {
+			$('.component-images-horizontal').scrollLeft(0);
+			loadImage();
+		});
 	}
 	close() {
 		this.setState({ open: false });
