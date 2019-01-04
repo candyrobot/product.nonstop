@@ -22,7 +22,7 @@ export default class extends React.Component {
           variant="inherit" color="inherit"
           onClick={()=> console.log('みんな がでてくる')}
         >
-          利用者数 1,520人突破!!
+          利用者数 1,520人以上 突破!!
         </Typography>
         <IconButton
           color="inherit"

@@ -80,7 +80,7 @@ export default class extends React.Component {
               >
                 <ListItemText>
                   みんな
-                  <small style={{ fontWeight: 'bold' }}>（利用者数 1,520人）</small>
+                  <small style={{ fontWeight: 'bold' }}>（利用者数 1,520人以上）</small>
                 </ListItemText>
               </ListItem>
             )}
