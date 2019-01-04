@@ -84,7 +84,7 @@ export class DrawerLetsShare extends Drawer {
       </h3>
       <p>
         まだまだ画像不足！<br>
-        拡散してもっと画像を投稿してもらおう！
+        拡散して毎日画像を投稿してもらおう！
       </p>
       <p text-align="center">
         <a
