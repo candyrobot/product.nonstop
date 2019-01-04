@@ -19,7 +19,8 @@ import './component/balloon.css';
 // import './component.env/Route';
 import {
   loadImage,
-  domain
+  domain,
+  getUrlParameter
 } from './component.env/_util';
 import {
   DrawerConspicuous,
@@ -30,6 +31,7 @@ import Overlays from './component.env/_overlays';
 // import GridList from './component.env/GridList';
 // import BottomNavigation from './component.env/bottomNavigation';
 import LayerBase from './component.env/LayerBase';
+import Recommendation from './component.env/Recommendation';
 
 // INFO: https://qiita.com/peutes/items/d74e5758a36478fbc039
 // document.addEventListener('touchend', event => {
@@ -86,8 +88,8 @@ export default class extends Component {
       console.log(dat);
       window.dat = dat;
 
-      this.setState({});
-      loadImage();
+      // this.setState({});
+      // loadImage();
 
       window.firebase.firestore().getImages((images)=> {
         // INFO: .stateは使わない方針のほうが良いかもしれない
@@ -119,27 +121,22 @@ export default class extends Component {
   }
 
   render() {
+    let image;
+    if (window.dat
+      && getUrlParameter('method') === 'images'
+      && getUrlParameter('param')
+      && getUrlParameter('param').id
+    )
+      image = window.dat.images.find(getUrlParameter('param').id);
     return (
     <div className="App">
-      <LayerBase />
+      <LayerBase image={image} />
 
       <div className="component-layer layer-2" style={{ top: 55 }}>
         <div id="drawer"></div>
 
         <div className="frombottom">
-
-          <div className="row" id="layer2-row1"></div>
-
-
-
-          <div className="area-recommendation" style={{display: 'none'}}>
-            <h4>関連</h4>
-            <div className="component-images-horizontal"></div>
-            <div className="close" onClick={(e)=> $(e.target).parent().hide(300)}>×</div>
-          </div>{/*
-          <BottomNavigation setState={(v)=> {
-            this.setState(v);
-          }} />*/}
+          <Recommendation image={image} open={false} />
         </div>
 
         {/*新しい画像 毎日20枚以上更新！*/}

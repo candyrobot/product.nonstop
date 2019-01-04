@@ -9,7 +9,6 @@ import GridListImage from '../component/GridListImage';
 
 import {
 	loadImage,
-	getUrlParameter,
 	countUp
 } from '../component.env/_util';
 import PaperUser from '../component.env/PaperUser';
@@ -18,10 +17,7 @@ import GridListTileImage from '../component.env/GridListTileImage';
 
 export default class extends Component {
 	render() {
-		let image = {};
-		if (getUrlParameter('method') === 'images')
-			image = getUrlParameter('param');
-
+		const image = this.props.image;
 		return (
 		<div className="layer-1">
 			<AppBar />
@@ -32,11 +28,12 @@ export default class extends Component {
 							return <PaperUser key={i} user={user} />
 						})
 					}
-					else if (image.id) {
-						return window.dat && ([
+					else if (image) {
+						return [
 						<GridListTileImage
+							style={{ height: '80vh' }}
 							guide={countUp('GridListTileImage.guide') < 4}
-							image={window.dat.images.find(image.id)}
+							image={image.id}
 						/>,
 						<h5
 							style={{
@@ -50,7 +47,7 @@ export default class extends Component {
 							関連
 						</h5>,
 						<GridListImage key="1" images={Image.sortByRelatedEffort(image)} />
-						])
+						]
 					}
 					else {
 						return <GridListImage key="1" images={Image.sortByNewer()} />
