@@ -137,31 +137,28 @@ export default class extends Component {
         <div id="drawer"></div>
 
         <div className="frombottom">
+          {/*新しい画像 毎日20枚以上更新！
+          <Fab
+            onClick={()=> $('#component-login').show(300).find('.toSwitchSignUp').click()}
+            variant="extended"
+            size="medium"
+            className="button"
+            aria-label="Add"
+            style={{ margin: '0 10px 25px' }}
+          >
+            <PlayArrowIcon className="poyooon" />
+            ログイン
+            <div className="balloon" position="top">
+              👇登録してアプリのようにホーム画面に追加しよう！
+              🌟このアプリをホーム画面に追加できるようになりました
+            </div>
+          </Fab>
+          */}
           <Recommendation
             instance={(o)=> this.recommendation = o}
             image={image}
           />
         </div>
-
-        {/*新しい画像 毎日20枚以上更新！*/}
-        <Fab
-          onClick={()=> $('#component-login').show(300).find('.toSwitchSignUp').click()}
-          variant="extended"
-          size="medium"
-          className="button"
-          aria-label="Add"
-          style={{
-            position: 'absolute', bottom: 50, left: 10, width: 'calc( 100% - 20px )' }}
-        >
-          {/*<SettingsCellIcon className="poyooon" />*/}
-          <PlayArrowIcon className="poyooon" />
-          {/*アカウント作成*/}
-          ログイン
-          <div className="balloon" position="top">
-            {/*👇登録してアプリのようにホーム画面に追加しよう！*/}
-            🌟このアプリをホーム画面に追加できるようになりました
-          </div>
-        </Fab>
       </div>
 
       {/* from this line z-index: 1300 */}
