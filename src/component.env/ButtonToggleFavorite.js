@@ -18,7 +18,10 @@ export default class extends Component {
     :
     <IconButton
       style={{ pointerEvents: 'initial', position: 'relative' }}
-      onClick={()=> Favorite.create(image.id)}>
+      onClick={()=> {
+        Favorite.create(image.id);
+        window.app.recommendation.setState({ open: true });
+      }}>
       <FavoriteIcon />
       {guide && (
         <div className="balloon" position="left">

@@ -9,10 +9,17 @@ import ButtonToggleFavorite from '../component.env/ButtonToggleFavorite';
 
 export default class extends Component {
 
+  image
+
+  pushRoute() {
+    Route.push('image', { id: this.image.id });
+  }
+
   render() {
     {/*INFO: https://material-ui.com/utils/transitions/*/}
 
-    const image = this.props.image;
+    const image = this.image = this.props.image;
+    const onClick = this.props.onClick;
     return (
     <Grow in={true}
       style={{ transformOrigin: '0 0 0' }}
@@ -26,7 +33,7 @@ export default class extends Component {
         <div
           className="background"
           data-load-image={image.url}
-          onClick={()=> Route.push('image', { id: image.id })}
+          onClick={()=> onClick ? onClick(this.pushRoute) : this.pushRoute()}
         >
           <GridListTileBar
             style={{ background: 'initial', pointerEvents: 'none' }}

@@ -202,6 +202,7 @@ input, .button {
 }
 .area-recommendation {
   position: relative;
+  padding-bottom: 25px;
   background-color: rgba(0, 0, 0, 1);
   color: white;
 }
@@ -216,7 +217,7 @@ input, .button {
   padding: 5px;
   white-space: nowrap;
 }
-.component-images-horizontal > div {
+.component-images-horizontal > li {
   display: inline-block;
   width: 38vw;
   margin: 5px;

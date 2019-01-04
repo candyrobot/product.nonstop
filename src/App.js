@@ -60,6 +60,10 @@ function disableUsersZoom() {
 window.$ = $;
 
 export default class extends Component {
+
+  // INFO: 子コンポーネント
+  recommendation;
+
   constructor() {
     super();
 
@@ -80,6 +84,8 @@ export default class extends Component {
   initializeApp() {
     $(window).on('scroll', loadImage);
 
+
+    // TODO: herokuが重い。改善しないと表示が遅い
     $.get(domain + '/application' + window.location.search, (dat)=> {
 
       // INFO: firebaseと統一しておく
@@ -126,8 +132,9 @@ export default class extends Component {
       && query('method') === 'images'
       && query('param')
       && query('param').id
-    )
+    ) {
       image = window.dat.images.find(query('param').id);
+    }
     return (
     <div className="App">
       <LayerBase image={image} />
@@ -136,7 +143,10 @@ export default class extends Component {
         <div id="drawer"></div>
 
         <div className="frombottom">
-          <Recommendation image={image} open={false} />
+          <Recommendation
+            instance={(o)=> this.recommendation = o}
+            image={image}
+          />
         </div>
 
         {/*新しい画像 毎日20枚以上更新！*/}
