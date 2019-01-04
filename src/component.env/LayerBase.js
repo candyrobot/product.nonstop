@@ -14,6 +14,9 @@ import {
 import PaperUser from '../component.env/PaperUser';
 import ButtonToggleFavorite from '../component.env/ButtonToggleFavorite';
 import GridListTileImage from '../component.env/GridListTileImage';
+import {
+  DrawerLetsSignup
+} from '../component.env/drawer';
 
 export default class extends Component {
 	render() {
@@ -32,6 +35,13 @@ export default class extends Component {
 						return [
 						<GridListTileImage
 							onClick={(inherit)=> console.log('TODO: 全画面で見る')}
+							onClickOnFavorite={(instance)=> {
+								if (instance.on);
+								else {
+									window.app.recommendation.setState({ open: true });
+									countUp('favoriteCount') % 3 === 0 && new DrawerLetsSignup().create();
+								}
+							}}
 							style={{ height: '80vh' }}
 							guide={!window.dat.session}
 							image={image}

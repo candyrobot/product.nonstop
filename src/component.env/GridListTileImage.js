@@ -39,7 +39,11 @@ export default class extends Component {
             style={{ background: 'initial' }}
             title={image.title}
             titlePosition="bottom"
-            actionIcon={<ButtonToggleFavorite {...this.props} />}
+            actionIcon={<ButtonToggleFavorite
+              image={this.props.image}
+              guide={this.props.guide}
+              onClick={this.props.onClickOnFavorite}
+              />}
             actionPosition="right"
           />
         </div>

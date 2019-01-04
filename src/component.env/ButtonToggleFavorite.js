@@ -4,23 +4,21 @@ import IconButton from '@material-ui/core/IconButton';
 
 import Favorite from '../model/Favorite';
 
-import {
-  DrawerLetsSignup
-} from '../component.env/drawer';
-import {
-  countUp
-} from '../component.env/_util';
-
 export default class extends Component {
   render() {
     const image = this.props.image;
     const guide = this.props.guide;
+    const onClick = this.props.onClick || function() {};
+    this.on = !!window.dat.favorites.where({imageID: image.id, userID: window.dat.session.id}).length;
     return (
-    !! window.dat.favorites.where({imageID: image.id, userID: window.dat.session.id}).length
-    ?
+    this.on ?
     <IconButton
       className="IconButton IconButton-skeleton on"
-      onClick={()=> Favorite.delete(image.id)}>
+      onClick={(e)=> {
+        e.stopPropagation();
+        Favorite.delete(image.id);
+        onClick(this);
+      }}>
       <FavoriteIcon />
     </IconButton>
     :
@@ -28,10 +26,9 @@ export default class extends Component {
       className="IconButton IconButton-skeleton"
       style={{ position: 'relative' }}
       onClick={(e)=> {
-        Favorite.create(image.id);
-        window.app.recommendation.setState({ open: true });
-        countUp('favoriteCount') % 3 === 0 && new DrawerLetsSignup().create();
         e.stopPropagation();
+        Favorite.create(image.id);
+        onClick(this);
       }}>
       <FavoriteIcon />
       {guide && (
