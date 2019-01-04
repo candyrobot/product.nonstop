@@ -19,6 +19,7 @@ export default class extends Component {
     >
         {/*ref={(node)=> $(node).inView().length}*/}
       <GridListTile
+        style={this.props.style}
         className="Pic fas fa-unlink"
         testAttr={image.id}
         key={image.id} cols={image.featured ? 2 : 1} rows={image.featured ? 2 : 1}>
@@ -27,15 +28,14 @@ export default class extends Component {
           data-load-image={image.url}
           onClick={()=> Route.push('image', { id: image.id })}
         >
+          <GridListTileBar
+            style={{ background: 'initial', pointerEvents: 'none' }}
+            title={image.title}
+            titlePosition="bottom"
+            actionIcon={<ButtonToggleFavorite {...this.props} />}
+            actionPosition="right"
+          />
         </div>
-        {/*<img src={image.url} alt={image.title} />*/}
-        <GridListTileBar
-          style={{ background: 'inherit', pointerEvents: 'none' }}
-          title={image.title}
-          titlePosition="bottom"
-          actionIcon={<ButtonToggleFavorite {...this.props} />}
-          actionPosition="right"
-        />
       </GridListTile>
     </Grow>
     );
