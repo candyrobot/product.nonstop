@@ -67,7 +67,7 @@ export default class extends React.Component {
               <ListItemIcon>
                 <InboxIcon />
               </ListItemIcon>*/}
-              <ListItemText primary="新着" />
+              <ListItemText primary="新着順" />
             </ListItem>
             {!(window.dat && window.dat.session) && (
               <ListItem
@@ -78,24 +78,21 @@ export default class extends React.Component {
                   this.setState({ left: false });
                 }}
               >
-                <ListItemText>
-                  みんな
-                  <small style={{ fontWeight: 'bold' }}>（利用者数 1,520人以上）</small>
-                </ListItemText>
+                <ListItemText
+                  primary="みんな"
+                  secondary={<small style={{ fontWeight: 'bold' }}>（利用者数 1,520人以上）</small>}
+                />
               </ListItem>
             )}
-            {!(window.dat && window.dat.session) && (
-              <ListItem
-                button
-                disabled
-                selected={this.state.selectedIndex === 2}
-                onClick={()=> new Toast('ログインしたユーザーのみ使えます', true)}
-              >
-                <ListItemText>
-                  人気順
-                </ListItemText>
-              </ListItem>
-            )}
+            <ListItem
+              button
+              selected={this.state.selectedIndex === 2}
+              onClick={()=> new Toast('近日解禁🌟', true)}
+            >
+              <ListItemText>
+                人気順
+              </ListItemText>
+            </ListItem>
           </List>
           <Divider />
           <List>
@@ -125,7 +122,7 @@ export default class extends React.Component {
               <ListItemIcon>
                 <InboxIcon />
               </ListItemIcon>*/}
-              <ListItemText primary="お気入り" />
+              <ListItemText primary="お気入り画像" />
             </ListItem>
             <ListItem
               button
@@ -142,7 +139,9 @@ export default class extends React.Component {
               disabled={!(window.dat && window.dat.session)}
               onClick={()=> logout()}
             >
-              <ListItemText primary={'ログアウト'} />
+              <ListItemText>
+                <div style={{ color: '#aaa' }}>ログアウト</div>
+              </ListItemText>
             </ListItem>
           </List>
         </div>
