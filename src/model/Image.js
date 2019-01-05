@@ -1,14 +1,7 @@
-import $ from 'jquery';
-import {
-  toast,
-  domain
-} from '../component.env/_util';
-
 // TODO: Arrayをextendsして
 // window.images = new Image(...dat.images);
 // window.images.sortByNewer()と使えるようにしたい
 export default window.Image = new class {
-	constructor() {}
 
 	// INFO: CRUDから命名
 	create(files) {
@@ -22,10 +15,11 @@ export default window.Image = new class {
 	sortByRelated(imageID) {
 		return window.dat.images
 		.map((i)=> {
-			return i.relatedScore = window.dat.favorites.where({imageID: imageID})
+			i.relatedScore = window.dat.favorites.where({imageID: imageID})
 			.reduce((n, f)=> {
 				return n + window.dat.favorites.where({imageID: i.id, userID: f.userID}).length;
-			}, 0), i;
+			}, 0);
+			return i;
 		}).sort((iA, iB)=> iA.relatedScore > iB.relatedScore ? -1 : 1);
 	}
 
@@ -40,7 +34,7 @@ export default window.Image = new class {
 	sortByFavorites() {
 		return window.dat.images
 		.map((i)=> {
-			i.favorites = window.dat.favorites.filter((f)=> f.imageID == i.id);
+			i.favorites = window.dat.favorites.where({ imageID: i.id });
 			return i;
 		})
 		.sort((iA, iB)=> iA.favorites.length > iB.favorites.length ? -1 : 1 );

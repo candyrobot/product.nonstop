@@ -11,7 +11,7 @@ export default class extends Component {
       id="component-images"
       cellHeight='auto' spacing={1}>
       {this.props.images.map((image, i) => (
-        <GridListTileImage image={image} />
+        <GridListTileImage key={i} image={image} />
       ))}
     </GridList>
     );

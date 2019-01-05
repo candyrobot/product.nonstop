@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Route from '../object/Route';
 
 import User from '../model/User';
+import Image from '../model/Image';
 
 import AppBar from '../component/AppBar';
 import GridListImage from '../component/GridListImage';
@@ -12,7 +13,6 @@ import {
 	countUp
 } from '../component.env/_util';
 import PaperUser from '../component.env/PaperUser';
-import ButtonToggleFavorite from '../component.env/ButtonToggleFavorite';
 import GridListTileImage from '../component.env/GridListTileImage';
 import {
   DrawerLetsSignup
@@ -34,6 +34,7 @@ export default class extends Component {
 					else if (image) {
 						return [
 						<GridListTileImage
+							key="0"
 							onClick={(inherit)=> console.log('TODO: 全画面で見る')}
 							onClickOnFavorite={(instance)=> {
 								if (instance.on);
@@ -47,6 +48,7 @@ export default class extends Component {
 							image={image}
 						/>,
 						<h5
+							key="1"
 							style={{
 								color: 'white',
 								marginTop: 5,
@@ -57,7 +59,7 @@ export default class extends Component {
 						>
 							関連
 						</h5>,
-						<GridListImage key="1" images={Image.sortByRelatedEffort(image)} />
+						<GridListImage key="2" images={Image.sortByRelatedEffort(image)} />
 						]
 					}
 					else {

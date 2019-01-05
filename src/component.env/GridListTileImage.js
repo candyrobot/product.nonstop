@@ -16,7 +16,8 @@ export default class extends Component {
   }
 
   render() {
-    {/*INFO: https://material-ui.com/utils/transitions/*/}
+    // TODO: transition
+    // INFO: https://material-ui.com/utils/transitions/
 
     const image = this.image = this.props.image;
     const onClick = this.props.onClick;
@@ -28,7 +29,6 @@ export default class extends Component {
       <GridListTile
         style={this.props.style}
         className="Pic fas fa-unlink"
-        testAttr={image.id}
         key={image.id} cols={image.featured ? 2 : 1} rows={image.featured ? 2 : 1}>
         <div
           className={'Pic-background ' + this.props.className}

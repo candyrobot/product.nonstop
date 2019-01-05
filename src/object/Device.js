@@ -1,10 +1,7 @@
 import $ from 'jquery';
 import Toast from '../object/Toast';
 import {
-	getCount,
-	countUp,
-	domain,
-	toast
+	countUp
 } from '../component.env/_util';
 
 export default window.Device = {
@@ -19,8 +16,8 @@ export default window.Device = {
 		constructor() {
 			if(countUp('Device.Album') < 3)
 				alert(this.message);
-			
-			this.$input = 
+
+			this.$input =
 			$('<input type="file" accept="image/*,video/*" multiple />')
 			.appendTo('body')
 			.on('change', (e)=> {
@@ -38,7 +35,7 @@ export default window.Device = {
 				.done((dat)=> {
 						// TODO: ひとつずつsetStateしていきたい
 						if(n === files.length) {
-							setTimeout('window.location.reload()', 1000);
+							setTimeout(()=> window.location.reload(), 1000);
 							toast.destroy();
 						}
 						toast.html(`アップロード中 ${n}/${files.length}個完了`);

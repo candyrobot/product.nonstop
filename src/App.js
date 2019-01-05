@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Fab from '@material-ui/core/Fab';
-import Tooltip from '@material-ui/core/Tooltip';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 import $ from 'jquery';
@@ -11,8 +9,6 @@ import './object/Array';
 import './object/FileList';
 import './object/firebase';
 import App from './object/App';
-
-import Image from './model/Image';
 
 import DrawerTemporary from './component/DrawerTemporary';
 import './component/balloon.css';

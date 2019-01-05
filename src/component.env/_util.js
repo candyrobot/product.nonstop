@@ -43,7 +43,7 @@ export const signup = function() {
 
 export const logout = function() {
   localStorage.removeItem('app.nonstop.session.token')
-  setTimeout('window.location.href = "/"', 1000);
+  setTimeout(()=> { window.location.href = '/'; }, 1000);
 };
 
 export const login = function(dat) {
@@ -62,7 +62,7 @@ export const login = function(dat) {
   })
   .done(function(dat) {
   	localStorage.setItem('app.nonstop.session.token', dat.session.token);
-    setTimeout('window.location.reload()', 1000);
+    setTimeout(()=> window.location.reload(), 1000);
   });
 };
 
@@ -143,7 +143,7 @@ export const getCount = (key)=> {
 
 export const startLoading = function() {
   $('.loadingLine').show(300);
-  return setTimeout('stopLoading()', 5000);
+  return setTimeout(()=> stopLoading(), 5000);
 };
 
 export const stopLoading = window.stopLoading = function() {

@@ -16,8 +16,8 @@ class Route {
   is(variable) {
     const route = this.routes.where({ variable })[0];
     return (
-      query('method') == route.query.method
-      && JSON.stringify(query('param')) == JSON.stringify(route.query.param)
+      query('method') === route.query.method
+      && JSON.stringify(query('param')) === JSON.stringify(route.query.param)
     );
   }
 

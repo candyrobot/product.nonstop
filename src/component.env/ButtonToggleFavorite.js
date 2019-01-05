@@ -9,7 +9,7 @@ export default class extends Component {
     const image = this.props.image;
     const guide = this.props.guide;
     const onClick = this.props.onClick || function() {};
-    this.on = !!window.dat.favorites.where({imageID: image.id, userID: window.dat.session.id}).length;
+    this.on = window.dat.session && !!window.dat.favorites.where({imageID: image.id, userID: window.dat.session.id}).length;
     return (
     this.on ?
     <IconButton
@@ -33,7 +33,7 @@ export default class extends Component {
       <FavoriteIcon />
       {guide && (
         <div className="balloon" position="left">
-          タップして "お気入り" に入れると…　👉
+          タップして "お気入り" に入れると…　<span role="img" aria-label="→">👉</span>
         </div>
       )}
     </IconButton>

@@ -17,8 +17,6 @@ export default new class {
 
       if (n === 2)
         this._xxxx();
-
-      this.doAfterLoading();
     });
 
     // TODO: herokuが重い。改善しないと表示が遅い
@@ -37,8 +35,6 @@ export default new class {
 
       if (n === 2)
         this._xxxx();
-
-      this.doAfterLoading();
     });
   }
 
@@ -46,6 +42,7 @@ export default new class {
 
   _xxxx() {
     this.images = this.images.shuffle();
+    this.doAfterLoading();
   }
 
   favorite(param) {
