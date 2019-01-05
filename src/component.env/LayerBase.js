@@ -40,7 +40,7 @@ export default class extends Component {
 								if (instance.on);
 								else {
 									window.app.recommendation.setState({ open: true });
-									countUp('favoriteCount') % 3 === 0 && new DrawerLetsSignup().create();
+									window.dat.session || countUp('favoriteCount') % 3 === 0 && new DrawerLetsSignup().create();
 								}
 							}}
 							className="main"
