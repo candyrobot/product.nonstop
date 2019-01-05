@@ -192,6 +192,12 @@ input, .button {
   color: rgba(255, 0, 0, 0.8);
 }
 
+.scroll {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+}
+
 
 /*ここからapp依存*/
 
@@ -224,9 +230,6 @@ input, .button {
 }
 
 .component-images-horizontal {
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  overflow-scrolling: touch;
   padding: 5px;
   white-space: nowrap;
 }
@@ -256,9 +259,6 @@ input, .button {
   height: 100%;
   position: relative;
   flex-direction: column;
-}
-.layer-1 .forAppBar{
-  overflow: auto;
 }
 
 .component-mediabox {

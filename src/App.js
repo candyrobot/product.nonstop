@@ -10,6 +10,7 @@ import './object/$';
 import './object/Array';
 import './object/FileList';
 import './object/firebase';
+import App from './object/App';
 
 import Image from './model/Image';
 
@@ -20,9 +21,6 @@ import './component/balloon.css';
 // - 遅い原因: imagesですべてのコンポーネントを呼んでるから？
 // - 他の TODO: をgrepして確認する
 // - リダイレクト
-// - アップロードした画像が新着にでてこない
-  // - firestoreにドキュメントが追加されないのが原因 -> prdにfunctionをdeployすれば良さそう
-
 
 import {
   loadImage,
@@ -77,7 +75,7 @@ export default class extends Component {
     super();
 
     // TODO: logicとviewを分ける
-    // new App()[query('method')](query('param'));
+    this.app = new App();
 
     window.app = this;
 
@@ -124,6 +122,8 @@ export default class extends Component {
   }
 
   render() {
+    // const viewableDat = this.app[query('method')](query('param'));
+
     let image;
     if (window.dat
       && query('method') === 'images'

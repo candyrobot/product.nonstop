@@ -24,7 +24,7 @@ export default class extends Component {
 		return (
 		<div className="layer-1">
 			<AppBar />
-			<div className="forAppBar" onScroll={()=> loadImage()}>
+			<div className="forAppBar scroll" onScroll={()=> loadImage()}>
 				{window.dat && window.dat.images && (()=> {
 					if (Route.is('users')) {
 						return User.sortByMostHavingFavorites().map((user, i)=> {
@@ -42,7 +42,7 @@ export default class extends Component {
 									countUp('favoriteCount') % 3 === 0 && new DrawerLetsSignup().create();
 								}
 							}}
-							style={{ height: '80vh' }}
+							style={{ height: '70vh' }}
 							guide={!window.dat.session}
 							image={image}
 						/>,

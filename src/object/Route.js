@@ -91,6 +91,11 @@ route.set({
   query: { method: 'users' },
 });
 
+route.set({
+  variable: 'myFavorites',
+  query: { method: 'favorite' },
+});
+
 // 使い方: route.push('imagesSortedByPopular');
 // 使い方: route.push('image', { id: 1 });
 // 使い方: route.is('imagesSortedByPopular')
