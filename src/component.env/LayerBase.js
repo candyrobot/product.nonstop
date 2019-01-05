@@ -42,7 +42,7 @@ export default class extends Component {
 									countUp('favoriteCount') % 3 === 0 && new DrawerLetsSignup().create();
 								}
 							}}
-							style={{ height: '70vh' }}
+							className="main"
 							guide={!window.dat.session}
 							image={image}
 						/>,

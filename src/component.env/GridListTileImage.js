@@ -31,7 +31,7 @@ export default class extends Component {
         testAttr={image.id}
         key={image.id} cols={image.featured ? 2 : 1} rows={image.featured ? 2 : 1}>
         <div
-          className="background"
+          className={'Pic-background ' + this.props.className}
           data-load-image={image.url}
           onClick={()=> onClick ? onClick(this.pushRoute) : this.pushRoute()}
         >
