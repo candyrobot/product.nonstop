@@ -79,7 +79,7 @@ route.set({
   variable: 'image',
   query: { method: 'images', param: { id: -1 } },
   doAfterPushing: function(inherit) {
-    window.randomValue = Math.random();
+    window.dat.images = window.dat.images.shuffle();
     $('.forAppBar').scrollTop(0);
     inherit();
     // inheritを実行しなければ、上記newした時に設定した値(関数リテラル)を実行しない。

@@ -46,12 +46,14 @@ export default window.Image = new class {
 		.sort((iA, iB)=> iA.favorites.length > iB.favorites.length ? -1 : 1 );
 	}
 
-	sortByRelatedEffort(image, randomValue) {
+	sortByRelatedEffort(image) {
 		let images;
-		if(window.dat.favorites.where({imageID: image.id}).length > 3)
+		if (window.dat.favorites.where({imageID: image.id}).length > 3) {
 			images = this.sortByRelated(image.id);
-		else
-			images = window.dat.images.shuffle(randomValue);
+		}
+		else {
+			images = window.dat.images;
+		}
 		return this.excludeIFavorited(images.exclude({ id: image.id }));
 	}
 

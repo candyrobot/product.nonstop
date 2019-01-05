@@ -20,6 +20,7 @@ import Pic from './Pic';
 import Image from '../model/Image';
 import Toggle from './Toggle';
 
+// TODO: 移植する
 export default new class {
   html(images) {
     return `

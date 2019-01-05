@@ -57,7 +57,7 @@ export default class extends Component {
 						>
 							関連
 						</h5>,
-						<GridListImage key="1" images={Image.sortByRelatedEffort(image, window.randomValue)} />
+						<GridListImage key="1" images={Image.sortByRelatedEffort(image)} />
 						]
 					}
 					else {

@@ -25,7 +25,7 @@ export default class extends Component {
 		>
 			<h4>関連</h4>
 			<div className="component-images-horizontal" onScroll={()=> loadImage()}>
-				{Image.sortByRelatedEffort(image.id).map((image)=> <GridListTileImage image={image} />)}
+				{Image.sortByRelatedEffort(image).map((image)=> <GridListTileImage image={image} />)}
 			</div>
 			<div className="close" onClick={()=> this.close()}>×</div>
 		</div>

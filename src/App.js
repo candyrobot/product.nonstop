@@ -16,6 +16,14 @@ import Image from './model/Image';
 import DrawerTemporary from './component/DrawerTemporary';
 import './component/balloon.css';
 
+// TODO:
+// - 遅い原因: imagesですべてのコンポーネントを呼んでるから？
+// - 他の TODO: をgrepして確認する
+// - リダイレクト
+// - アップロードした画像が新着にでてこない
+  // - firestoreにドキュメントが追加されないのが原因 -> prdにfunctionをdeployすれば良さそう
+
+
 import {
   loadImage,
   domain,
@@ -56,7 +64,6 @@ function disableUsersZoom() {
 }
 
 window.$ = $;
-window.randomValue = Math.random();
 
 // TODO:
 // - シングルのときの画像リンク切れのアイコンの位置が変
@@ -68,6 +75,9 @@ export default class extends Component {
 
   constructor() {
     super();
+
+    // TODO: logicとviewを分ける
+    // new App()[query('method')](query('param'));
 
     window.app = this;
 
@@ -96,11 +106,7 @@ export default class extends Component {
       // loadImage();
 
       window.firebase.firestore().getImages((images)=> {
-        // INFO: .stateは使わない方針のほうが良いかもしれない
-        // this.state.images = this.state.images.concat(images);
-
-        // TODO: for dev
-        window.dat.images = window.dat.images.concat(images);
+        window.dat.images = window.dat.images.concat(images).shuffle();
 
         this.setState({});
         loadImage();

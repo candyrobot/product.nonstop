@@ -1,3 +1,12 @@
+import Random from './Math';
+
+
+// WARN: ！！！元の配列を破壊しないで！！！
+// WARN: ！！！元の配列を破壊しないで！！！
+// WARN: ！！！元の配列を破壊しないで！！！
+// でも同じポインタが欲しい時(=参照渡ししたい時)もあるからoptionalで
+
+
 /**
  * 非破壊型
  * sample: `[0,1].merge(1, [0,0]) => [0,0,0]`
@@ -160,10 +169,15 @@ Array.prototype.serialize = function() {
   }, []);
 };
 
+// INFO: https://sbfl.net/blog/2017/06/01/javascript-reproducible-random/
+// INFO: Google: 疑似乱数, シード値
 // INFO: https://qiita.com/komaji504/items/62a0f8ea43053e90555a
-/**
- * @param  {float} randomValue - 外部から乱数をセットしたい場合に使う
- */
-Array.prototype.shuffle = function(randomValue = Math.random()) {
-  return this.sort(()=> randomValue - .5)
+Array.prototype.shuffle = function() {
+  for(var i = this.length - 1; i > 0; i--){
+      var r = Math.floor(Math.random() * (i + 1));
+      var tmp = this[i];
+      this[i] = this[r];
+      this[r] = tmp;
+  }
+  return this;
 };

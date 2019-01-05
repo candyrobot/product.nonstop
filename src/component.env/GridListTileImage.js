@@ -37,7 +37,7 @@ export default class extends Component {
         >
           <GridListTileBar
             style={{ background: 'initial' }}
-            title={image.title}
+            title={image.id}
             titlePosition="bottom"
             actionIcon={<ButtonToggleFavorite
               image={this.props.image}
