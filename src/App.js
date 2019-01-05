@@ -24,7 +24,6 @@ import './component/balloon.css';
 
 import {
   loadImage,
-  domain,
   query
 } from './component.env/_util';
 import {
@@ -63,6 +62,8 @@ function disableUsersZoom() {
 
 window.$ = $;
 
+window.dat = App;
+
 // TODO:
 // - シングルのときの画像リンク切れのアイコンの位置が変
 
@@ -75,50 +76,30 @@ export default class extends Component {
     super();
 
     // TODO: logicとviewを分ける
-    this.app = new App();
+    // this.app = new App();
 
     window.app = this;
 
-    this.initializeApp();
+    $(window).on('scroll', loadImage);
 
     $(window).on('popstate', (e)=> {
       this.setState({});
       loadImage();
     });
-  }
 
-  initializeApp() {
-    $(window).on('scroll', loadImage);
+    window.dat.doAfterLoading = ()=> {
+      this.setState({});
+      loadImage();
+    };
 
-
-    // TODO: herokuが重い。改善しないと表示が遅い
-    $.get(domain + '/application' + window.location.search, (dat)=> {
-
-      // INFO: firebaseと統一しておく
-      dat.images = dat.images.map((i)=> (i.created_at = new Date(i.created_at), i));
-
-      console.log(dat);
-      window.dat = dat;
-
-      // this.setState({});
-      // loadImage();
-
-      window.firebase.firestore().getImages((images)=> {
-        window.dat.images = window.dat.images.concat(images).shuffle();
-
-        this.setState({});
-        loadImage();
-      });
-
-      if(window.dat.session) {
-        setInterval(()=> {
-          new DrawerLetsShare().create();
-        }, 1000 * 60 * 1);
-      }
-      else {
-        new DrawerConspicuous().create();
-      }
-    });
+    if(window.dat.session) {
+      setInterval(()=> {
+        new DrawerLetsShare().create();
+      }, 1000 * 60 * 1);
+    }
+    else {
+      new DrawerConspicuous().create();
+    }
   }
 
   render() {

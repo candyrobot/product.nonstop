@@ -86,6 +86,7 @@ export default class extends React.Component {
             )}
             <ListItem
               button
+              disabled={!(window.dat && window.dat.session)}
               selected={this.state.selectedIndex === 2}
               onClick={()=> new Toast('近日解禁🌟', true)}
             >
@@ -128,6 +129,7 @@ export default class extends React.Component {
               button
               disabled={!(window.dat && window.dat.session)}
               selected={this.state.selectedIndex === 3}
+              onClick={()=> new Toast('近日解禁🌟', true)}
             >{/*
               <ListItemIcon>
                 <InboxIcon />
