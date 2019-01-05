@@ -24,7 +24,7 @@ export default class extends Component {
 			className="area-recommendation"
 		>
 			<h4>関連</h4>
-			<div className="component-images-horizontal scroll" onScroll={()=> loadImage()}>
+			<div className="component-images-horizontal scroll" style={{ overflowX: 'scroll' }} onScroll={()=> loadImage()}>
 				{Image.sortByRelatedEffort(image).map((image, i)=> <GridListTileImage key={i} image={image} />)}
 			</div>
 			<div className="close" onClick={()=> this.close()}>×</div>

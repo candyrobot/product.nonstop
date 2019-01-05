@@ -194,7 +194,6 @@ input, .button {
 }
 
 .scroll {
-  overflow: auto;
   -webkit-overflow-scrolling: touch;
   overflow-scrolling: touch;
 }

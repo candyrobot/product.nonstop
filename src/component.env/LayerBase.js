@@ -24,7 +24,7 @@ export default class extends Component {
 		return (
 		<div className="layer-1">
 			<AppBar />
-			<div className="forAppBar scroll" onScroll={()=> loadImage()}>
+			<div className="forAppBar scroll" style={{ overflowY: 'scroll' }} onScroll={()=> loadImage()}>
 				{window.dat && window.dat.images && (()=> {
 					if (Route.is('users')) {
 						return User.sortByMostHavingFavorites().map((user, i)=> {
