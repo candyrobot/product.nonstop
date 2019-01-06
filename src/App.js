@@ -127,6 +127,7 @@ export default class extends Component {
           </Fab>
           */}
           <Recommendation
+            open={window.history.state.areaRecommendation_open}
             instance={(o)=> this.recommendation = o}
             imageID={imageID}
           />

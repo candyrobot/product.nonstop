@@ -26,15 +26,33 @@ class Route {
    * @param  {object} param    [description]
    */
   push(variable, param) {
+    this.doBeforePushing();
+
     const route = this.routes.where({ variable })[0];
     let url = '';
-    route.query.method && ( url += `/?method="${route.query.method}"` );
-    param && ( route.query.param = Object.assign(route.query.param || {}, param) );
-    route.query.param && ( url += `&param=${JSON.stringify(route.query.param)}` );
+
+    if (route.query.method)
+      url += `/?method="${route.query.method}"`;
+
+    if (param)
+      route.query.param = Object.assign(route.query.param || {}, param);
+    if (route.query.param)
+      url += `&param=${JSON.stringify(route.query.param)}`;
+
     const title = url;
-    window.history.pushState({url: url, title: title}, title, url);
+    window.history.pushState({url, title}, title, url);
     route.doAfterPushing ? route.doAfterPushing(this.doAfterPushing) : this.doAfterPushing();
     return this;
+  }
+
+  doBeforePushing() {
+    const { url, title } = window.history.state;
+    window.history.replaceState({
+      url, title,
+      forAppBar_scrollTop: $('.forAppBar').scrollTop(),
+      imagesHorizontal_scrollLeft: $('.component-images-horizontal').scrollLeft(),
+      areaRecommendation_open: $('.area-recommendation').is(':visible')
+    }, title, url);
   }
 
   set(o) {

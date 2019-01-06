@@ -9,23 +9,20 @@ export default class extends Component {
 	constructor(props) {
 		super(props);
 		this.props.instance && this.props.instance(this);
-		this.state = {
-			open: this.props.open
-		};
 	}
 	render() {
 		const imageID = this.props.imageID;
+
 		if (imageID === undefined)
 			return null;
 
 		return (
 		<div
-			ref={(el)=> this.state.open ? this.open(el) : $(el).hide(300)}
+			ref={(el)=> this.props.open ? this.open(el) : $(el).hide(300)}
 			className="area-recommendation"
 		>
 			<h4>関連</h4>
 			<div
-				ref={(el)=> $(el).scrollLeft(0)}
 				className="component-images-horizontal scroll"
 				style={{ overflowX: 'scroll' }}
 				onScroll={()=> loadImage()}>
@@ -37,6 +34,7 @@ export default class extends Component {
 	}
 	open(el) {
 		$(el).show(300, ()=> {
+			$('.component-images-horizontal').scrollLeft(window.history.state.imagesHorizontal_scrollLeft || 0)
 			loadImage();
 		});
 	}

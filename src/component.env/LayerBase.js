@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
 
 import Route from '../object/Route';
 
@@ -25,7 +26,12 @@ export default class extends Component {
 		return (
 		<div className="layer-1">
 			<AppBar style={{ zIndex: 1, boxShadow: '0 2px 10px rgba(0,0,0,.5)' }} />
-			<div className="forAppBar scroll" style={{ overflowY: 'scroll' }} onScroll={()=> loadImage()}>
+			<div
+				ref={(el)=> $(el).scrollTop(window.history.state.forAppBar_scrollTop || 0) }
+				className="forAppBar scroll"
+				style={{ overflowY: 'scroll' }}
+				onScroll={()=> loadImage()}
+			>
 				{window.dat && window.dat.images && (()=> {
 					if (Route.is('user')) {
 						return User.sortByMostHavingFavorites().map((user, i)=> {

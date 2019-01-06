@@ -14,6 +14,7 @@ export default new class {
   favorites = []
   constructor() {
     let n = 0;
+
     window.firebase.firestore().getImages((images)=> {
       n++; console.log('firebase done.');
 
