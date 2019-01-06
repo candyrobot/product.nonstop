@@ -24,7 +24,7 @@ export default class extends Component {
 		const imageID = this.props.imageID;
 		return (
 		<div className="layer-1">
-			<AppBar />
+			<AppBar style={{ zIndex: 1, boxShadow: '0 2px 10px rgba(0,0,0,.5)' }} />
 			<div className="forAppBar scroll" style={{ overflowY: 'scroll' }} onScroll={()=> loadImage()}>
 				{window.dat && window.dat.images && (()=> {
 					if (Route.is('user')) {

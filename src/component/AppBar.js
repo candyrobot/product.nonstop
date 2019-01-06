@@ -12,7 +12,7 @@ export default class extends React.Component {
   render() {
     const toggleDrawer = window.drawer && window.drawer.toggleDrawer || function() {};
     return (
-    <AppBar position="static" style={{ zIndex: 'inherit' }}>
+    <AppBar position="static" style={this.props.style}>
       <Toolbar style={{ padding: 0 }}>
         <IconButton color="inherit" aria-label="Menu">
           <MenuIcon onClick={toggleDrawer('left', true)} />
