@@ -37,7 +37,7 @@ export default class extends Component {
 	}
 	open(el) {
 		$(el).show(300, ()=> {
-			$('.component-images-horizontal').scrollLeft(window.history.state.imagesHorizontal_scrollLeft || 0)
+			$('.component-images-horizontal').scrollLeft(window.history.state && window.history.state.imagesHorizontal_scrollLeft || 0)
 			loadImage();
 		});
 	}

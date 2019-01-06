@@ -73,7 +73,7 @@ export default class extends Component {
     $(window).on('scroll', loadImage);
 
     $(window).on('popstate', (e)=> {
-      window.app.recommendation.setState({ open: window.history.state.areaRecommendation_open });
+      window.app.recommendation.setState({ open: window.history.state && window.history.state.areaRecommendation_open });
       this.setState({});
       loadImage();
     });

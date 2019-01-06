@@ -27,7 +27,7 @@ export default class extends Component {
 		<div className="layer-1">
 			<AppBar style={{ zIndex: 1, boxShadow: '0 2px 10px rgba(0,0,0,.5)' }} />
 			<div
-				ref={(el)=> $(el).scrollTop(window.history.state.forAppBar_scrollTop || 0) }
+				ref={(el)=> $(el).scrollTop(window.history.state && window.history.state.forAppBar_scrollTop || 0) }
 				className="forAppBar scroll"
 				style={{ overflowY: 'scroll' }}
 				onScroll={()=> loadImage()}
