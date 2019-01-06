@@ -7,10 +7,10 @@ import {
 
 class Route {
   routes = [];
-  doAfterPushing = function() {};
 
   constructor(setup = {}) {
-    setup.doAfterPushing && (this.doAfterPushing = setup.doAfterPushing);
+    this.doAfterPushing = setup.doAfterPushing || function() {};
+    setup.routes.forEach((r)=> this.set(r));
   }
 
   is(variable) {
@@ -42,59 +42,62 @@ class Route {
   }
 }
 
+
 // depends on app from this line.
 
+
+// queryはユーザーに知られることを前提に書こう。URLで表現される。
+
+// INFO: doAfterPushingの挙動が同じ場合、rootは使わないほうがいい。current(bool)を得るためのisメソッドをもうひとつ書くことになる。
+// TODO: つまり初回のアクセスでもなんらかのクエリを持たさないといけないということ。
+
+const routes = [
+  {
+    variable: 'root',
+    query: {},
+  },
+  {
+    variable: 'imagesSortedByNewer',
+    query: { method: 'image' },
+  },
+  {
+    variable: 'imagesSortedByPopular',
+    query: { method: 'image', param: { sortBy: 'favorite' } },
+  },
+  {
+    variable: 'image',
+    query: { method: 'image', param: { id: -1 } },
+    doAfterPushing: function(inherit) {
+      window.dat.images = window.dat.images.shuffle();
+      $('.forAppBar').scrollTop(0);
+      inherit();
+      // inheritを実行しなければ、newした時に設定したdoAfterPushingを実行しない。
+    }
+  },
+  {
+    variable: 'user',
+    query: { method: 'user' },
+  },
+  {
+    variable: 'myFavorites',
+    query: { method: 'favorite' },
+  },
+];
+
 const route = new Route({
+  routes,
   doAfterPushing: function() {
+    if (!window.app)
+      return;
+
     window.app.setState({});
     window.app.recommendation.setState({ open: false });
     setTimeout(()=> loadImage(), 500);
   }
 });
 
-// queryはユーザーに知られることを前提に書こう。URLで表現される。
-
-// INFO: doAfterPushingの挙動が同じ場合、rootは使わないほうがいい。current(bool)を得るためのisメソッドをもうひとつ書くことになる。
-// TODO: つまり初回のアクセスでもなんらかのクエリを持たさないといけないということ。
-// route.set({
-//   variable: 'root',
-//   doAfterPushing: function(inherit) {
-//     // TODO: images sorted by created_at
-//     inherit();
-//     // inheritを実行しなければ、上記newした時に設定した値(関数リテラル)を実行しない。
-//   }
-// });
-
-route.set({
-  variable: 'imagesSortedByNewer',
-  query: { method: 'image' },
-});
-
-route.set({
-  variable: 'imagesSortedByPopular',
-  query: { method: 'image', param: { sortBy: 'favorite' } },
-});
-
-route.set({
-  variable: 'image',
-  query: { method: 'image', param: { id: -1 } },
-  doAfterPushing: function(inherit) {
-    window.dat.images = window.dat.images.shuffle();
-    $('.forAppBar').scrollTop(0);
-    inherit();
-    // inheritを実行しなければ、上記newした時に設定した値(関数リテラル)を実行しない。
-  }
-});
-
-route.set({
-  variable: 'user',
-  query: { method: 'user' },
-});
-
-route.set({
-  variable: 'myFavorites',
-  query: { method: 'favorite' },
-});
+if (route.is('root'))
+  route.push('imagesSortedByNewer')
 
 // 使い方: route.push('imagesSortedByPopular');
 // 使い方: route.push('image', { id: 1 });
