@@ -16,7 +16,7 @@ $.ajaxSetup({
 // 2. transitionを
 // 3. backgroundを持ってる自分or子孫要素にloadImage
 export const loadImage = ()=> {
-  $('[data-load-image]:not([style*="background-image"])').inView().each(function() {
+  $('[data-load-image]:not([style*="background-image"]):visible').inView().each(function() {
     var url = $(this).data('load-image');
     // console.log(url);
     $(this).css({

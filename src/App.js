@@ -5,18 +5,10 @@ import $ from 'jquery';
 import 'jquery.transit';
 
 import './object/$';
-import './object/Array';
-import './object/FileList';
-import './object/firebase';
 import App from './object/App';
 
 import DrawerTemporary from './component/DrawerTemporary';
 import './component/balloon.css';
-
-// TODO:
-// - 遅い原因: imagesですべてのコンポーネントを呼んでるから？
-// - 他の TODO: をgrepして確認する
-// - リダイレクト
 
 import {
   startLoading,
@@ -76,9 +68,6 @@ export default class extends Component {
     // TODO: 動いていない
     startLoading();
 
-    // TODO: logicとviewを分ける
-    // this.app = new App();
-
     window.app = this;
 
     $(window).on('scroll', loadImage);
@@ -115,6 +104,7 @@ export default class extends Component {
     <div className="App">
       <LayerBase images={dat.images} imageID={imageID} />
 
+      {/*INFO: LayerBaseより手前にだしたいものはこの中へ（position: fixed非推奨。ボタンが被る）*/}
       <div className="component-layer layer-2" style={{ top: 55 }}>
         <div id="drawer"></div>
 
@@ -143,11 +133,14 @@ export default class extends Component {
         </div>
       </div>
 
-      {/* from this line z-index: 1300 */}
+      {/* INFO: from this line z-index: 1300 */}
+
       <DrawerTemporary classes={{}} />
 
+      {/*INFO: Drawerよりも手前に出したいものはこの中へ*/}
       <Overlays />
 
+      {/*INFO: 何よりも手前に出したいものはこの中へ*/}
       <div id="layer-appMessages" className="component-layer" style={{ zIndex: 1301 }}>
         <div className="loadingLine">
           <span className="expand"></span>

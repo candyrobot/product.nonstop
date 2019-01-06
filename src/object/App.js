@@ -1,4 +1,7 @@
 import $ from 'jquery';
+import '../object/Array';
+import '../object/FileList';
+import '../object/firebase';
 import Image from '../model/Image';
 import {
   domain

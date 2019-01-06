@@ -24,7 +24,11 @@ export default class extends Component {
 			className="area-recommendation"
 		>
 			<h4>関連</h4>
-			<div className="component-images-horizontal scroll" style={{ overflowX: 'scroll' }} onScroll={()=> loadImage()}>
+			<div
+				ref={(el)=> $(el).scrollLeft(0)}
+				className="component-images-horizontal scroll"
+				style={{ overflowX: 'scroll' }}
+				onScroll={()=> loadImage()}>
 				{Image.sortByRelatedEffort(imageID).map((image, i)=> <GridListTileImage key={i} image={image} />)}
 			</div>
 			<div className="close" onClick={()=> this.close()}>×</div>
@@ -33,7 +37,6 @@ export default class extends Component {
 	}
 	open(el) {
 		$(el).show(300, ()=> {
-			$('.component-images-horizontal').scrollLeft(0);
 			loadImage();
 		});
 	}
