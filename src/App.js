@@ -73,6 +73,7 @@ export default class extends Component {
     $(window).on('scroll', loadImage);
 
     $(window).on('popstate', (e)=> {
+      window.app.recommendation.setState({ open: window.history.state.areaRecommendation_open });
       this.setState({});
       loadImage();
     });
@@ -127,7 +128,6 @@ export default class extends Component {
           </Fab>
           */}
           <Recommendation
-            open={window.history.state.areaRecommendation_open}
             instance={(o)=> this.recommendation = o}
             imageID={imageID}
           />

@@ -46,6 +46,9 @@ class Route {
   }
 
   doBeforePushing() {
+    if (!window.history.state)
+      return;
+
     const { url, title } = window.history.state;
     window.history.replaceState({
       url, title,

@@ -9,6 +9,9 @@ export default class extends Component {
 	constructor(props) {
 		super(props);
 		this.props.instance && this.props.instance(this);
+		this.state = {
+			open: this.props.open
+		};
 	}
 	render() {
 		const imageID = this.props.imageID;
@@ -18,7 +21,7 @@ export default class extends Component {
 
 		return (
 		<div
-			ref={(el)=> this.props.open ? this.open(el) : $(el).hide(300)}
+			ref={(el)=> this.state.open ? this.open(el) : $(el).hide(300)}
 			className="area-recommendation"
 		>
 			<h4>関連</h4>
