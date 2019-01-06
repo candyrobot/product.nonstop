@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Image from '../model/Image';
 import {
   domain
 } from '../component.env/_util';
@@ -16,7 +17,7 @@ export default new class {
       this.images = this.images.concat(images);
 
       if (n === 2)
-        this._xxxx();
+        this._doAfterAllLoading();
     });
 
     // TODO: herokuが重い。改善しないと表示が遅い
@@ -34,20 +35,28 @@ export default new class {
       this.images = this.images.concat(dat.images);
 
       if (n === 2)
-        this._xxxx();
+        this._doAfterAllLoading();
     });
-  }
-
-  xxxx
-
-  _xxxx() {
-    this.images = this.images.shuffle();
-    this.doAfterLoading();
   }
 
   favorite(param) {
     return {
-      images: this.images.filterByMyFavorite()
+      images: Image.filterByMyFavorite(),
     }
+  }
+
+  user() {
+    return this
+  }
+
+  image(param) {
+    return {
+      images: param && param.id ? Image.sortByRelatedEffort(param.id) : Image.sortByNewer()
+    };
+  }
+
+  _doAfterAllLoading() {
+    this.images = this.images.shuffle();
+    this.doAfterLoading();
   }
 }

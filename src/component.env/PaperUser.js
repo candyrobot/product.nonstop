@@ -38,9 +38,12 @@ export default class extends Component {
       </div>
       <div style={{ display: this.isDisplayImages ? 'block' : 'none' }}>
         {/*.splice(0, 5)*/}
-        {window.dat.favorites.where({ userID: user.id })
-        .map((f, i)=> {
+        {window.dat.favorites.where({ userID: user.id }).map((f, i)=> {
           const image = window.dat.images.find(f.imageID);
+
+          if (!image)
+            return;
+
           return (
           <Grow in={this.isDisplayImages} key={i}
           timeout={3000}

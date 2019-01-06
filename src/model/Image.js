@@ -24,8 +24,6 @@ export default window.Image = new class {
 	}
 
 	sortByNewer() {
-		if (!window.dat || !window.dat.images)
-			return;
 		return window.dat.images.sort((iA, iB)=> {
 			return iA.created_at.getTime() > iB.created_at.getTime() ? -1 : 1;
 		});
@@ -40,15 +38,15 @@ export default window.Image = new class {
 		.sort((iA, iB)=> iA.favorites.length > iB.favorites.length ? -1 : 1 );
 	}
 
-	sortByRelatedEffort(image) {
+	sortByRelatedEffort(imageID) {
 		let images;
-		if (window.dat.favorites.where({imageID: image.id}).length > 3) {
-			images = this.sortByRelated(image.id);
+		if (window.dat.favorites.where({ imageID }).length > 3) {
+			images = this.sortByRelated(imageID);
 		}
 		else {
 			images = window.dat.images;
 		}
-		return this.excludeIFavorited(images.exclude({ id: image.id }));
+		return this.excludeIFavorited(images.exclude({ id: imageID }));
 	}
 
 	filterByMyFavorite() {

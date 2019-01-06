@@ -6,11 +6,16 @@ import '../component.env/GridList.css';
 
 export default class extends Component {
   render() {
+    const images = this.props.images;
+
+    if (!images)
+      return null;
+
     return (
     <GridList
       id="component-images"
       cellHeight='auto' spacing={1}>
-      {this.props.images.map((image, i) => (
+      {images.map((image, i) => (
         <GridListTileImage key={i} image={image} />
       ))}
     </GridList>

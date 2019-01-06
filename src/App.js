@@ -19,6 +19,8 @@ import './component/balloon.css';
 // - リダイレクト
 
 import {
+  startLoading,
+  stopLoading,
   loadImage,
   query
 } from './component.env/_util';
@@ -71,6 +73,9 @@ export default class extends Component {
   constructor() {
     super();
 
+    // TODO: 動いていない
+    startLoading();
+
     // TODO: logicとviewを分ける
     // this.app = new App();
 
@@ -84,6 +89,7 @@ export default class extends Component {
     });
 
     window.dat.doAfterLoading = ()=> {
+      stopLoading();
       this.setState({});
       loadImage();
     };
@@ -99,19 +105,15 @@ export default class extends Component {
   }
 
   render() {
-    // const viewableDat = this.app[query('method')](query('param'));
+    // INFO: 源のdataを書き換えてはいけない
+    // Object.assign(window.dat, window.dat[query('method')](query('param')));
+    const dat = window.dat[query('method')](query('param'));
 
-    let image;
-    if (window.dat
-      && query('method') === 'images'
-      && query('param')
-      && query('param').id
-    ) {
-      image = window.dat.images.find(query('param').id);
-    }
+    const imageID = query('method') === 'image' && query('param') && query('param').id;
+
     return (
     <div className="App">
-      <LayerBase image={image} />
+      <LayerBase images={dat.images} imageID={imageID} />
 
       <div className="component-layer layer-2" style={{ top: 55 }}>
         <div id="drawer"></div>
@@ -136,7 +138,7 @@ export default class extends Component {
           */}
           <Recommendation
             instance={(o)=> this.recommendation = o}
-            image={image}
+            imageID={imageID}
           />
         </div>
       </div>

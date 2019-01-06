@@ -14,8 +14,8 @@ export default class extends Component {
 		};
 	}
 	render() {
-		const image = this.props.image;
-		if (image === undefined)
+		const imageID = this.props.imageID;
+		if (imageID === undefined)
 			return null;
 
 		return (
@@ -25,7 +25,7 @@ export default class extends Component {
 		>
 			<h4>関連</h4>
 			<div className="component-images-horizontal scroll" style={{ overflowX: 'scroll' }} onScroll={()=> loadImage()}>
-				{Image.sortByRelatedEffort(image).map((image, i)=> <GridListTileImage key={i} image={image} />)}
+				{Image.sortByRelatedEffort(imageID).map((image, i)=> <GridListTileImage key={i} image={image} />)}
 			</div>
 			<div className="close" onClick={()=> this.close()}>×</div>
 		</div>

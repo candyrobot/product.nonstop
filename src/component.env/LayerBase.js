@@ -20,18 +20,19 @@ import {
 
 export default class extends Component {
 	render() {
-		const image = this.props.image;
+		const images = this.props.images;
+		const imageID = this.props.imageID;
 		return (
 		<div className="layer-1">
 			<AppBar />
 			<div className="forAppBar scroll" style={{ overflowY: 'scroll' }} onScroll={()=> loadImage()}>
 				{window.dat && window.dat.images && (()=> {
-					if (Route.is('users')) {
+					if (Route.is('user')) {
 						return User.sortByMostHavingFavorites().map((user, i)=> {
 							return <PaperUser key={i} user={user} />
 						})
 					}
-					else if (image) {
+					else if (imageID) {
 						return [
 						<GridListTileImage
 							key="0"
@@ -45,7 +46,7 @@ export default class extends Component {
 							}}
 							className="main"
 							guide={!window.dat.session}
-							image={image}
+							image={window.dat.images.find(imageID)}
 						/>,
 						<h5
 							key="1"
@@ -59,11 +60,11 @@ export default class extends Component {
 						>
 							関連
 						</h5>,
-						<GridListImage key="2" images={Image.sortByRelatedEffort(image)} />
+						<GridListImage key="2" images={images} />
 						]
 					}
 					else {
-						return <GridListImage key="1" images={Image.sortByNewer()} />
+						return <GridListImage images={images} />
 					}
 				})()}
 			</div>

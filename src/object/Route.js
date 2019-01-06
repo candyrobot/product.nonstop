@@ -67,17 +67,17 @@ const route = new Route({
 
 route.set({
   variable: 'imagesSortedByNewer',
-  query: { method: 'images' },
+  query: { method: 'image' },
 });
 
 route.set({
   variable: 'imagesSortedByPopular',
-  query: { method: 'images', param: { sortBy: 'favorite' } },
+  query: { method: 'image', param: { sortBy: 'favorite' } },
 });
 
 route.set({
   variable: 'image',
-  query: { method: 'images', param: { id: -1 } },
+  query: { method: 'image', param: { id: -1 } },
   doAfterPushing: function(inherit) {
     window.dat.images = window.dat.images.shuffle();
     $('.forAppBar').scrollTop(0);
@@ -87,8 +87,8 @@ route.set({
 });
 
 route.set({
-  variable: 'users',
-  query: { method: 'users' },
+  variable: 'user',
+  query: { method: 'user' },
 });
 
 route.set({

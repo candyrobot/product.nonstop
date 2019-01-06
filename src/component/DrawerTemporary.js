@@ -72,9 +72,9 @@ export default class extends React.Component {
             {!(window.dat && window.dat.session) && (
               <ListItem
                 button
-                selected={Route.is('users')}
+                selected={Route.is('user')}
                 onClick={()=> {
-                  Route.push('users');
+                  Route.push('user');
                   this.setState({ left: false });
                 }}
               >
@@ -119,6 +119,11 @@ export default class extends React.Component {
               button
               disabled={!(window.dat && window.dat.session)}
               selected={this.state.selectedIndex === 2}
+              selected={Route.is('myFavorites')}
+              onClick={()=> {
+                Route.push('myFavorites');
+                this.setState({ left: false });
+              }}
             >{/*
               <ListItemIcon>
                 <InboxIcon />
