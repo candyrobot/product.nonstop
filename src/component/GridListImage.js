@@ -22,7 +22,7 @@ export default class extends Component {
       cellHeight='auto' spacing={1}>
       {images.map((image, i) => [
         i % 12 || <div
-          ref={(el)=> el.style = undefined}
+          style={{ padding: undefined, width: undefined, height: undefined }}
           className="message"
           onClick={()=> {
             if (isAndroid()) {
