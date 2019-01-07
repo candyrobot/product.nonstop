@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
 import {
   query
 } from '../component.env/_util';
@@ -11,26 +12,32 @@ export default class extends Component {
 	render() {
 		window.hideaki = this;
 		return (
-		<div style={{ 
+		<div 
+			ref={(el)=> $(el).scrollTop(2000) }
+			style={{ 
 			position: 'fixed',
 			left: 0, top: 0,
 			width: '100%', height: '100%',
 			backgroundColor: 'black', zIndex: 1400,
 			overflow: 'scroll'
 		}}>
-			<button onClick={()=> {
-				console.log(1)
-				var index = this.state.index - 1;
-				this.push({ index });
-				this.setState({ index });
-			}}>←</button>
-			<button onClick={()=> {
-				console.log(1)
-				var index = this.state.index + 1;
-				this.push({ index });
-				this.setState({ index });
-			}}>→</button>
 			<img src={this.a[this.state.index]} style={{ display: 'block', width: '100%' }} />
+			<button 
+				style={{ display: 'inline-block', width: '45%', backgroundColor: 'white', 
+					paddingTop: 20, paddingBottom: 20 }}
+				onClick={()=> {
+					var index = this.state.index - 1;
+					this.push({ index });
+					this.setState({ index });
+			}}>←</button>
+			<button 
+				style={{ display: 'inline-block', width: '45%', backgroundColor: 'white', 
+					paddingTop: 20, paddingBottom: 20 }}
+				onClick={()=> {
+					var index = this.state.index + 1;
+					this.push({ index });
+					this.setState({ index });
+			}}>→</button>
 		</div>
 		);
 	}
