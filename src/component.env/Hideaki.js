@@ -15,7 +15,7 @@ export default class extends Component {
 			position: 'fixed',
 			left: 0, top: 0,
 			width: '100%', height: '100%',
-			backgroundColor: 'white', zIndex: 1400,
+			backgroundColor: 'black', zIndex: 1400,
 			overflow: 'scroll'
 		}}>
 			<button onClick={()=> {
