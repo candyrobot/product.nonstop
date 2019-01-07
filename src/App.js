@@ -59,9 +59,6 @@ window.$ = $;
 
 window.dat = App;
 
-// TODO:
-// - シングルのときの画像リンク切れのアイコンの位置が変
-
 export default class extends Component {
 
   // INFO: 子コンポーネント
