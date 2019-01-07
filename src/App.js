@@ -26,6 +26,11 @@ import Overlays from './component.env/_overlays';
 import LayerBase from './component.env/LayerBase';
 import Recommendation from './component.env/Recommendation';
 
+
+// INFO: これが何なのかは秀明にきいてねw
+import Hideaki from './component.env/Hideaki';
+
+
 // INFO: https://qiita.com/peutes/items/d74e5758a36478fbc039
 // document.addEventListener('touchend', event => {
 //   event.preventDefault();
@@ -148,6 +153,9 @@ export default class extends Component {
         </div>
         <div className="alerts"></div>
       </div>
+
+      {query('hideaki') === 1 && <Hideaki />}
+
     </div>
     );
   }
