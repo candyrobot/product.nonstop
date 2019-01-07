@@ -74,10 +74,6 @@ class Route {
 
 const routes = [
   {
-    variable: 'root',
-    query: {},
-  },
-  {
     variable: 'imagesSortedByNewer',
     query: { method: 'image' },
   },
@@ -117,7 +113,7 @@ const route = new Route({
   }
 });
 
-if (route.is('root'))
+if (window.location.search === '')
   route.push('imagesSortedByNewer')
 
 // 使い方: route.push('imagesSortedByPopular');
