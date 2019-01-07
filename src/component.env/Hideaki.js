@@ -18,7 +18,6 @@ export default class extends Component {
 			backgroundColor: 'white', zIndex: 1400,
 			overflow: 'scroll'
 		}}>
-			<img src={this.a[this.state.index]} style={{ display: 'block', width: '100%' }} />
 			<button onClick={()=> {
 				console.log(1)
 				var index = this.state.index - 1;
@@ -31,6 +30,7 @@ export default class extends Component {
 				this.push({ index });
 				this.setState({ index });
 			}}>→</button>
+			<img src={this.a[this.state.index]} style={{ display: 'block', width: '100%' }} />
 		</div>
 		);
 	}
