@@ -3,24 +3,32 @@ import $ from 'jquery';
 import './drawer.css';
 
 export default class extends Component {
+  isShowing = true;
   state = {
     // INFO: アニメーション中はラグがあるためこれを使って表示/非表示を行う
     realyShowingIndex: 0
   };
+
+  open() {
+    $(this).show(300);
+    this.isShowing = false;
+  }
+
   render() {
     const { showingIndex } = this.props;
 
-    console.log(1)
-
-    $('.Conspicuous').hide(300, ()=> {
-      this.setState({ realyShowingIndex: showingIndex })
-    });
+    if (!this.isShowing) {
+      $('.Conspicuous').hide(300, ()=> {
+        this.isShowing = true;
+        this.setState({ realyShowingIndex: showingIndex });
+      });
+    }
 
     if (this.state.realyShowingIndex === 0)
       return (
       <div id="component-conspicuous"
         className="Conspicuous"
-        ref={(el)=> $(el).show(300)}
+        ref={(el)=> this.open()}
       >
         <i className="fab fa-twitter"></i>
         <h3 className="title">
@@ -36,7 +44,7 @@ export default class extends Component {
       return (
       <div id="component-letsSignup" 
         className="Conspicuous component-suggestion paper"
-        ref={(el)=> $(el).show(300)}
+        ref={(el)=> this.open()}
       >
         <h3>登録してあなただけのお気入りBOXを🌟</h3>
         <p>
@@ -54,7 +62,7 @@ export default class extends Component {
       return (
       <div id="component-LetsShare"
         className="Conspicuous component-suggestion paper"
-        ref={(el)=> $(el).show(300)}
+        ref={(el)=> this.open()}
       >
         <h3 style={{ fontSize: 18, textIndent: '.5em' }}>
           拡散希望🌟
