@@ -15,9 +15,9 @@ import {
 } from '../component.env/_util';
 import PaperUser from '../component.env/PaperUser';
 import GridListTileImage from '../component.env/GridListTileImage';
-import {
-  DrawerLetsSignup
-} from '../component.env/drawer';
+// import {
+//   DrawerLetsSignup
+// } from '../component.env/drawer';
 
 export default class extends Component {
 	render() {
@@ -47,7 +47,8 @@ export default class extends Component {
 								if (instance.on);
 								else {
 									window.app.recommendation.setState({ open: true });
-									window.dat.session || countUp('favoriteCount') % 3 === 0 && new DrawerLetsSignup().create();
+									// TODO:
+									// window.dat.session || countUp('favoriteCount') % 3 === 0 && new DrawerLetsSignup().create();
 								}
 							}}
 							className="main"

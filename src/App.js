@@ -17,15 +17,12 @@ import {
   query,
   disableUsersZoom
 } from './component.env/_util';
-import {
-  DrawerConspicuous,
-  DrawerLetsShare
-} from './component.env/drawer';
 import Overlays from './component.env/_overlays';
 // import GridList from './component.env/GridList';
 // import BottomNavigation from './component.env/bottomNavigation';
 import LayerBase from './component.env/LayerBase';
 import Recommendation from './component.env/Recommendation';
+import Conspicuous from './component.env/Conspicuous';
 
 
 // INFO: これが何なのかは秀明にきいてねw
@@ -66,14 +63,15 @@ export default class extends Component {
       loadImage();
     };
 
-    if(window.dat.session) {
-      setInterval(()=> {
-        new DrawerLetsShare().create();
-      }, 1000 * 60 * 1);
-    }
-    else {
-      new DrawerConspicuous().create();
-    }
+    // if(window.dat.session) {
+    //   setInterval(()=> {
+    //     new DrawerLetsShare().create();
+    //   }, 1000 * 60 * 1);
+    // }
+    // else {
+    //   debugger
+    //   new DrawerConspicuous().create();
+    // }
   }
 
   render() {
@@ -89,7 +87,6 @@ export default class extends Component {
 
       {/*INFO: LayerBaseより手前にだしたいものはこの中へ（position: fixed非推奨。ボタンが被る）*/}
       <div className="component-layer layer-2" style={{ top: 55 }}>
-        <div id="drawer"></div>
 
         <div className="frombottom">
           {/*新しい画像 毎日20枚以上更新！
