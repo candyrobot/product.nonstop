@@ -1,93 +1,77 @@
 import React, { Component } from 'react';
+import Grow from '@material-ui/core/Grow';
 import $ from 'jquery';
 import './drawer.css';
 
 export default class extends Component {
-  isShowing = true;
-  state = {
-    // INFO: アニメーション中はラグがあるためこれを使って表示/非表示を行う
-    realyShowingIndex: 0
-  };
-
-  open() {
-    $(this).show(300);
-    this.isShowing = false;
-  }
-
   render() {
     const { showingIndex } = this.props;
 
-    if (!this.isShowing) {
-      $('.Conspicuous').hide(300, ()=> {
-        this.isShowing = true;
-        this.setState({ realyShowingIndex: showingIndex });
-      });
-    }
+    console.log(showingIndex);
 
-    if (this.state.realyShowingIndex === 0)
-      return (
-      <div id="component-conspicuous"
-        className="Conspicuous"
-        ref={(el)=> this.open()}
-      >
-        <i className="fab fa-twitter"></i>
-        <h3 className="title">
-          TwitterやTumblrより効率的に画像を収集しませんか？
-        </h3>
-        <p>※Tumblrは12/17以降、<br />成人向けの一切の画像が削除されました</p>
-        <p>百聞は一見にしかず。</p>
-        <p>まずは使ってみて下さい！</p>
-        <div className="close" onClick={(e)=> $(e.target).parent().hide(300)}>×</div>
-      </div>
-      );
-    if (this.state.realyShowingIndex === 1)
-      return (
-      <div id="component-letsSignup" 
-        className="Conspicuous component-suggestion paper"
-        ref={(el)=> this.open()}
-      >
-        <h3>登録してあなただけのお気入りBOXを🌟</h3>
-        <p>
-          <span className="button-plane" onClick={()=> $('#component-login').show(300)}>ログイン</span>
-          <button className="button" onClick={()=> $('#component-login').show(300).find('.toSwitchSignUp').click()}>アカウント作成</button>
-        </p>
-        <div className="close" onClick={(e)=> $(e.target).parent().hide(300)}>×</div>
-      </div>
-      );
-    if (this.state.realyShowingIndex === 2) {
-      const t = encodeURI('Tumblrより画像収拾が8.3倍捗ると話題『nonStop』　pic.twitter.com/WREvim9ydM　リンク: ');
-      const u = encodeURI('https://nonstop-vr.firebaseapp.com/');
-      const h = encodeURI('nonstopVr');
-      const o = encodeURI(window.location.href);
-      return (
-      <div id="component-LetsShare"
-        className="Conspicuous component-suggestion paper"
-        ref={(el)=> this.open()}
-      >
-        <h3 style={{ fontSize: 18, textIndent: '.5em' }}>
-          拡散希望🌟
-        </h3>
-        <p>
-          まだまだ画像不足！<br />
-          拡散して毎日画像を投稿してもらおう！
-        </p>
-        <p text-align="center">
-          <a
-            target="_blank"
-            style={{ padding: '.5em 1em' }}
-            className="button"
-            href="
-            https://twitter.com/intent/tweet?text=${t}&url=${u}&original_referer=${o}&hashtags=${h}
-            "
-            >
-            <i className="fab fa-twitter"></i>
-            画像を増やしてもらう🌟
-          </a>
-        </p>
-        <div className="close" onClick={(e)=> $(e.target).parent().hide(300)}>×</div>
-      </div>
-      );
-    }
+    const t = encodeURI('Tumblrより画像収拾が8.3倍捗ると話題『nonStop』　pic.twitter.com/WREvim9ydM　リンク: ');
+    const u = encodeURI('https://nonstop-vr.firebaseapp.com/');
+    const h = encodeURI('nonstopVr');
+    const o = encodeURI(window.location.href);
+
+    return (
+    <div className="Conspicuous">
+      <Grow in={showingIndex === 0}>
+        <div 
+          id="component-conspicuous"
+          className="hoge"
+        >
+          <i className="fab fa-twitter"></i>
+          <h3 className="title">
+            TwitterやTumblrより効率的に画像を収集しませんか？
+          </h3>
+          <p>※Tumblrは12/17以降、<br />成人向けの一切の画像が削除されました</p>
+          <p>百聞は一見にしかず。</p>
+          <p>まずは使ってみて下さい！</p>
+          <div className="close" onClick={(e)=> $(e.target).parent().hide(300)}>×</div>
+        </div>
+      </Grow>
+      <Grow in={showingIndex === 1}>
+        <div id="component-letsSignup" 
+          className="hoge component-suggestion paper"
+        >
+          <h3>登録してあなただけのお気入りBOXを🌟</h3>
+          <p>
+            <span className="button-plane" onClick={()=> $('#component-login').show(300)}>ログイン</span>
+            <button className="button" onClick={()=> $('#component-login').show(300).find('.toSwitchSignUp').click()}>アカウント作成</button>
+          </p>
+          <div className="close" onClick={(e)=> $(e.target).parent().hide(300)}>×</div>
+        </div>
+      </Grow>
+      <Grow in={showingIndex === 2}>
+        <div id="component-LetsShare"
+          className="hoge component-suggestion paper"
+        >
+          <h3 style={{ fontSize: 18, textIndent: '.5em' }}>
+            拡散希望🌟
+          </h3>
+          <p>
+            まだまだ画像不足！<br />
+            拡散して毎日画像を投稿してもらおう！
+          </p>
+          <p text-align="center">
+            <a
+              target="_blank"
+              style={{ padding: '.5em 1em' }}
+              className="button"
+              href="
+              https://twitter.com/intent/tweet?text=${t}&url=${u}&original_referer=${o}&hashtags=${h}
+              "
+              >
+              <i className="fab fa-twitter"></i>
+              画像を増やしてもらう🌟
+            </a>
+          </p>
+          <div className="close" onClick={(e)=> $(e.target).parent().hide(300)}>×</div>
+        </div>
+      </Grow>
+    </div>
+    );
   }
 }
 
