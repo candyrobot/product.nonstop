@@ -149,3 +149,26 @@ export const startLoading = function() {
 export const stopLoading = window.stopLoading = function() {
   return $('.loadingLine').hide(300);
 };
+
+// INFO: https://qiita.com/peutes/items/d74e5758a36478fbc039
+// document.addEventListener('touchend', event => {
+//   event.preventDefault();
+// }, false);
+export function disableUsersZoom() {
+  // for zoom with multiple fingers
+  document.addEventListener('touchstart', event => {
+    if (event.touches.length > 1) {
+      event.preventDefault();
+    }
+  }, true);
+
+  // for zoom with double tap.
+  let lastTouch = 0;
+  document.addEventListener('touchend', event => {
+    const now = window.performance.now();
+    if (now - lastTouch <= 500) {
+      event.preventDefault();
+    }
+    lastTouch = now;
+  }, true);
+}

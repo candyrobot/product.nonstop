@@ -14,7 +14,8 @@ import {
   startLoading,
   stopLoading,
   loadImage,
-  query
+  query,
+  disableUsersZoom
 } from './component.env/_util';
 import {
   DrawerConspicuous,
@@ -31,29 +32,8 @@ import Recommendation from './component.env/Recommendation';
 import Hideaki from './component.env/Hideaki';
 
 
-// INFO: https://qiita.com/peutes/items/d74e5758a36478fbc039
-// document.addEventListener('touchend', event => {
-//   event.preventDefault();
-// }, false);
-disableUsersZoom();
-function disableUsersZoom() {
-  // for zoom with multiple fingers
-  document.addEventListener('touchstart', event => {
-    if (event.touches.length > 1) {
-      event.preventDefault();
-    }
-  }, true);
+// disableUsersZoom();
 
-  // for zoom with double tap.
-  let lastTouch = 0;
-  document.addEventListener('touchend', event => {
-    const now = window.performance.now();
-    if (now - lastTouch <= 500) {
-      event.preventDefault();
-    }
-    lastTouch = now;
-  }, true);
-}
 
 window.$ = $;
 
