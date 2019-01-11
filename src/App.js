@@ -41,6 +41,10 @@ export default class extends Component {
   // INFO: 子コンポーネント
   recommendation;
 
+  state= {
+    conspicuousShowingIndex: 2
+  }
+
   constructor() {
     super();
 
@@ -87,7 +91,7 @@ export default class extends Component {
 
       {/*INFO: LayerBaseより手前にだしたいものはこの中へ（position: fixed非推奨。ボタンが被る）*/}
       <div className="component-layer layer-2" style={{ top: 55 }}>
-        <Conspicuous showingIndex={2} ref={(c)=> window.c = c} />
+        <Conspicuous showingIndex={this.state.conspicuousShowingIndex} />
 
         <div className="frombottom">
           {/*新しい画像 毎日20枚以上更新！

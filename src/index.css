@@ -198,6 +198,10 @@ input, .button {
   overflow-scrolling: touch;
 }
 
+.Conspicuous {
+  padding: 10px;
+}
+
 .hoge {
   position: fixed;
   left: 0;
