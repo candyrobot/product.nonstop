@@ -1,3 +1,14 @@
+
+//============================================================================
+// 80点の導線✨
+// 80点の導線✨
+// 80点の導線✨
+// 80点の導線✨
+// 80点の導線✨
+// 80点の導線✨
+// 80点の導線✨
+//============================================================================
+
 import React, { Component } from 'react';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
@@ -8,7 +19,6 @@ import './object/$';
 import App from './object/App';
 
 import DrawerTemporary from './component/DrawerTemporary';
-import DialogSlide from './component/DialogSlide';
 import './component/balloon.css';
 
 import {
@@ -24,6 +34,7 @@ import Overlays from './component.env/_overlays';
 import LayerBase from './component.env/LayerBase';
 import Recommendation from './component.env/Recommendation';
 import Conspicuous from './component.env/Conspicuous';
+import DialogWhatIsThisApp from './component.env/DialogWhatIsThisApp';
 
 
 // INFO: これが何なのかは秀明にきいてねw
@@ -97,7 +108,7 @@ export default class extends Component {
 
       <DrawerTemporary classes={{}} />
 
-      <DialogSlide ref={(c)=> this.DialogWhatIsThisApp = c } />
+      <DialogWhatIsThisApp initialize={{ open: true }} ref={(c)=> this.DialogWhatIsThisApp = c } />
 
 
       {/* INFO: from this line z-index: 1301 */}
