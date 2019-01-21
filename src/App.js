@@ -8,6 +8,7 @@ import './object/$';
 import App from './object/App';
 
 import DrawerTemporary from './component/DrawerTemporary';
+import DialogSlide from './component/DialogSlide';
 import './component/balloon.css';
 
 import {
@@ -39,11 +40,14 @@ window.dat = App;
 export default class extends Component {
 
   // INFO: 子コンポーネント
-  recommendation;
+  recommendation = null;
 
-  state= {
-    conspicuousShowingIndex: 2
-  }
+  // INFO: このアプリが何なのかを示すDialog
+  DialogWhatIsThisApp = null;
+
+  state = {
+    conspicuousShowingIndex: 2,
+  };
 
   constructor() {
     super();
@@ -87,6 +91,34 @@ export default class extends Component {
 
     return (
     <div className="App">
+
+
+      {/* INFO: from this line z-index: 1300 */}
+
+      <DrawerTemporary classes={{}} />
+
+      <DialogSlide ref={(c)=> this.DialogWhatIsThisApp = c } />
+
+
+      {/* INFO: from this line z-index: 1301 */}
+
+      <Overlays />
+
+      <div id="layer-appMessages" className="component-layer" style={{ zIndex: 1301 }}>
+        <div className="loadingLine">
+          <span className="expand"></span>
+        </div>
+        <div className="alerts"></div>
+      </div>
+
+
+      {/* INFO: from this line z-index: 1400 */}
+
+      {query('hideaki') === 1 && <Hideaki />}
+
+
+      {/* INFO: from this line z-index: initial */}
+
       <LayerBase images={dat.images} imageID={imageID} />
 
       {/*INFO: LayerBaseより手前にだしたいものはこの中へ（position: fixed非推奨。ボタンが被る）*/}
@@ -117,24 +149,6 @@ export default class extends Component {
           />
         </div>
       </div>
-
-      {/* INFO: from this line z-index: 1300 */}
-
-      <DrawerTemporary classes={{}} />
-
-      {/*INFO: Drawerよりも手前に出したいものはこの中へ*/}
-      <Overlays />
-
-      {/*INFO: 何よりも手前に出したいものはこの中へ*/}
-      <div id="layer-appMessages" className="component-layer" style={{ zIndex: 1301 }}>
-        <div className="loadingLine">
-          <span className="expand"></span>
-        </div>
-        <div className="alerts"></div>
-      </div>
-
-      {query('hideaki') === 1 && <Hideaki />}
-
     </div>
     );
   }
