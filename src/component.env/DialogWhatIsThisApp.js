@@ -21,7 +21,6 @@ export default class extends React.Component {
 				<p>※Tumblrは12/17以降、<br />成人向けの一切の画像が削除されました</p>
 				<p>百聞は一見にしかず。</p>
 				<p>まずは使ってみて下さい！</p>
-				<div className="close" onClick={(e)=> $(e.target).parent().hide(300)}>×</div>
 			</div>
 		</DialogSlide>
 		);
