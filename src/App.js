@@ -35,6 +35,7 @@ import LayerBase from './component.env/LayerBase';
 import Recommendation from './component.env/Recommendation';
 import Conspicuous from './component.env/Conspicuous';
 import DialogWhatIsThisApp from './component.env/DialogWhatIsThisApp';
+import DialogCanDoWithLogin from './component.env/DialogCanDoWithLogin';
 
 
 // INFO: これが何なのかは秀明にきいてねw
@@ -109,7 +110,9 @@ export default class extends Component {
       <DrawerTemporary classes={{}} />
 
       {window.app.isLoaded() && !window.app.isLogined() && 
-        <DialogWhatIsThisApp initialize={{ open: true }} ref={(c)=> this.DialogWhatIsThisApp = c } />}
+        <DialogWhatIsThisApp initialize={{ open: true }} />}
+
+      <DialogCanDoWithLogin ref={(c)=> document.dialogCanDoWithLogin = c}  />}
 
 
       {/* INFO: from this line z-index: 1301 */}
@@ -135,7 +138,8 @@ export default class extends Component {
 
       {/*INFO: LayerBaseより手前にだしたいものはこの中へ（position: fixed非推奨。ボタンが被る）*/}
       <div className="component-layer layer-2" style={{ top: 55 }}>
-        <Conspicuous showingIndex={this.state.conspicuousShowingIndex} />
+
+        {/*<Conspicuous showingIndex={this.state.conspicuousShowingIndex} />*/}
 
         <div className="frombottom">
           {/*新しい画像 毎日20枚以上更新！

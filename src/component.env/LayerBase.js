@@ -42,7 +42,31 @@ export default class extends Component {
 						return [
 						<GridListTileImage
 							key="0"
-							onClick={(inherit)=> console.log('TODO: 全画面で見る')}
+							onClick={(inherit)=> {
+								(()=> {
+									if (!window.app.isLogined()) {
+										document.dialogCanDoWithLogin.setState({
+											html: '保存するにはログインします',
+											open: true,
+										});
+
+										//
+
+										// document.app.setState({
+										// 	DialogCanDoWithLogin: {
+										// 		message: '保存するにはログインします'
+										// 		open: true,
+										// 	}
+										// });
+									}
+									else if (!window.app.kakinzumi) {
+										document.app.DialogCanDoWithKakin.xxx('保存するには課金します');
+									}
+									else {
+										console.log('TODO: 全画面で見る');
+									}
+								})();
+							}}
 							onClickOnFavorite={(instance)=> {
 								if (instance.on);
 								else {
