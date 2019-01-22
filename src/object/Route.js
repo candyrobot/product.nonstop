@@ -104,11 +104,11 @@ const routes = [
 const route = new Route({
   routes,
   doAfterPushing: function() {
-    if (!window.app)
+    if (!document.app)
       return;
 
-    window.app.setState({});
-    window.app.recommendation.setState({ open: false });
+    document.app.setState({});
+    document.app.recommendation.setState({ open: false });
     setTimeout(()=> loadImage(), 500);
   }
 });

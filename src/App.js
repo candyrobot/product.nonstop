@@ -66,12 +66,12 @@ export default class extends Component {
     // TODO: 動いていない
     startLoading();
 
-    window.app = this;
+    document.app = this;
 
     $(window).on('scroll', loadImage);
 
     $(window).on('popstate', (e)=> {
-      window.app.recommendation.setState({ open: window.history.state && window.history.state.areaRecommendation_open });
+      document.app.recommendation.setState({ open: window.history.state && window.history.state.areaRecommendation_open });
       this.setState({});
       loadImage();
     });
