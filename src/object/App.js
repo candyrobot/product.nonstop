@@ -7,13 +7,33 @@ import {
   domain
 } from '../component.env/_util';
 
-export default new class {
+// const Server = {
+//   firestore: {
+//     load: ()=> {
+      
+//     }
+//   },
+//   heroku: {
+//     load: ()=> {
+
+//     }
+//   }
+// };
+
+export default class {
   doAfterLoading = function() {};
   images = []
   users = []
   favorites = []
   constructor() {
     let n = 0;
+
+    // Server.firestore.load((images)=> {
+
+    // });
+    // Server.heroku.load((dat)=> {
+    //   this.isLoadedSessionData = true;
+    // });
 
     window.firebase.firestore().getImages((images)=> {
       n++; console.log('firebase done.');

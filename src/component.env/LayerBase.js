@@ -32,7 +32,7 @@ export default class extends Component {
 				style={{ overflowY: 'scroll' }}
 				onScroll={()=> loadImage()}
 			>
-				{window.dat && window.dat.images && (()=> {
+				{window.app && window.app.images && (()=> {
 					if (Route.is('user')) {
 						return User.sortByMostHavingFavorites().map((user, i)=> {
 							return <PaperUser key={i} user={user} />
@@ -48,12 +48,12 @@ export default class extends Component {
 								else {
 									document.app.recommendation.setState({ open: true });
 									// TODO:
-									// window.dat.session || countUp('favoriteCount') % 3 === 0 && new DrawerLetsSignup().create();
+									// window.app.session || countUp('favoriteCount') % 3 === 0 && new DrawerLetsSignup().create();
 								}
 							}}
 							className="main"
-							guide={!window.dat.session}
-							image={window.dat.images.find(imageID)}
+							guide={!window.app.session}
+							image={window.app.images.find(imageID)}
 						/>,
 						<h5
 							key="1"

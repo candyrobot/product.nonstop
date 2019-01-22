@@ -29,7 +29,7 @@ export default new class {
       images.reduce(function(prev, image, i) {
 
         // var htmlAdditional = '';
-        var htmlAdditional = window.dat.session && i === 0 ? `
+        var htmlAdditional = window.app.session && i === 0 ? `
         <div
           class="Pic additional"
           onclick="new Device.Album()"
@@ -39,7 +39,7 @@ export default new class {
           </div>
         </div>
         ` : '';
-        window.dat.session && i++;
+        window.app.session && i++;
 
         var htmlBanners = i % 12 ? '' : `
         <div class="message">

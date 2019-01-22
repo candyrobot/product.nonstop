@@ -8,7 +8,7 @@ import {
 
 export default new class {
   create(imageID, instance) {
-    if (!window.dat.session) {
+    if (!window.app.session) {
       new Toast('ログインするとお気入りに保存できます', true);
       return;
     }
@@ -18,14 +18,14 @@ export default new class {
       new Toast(dat.responseJSON.toast, true);
     })
     .done((favorites)=> {
-      window.dat.favorites.push(favorites[0]);
+      window.app.favorites.push(favorites[0]);
       instance.setState({});
     })
     .always(stopLoading);
   }
 
   delete(imageID, instance) {
-    if (!window.dat.session) {
+    if (!window.app.session) {
       new Toast('ログインするとお気入りに保存できます', true);
       return;
     }
@@ -36,7 +36,7 @@ export default new class {
       data: { imageID }
     })
     .done(()=> {
-      window.dat.favorites = window.dat.favorites.exclude({ imageID, userID: window.dat.session.id });
+      window.app.favorites = window.app.favorites.exclude({ imageID, userID: window.app.session.id });
       instance.setState({});
     })
     .fail(function(dat) {

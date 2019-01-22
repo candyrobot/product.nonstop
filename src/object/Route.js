@@ -85,7 +85,7 @@ const routes = [
     variable: 'image',
     query: { method: 'image', param: { id: -1 } },
     doAfterPushing: function(inherit) {
-      window.dat.images = window.dat.images.shuffle();
+      window.app.images = window.app.images.shuffle();
       $('.forAppBar').scrollTop(0);
       inherit();
       // inheritを実行しなければ、newした時に設定したdoAfterPushingを実行しない。

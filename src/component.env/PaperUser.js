@@ -9,7 +9,7 @@ export default class extends Component {
   isDisplayImages = false;
   render() {
     const user = this.props.user;
-    const favorites = window.dat.favorites.where({ userID: user.id });
+    const favorites = window.app.favorites.where({ userID: user.id });
     if(favorites.length === 0)
       return null;
     setTimeout(()=> {
@@ -38,8 +38,8 @@ export default class extends Component {
       </div>
       <div style={{ display: this.isDisplayImages ? 'block' : 'none' }}>
         {/*.splice(0, 5)*/}
-        {window.dat.favorites.where({ userID: user.id }).map((f, i)=> {
-          const image = window.dat.images.find(f.imageID);
+        {window.app.favorites.where({ userID: user.id }).map((f, i)=> {
+          const image = window.app.images.find(f.imageID);
 
           if (!image)
             return;

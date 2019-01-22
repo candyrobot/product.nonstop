@@ -13,26 +13,26 @@ export default window.Image = new class {
 	// }
 
 	sortByRelated(imageID) {
-		return window.dat.images
+		return window.app.images
 		.map((i)=> {
-			i.relatedScore = window.dat.favorites.where({imageID: imageID})
+			i.relatedScore = window.app.favorites.where({imageID: imageID})
 			.reduce((n, f)=> {
-				return n + window.dat.favorites.where({imageID: i.id, userID: f.userID}).length;
+				return n + window.app.favorites.where({imageID: i.id, userID: f.userID}).length;
 			}, 0);
 			return i;
 		}).sort((iA, iB)=> iA.relatedScore > iB.relatedScore ? -1 : 1);
 	}
 
 	sortByNewer() {
-		return window.dat.images.sort((iA, iB)=> {
+		return window.app.images.sort((iA, iB)=> {
 			return iA.created_at.getTime() > iB.created_at.getTime() ? -1 : 1;
 		});
 	}
 
 	sortByFavorites() {
-		return window.dat.images
+		return window.app.images
 		.map((i)=> {
-			i.favorites = window.dat.favorites.where({ imageID: i.id });
+			i.favorites = window.app.favorites.where({ imageID: i.id });
 			return i;
 		})
 		.sort((iA, iB)=> iA.favorites.length > iB.favorites.length ? -1 : 1 );
@@ -40,27 +40,27 @@ export default window.Image = new class {
 
 	sortByRelatedEffort(imageID) {
 		let images;
-		if (window.dat.favorites.where({ imageID }).length > 3) {
+		if (window.app.favorites.where({ imageID }).length > 3) {
 			images = this.sortByRelated(imageID);
 		}
 		else {
-			images = window.dat.images;
+			images = window.app.images;
 		}
 		return this.excludeIFavorited(images.exclude({ id: imageID }));
 	}
 
 	filterByMyFavorite() {
-		return window.dat.images.filter((i)=> window.dat.favorites.where({ imageID: i.id, userID: window.dat.session.id }).length);
+		return window.app.images.filter((i)=> window.app.favorites.where({ imageID: i.id, userID: window.app.session.id }).length);
 	}
 
 	// TODO: Arrayをextendsしたら引数をとる
 	excludeIFavorited(images) {
 		return images.filter((i)=> {
-			return !window.dat.favorites.where({imageID: i.id, userID: window.dat.session.id}).length
+			return !window.app.favorites.where({imageID: i.id, userID: window.app.session.id}).length
 		});
 	}
 
 	isIFavorited(imageID) {
-		return !!window.dat.favorites.where({imageID: imageID, userID: window.dat.session.id}).length;
+		return !!window.app.favorites.where({imageID: imageID, userID: window.app.session.id}).length;
 	}
 }

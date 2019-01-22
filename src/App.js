@@ -46,7 +46,7 @@ import Hideaki from './component.env/Hideaki';
 
 window.$ = $;
 
-window.dat = App;
+window.app = new App();
 
 export default class extends Component {
 
@@ -76,13 +76,13 @@ export default class extends Component {
       loadImage();
     });
 
-    window.dat.doAfterLoading = ()=> {
+    window.app.doAfterLoading = ()=> {
       stopLoading();
       this.setState({});
       loadImage();
     };
 
-    // if(window.dat.session) {
+    // if(window.app.session) {
     //   setInterval(()=> {
     //     new DrawerLetsShare().create();
     //   }, 1000 * 60 * 1);
@@ -95,8 +95,8 @@ export default class extends Component {
 
   render() {
     // INFO: 源のdataを書き換えてはいけない
-    // Object.assign(window.dat, window.dat[query('method')](query('param')));
-    const dat = window.dat[query('method')](query('param'));
+    // Object.assign(window.app, window.app[query('method')](query('param')));
+    const dat = window.app[query('method')](query('param'));
 
     const imageID = query('method') === 'image' && query('param') && query('param').id;
 

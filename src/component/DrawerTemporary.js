@@ -45,7 +45,7 @@ export default class extends React.Component {
       >
         <div className={classes.list}>
           <List>
-            {!(window.dat && window.dat.session) && (
+            {!(window.app && window.app.session) && (
               <ListItem
                 button
                 onClick={()=> {
@@ -69,7 +69,7 @@ export default class extends React.Component {
               </ListItemIcon>*/}
               <ListItemText primary="新着順" />
             </ListItem>
-            {!(window.dat && window.dat.session) && (
+            {!(window.app && window.app.session) && (
               <ListItem
                 button
                 selected={Route.is('user')}
@@ -86,7 +86,7 @@ export default class extends React.Component {
             )}
             <ListItem
               button
-              disabled={!(window.dat && window.dat.session)}
+              disabled={!(window.app && window.app.session)}
               selected={this.state.selectedIndex === 2}
               onClick={()=> new Toast('近日解禁🌟', true)}
             >
@@ -98,9 +98,9 @@ export default class extends React.Component {
           <Divider />
           <List>
             <ListItem>
-              {window.dat && window.dat.session ? (
+              {window.app && window.app.session ? (
                 <small style={{ color: '#808080' }}>
-                  Me: {window.dat && window.dat.session.email}
+                  Me: {window.app && window.app.session.email}
                 </small>
               ) : (
                 <small>
@@ -117,7 +117,7 @@ export default class extends React.Component {
             </ListItem>
             <ListItem
               button
-              disabled={!(window.dat && window.dat.session)}
+              disabled={!(window.app && window.app.session)}
               selected={this.state.selectedIndex === 2}
               selected={Route.is('myFavorites')}
               onClick={()=> {
@@ -132,7 +132,7 @@ export default class extends React.Component {
             </ListItem>
             <ListItem
               button
-              disabled={!(window.dat && window.dat.session)}
+              disabled={!(window.app && window.app.session)}
               selected={this.state.selectedIndex === 3}
               onClick={()=> new Toast('近日解禁🌟', true)}
             >{/*
@@ -143,7 +143,7 @@ export default class extends React.Component {
             </ListItem>
             <ListItem
               button
-              disabled={!(window.dat && window.dat.session)}
+              disabled={!(window.app && window.app.session)}
               onClick={()=> logout()}
             >
               <ListItemText>

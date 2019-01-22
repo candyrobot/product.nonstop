@@ -9,7 +9,7 @@ export default class extends Component {
     const image = this.props.image;
     const guide = this.props.guide;
     const onClick = this.props.onClick || function() {};
-    this.on = window.dat.session && !!window.dat.favorites.where({imageID: image.id, userID: window.dat.session.id}).length;
+    this.on = window.app.session && !!window.app.favorites.where({imageID: image.id, userID: window.app.session.id}).length;
     return (
     this.on ?
     <IconButton
