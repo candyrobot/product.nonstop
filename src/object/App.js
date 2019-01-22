@@ -63,6 +63,14 @@ export default class {
     });
   }
 
+  isLoaded() {
+    return this.session !== undefined;
+  }
+
+  isLogined() {
+    return this.session;
+  }
+
   favorite(param) {
     return {
       images: Image.filterByMyFavorite(),

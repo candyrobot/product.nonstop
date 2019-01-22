@@ -108,7 +108,8 @@ export default class extends Component {
 
       <DrawerTemporary classes={{}} />
 
-      <DialogWhatIsThisApp initialize={{ open: true }} ref={(c)=> this.DialogWhatIsThisApp = c } />
+      {window.app.isLoaded() && !window.app.isLogined() && 
+        <DialogWhatIsThisApp initialize={{ open: true }} ref={(c)=> this.DialogWhatIsThisApp = c } />}
 
 
       {/* INFO: from this line z-index: 1301 */}
