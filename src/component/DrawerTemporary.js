@@ -86,9 +86,10 @@ export default class extends React.Component {
             )}
             <ListItem
               button
-              disabled={!(window.app && window.app.session)}
               selected={this.state.selectedIndex === 2}
-              onClick={()=> new Toast('近日解禁🌟', true)}
+              onClick={()=> {
+                window.app.isLogined() ? new Toast('近日解禁🌟', true) : new Toast('ログインすると閲覧できます', true)
+              }}
             >
               <ListItemText>
                 人気順
