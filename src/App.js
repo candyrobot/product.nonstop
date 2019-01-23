@@ -10,7 +10,6 @@
 //============================================================================
 
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 import $ from 'jquery';
@@ -48,11 +47,6 @@ import Hideaki from './component.env/Hideaki';
 window.$ = $;
 
 window.app = new App();
-
-document.call = (c)=> {
-  var $el = $('<div>').appendTo('body');
-  ReactDOM.render(<c />, $el.get()[0]);
-};
 
 export default class extends Component {
 
