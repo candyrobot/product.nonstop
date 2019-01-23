@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-
-import Route from '../object/Route';
-
-import User from '../model/User';
-import Image from '../model/Image';
-
-import AppBar from '../component/AppBar';
-import GridListImage from '../component/GridListImage';
-
 import {
 	loadImage,
 	countUp
 } from '../component.env/_util';
+import Route from '../object/Route';
+import User from '../model/User';
+import Image from '../model/Image';
+import AppBar from '../component/AppBar';
+import GridListImage from '../component/GridListImage';
+import DialogCanDoWithLogin from '../component.env/DialogCanDoWithLogin';
 import PaperUser from '../component.env/PaperUser';
 import GridListTileImage from '../component.env/GridListTileImage';
 // import {
@@ -20,9 +17,13 @@ import GridListTileImage from '../component.env/GridListTileImage';
 // } from '../component.env/drawer';
 
 export default class extends Component {
+	state = {
+		open: false
+	}
 	render() {
 		const images = this.props.images;
 		const imageID = this.props.imageID;
+		console.log(1, this.state.open);
 		return (
 		<div className="layer-1">
 			<AppBar style={{ zIndex: 1, boxShadow: '0 2px 10px rgba(0,0,0,.5)' }} />
@@ -45,10 +46,17 @@ export default class extends Component {
 							onClick={(inherit)=> {
 								(()=> {
 									if (!window.app.isLogined()) {
-										document.dialogCanDoWithLogin.setState({
-											html: '保存するにはログインします',
-											open: true,
-										});
+										document.call(<DialogCanDoWithLogin open={true} />);
+
+
+
+										this.setState({ open: true })
+
+										
+										// document.dialogCanDoWithLogin.setState({
+										// 	html: '保存するにはログインします',
+										// 	open: true,
+										// });
 
 										//
 
@@ -79,8 +87,9 @@ export default class extends Component {
 							guide={!window.app.session}
 							image={window.app.images.find(imageID)}
 						/>,
+						this.state.open ? <DialogCanDoWithLogin key={1} open={true} /> : null,
 						<h5
-							key="1"
+							key="2"
 							style={{
 								color: 'white',
 								marginTop: 5,
@@ -91,7 +100,7 @@ export default class extends Component {
 						>
 							関連
 						</h5>,
-						<GridListImage key="2" images={images} />
+						<GridListImage key="3" images={images} />
 						]
 					}
 					else {

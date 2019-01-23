@@ -13,25 +13,25 @@ export default class extends React.Component {
 		super(props);
 
 		this.state = {
-			open: false,
+			open: props.open,
 			html: ''
 		};
 	}
 
 	render() {
 		return (
-		<DialogSlide initialize={{ open: this.state.open }}>
-				<div id="component-letsSignup" 
-					className="hoge component-suggestion paper"
-				>
-					{this.state.html}
-					<h3>登録してあなただけのお気入りBOXを🌟</h3>
-					<p>
-						<span className="button-plane" onClick={()=> $('#component-login').show(300)}>ログイン</span>
-						<button className="button" onClick={()=> $('#component-login').show(300).find('.toSwitchSignUp').click()}>アカウント作成</button>
-					</p>
-					<div className="close" onClick={(e)=> $(e.target).parent().hide(300)}>×</div>
-				</div>
+		<DialogSlide className='Dialog-margin-small' open={this.state.open}>
+			<div
+				id="component-letsSignup" 
+				className="component-suggestion paper"
+			>
+				{this.state.html}
+				<h3>登録してあなただけのお気入りBOXを🌟</h3>
+				<p>
+					<span className="button-plane" onClick={()=> $('#component-login').show(300)}>ログイン</span>
+					<button className="button" onClick={()=> $('#component-login').show(300).find('.toSwitchSignUp').click()}>アカウント作成</button>
+				</p>
+			</div>
 		</DialogSlide>
 		);
 	}

@@ -10,6 +10,7 @@
 //============================================================================
 
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 import $ from 'jquery';
@@ -35,7 +36,6 @@ import LayerBase from './component.env/LayerBase';
 import Recommendation from './component.env/Recommendation';
 import Conspicuous from './component.env/Conspicuous';
 import DialogWhatIsThisApp from './component.env/DialogWhatIsThisApp';
-import DialogCanDoWithLogin from './component.env/DialogCanDoWithLogin';
 
 
 // INFO: これが何なのかは秀明にきいてねw
@@ -48,6 +48,11 @@ import Hideaki from './component.env/Hideaki';
 window.$ = $;
 
 window.app = new App();
+
+document.call = (c)=> {
+  var $el = $('<div>').appendTo('body');
+  ReactDOM.render(<c />, $el.get()[0]);
+};
 
 export default class extends Component {
 
@@ -110,9 +115,7 @@ export default class extends Component {
       <DrawerTemporary classes={{}} />
 
       {window.app.isLoaded() && !window.app.isLogined() && 
-        <DialogWhatIsThisApp initialize={{ open: true }} />}
-
-      <DialogCanDoWithLogin ref={(c)=> document.dialogCanDoWithLogin = c}  />}
+        <DialogWhatIsThisApp open={true} />}
 
 
       {/* INFO: from this line z-index: 1301 */}

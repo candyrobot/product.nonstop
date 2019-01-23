@@ -8,7 +8,7 @@ function Transition(props) {
 
 export default class extends React.Component {
 
-	handleClickOpen = () => {
+	handleOpen = () => {
 		this.setState({ open: true });
 	};
 
@@ -20,23 +20,22 @@ export default class extends React.Component {
 		super(props);
 
 		this.state = {
-			open: props.initialize.open,
+			open: props.open,
 		};
 	}
 
 	render() {
 		return (
-			<div>
-				<Dialog
-					open={this.state.open}
-					TransitionComponent={Transition}
-					keepMounted
-					onClose={this.handleClose}
-					aria-labelledby="alert-dialog-slide-title"
-					aria-describedby="alert-dialog-slide-description"
-					children={this.props.children}
-				/>
-			</div>
+			<Dialog
+				className={this.props.className}
+				open={this.state.open}
+				TransitionComponent={Transition}
+				keepMounted
+				onClose={this.handleClose}
+				aria-labelledby="alert-dialog-slide-title"
+				aria-describedby="alert-dialog-slide-description"
+				children={this.props.children}
+			/>
 		);
 	}
 }

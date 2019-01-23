@@ -213,6 +213,10 @@ input, .button {
 /*ここからapp依存*/
 
 
+.Dialog-margin-small [class*="MuiDialog-paper"] {
+  margin: 5px;
+}
+
 .component-layer .row {
   text-align: right;
 }

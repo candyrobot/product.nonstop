@@ -10,7 +10,7 @@ import DialogSlide from '../component/DialogSlide';
 export default class extends React.Component {
 	render() {
 		return (
-		<DialogSlide initialize={{ open: this.props.initialize.open }} ref={(c)=> this.DialogWhatIsThisApp = c }>
+		<DialogSlide open={this.props.open}>
 			<div 
 				id="component-conspicuous"
 			>
