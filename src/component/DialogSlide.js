@@ -8,30 +8,14 @@ function Transition(props) {
 
 export default class extends React.Component {
 
-	handleOpen = () => {
-		this.setState({ open: true });
-	};
-
-	handleClose = () => {
-		this.setState({ open: false });
-	};
-
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			open: props.open,
-		};
-	}
-
 	render() {
 		return (
 			<Dialog
 				className={this.props.className}
-				open={this.state.open}
+				open={this.props.open}
 				TransitionComponent={Transition}
 				keepMounted
-				onClose={this.handleClose}
+				onClose={this.props.onClose}
 				aria-labelledby="alert-dialog-slide-title"
 				aria-describedby="alert-dialog-slide-description"
 				children={this.props.children}

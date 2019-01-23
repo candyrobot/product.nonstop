@@ -10,8 +10,8 @@ import DialogSlide from '../component/DialogSlide';
 export default class extends React.Component {
 	render() {
 		return (
-		<DialogSlide open={this.props.open}>
-			<div 
+		<DialogSlide {...this.props}>
+			<div
 				id="component-conspicuous"
 			>
 				<i className="fab fa-twitter"></i>

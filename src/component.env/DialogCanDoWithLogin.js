@@ -9,23 +9,14 @@ import DialogSlide from '../component/DialogSlide';
 
 export default class extends React.Component {
 
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			open: props.open,
-			html: ''
-		};
-	}
-
 	render() {
 		return (
-		<DialogSlide className='Dialog-margin-small' open={this.state.open}>
+		<DialogSlide className='Dialog-margin-small' {...this.props}>
 			<div
-				id="component-letsSignup" 
+				id="component-letsSignup"
 				className="component-suggestion paper"
 			>
-				{this.state.html}
+				{this.props.html}
 				<h3>登録してあなただけのお気入りBOXを🌟</h3>
 				<p>
 					<span className="button-plane" onClick={()=> $('#component-login').show(300)}>ログイン</span>

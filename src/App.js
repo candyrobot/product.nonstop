@@ -58,6 +58,7 @@ export default class extends Component {
 
   state = {
     conspicuousShowingIndex: 2,
+    open: true
   };
 
   constructor() {
@@ -108,8 +109,8 @@ export default class extends Component {
 
       <DrawerTemporary classes={{}} />
 
-      {window.app.isLoaded() && !window.app.isLogined() && 
-        <DialogWhatIsThisApp open={true} />}
+      {window.app.isLoaded() && !window.app.isLogined() &&
+        <DialogWhatIsThisApp open={this.state.open} onClose={()=> this.setState({ open: false })} />}
 
 
       {/* INFO: from this line z-index: 1301 */}

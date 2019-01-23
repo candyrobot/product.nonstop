@@ -17,13 +17,39 @@ import GridListTileImage from '../component.env/GridListTileImage';
 // } from '../component.env/drawer';
 
 export default class extends Component {
+
 	state = {
 		open: false
 	}
+
+	handleClickThumbnail = (inherit)=> {
+		if (!window.app.isLogined()) {
+			this.setState({ open: true });
+		}
+		else if (!window.app.kakinzumi) {
+			document.app.DialogCanDoWithKakin.xxx('保存するには課金します');
+		}
+		else {
+			console.log('TODO: 全画面で見る');
+		}
+	};
+
+	handleClickFavorite = (instance)=> {
+		if (instance.on);
+		else {
+			document.app.recommendation.setState({ open: true });
+			// TODO:
+			// window.app.session || countUp('favoriteCount') % 3 === 0 && new DrawerLetsSignup().create();
+		}
+	};
+
+	handleClose = ()=> {
+		this.setState({ open: false });
+	};
+
 	render() {
 		const images = this.props.images;
 		const imageID = this.props.imageID;
-		console.log(1, this.state.open);
 		return (
 		<div className="layer-1">
 			<AppBar style={{ zIndex: 1, boxShadow: '0 2px 10px rgba(0,0,0,.5)' }} />
@@ -40,68 +66,34 @@ export default class extends Component {
 						})
 					}
 					else if (imageID) {
-						return [
-						<GridListTileImage
-							key="0"
-							onClick={(inherit)=> {
-								(()=> {
-									if (!window.app.isLogined()) {
-										document.call(<DialogCanDoWithLogin open={true} />);
-
-
-
-										this.setState({ open: true })
-
-										
-										// document.dialogCanDoWithLogin.setState({
-										// 	html: '保存するにはログインします',
-										// 	open: true,
-										// });
-
-										//
-
-										// document.app.setState({
-										// 	DialogCanDoWithLogin: {
-										// 		message: '保存するにはログインします'
-										// 		open: true,
-										// 	}
-										// });
-									}
-									else if (!window.app.kakinzumi) {
-										document.app.DialogCanDoWithKakin.xxx('保存するには課金します');
-									}
-									else {
-										console.log('TODO: 全画面で見る');
-									}
-								})();
-							}}
-							onClickOnFavorite={(instance)=> {
-								if (instance.on);
-								else {
-									document.app.recommendation.setState({ open: true });
-									// TODO:
-									// window.app.session || countUp('favoriteCount') % 3 === 0 && new DrawerLetsSignup().create();
-								}
-							}}
-							className="main"
-							guide={!window.app.session}
-							image={window.app.images.find(imageID)}
-						/>,
-						this.state.open ? <DialogCanDoWithLogin key={1} open={true} /> : null,
-						<h5
-							key="2"
-							style={{
-								color: 'white',
-								marginTop: 5,
-								marginBottom: 0,
-								padding: 10,
-								backgroundColor: '#ffffff14'
-							}}
-						>
-							関連
-						</h5>,
-						<GridListImage key="3" images={images} />
-						]
+						return (
+						<div>
+							<GridListTileImage
+								onClick={this.handleClickThumbnail}
+								onClickOnFavorite={this.handleClickFavorite}
+								className="main"
+								guide={!window.app.session}
+								image={window.app.images.find(imageID)}
+							/>
+							<DialogCanDoWithLogin
+								html='保存するにはログインします'
+								open={this.state.open}
+								onClose={this.handleClose}
+							/>
+							<h5
+								style={{
+									color: 'white',
+									marginTop: 5,
+									marginBottom: 0,
+									padding: 10,
+									backgroundColor: '#ffffff14'
+								}}
+							>
+								関連
+							</h5>
+							<GridListImage images={images} />
+						</div>
+						)
 					}
 					else {
 						return <GridListImage images={images} />
