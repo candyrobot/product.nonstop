@@ -11,16 +11,12 @@
 
 import React, { Component } from 'react';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-
 import $ from 'jquery';
 import 'jquery.transit';
-
 import './object/$';
 import App from './object/App';
-
 import DrawerTemporary from './component/DrawerTemporary';
 import './component/balloon.css';
-
 import {
   startLoading,
   stopLoading,
@@ -28,13 +24,14 @@ import {
   query,
   disableUsersZoom
 } from './component.env/_util';
+import './component.env/dialog.css';
 import Overlays from './component.env/_overlays';
 // import GridList from './component.env/GridList';
 // import BottomNavigation from './component.env/bottomNavigation';
 import LayerBase from './component.env/LayerBase';
 import Recommendation from './component.env/Recommendation';
-import Conspicuous from './component.env/Conspicuous';
 import DialogWhatIsThisApp from './component.env/DialogWhatIsThisApp';
+import DialogLetsShare from './component.env/DialogLetsShare';
 
 
 // INFO: これが何なのかは秀明にきいてねw
@@ -58,7 +55,8 @@ export default class extends Component {
 
   state = {
     conspicuousShowingIndex: 2,
-    open: true
+    DialogWhatIsThisAppOpen: true,
+    DialogLetsShareOpen: true
   };
 
   constructor() {
@@ -82,16 +80,6 @@ export default class extends Component {
       this.setState({});
       loadImage();
     };
-
-    // if(window.app.session) {
-    //   setInterval(()=> {
-    //     new DrawerLetsShare().create();
-    //   }, 1000 * 60 * 1);
-    // }
-    // else {
-    //   debugger
-    //   new DrawerConspicuous().create();
-    // }
   }
 
   render() {
@@ -110,7 +98,10 @@ export default class extends Component {
       <DrawerTemporary classes={{}} />
 
       {window.app.isLoaded() && !window.app.isLogined() &&
-        <DialogWhatIsThisApp open={this.state.open} onClose={()=> this.setState({ open: false })} />}
+        <DialogWhatIsThisApp open={this.state.DialogWhatIsThisAppOpen} onClose={()=> this.setState({ DialogWhatIsThisAppOpen: false })} />}
+
+      {window.app.isLoaded() && window.app.isLogined() &&
+        <DialogLetsShare open={this.state.DialogLetsShareOpen} onClose={()=> this.setState({ DialogLetsShareOpen: false })} />}
 
 
       {/* INFO: from this line z-index: 1301 */}

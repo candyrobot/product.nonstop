@@ -202,13 +202,6 @@ input, .button {
   padding: 10px;
 }
 
-.hoge {
-  position: fixed;
-  left: 0;
-  width: 100%;
-  top: 0;
-}
-
 
 /*ここからapp依存*/
 
