@@ -80,6 +80,12 @@ export default class extends Component {
       this.setState({});
       loadImage();
     };
+
+    setInterval(()=> {
+      this.setState({ DialogLetsShareOpen: true });
+    }, 
+    // INFO: 2.5分
+    1000 * 60 * 2.5);
   }
 
   render() {

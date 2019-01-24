@@ -57,7 +57,11 @@ export default class extends Component {
 				ref={(el)=> $(el).scrollTop(window.history.state && window.history.state.forAppBar_scrollTop || 0) }
 				className="forAppBar scroll"
 				style={{ overflowY: 'scroll' }}
-				onScroll={()=> loadImage()}
+				onScroll={(v)=> {
+					// console.log($(v.target).scrollTop());
+					// $(v.target).scrollTop() 
+					loadImage();
+				}}
 			>
 				{window.app && window.app.images && (()=> {
 					if (Route.is('user')) {
