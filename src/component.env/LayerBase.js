@@ -55,6 +55,15 @@ export default class extends Component {
 		}, 1000);
 	}
 
+	bindShowDialogWhenScrollEnd(el) {
+		$(el).on('scrollend', ()=> {
+
+		});
+		
+		const maxScroll = $(el).find('>div').innerHeight() - $(el).innerHeight();
+		$(el).scrollTop() >= maxScroll
+	}
+
 	render() {
 		const images = this.props.images;
 		const imageID = this.props.imageID;
@@ -66,6 +75,7 @@ export default class extends Component {
 				ref={(el)=> {
 					this.doAfterRendering(()=> {
 						$(el).scrollTop(y);
+						bindShowDialogWhenScrollEnd(el);
 					});
 				}}
 				className="forAppBar scroll"
