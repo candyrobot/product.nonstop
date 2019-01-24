@@ -71,7 +71,7 @@ export default class extends Component {
 				className="forAppBar scroll"
 				style={{ overflowY: 'scroll' }}
 				onScroll={(v)=> {
-					Route.replaceHistory(Object.assign(window.history.state, {
+					Route.replaceHistory(Object.assign(window.history.state || {}, {
 						forAppBar_scrollTop: $(v.target).scrollTop(),
 					}));
 

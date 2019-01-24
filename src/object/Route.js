@@ -61,7 +61,7 @@ class Route {
   }
 
   replaceHistory(state) {
-    const { url, title } = window.history.state;
+    const { url, title } = window.history.state || {};
     window.history.replaceState(state, title, url);
   }
 
