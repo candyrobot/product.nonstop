@@ -11,12 +11,6 @@ class Route {
   constructor(setup = {}) {
     this.doAfterPushing = setup.doAfterPushing || function() {};
     setup.routes.forEach((r)=> this.set(r));
-
-    // INFO: 再描画される前
-    $(window).on('popstate', (e)=> {
-      console.log(1)
-      this.saveState();
-    });
   }
 
   is(variable) {

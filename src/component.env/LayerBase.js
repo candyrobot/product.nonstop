@@ -48,6 +48,13 @@ export default class extends Component {
 		this.setState({ open: false });
 	};
 
+	doAfterRendering(callback) {
+		// TODO: 正確に補足できていない
+		setTimeout(()=> {
+			callback();
+		}, 1000);
+	}
+
 	render() {
 		const images = this.props.images;
 		const imageID = this.props.imageID;
@@ -56,14 +63,17 @@ export default class extends Component {
 		<div className="layer-1">
 			<AppBar style={{ zIndex: 1, boxShadow: '0 2px 10px rgba(0,0,0,.5)' }} />
 			<div
-				ref={(el)=> $(el).scrollTop(y) }
+				ref={(el)=> {
+					this.doAfterRendering(()=> {
+						$(el).scrollTop(y);
+					});
+				}}
 				className="forAppBar scroll"
 				style={{ overflowY: 'scroll' }}
 				onScroll={(v)=> {
-					// console.log($(v.target).scrollTop())
-					// Route.replaceHistory(Object.assign(window.history.state, {
-					// 	forAppBar_scrollTop: $(v.target).scrollTop(),
-					// }));
+					Route.replaceHistory(Object.assign(window.history.state, {
+						forAppBar_scrollTop: $(v.target).scrollTop(),
+					}));
 
 					loadImage();
 				}}
