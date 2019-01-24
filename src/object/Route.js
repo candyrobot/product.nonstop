@@ -11,6 +11,12 @@ class Route {
   constructor(setup = {}) {
     this.doAfterPushing = setup.doAfterPushing || function() {};
     setup.routes.forEach((r)=> this.set(r));
+
+    // INFO: 再描画される前
+    $(window).on('popstate', (e)=> {
+      console.log(1)
+      this.saveState();
+    });
   }
 
   is(variable) {
@@ -46,16 +52,23 @@ class Route {
   }
 
   doBeforePushing() {
-    if (!window.history.state)
-      return;
+    // if (!window.history.state)
+    //   return;
 
-    const { url, title } = window.history.state;
-    window.history.replaceState({
-      url, title,
+    this.saveState();
+  }
+
+  saveState() {
+    this.replaceHistory(Object.assign(window.history.state, {
       forAppBar_scrollTop: $('.forAppBar').scrollTop(),
       imagesHorizontal_scrollLeft: $('.component-images-horizontal').scrollLeft(),
       areaRecommendation_open: $('.area-recommendation').is(':visible')
-    }, title, url);
+    }));
+  }
+
+  replaceHistory(state) {
+    const { url, title } = window.history.state;
+    window.history.replaceState(state, title, url);
   }
 
   set(o) {

@@ -19,7 +19,8 @@ import GridListTileImage from '../component.env/GridListTileImage';
 export default class extends Component {
 
 	state = {
-		open: false
+		open: false,
+		scrollTop: parseInt(localStorage.getItem('app.nonstop.forAppBar_scrollTop'))
 	}
 
 	handleClickThumbnail = (inherit)=> {
@@ -50,16 +51,20 @@ export default class extends Component {
 	render() {
 		const images = this.props.images;
 		const imageID = this.props.imageID;
+		const y = window.history.state && window.history.state.forAppBar_scrollTop || 0;
 		return (
 		<div className="layer-1">
 			<AppBar style={{ zIndex: 1, boxShadow: '0 2px 10px rgba(0,0,0,.5)' }} />
 			<div
-				ref={(el)=> $(el).scrollTop(window.history.state && window.history.state.forAppBar_scrollTop || 0) }
+				ref={(el)=> $(el).scrollTop(y) }
 				className="forAppBar scroll"
 				style={{ overflowY: 'scroll' }}
 				onScroll={(v)=> {
-					// console.log($(v.target).scrollTop());
-					// $(v.target).scrollTop() 
+					// console.log($(v.target).scrollTop())
+					// Route.replaceHistory(Object.assign(window.history.state, {
+					// 	forAppBar_scrollTop: $(v.target).scrollTop(),
+					// }));
+
 					loadImage();
 				}}
 			>
