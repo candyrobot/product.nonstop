@@ -28,7 +28,7 @@ export default class extends React.Component {
 					拡散して毎日画像を投稿してもらおう！
 				</p>
 				<p style={{ fontSize: 10, fontWeight: 'bold' }}>
-					※ツイートするとこのポップアップは今日はでてきません
+					※ツイートするとこのポップアップはしばらくでてきません
 				</p>
 				<p text-align="center">
 					<a

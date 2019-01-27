@@ -55,13 +55,18 @@ export default class extends Component {
 		}, 1000);
 	}
 
-	bindShowDialogWhenScrollEnd(el) {
-		$(el).on('scrollend', ()=> {
-
+	bindScrollEnd(el, callback) {
+		$(el).on('scroll', ()=> {
+			isScrollEnd() && callback();
 		});
-		
-		const maxScroll = $(el).find('>div').innerHeight() - $(el).innerHeight();
-		$(el).scrollTop() >= maxScroll
+
+		// TODO: 判定がガバガバ.
+		// TODO: 他のプロダクトでも使い回しできるようにしたい
+		function isScrollEnd() {
+			const HANDE = 50;
+			const maxScroll = $(el).find('>div').innerHeight() - $(el).innerHeight();
+			return $(el).scrollTop() + HANDE >= maxScroll;
+		}
 	}
 
 	render() {
@@ -75,7 +80,10 @@ export default class extends Component {
 				ref={(el)=> {
 					this.doAfterRendering(()=> {
 						$(el).scrollTop(y);
-						bindShowDialogWhenScrollEnd(el);
+						{/*TODO: 無限ループ問題*/}
+						{/*this.bindScrollEnd(el, ()=> {
+							document.app.setState({ DialogLetsShareOpen: true });
+						});*/}
 					});
 				}}
 				className="forAppBar scroll"
