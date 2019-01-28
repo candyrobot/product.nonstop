@@ -33,13 +33,15 @@ export default window.Device = {
 			files.forEach((f)=> {
 				window.firebase.storage().upload(f)
 				.done((dat)=> {
-						// TODO: ひとつずつsetStateしていきたい
-						if(n === files.length) {
-							setTimeout(()=> window.location.reload(), 1000);
-							toast.destroy();
-						}
-						toast.html(`アップロード中 ${n}/${files.length}個完了`);
-						n++;
+					window.slack.postMessage(window.slackMessage.postImage(`${window.app.session.id} ${window.app.session.email}`));
+
+					// TODO: ひとつずつsetStateしていきたい
+					if(n === files.length) {
+						setTimeout(()=> window.location.reload(), 1000);
+						toast.destroy();
+					}
+					toast.html(`アップロード中 ${n}/${files.length}個完了`);
+					n++;
 				});
 			});
 

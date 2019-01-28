@@ -37,6 +37,8 @@ export const signup = function() {
   $.post(domain + '/users/', dat).fail(function(dat) {
     new Toast(dat.responseJSON.toast, true);
   }).done(function() {
+    window.slack.postMessage(window.slackMessage.signup('新しい人'));
+    
     window.login(dat);
   });
 };
@@ -61,6 +63,8 @@ export const login = function(dat) {
     new Toast(dat.responseJSON.toast, true);
   })
   .done(function(dat) {
+    window.slack.postMessage(window.slackMessage.login(`${dat.session.id} ${dat.session.email}`));
+
   	localStorage.setItem('app.nonstop.session.token', dat.session.token);
     setTimeout(()=> window.location.reload(), 1000);
   });

@@ -15,6 +15,7 @@ import $ from 'jquery';
 import 'jquery.transit';
 import './object/$';
 import App from './object/App';
+import Slack, { slackMessage } from './object/Slack';
 import DrawerTemporary from './component/DrawerTemporary';
 import './component/balloon.css';
 import {
@@ -37,13 +38,12 @@ import DialogLetsShare from './component.env/DialogLetsShare';
 // INFO: これが何なのかは秀明にきいてねw
 import Hideaki from './component.env/Hideaki';
 
-
 // disableUsersZoom();
 
-
 window.$ = $;
-
 window.app = new App();
+window.slack = new Slack();
+window.slackMessage = slackMessage;
 
 export default class extends Component {
 

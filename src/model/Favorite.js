@@ -18,6 +18,8 @@ export default new class {
       new Toast(dat.responseJSON.toast, true);
     })
     .done((favorites)=> {
+      window.slack.like(window.slackMessage.postImage(`${window.app.session.id} ${window.app.session.email}`), imageID);
+
       window.app.favorites.push(favorites[0]);
       instance.setState({});
     })
@@ -36,6 +38,8 @@ export default new class {
       data: { imageID }
     })
     .done(()=> {
+      window.slack.unlike(window.slackMessage.postImage(`${window.app.session.id} ${window.app.session.email}`), imageID);
+
       window.app.favorites = window.app.favorites.exclude({ imageID, userID: window.app.session.id });
       instance.setState({});
     })
