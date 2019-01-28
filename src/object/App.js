@@ -10,7 +10,7 @@ import {
 // const Server = {
 //   firestore: {
 //     load: ()=> {
-      
+
 //     }
 //   },
 //   heroku: {
@@ -61,6 +61,10 @@ export default class {
       if (n === 2)
         this._doAfterAllLoading();
     });
+  }
+
+  isAdmin() {
+    return this.isLoaded() && this.isLogined() && this.session && this.session.id === 1
   }
 
   isLoaded() {

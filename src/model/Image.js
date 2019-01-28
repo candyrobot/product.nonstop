@@ -8,6 +8,10 @@ export default window.Image = new class {
 
 	}
 
+	delete(imageID) {
+		window.firebase.firestore().delete(imageID);
+	}
+
 	// 命名だけよかった
 	// saveUrl(url) {
 	// }

@@ -45,11 +45,16 @@ export default class extends Component {
     <GridList
       id="component-images"
       cellHeight='auto' spacing={1}>
-      {images.map((image, i) => (
-        image.type === 'banner' ?
-        <Banner key={i} /> :
-        <GridListTileImage key={i} image={image} />
-      ))}
+      {images.map((image, i) => {
+        console.log(image.deleteFlag);
+        if (image.deleteFlag)
+          return;
+        return (
+          image.type === 'banner' ?
+          <Banner key={i} /> :
+          <GridListTileImage key={i} image={image} />
+        );
+      })}
     </GridList>
     );
   }

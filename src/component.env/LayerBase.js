@@ -117,13 +117,23 @@ export default class extends Component {
 								image={window.app.images.find(imageID)}
 							/>
 
-							<IconButton
-								className="ReportIcon"
-								onClick={(e)=> {
-									document.app.setState({ DialogReport: true });
-								}}>
-								<ReportIcon />
-							</IconButton>
+							{window.app.isAdmin() ?
+								<h3 style={{ color: 'white' }}
+									onClick={(e)=> {
+										window.Image.delete(imageID);
+									}}>
+									削除
+								</h3>
+								:
+								<IconButton
+									className="ReportIcon"
+									onClick={(e)=> {
+										document.app.setState({ DialogReport: true });
+									}}>
+									<ReportIcon />
+								</IconButton>
+							}
+
 							<DialogReport imageID={imageID} />
 
 							<DialogCanDoWithLogin

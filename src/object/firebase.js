@@ -25,6 +25,14 @@ window.firebase.storage().upload = (f)=> {
 // firestore
 // - created_at.toDate().getTime()
 
+window.firebase.firestore().delete = (imageID)=> {
+  const db = window.firebase.firestore();
+  var ref = db.collection('images').doc(imageID);
+  var setWithMerge = ref.set({
+    deleteFlag: true
+  }, { merge: true });
+};
+
 window.firebase.firestore().getImages = (fn)=> {
   // Initialize Cloud Firestore through Firebase
   var db = window.firebase.firestore();
