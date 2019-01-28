@@ -53,7 +53,7 @@ class Route {
   }
 
   saveState() {
-    this.replaceHistory(Object.assign(window.history.state, {
+    this.replaceHistory(Object.assign(window.history.state || {}, {
       forAppBar_scrollTop: $('.forAppBar').scrollTop(),
       imagesHorizontal_scrollLeft: $('.component-images-horizontal').scrollLeft(),
       areaRecommendation_open: $('.area-recommendation').is(':visible')

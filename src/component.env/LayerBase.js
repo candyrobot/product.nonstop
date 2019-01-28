@@ -28,7 +28,8 @@ export default class extends Component {
 			this.setState({ open: true });
 		}
 		else if (!window.app.kakinzumi) {
-			document.app.DialogCanDoWithKakin.xxx('保存するには課金します');
+			console.log('TODO: ここ作ってないから通るはずない');
+			// document.app.DialogCanDoWithKakin.xxx('保存するには課金します');
 		}
 		else {
 			console.log('TODO: 全画面で見る');
