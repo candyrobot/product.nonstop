@@ -33,7 +33,9 @@ export default window.Device = {
 			files.forEach((f)=> {
 				window.firebase.storage().upload(f)
 				.done((dat)=> {
-					window.slack.postMessage(window.slackMessage.postImage(`${window.app.session.id} ${window.app.session.email}`));
+					window.slack.postMessage(window.slackMessage.postImage(
+						window.app.session ? `${window.app.session.id} ${window.app.session.email}` : '未ログイン'
+					));
 
 					// TODO: ひとつずつsetStateしていきたい
 					if(n === files.length) {

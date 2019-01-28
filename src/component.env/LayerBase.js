@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
+import IconButton from '@material-ui/core/IconButton';
+import ReportIcon from '@material-ui/icons/Report';
 import {
 	loadImage,
 	countUp
@@ -12,6 +14,7 @@ import GridListImage from '../component/GridListImage';
 import DialogCanDoWithLogin from '../component.env/DialogCanDoWithLogin';
 import PaperUser from '../component.env/PaperUser';
 import GridListTileImage from '../component.env/GridListTileImage';
+import DialogReport from '../component.env/DialogReport';
 // import {
 //   DrawerLetsSignup
 // } from '../component.env/drawer';
@@ -105,7 +108,7 @@ export default class extends Component {
 					}
 					else if (imageID) {
 						return (
-						<div>
+						<div className="LayerBase" style={{ position: 'relative' }}>
 							<GridListTileImage
 								onClick={this.handleClickThumbnail}
 								onClickOnFavorite={this.handleClickFavorite}
@@ -113,6 +116,16 @@ export default class extends Component {
 								guide={!window.app.session}
 								image={window.app.images.find(imageID)}
 							/>
+
+							<IconButton
+								className="ReportIcon"
+								onClick={(e)=> {
+									document.app.setState({ DialogReport: true });
+								}}>
+								<ReportIcon />
+							</IconButton>
+							<DialogReport imageID={imageID} />
+
 							<DialogCanDoWithLogin
 								html='保存するにはログインします'
 								open={this.state.open}

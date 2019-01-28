@@ -56,7 +56,8 @@ export default class extends Component {
   state = {
     conspicuousShowingIndex: 2,
     DialogWhatIsThisAppOpen: true,
-    DialogLetsShareOpen: true
+    DialogLetsShareOpen: true,
+    DialogReport: false,
   };
 
   constructor() {
