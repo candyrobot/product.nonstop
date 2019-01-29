@@ -10,6 +10,7 @@ export default window.Image = new class {
 
 	delete(imageID) {
 		window.firebase.firestore().delete(imageID);
+		alert('削除しました');
 	}
 
 	// 命名だけよかった

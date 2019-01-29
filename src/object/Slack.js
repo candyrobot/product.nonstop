@@ -3,7 +3,7 @@ export default class {
 	// INFO: https://qiita.com/ykhirao/items/3b19ee6a1458cfb4ba21
 	// INFO: xxxx-xxxxxxxxx-xxxx の形
 	// INFO: 設定を変えるとトークンが変わる可能性がある
-	token = 'xoxp-134701714128-134701714240-534778860050-403c02703082c15d296ee0f7d620980d'
+	token = 'xoxp-134701714128-134701714240-535034012801-a0bbb411130cc7127d66b52f8c276622'
 
 	postMessage(text = ':heartpulse:', opt = {}) {
 		$.ajax({

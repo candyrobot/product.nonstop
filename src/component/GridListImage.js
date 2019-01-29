@@ -46,7 +46,6 @@ export default class extends Component {
       id="component-images"
       cellHeight='auto' spacing={1}>
       {images.map((image, i) => {
-        console.log(image.deleteFlag);
         if (image.deleteFlag)
           return;
         return (
