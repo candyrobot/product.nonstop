@@ -26,6 +26,17 @@ export default class extends Component {
 		scrollTop: parseInt(localStorage.getItem('app.nonstop.forAppBar_scrollTop'))
 	}
 
+	constructor(props) {
+		super(props);
+		this.doAfterRendering(()=> {
+			$(this.elForAppBar).find('.Pic, .message').filter((i)=> i < 10).show();
+		
+			this.bindScrollEnd(this.elForAppBar, ()=> {
+				console.log('end');
+			});
+		});
+	}
+
 	handleClickThumbnail = (inherit)=> {
 		if (!window.app.isLogined()) {
 			this.setState({ open: true });
@@ -54,22 +65,30 @@ export default class extends Component {
 
 	doAfterRendering(callback) {
 		// TODO: 正確に補足できていない
+		// TODO: 正確に補足できていない
+		// TODO: 正確に補足できていない
+		// TODO: 正確に補足できていない
+		// TODO: 正確に補足できていない
+		// TODO: 正確に補足できていない
+		// TODO: 正確に補足できていない
+		// TODO: 正確に補足できていない
 		setTimeout(()=> {
 			callback();
-		}, 1000);
+		}, 1500);
 	}
 
-	// bindScrollEnd(el, callback) {
-	// 	$(el).on('scroll', ()=> {
-	// 		this.isScrollEnd(el) && callback();
-	// 	});
-	// }
+	bindScrollEnd(el, callback) {
+		$(el).on('scroll', ()=> {
+			this.isScrollEnd(el) && callback();
+		});
+	}
 
 	// TODO: 判定がガバガバ.
 	// TODO: 他のプロダクトでも使い回しできるようにしたい
-	isScrollEnd(el) {
+	isScrollEnd() {
+		const el = this.elForAppBar;
 		const HANDE = 50;
-		const maxScroll = $(el).find('>div').innerHeight() - $(el).innerHeight();
+		const maxScroll = $(el).find('>*').innerHeight() - $(el).innerHeight();
 		return $(el).scrollTop() + HANDE >= maxScroll;
 	}
 
@@ -82,6 +101,7 @@ export default class extends Component {
 			<AppBar style={{ zIndex: 1, boxShadow: '0 2px 10px rgba(0,0,0,.5)' }} />
 			<div
 				ref={(el)=> {
+					this.elForAppBar = el;
 					this.doAfterRendering(()=> {
 						$(el).scrollTop(y);
 						{/*TODO: 無限ループ問題*/}
