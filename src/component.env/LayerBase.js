@@ -59,18 +59,18 @@ export default class extends Component {
 		}, 1000);
 	}
 
-	bindScrollEnd(el, callback) {
-		$(el).on('scroll', ()=> {
-			isScrollEnd() && callback();
-		});
+	// bindScrollEnd(el, callback) {
+	// 	$(el).on('scroll', ()=> {
+	// 		this.isScrollEnd(el) && callback();
+	// 	});
+	// }
 
-		// TODO: 判定がガバガバ.
-		// TODO: 他のプロダクトでも使い回しできるようにしたい
-		function isScrollEnd() {
-			const HANDE = 50;
-			const maxScroll = $(el).find('>div').innerHeight() - $(el).innerHeight();
-			return $(el).scrollTop() + HANDE >= maxScroll;
-		}
+	// TODO: 判定がガバガバ.
+	// TODO: 他のプロダクトでも使い回しできるようにしたい
+	isScrollEnd(el) {
+		const HANDE = 50;
+		const maxScroll = $(el).find('>div').innerHeight() - $(el).innerHeight();
+		return $(el).scrollTop() + HANDE >= maxScroll;
 	}
 
 	render() {
@@ -85,9 +85,9 @@ export default class extends Component {
 					this.doAfterRendering(()=> {
 						$(el).scrollTop(y);
 						{/*TODO: 無限ループ問題*/}
-						{/*this.bindScrollEnd(el, ()=> {
-							document.app.setState({ DialogLetsShareOpen: true });
-						});*/}
+						// this.bindScrollEnd(el, ()=> {
+						// 	document.app.setState({ DialogLetsShareOpen: true });
+						// });
 					});
 				}}
 				className="forAppBar scroll"
@@ -98,6 +98,8 @@ export default class extends Component {
 					}));
 
 					loadImage();
+
+					// this.isScrollEnd(v.target) && this.setState({});
 				}}
 			>
 				{window.app && window.app.images && (()=> {

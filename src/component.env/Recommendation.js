@@ -29,7 +29,9 @@ export default class extends Component {
 				className="component-images-horizontal scroll"
 				style={{ overflowX: 'scroll' }}
 				onScroll={()=> loadImage()}>
-				{Image.sortByRelatedEffort(imageID).map((image, i)=> <GridListTileImage key={i} image={image} />)}
+				{Image.sortByRelatedEffort(imageID).map((image, i)=> {
+					return <GridListTileImage key={i} image={image} />
+				})}
 			</div>
 			<div className="close" onClick={()=> this.close()}>×</div>
 		</div>
