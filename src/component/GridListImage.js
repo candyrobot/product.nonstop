@@ -13,7 +13,6 @@ class Banner extends Component {
     return (
     <div
       style={{ 
-        display: 'none',
         padding: undefined, width: undefined, height: undefined
       }}
       className="message"
