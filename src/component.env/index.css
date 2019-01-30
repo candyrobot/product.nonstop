@@ -7,8 +7,13 @@
   background-color: black;
   /*INFO: この数字はてきとー*/
   z-index: 99999999;
+  display: flex;
 }
-body > .fullscreenImage > img {
+body > .fullscreenImage > .imageContainer {
+  display: flex;
+  align-items: center;
+}
+body > .fullscreenImage > .imageContainer > img {
   width: 100%;
 }
 

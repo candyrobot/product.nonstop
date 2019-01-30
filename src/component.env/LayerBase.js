@@ -47,7 +47,7 @@ export default class extends Component {
 		// }
 		else {
 			const imageUrl = window.app.images.find(this.props.imageID).url;
-			const $el = $(`<div class="fullscreenImage"><img src="${imageUrl}"></div>`)
+			const $el = $(`<div class="fullscreenImage"><div class="imageContainer"><img src="${imageUrl}"></div></div>`)
 			.appendTo('body')
 			.on('click', function() {
 				$el.remove();
