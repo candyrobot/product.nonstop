@@ -41,12 +41,17 @@ export default class extends Component {
 		if (!window.app.isLogined()) {
 			this.setState({ open: true });
 		}
-		else if (!window.app.kakinzumi) {
-			console.log('TODO: ここ作ってないから通るはずない');
+		// else if (!window.app.kakinzumi) {
+		// 	console.log('TODO: ここ作ってないから通るはずない');
 			// document.app.DialogCanDoWithKakin.xxx('保存するには課金します');
-		}
+		// }
 		else {
-			console.log('TODO: 全画面で見る');
+			const imageUrl = window.app.images.find(this.props.imageID).url;
+			const $el = $(`<div class="fullscreenImage"><img src="${imageUrl}"></div>`)
+			.appendTo('body')
+			.on('click', function() {
+				$el.remove();
+			});
 		}
 	};
 

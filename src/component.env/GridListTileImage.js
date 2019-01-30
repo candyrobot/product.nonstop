@@ -27,7 +27,7 @@ export default class extends Component {
 
     return (
     <Grow in={true}
-      style={{ transformOrigin: '0 0 0', display: 'none' }}
+      style={{ transformOrigin: '0 0 0' }}
     >
         {/*ref={(node)=> $(node).inView().length}*/}
       <GridListTile

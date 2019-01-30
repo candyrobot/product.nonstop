@@ -1,3 +1,18 @@
+ body > .fullscreenImage {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  /*INFO: この数字はてきとー*/
+  z-index: 99999999;
+}
+body > .fullscreenImage > img {
+  width: 100%;
+}
+
+
 .LayerBase .ReportIcon {
   position: fixed;
   right: 0;
