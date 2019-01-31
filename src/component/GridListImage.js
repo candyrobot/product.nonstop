@@ -38,7 +38,13 @@ export default class extends Component {
   }
 
   render() {
-    const images = this.props.images.reduce((a, image, i)=> {
+
+    const images = this.props.images
+    .filter((i)=> !i.deleteFlag)
+    .reduce((a, image, i)=> {
+      if (i >= this.props.initialDisplayNum)
+        return a;
+
       i === 0 || i % 12 || a.push({ type: 'banner' });
       
       // image.hiddenToPerformance = i >= 10 + this.xxxxx();
@@ -58,9 +64,6 @@ export default class extends Component {
         // return;
         // if (image.hiddenToPerformance)
         //   return;
-
-        if (image.deleteFlag)
-          return;
         
         return (
           image.type === 'banner' ?

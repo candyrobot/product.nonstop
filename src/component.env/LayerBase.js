@@ -179,12 +179,12 @@ export default class extends Component {
 							>
 								関連
 							</h5>
-							<GridListImage images={images} />
+							<GridListImage initialDisplayNum="8" images={images} />
 						</div>
 						)
 					}
 					else {
-						return <GridListImage images={images} />
+						return <GridListImage initialDisplayNum="8" images={images} />
 					}
 				})()}
 			</div>

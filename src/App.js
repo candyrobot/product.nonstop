@@ -156,6 +156,7 @@ export default class extends Component {
           </Fab>
           */}
           <Recommendation
+            initialDisplayNum="6"
             instance={(o)=> this.recommendation = o}
             imageID={imageID}
           />

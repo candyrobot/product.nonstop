@@ -13,12 +13,25 @@ export default class extends Component {
 			open: this.props.open
 		};
 	}
+
+	getImages() {
+		return Image.sortByRelatedEffort(this.props.imageID).filter((_, i)=> {
+			return i < this.props.initialDisplayNum
+		})
+	}
+	
+	open(el) {
+		$(el).show(300, ()=> {
+			$('.component-images-horizontal').scrollLeft(window.history.state && window.history.state.imagesHorizontal_scrollLeft || 0)
+			loadImage();
+		});
+	}
+	
+	close() {
+		this.setState({ open: false });
+	}
+
 	render() {
-		const imageID = this.props.imageID;
-
-		if (imageID === undefined)
-			return null;
-
 		return (
 		<div
 			ref={(el)=> this.state.open ? this.open(el) : $(el).hide(300)}
@@ -29,21 +42,12 @@ export default class extends Component {
 				className="component-images-horizontal scroll"
 				style={{ overflowX: 'scroll' }}
 				onScroll={()=> loadImage()}>
-				{Image.sortByRelatedEffort(imageID).map((image, i)=> {
+				{this.getImages().map((image, i)=> {
 					return <GridListTileImage key={i} image={image} />
 				})}
 			</div>
 			<div className="close" onClick={()=> this.close()}>×</div>
 		</div>
 		);
-	}
-	open(el) {
-		$(el).show(300, ()=> {
-			$('.component-images-horizontal').scrollLeft(window.history.state && window.history.state.imagesHorizontal_scrollLeft || 0)
-			loadImage();
-		});
-	}
-	close() {
-		this.setState({ open: false });
 	}
 }
