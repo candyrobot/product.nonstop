@@ -17,21 +17,22 @@ import Image from '../component.env/Image';
 export default class extends Component {
 
 	elForAppBar
+	disableSetState = false
 
 	state = {
-		scrollTop: parseInt(localStorage.getItem('app.nonstop.forAppBar_scrollTop'))
+		initialDisplayNum: 8
 	}
 
-	constructor(props) {
-		super(props);
-		this.doAfterRendering(()=> {
-			$(this.elForAppBar).find('.Pic, .message').filter((i)=> i < 10).show();
+	// constructor(props) {
+	// 	super(props);
+	// 	this.doAfterRendering(()=> {
+	// 		$(this.elForAppBar).find('.Pic, .message').filter((i)=> i < 10).show();
 		
-			this.bindScrollEnd(this.elForAppBar, ()=> {
-				console.log('end');
-			});
-		});
-	}
+	// 		this.bindScrollEnd(this.elForAppBar, ()=> {
+	// 			console.log('end');
+	// 		});
+	// 	});
+	// }
 
 	doAfterRendering(callback) {
 		// TODO: 正確に補足できていない
@@ -49,17 +50,15 @@ export default class extends Component {
 
 	bindScrollEnd(el, callback) {
 		$(el).on('scroll', ()=> {
-			this.isScrollEnd(el) && callback();
+			this.isScrollIsAroundEnd(el) && callback();
 		});
 	}
 
-	// TODO: 判定がガバガバ.
 	// TODO: 他のプロダクトでも使い回しできるようにしたい
-	isScrollEnd() {
-		const el = this.elForAppBar;
-		const HANDE = 50;
-		const maxScroll = $(el).find('>*').innerHeight() - $(el).innerHeight();
-		return $(el).scrollTop() + HANDE >= maxScroll;
+	isScrollIsAroundEnd() {
+		const iMaxScroll = $(this.elForAppBar).find('>*').innerHeight() - $(this.elForAppBar).innerHeight();
+		const iAroundEnd = iMaxScroll - 500;
+		return $(this.elForAppBar).scrollTop() >= iAroundEnd;
 	}
 
 	onScroll(v) {
@@ -71,7 +70,10 @@ export default class extends Component {
 
 		loadImage();
 
-		// this.isScrollEnd(v.target) && this.setState({});
+		if (this.isScrollIsAroundEnd() && !this.disableSetState) {
+			this.setState({ initialDisplayNum: this.state.initialDisplayNum + 8 });
+			this.disableSetState = true;
+		}
 	}
 
 	ref(el) {
@@ -87,14 +89,16 @@ export default class extends Component {
 	}
 
 	render() {
+		this.disableSetState = false;
+
 		const images = this.props.images;
 		const imageID = this.props.imageID;
 		return (
 		<div className="LayerBase">
 			<AppBar style={{ zIndex: 1, boxShadow: '0 2px 10px rgba(0,0,0,.5)' }} />
 			<div
-				ref={()=> this.ref()}
-				onScroll={()=> this.onScroll()}
+				ref={(el)=> this.ref(el)}
+				onScroll={(v)=> this.onScroll(v)}
 				className="forAppBar scroll"
 				style={{ overflowY: 'scroll' }}
 			>
@@ -121,13 +125,13 @@ export default class extends Component {
 							>
 								関連
 							</h5>
-							<GridListImage initialDisplayNum="8" images={images} />
+							<GridListImage initialDisplayNum={this.state.initialDisplayNum} images={images} />
 						</div>
 						)
 					}
 
 					else {
-						return <GridListImage initialDisplayNum="8" images={images} />
+						return <GridListImage initialDisplayNum={this.state.initialDisplayNum} images={images} />
 					}
 				})()}
 			</div>

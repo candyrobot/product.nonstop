@@ -64,8 +64,10 @@ body > .fullscreenImage > .imageContainer > img {
 }
 
 .component-images-horizontal {
+  margin: 0;
   padding: 5px;
   white-space: nowrap;
+  overflow-x: scroll;
 }
 .component-images-horizontal > li {
   display: inline-block;
