@@ -62,39 +62,41 @@ export default class extends Component {
 		return $(el).scrollTop() + HANDE >= maxScroll;
 	}
 
+	onScroll(v) {
+		const y = $(v.target).scrollTop();
+		
+		Route.replaceHistory(Object.assign(window.history.state || {}, {
+			forAppBar_scrollTop: y,
+		}));
+
+		loadImage();
+
+		// this.isScrollEnd(v.target) && this.setState({});
+	}
+
+	ref(el) {
+		const y = window.history.state && window.history.state.forAppBar_scrollTop || 0;
+		this.elForAppBar = el;
+		this.doAfterRendering(()=> {
+			$(el).scrollTop(y);
+			{/*TODO: 無限ループ問題*/}
+			// this.bindScrollEnd(el, ()=> {
+			// 	document.app.setState({ DialogLetsShareOpen: true });
+			// });
+		});
+	}
+
 	render() {
 		const images = this.props.images;
 		const imageID = this.props.imageID;
-		const y = window.history.state && window.history.state.forAppBar_scrollTop || 0;
 		return (
 		<div className="LayerBase">
 			<AppBar style={{ zIndex: 1, boxShadow: '0 2px 10px rgba(0,0,0,.5)' }} />
 			<div
-				ref={(el)=> {
-					this.elForAppBar = el;
-					this.doAfterRendering(()=> {
-						$(el).scrollTop(y);
-						{/*TODO: 無限ループ問題*/}
-						// this.bindScrollEnd(el, ()=> {
-						// 	document.app.setState({ DialogLetsShareOpen: true });
-						// });
-					});
-				}}
+				ref={()=> this.ref()}
+				onScroll={()=> this.onScroll()}
 				className="forAppBar scroll"
 				style={{ overflowY: 'scroll' }}
-				onScroll={(v)=> {
-					const y = $(v.target).scrollTop();
-					
-					Route.replaceHistory(Object.assign(window.history.state || {}, {
-						forAppBar_scrollTop: y,
-					}));
-
-					loadImage();
-
-					// this.isScrollEnd(v.target) && this.setState({});
-
-
-				}}
 			>
 				{window.app && window.app.images && (()=> {
 					if (Route.is('user')) {
@@ -102,6 +104,7 @@ export default class extends Component {
 							return <PaperUser key={i} user={user} />
 						})
 					}
+
 					else if (imageID) {
 						return (
 						<div>
@@ -122,6 +125,7 @@ export default class extends Component {
 						</div>
 						)
 					}
+
 					else {
 						return <GridListImage initialDisplayNum="8" images={images} />
 					}
