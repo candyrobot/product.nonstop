@@ -20,17 +20,17 @@ export default class extends Component {
 
 	getImages() {
 		return Image.sortByRelatedEffort(this.props.imageID).filter((_, i)=> {
-			return i < this.props.initialDisplayNum
+			return i < this.state.initialDisplayNum
 		})
 	}
-	
+
 	open(el) {
 		$(el).show(300, ()=> {
 			$('.component-images-horizontal').scrollLeft(window.history.state && window.history.state.imagesHorizontal_scrollLeft || 0)
 			loadImage();
 		});
 	}
-	
+
 	close() {
 		this.setState({ open: false });
 	}
@@ -38,7 +38,7 @@ export default class extends Component {
 	// TODO: 他のプロダクトでも使い回しできるようにしたい
 	isScrollIsAroundEnd(el) {
 		const iMaxScroll = $(el).find('>*').reduce((p, el)=> p + $(el).outerWidth(true), 0) - $(el).innerWidth();
-		const iAroundEnd = iMaxScroll - 500;
+		const iAroundEnd = iMaxScroll - 200;
 		return $(el).scrollLeft() >= iAroundEnd;
 	}
 
