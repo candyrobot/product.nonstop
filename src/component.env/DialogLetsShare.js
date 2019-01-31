@@ -9,6 +9,18 @@ import DialogSlide from '../component/DialogSlide';
 
 export default class extends React.Component {
 
+	onClick() {
+		localStorage.setItem('app.nonstop.time.lastShared', new Date().getTime())
+	}
+
+	shouldOpen() {
+		const v = localStorage.getItem('app.nonstop.time.lastShared');
+		if (v === null)
+			return true;
+		const iPast = parseInt(localStorage.getItem('app.nonstop.time.lastShared'));
+		return (new Date().getTime() - iPast) > 1000 * 60 * 60 * 24;
+	}
+
 	render() {
 		const t = encodeURI('Tumblrより画像収拾が8.3倍捗ると話題『nonStop』　pic.twitter.com/WREvim9ydM　リンク: ');
 		const u = encodeURI('https://nonstop-vr.firebaseapp.com/');
@@ -16,7 +28,11 @@ export default class extends React.Component {
 		const o = encodeURI(window.location.href);
 
 		return (
-		<DialogSlide className='Dialog-margin-small' {...this.props}>
+		<DialogSlide
+			className='Dialog-margin-small'
+			open={this.shouldOpen() && this.props.open}
+			onClose={this.props.onClose}
+		>
 			<div id="component-LetsShare"
 				className="component-suggestion paper"
 			>
@@ -35,6 +51,7 @@ export default class extends React.Component {
 						target="_blank"
 						style={{ padding: '.5em 1em' }}
 						className="button"
+						onClick={()=> this.onClick()}
 						href={
 						`https://twitter.com/intent/tweet?text=${t}&url=${u}&original_referer=${o}&hashtags=${h}`
 						}
