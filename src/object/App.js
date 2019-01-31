@@ -46,7 +46,14 @@ export default class {
 
     // TODO: herokuが重い。改善しないと表示が遅い
     // いやfirebaseのほうが遅い
-    $.get(domain + '/application' + window.location.search, (dat)=> {
+    $.ajax({
+      type: 'GET',
+      url: domain + '/application' + window.location.search,
+      headers: {
+        'X-CSRF-Token': localStorage.getItem('app.nonstop.session.token')
+      }
+    })
+    .done((dat)=> {
       n++; console.log('heroku done.');
 
       this.users = dat.users;

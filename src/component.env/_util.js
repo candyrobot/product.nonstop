@@ -5,12 +5,6 @@ import Toast from '../object/Toast';
 // export const domain = "http://0.0.0.0:3000";
 export const domain = "https://with-one-account-prd.herokuapp.com";
 
-$.ajaxSetup({
-  headers: {
-  	'X-CSRF-Token': localStorage.getItem('app.nonstop.session.token')
-  }
-});
-
 // TODO:
 // 1. visibility: hiddenをvisibleに
 // 2. transitionを
@@ -38,8 +32,8 @@ export const signup = function() {
     new Toast(dat.responseJSON.toast, true);
   }).done(function() {
     window.slack.postMessage(window.slackMessage.signup('新しい人'));
-    
-    window.login(dat);
+
+    login(dat);
   });
 };
 
@@ -58,7 +52,11 @@ export const login = function(dat) {
     return;
   }
   startLoading();
-  return $.post(domain + '/users/login', dat)
+  return $.ajax({
+    type: 'POST',
+    url: domain + '/users/login',
+    data: dat,
+  })
   .fail(function(dat) {
     new Toast(dat.responseJSON.toast, true);
   })
