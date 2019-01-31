@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import {
-	loadImage,
 	countUp
 } from '../component.env/_util';
 import Route from '../object/Route';
@@ -27,7 +26,7 @@ export default class extends Component {
 	// 	super(props);
 	// 	this.doAfterRendering(()=> {
 	// 		$(this.elForAppBar).find('.Pic, .message').filter((i)=> i < 10).show();
-		
+
 	// 		this.bindScrollEnd(this.elForAppBar, ()=> {
 	// 			console.log('end');
 	// 		});
@@ -63,12 +62,10 @@ export default class extends Component {
 
 	onScroll(v) {
 		const y = $(v.target).scrollTop();
-		
+
 		Route.replaceHistory(Object.assign(window.history.state || {}, {
 			forAppBar_scrollTop: y,
 		}));
-
-		loadImage();
 
 		if (this.isScrollIsAroundEnd() && !this.disableSetState) {
 			this.setState({ initialDisplayNum: this.state.initialDisplayNum + 8 });

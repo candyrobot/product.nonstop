@@ -36,7 +36,7 @@ export default class extends Component {
         key={this.image.id} cols={this.image.featured ? 2 : 1} rows={this.image.featured ? 2 : 1}>
         <div
           className={'Pic-background ' + className}
-          data-load-image={this.image.url}
+          style={{ backgroundImage: `url(${this.image.url})` }}
           onClick={()=> onClick ? onClick(this.pushRoute) : this.pushRoute()}
         >
           <GridListTileBar

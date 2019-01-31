@@ -21,7 +21,6 @@ import './component/balloon.css';
 import {
   startLoading,
   stopLoading,
-  loadImage,
   query,
   disableUsersZoom
 } from './component.env/_util';
@@ -68,23 +67,19 @@ export default class extends Component {
 
     document.app = this;
 
-    $(window).on('scroll', loadImage);
-
     $(window).on('popstate', (e)=> {
       document.app.recommendation.setState({ open: window.history.state && window.history.state.areaRecommendation_open });
       this.setState({});
-      loadImage();
     });
 
     window.app.doAfterLoading = ()=> {
       stopLoading();
       this.setState({});
-      loadImage();
     };
 
     setInterval(()=> {
       this.setState({ DialogLetsShareOpen: true });
-    }, 
+    },
     // INFO: 2.5分
     1000 * 60 * 2.5);
   }

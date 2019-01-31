@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import {
-	loadImage
-} from './_util';
 import GridListTileImage from '../component.env/GridListTileImage';
 
 class ComponentImagesHorizontal extends Component {
@@ -62,7 +59,6 @@ export default class extends Component {
 	open(el) {
 		$(el).show(300, ()=> {
 			$('.component-images-horizontal').scrollLeft(window.history.state && window.history.state.imagesHorizontal_scrollLeft || 0)
-			loadImage();
 		});
 	}
 

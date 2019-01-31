@@ -1,8 +1,6 @@
 import $ from 'jquery';
-
 import {
   query,
-  loadImage
 } from '../component.env/_util';
 
 class Route {
@@ -116,7 +114,6 @@ const route = new Route({
 
     document.app.setState({});
     document.app.recommendation.setState({ open: false });
-    setTimeout(()=> loadImage(), 500);
   }
 });
 

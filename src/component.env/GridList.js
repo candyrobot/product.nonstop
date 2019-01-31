@@ -12,8 +12,7 @@ import {
 	toast,
 	isAlmostThere,
 	isAndroid,
-	showWebview,
-	loadImage
+	showWebview
 } from './_util';
 import Pic from './Pic';
 import Image from '../model/Image';
@@ -76,8 +75,6 @@ export default new class {
   }
 
   run(el) {
-    loadImage();
-
     $(el).find('#component-images .component-fav').on('click', function() {
       var imageID = $(this).closest('.Pic').data('imageid');
       Toggle.toggle(this, imageID);

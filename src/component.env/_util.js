@@ -5,20 +5,6 @@ import Toast from '../object/Toast';
 // export const domain = "http://0.0.0.0:3000";
 export const domain = "https://with-one-account-prd.herokuapp.com";
 
-// TODO:
-// 1. visibility: hiddenをvisibleに
-// 2. transitionを
-// 3. backgroundを持ってる自分or子孫要素にloadImage
-export const loadImage = ()=> {
-  $('[data-load-image]:not([style*="background-image"]):visible').inView().each(function() {
-    var url = $(this).data('load-image');
-    // console.log(url);
-    $(this).css({
-      backgroundImage: `url(${url})`
-    });
-  });
-};
-
 export const signup = function() {
   var dat;
   dat = {};
