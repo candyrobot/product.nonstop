@@ -13,7 +13,14 @@ export default new class {
       return;
     }
     startLoading();
-    $.post(domain + '/favorites', { imageID })
+    $.ajax({
+      type: 'POST',
+      url: domain + '/favorites',
+      data: { imageID },
+      headers: {
+        'X-CSRF-Token': localStorage.getItem('app.nonstop.session.token')
+      }
+    })
     .fail((dat)=> {
       new Toast(dat.responseJSON.toast, true);
     })
@@ -35,7 +42,10 @@ export default new class {
     $.ajax({
       type: 'DELETE',
       url: domain + '/favorites',
-      data: { imageID }
+      data: { imageID },
+      headers: {
+        'X-CSRF-Token': localStorage.getItem('app.nonstop.session.token')
+      }
     })
     .done(()=> {
       window.slack.postMessage(window.slackMessage.unlike(`${window.app.session.id} ${window.app.session.email}`), imageID);
