@@ -18,6 +18,12 @@ body > .fullscreenImage > .imageContainer > img {
 }
 
 
+.LayerBase {
+  display: flex;
+  height: 100%;
+  position: relative;
+  flex-direction: column;
+}
 .LayerBase .ReportIcon {
   position: fixed;
   right: 0;
@@ -81,12 +87,6 @@ body > .fullscreenImage > .imageContainer > img {
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 2px 20px rgba(0, 0, 0, .3);
-}
-.layer-1 {
-  display: flex;
-  height: 100%;
-  position: relative;
-  flex-direction: column;
 }
 
 .component-mediabox {

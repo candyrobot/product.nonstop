@@ -61,10 +61,6 @@ export default class extends Component {
       id="component-images"
       cellHeight='auto' spacing={1}>
       {images.map((image, i) => {
-        // return;
-        // if (image.hiddenToPerformance)
-        //   return;
-        
         return (
           image.type === 'banner' ?
           <Banner key={i} /> :
