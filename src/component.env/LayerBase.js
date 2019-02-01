@@ -9,6 +9,7 @@ import AppBar from '../component/AppBar';
 import GridListImage from '../component/GridListImage';
 import PaperUser from '../component.env/PaperUser';
 import Image from '../component.env/Image';
+import Favorites from '../component.env/Favorites';
 // import {
 //   DrawerLetsSignup
 // } from '../component.env/drawer';
@@ -93,45 +94,50 @@ export default class extends Component {
 		return (
 		<div className="LayerBase">
 			<AppBar style={{ zIndex: 1, boxShadow: '0 2px 10px rgba(0,0,0,.5)' }} />
-			<div
-				ref={(el)=> this.ref(el)}
-				onScroll={(v)=> this.onScroll(v)}
-				className="forAppBar scroll"
-				style={{ overflowY: 'scroll' }}
-			>
-				{window.app && window.app.images && (()=> {
-					if (Route.is('user')) {
-						return User.sortByMostHavingFavorites().map((user, i)=> {
-							return <PaperUser key={i} user={user} />
-						})
-					}
+			{window.app && window.app.images && (()=> {
+				if (Route.is('user')) {
+					return <Favorites data={window.app.favorites} />
+					// return User.sortByMostHavingFavorites().map((user, i)=> {
+					// 	 return <PaperUser key={i} user={user} />
+					// })
+				}
+				else {
+					return (
+					<div
+						ref={(el)=> this.ref(el)}
+						onScroll={(v)=> this.onScroll(v)}
+						className="forAppBar scroll"
+						style={{ overflowY: 'scroll' }}
+					>
+						{window.app && window.app.images && (()=> {
+							if (imageID) {
+								return (
+								<div>
+									<Image imageID={imageID} />
 
-					else if (imageID) {
-						return (
-						<div>
-							<Image imageID={imageID} />
-
-							<h5
-								style={{
-									color: 'white',
-									marginTop: 5,
-									marginBottom: 0,
-									padding: 10,
-									backgroundColor: '#ffffff14'
-								}}
-							>
-								関連
-							</h5>
-							<GridListImage initialDisplayNum={this.state.initialDisplayNum} images={images} />
-						</div>
-						)
-					}
-
-					else {
-						return <GridListImage initialDisplayNum={this.state.initialDisplayNum} images={images} />
-					}
-				})()}
-			</div>
+									<h5
+										style={{
+											color: 'white',
+											marginTop: 5,
+											marginBottom: 0,
+											padding: 10,
+											backgroundColor: '#ffffff14'
+										}}
+									>
+										関連
+									</h5>
+									<GridListImage initialDisplayNum={this.state.initialDisplayNum} images={images} />
+								</div>
+								)
+							}
+							else {
+								return <GridListImage initialDisplayNum={this.state.initialDisplayNum} images={images} />
+							}
+						})()}
+					</div>
+					)
+				}
+			})()}
 		</div>
 		);
 	}

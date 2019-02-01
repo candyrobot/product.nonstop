@@ -18,6 +18,21 @@ body > .fullscreenImage > .imageContainer > img {
 }
 
 
+.Favorite {
+  padding-left: 11px !important;
+  padding-right: 11px !important;
+  background-color: white;
+  border-bottom: 1px solid #ddd;
+  align-items: initial !important;
+}
+.Favorite .CardMedia {
+  height: 140px;
+  margin-top: 10px;
+  background-color: #ccc;
+  border-radius: 6px;
+}
+
+
 .LayerBase {
   display: flex;
   height: 100%;
