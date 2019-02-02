@@ -78,7 +78,7 @@ export default class extends Component {
 			<DialogReport imageID={imageID} />
 
 			<DialogCanDoWithLogin
-				html='保存するにはログインします'
+				html="保存するにはログインします"
 				open={this.state.open}
 				onClose={this.handleClose}
 			/>
