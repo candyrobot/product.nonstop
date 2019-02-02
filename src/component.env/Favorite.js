@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactList from 'react-list';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Card from '@material-ui/core/Card';
