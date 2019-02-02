@@ -26,7 +26,7 @@ body > .fullscreenImage > .imageContainer > img {
   align-items: initial !important;
 }
 .Favorite .CardMedia {
-  height: 140px;
+  padding-top: 60%;
   margin-top: 10px;
   background-color: #ccc;
   border-radius: 6px;

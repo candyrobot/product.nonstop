@@ -51,7 +51,7 @@ export default class extends Component {
 	}
 	render() {
 		return (
-		<div style={{ overflow: 'auto', maxHeight: '100%' }}>
+		<div className="scroll" style={{ overflow: 'auto', maxHeight: '100%' }}>
 			<ReactList
 				itemRenderer={(index, key)=> this.renderItem(index, key)}
 				length={this.props.data.length}
