@@ -57,7 +57,7 @@ export default class extends React.Component {
 						}
 						>
 						<i className="fab fa-twitter" style={{ paddingRight: 5 }}></i>
-						画像を増やしてもらう🌟
+						画像をもっと増やしてもらう🌟
 					</a>
 				</p>
 			</div>
