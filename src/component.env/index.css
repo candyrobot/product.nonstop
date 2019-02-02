@@ -42,6 +42,36 @@ body > .fullscreenImage > .imageContainer > img {
 }
 
 
+.Banner {
+  position: relative;
+  top: 0px;
+  margin: 0 1px 1px;
+  padding: 10px;
+  padding-left: 54px;
+  font-size: 11px;
+  color: #888;
+  font-weight: bold;
+  border-radius: 3px;
+  background-color: rgba(28, 161, 242, .8);
+  color: white;
+}
+.Banner:before {
+  content: "\f3cd";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  overflow: hidden;
+  font-size: 58px;
+  text-indent: 85%;
+  text-indent: 11px;
+  line-height: 32px;
+  opacity: 0.5;
+  font-family: "Font Awesome 5 Free";
+}
+
+
 .Favorite {
   padding-left: 11px !important;
   padding-right: 11px !important;
