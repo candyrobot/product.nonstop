@@ -19,8 +19,8 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import $ from 'jquery';
 import 'jquery.transit';
 import './object/$';
+import './object/Slack';
 import App from './object/App';
-import Slack, { slackMessage } from './object/Slack';
 import DrawerTemporary from './component/DrawerTemporary';
 import './component/balloon.css';
 import {
@@ -44,8 +44,6 @@ import Hideaki from './component.env/Hideaki';
 
 window.$ = $;
 window.app = new App();
-window.slack = new Slack();
-window.slackMessage = slackMessage;
 
 export default class extends Component {
 

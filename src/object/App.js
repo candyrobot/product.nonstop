@@ -4,7 +4,8 @@ import '../object/FileList';
 import '../object/firebase';
 import Image from '../model/Image';
 import {
-  domain
+  domain,
+  query
 } from '../component.env/_util';
 
 // const Server = {
@@ -26,6 +27,11 @@ export default class {
   users = []
   favorites = []
   constructor() {
+
+    if (query('utm_source') === 'homescreen') {
+      window.slack.postMessage('ホーム画面からアクセスされました');
+    }
+
     let n = 0;
 
     // Server.firestore.load((images)=> {

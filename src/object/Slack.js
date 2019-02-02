@@ -1,5 +1,6 @@
 import $ from 'jquery';
-export default class {
+
+class Slack {
 	// INFO: https://qiita.com/ykhirao/items/3b19ee6a1458cfb4ba21
 	// INFO: xxxx-xxxxxxxxx-xxxx の形
 	// INFO: 設定を変えるとトークンが変わる可能性がある
@@ -40,7 +41,7 @@ export default class {
 
 }
 
-export const slackMessage = {
+const slackMessage = {
 	login: (username)=> `
 	${username}さんがログインしました
 	`,
@@ -57,3 +58,6 @@ export const slackMessage = {
 	${username}さんが画像ID: ${imageID} をお気入りから外しました
 	`,
 };
+
+window.slack = new Slack();
+window.slackMessage = slackMessage;

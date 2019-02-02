@@ -13,7 +13,7 @@ import Toast from '../object/Toast';
 import {
   logout
 } from '../component.env/_util';
-import Route from '../object/Route';
+import Route from '../object.env/Route';
 
 export default class extends React.Component {
 
