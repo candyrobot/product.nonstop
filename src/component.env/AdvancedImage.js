@@ -49,7 +49,7 @@ export default class extends Component {
 		const imageID = this.props.imageID;
 
 		return (
-		<div className="Image" style={{ position: 'relative' }}>
+		<div className="Image" style={{ position: 'relative', width: '100%' }}>
 			<GridListTileImage
 				onClick={this.handleClickThumbnail}
 				onClickOnFavorite={this.handleClickFavorite}

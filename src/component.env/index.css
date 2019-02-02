@@ -17,10 +17,22 @@ body > .fullscreenImage > .imageContainer > img {
 }
 
 
-.Images > div {
+.headline {
+  width: 100%;
+  color: white;
+  marginTop: 5;
+  marginBottom: 0;
+  padding: 10;
+  backgroundColor: #ffffff14;
+}
+
+
+.ReactList > div {
   display: flex;
   flex-wrap: wrap;
 }
+
+
 .Image {
   position: relative;
   background-size: cover;

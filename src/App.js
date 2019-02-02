@@ -85,9 +85,6 @@ export default class extends Component {
   }
 
   render() {
-    // INFO: 源のdataを書き換えてはいけない
-    // Object.assign(window.app, window.app[query('method')](query('param')));
-    const dat = window.app[query('method')](query('param'));
 
     const imageID = query('method') === 'image' && query('param') && query('param').id;
 
@@ -125,7 +122,7 @@ export default class extends Component {
 
       {/* INFO: from this line z-index: initial */}
 
-      <LayerBase images={dat.images.filter((i)=> !i.deleteFlag)} imageID={imageID} />
+      <LayerBase />
 
       {/*INFO: LayerBaseより手前にだしたいものはこの中へ（position: fixed非推奨。ボタンが被る）*/}
       <div className="component-layer layer-2" style={{ top: 55 }}>

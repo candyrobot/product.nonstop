@@ -7,7 +7,7 @@ import Route from '../object/Route';
 import ButtonToggleFavorite from '../component.env/ButtonToggleFavorite';
 import Banner from '../component.env/Banner';
 
-export class Image extends Component {
+export default class extends Component {
 	isNotFavoritedAnybody(dat) {
 		return !window.app.favorites.where({ imageID: dat.id }).length
 	}
@@ -29,23 +29,5 @@ export class Image extends Component {
 			/>
 		</div>
 		);
-	}
-}
-
-export default class extends Component {
-	renderItem(i, key) {
-		if (i === 0 || i % 12)
-			return <Image key={key} dat={this.props.data[i]} />;
-		else
-			return [<Banner key="banner" />, <Image key={key} dat={this.props.data[i]} />];
-	}
-	render() {
-		return (
-		<div className="Images scroll" style={{ overflow: 'auto', maxHeight: '100%' }}>
-			<ReactList
-				itemRenderer={(index, key)=> this.renderItem(index, key)}
-				length={this.props.data.length}
-			/>
-		</div>);
 	}
 }

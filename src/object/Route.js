@@ -19,6 +19,12 @@ class Route {
     );
   }
 
+  // getCurrent() {
+  //   return routes.filter((v)=> {
+  //     return query('method') === v.method && query('param') === v.param
+  //   })[0].variable
+  // }
+
   /**
    * @param  {string} variable [description]
    * @param  {object} param    [description]
