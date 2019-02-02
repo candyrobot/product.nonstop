@@ -9,6 +9,11 @@ class Route {
   constructor(setup = {}) {
     this.doAfterPushing = setup.doAfterPushing || function() {};
     setup.routes.forEach((r)=> this.set(r));
+
+    // INFO: redirect
+    this.routes
+      .filter((v)=> v.query.method === query('method')).length === 0 &&
+        this.push(this.routes.where({ default: true })[0].variable);
   }
 
   is(variable) {
@@ -85,6 +90,7 @@ class Route {
 
 const routes = [
   {
+    default: true,
     variable: 'imagesSortedByNewer',
     query: { method: 'image' },
   },
@@ -112,6 +118,10 @@ const routes = [
   },
 ];
 
+if (query('utm_source') === 'homescreen') {
+  window.slack.postMessage('ホーム画面からアクセスされました');
+}
+
 const route = new Route({
   routes,
   doAfterPushing: function() {
@@ -122,9 +132,6 @@ const route = new Route({
     document.app.recommendation.setState({ open: false });
   }
 });
-
-if (window.location.search === '')
-  route.push('imagesSortedByNewer')
 
 // 使い方: route.push('imagesSortedByPopular');
 // 使い方: route.push('image', { id: 1 });
