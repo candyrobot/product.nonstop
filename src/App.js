@@ -125,7 +125,7 @@ export default class extends Component {
 
       {/* INFO: from this line z-index: initial */}
 
-      <LayerBase images={dat.images} imageID={imageID} />
+      <LayerBase images={dat.images.filter((i)=> !i.deleteFlag)} imageID={imageID} />
 
       {/*INFO: LayerBaseより手前にだしたいものはこの中へ（position: fixed非推奨。ボタンが被る）*/}
       <div className="component-layer layer-2" style={{ top: 55 }}>
