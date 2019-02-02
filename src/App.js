@@ -28,8 +28,6 @@ import {
 } from './component.env/_util';
 import './component.env/dialog.css';
 import Overlays from './component.env/_overlays';
-// import GridList from './component.env/GridList';
-// import BottomNavigation from './component.env/bottomNavigation';
 import LayerBase from './component.env/LayerBase';
 import Recommendation from './component.env/Recommendation';
 import DialogWhatIsThisApp from './component.env/DialogWhatIsThisApp';

@@ -7,8 +7,7 @@ import Route from '../object/Route';
 import User from '../model/User';
 import AppBar from '../component/AppBar';
 import GridListImage from '../component/GridListImage';
-import PaperUser from '../component.env/PaperUser';
-import Image from '../component.env/Image';
+import AdvancedImage from '../component.env/AdvancedImage';
 import Favorites from '../component.env/Favorites';
 // import {
 //   DrawerLetsSignup
@@ -98,7 +97,6 @@ export default class extends Component {
 				if (Route.is('user')) {
 					return <Favorites data={window.app.favorites} />
 					// return User.sortByMostHavingFavorites().map((user, i)=> {
-					// 	 return <PaperUser key={i} user={user} />
 					// })
 				}
 				else {
@@ -113,7 +111,7 @@ export default class extends Component {
 							if (imageID) {
 								return (
 								<div>
-									<Image imageID={imageID} />
+									<AdvancedImage imageID={imageID} />
 
 									<h5
 										style={{
