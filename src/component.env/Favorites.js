@@ -19,7 +19,7 @@ class Favorite extends Component {
 			return '@' + (dat.userID * Math.random()).toString(36).slice(-8)
 	}
 	render() {
-		const dat = window.app.favorites[this.props.i];
+		const dat = this.props.dat;
 		return (
 			<ListItem className="Favorite">
 				<Avatar className="Avatar">
@@ -47,7 +47,7 @@ class Favorite extends Component {
 
 export default class extends Component {
 	renderItem(i, key) {
-		return <Favorite key={key} i={i} />;
+		return <Favorite key={key} dat={this.props.data[i]} />;
 	}
 	render() {
 		return (

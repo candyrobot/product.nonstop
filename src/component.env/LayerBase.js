@@ -8,6 +8,7 @@ import User from '../model/User';
 import AppBar from '../component/AppBar';
 import GridListImage from '../component/GridListImage';
 import AdvancedImage from '../component.env/AdvancedImage';
+import Images from '../component.env/Images';
 import Favorites from '../component.env/Favorites';
 // import {
 //   DrawerLetsSignup
@@ -99,6 +100,9 @@ export default class extends Component {
 					// return User.sortByMostHavingFavorites().map((user, i)=> {
 					// })
 				}
+				else if (!imageID) {
+					return <Images data={images} />
+				}
 				else {
 					return (
 					<div
@@ -107,31 +111,19 @@ export default class extends Component {
 						className="forAppBar scroll"
 						style={{ overflowY: 'scroll' }}
 					>
-						{window.app && window.app.images && (()=> {
-							if (imageID) {
-								return (
-								<div>
-									<AdvancedImage imageID={imageID} />
-
-									<h5
-										style={{
-											color: 'white',
-											marginTop: 5,
-											marginBottom: 0,
-											padding: 10,
-											backgroundColor: '#ffffff14'
-										}}
-									>
-										関連
-									</h5>
-									<GridListImage initialDisplayNum={this.state.initialDisplayNum} images={images} />
-								</div>
-								)
-							}
-							else {
-								return <GridListImage initialDisplayNum={this.state.initialDisplayNum} images={images} />
-							}
-						})()}
+						<AdvancedImage imageID={imageID} />
+						<h5
+							style={{
+								color: 'white',
+								marginTop: 5,
+								marginBottom: 0,
+								padding: 10,
+								backgroundColor: '#ffffff14'
+							}}
+						>
+							関連
+						</h5>
+						<GridListImage initialDisplayNum={this.state.initialDisplayNum} images={images} />
 					</div>
 					)
 				}

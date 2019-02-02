@@ -17,6 +17,31 @@ body > .fullscreenImage > .imageContainer > img {
 }
 
 
+.Images > div {
+  display: flex;
+  flex-wrap: wrap;
+}
+.Image {
+  position: relative;
+  background-size: cover;
+  background-position: 50%;
+  background-color: hsla(0,0%,100%,.09);
+  background-repeat: no-repeat;
+}
+.Image[cols="2"] {
+  width: calc(50% - 1px);
+  padding-top: 50%;
+  height: 0;
+  margin-right: 1px;
+  margin-bottom: 1px;
+}
+.Image > div > div > div {
+  font-size: 14px;
+  font-weight: bold;
+  color: red;
+}
+
+
 .Favorite {
   padding-left: 11px !important;
   padding-right: 11px !important;
