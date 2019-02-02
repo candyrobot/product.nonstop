@@ -12,22 +12,31 @@ import PetsIcon from '@material-ui/icons/Pets';
 import Route from '../object/Route';
 
 class Favorite extends Component {
+	getName(dat) {
+		if (dat.userID == 1)
+			return '名無しさん';
+		else
+			return '@' + (dat.userID * Math.random()).toString(36).slice(-8)
+	}
 	render() {
 		const dat = window.app.favorites[this.props.i];
 		return (
 			<ListItem className="Favorite">
-				<Avatar>
+				<Avatar className="Avatar">
 					<PetsIcon />
 				</Avatar>
 				<div style={{ width: '100%', marginLeft: 5 }}>
-					<ListItemText 
+					<ListItemText
+						className="ListItemText"
 						// INFO: https://qiita.com/ryounagaoka/items/4736c225bdd86a74d59c
-						primary={'@' + (dat.userID * Math.random()).toString(36).slice(-8)}
+						primary={this.getName(dat)}
 						secondary={dat.created_at.replace('T', ' ').replace(/\..*$/, '')}
 					/>
+					<div className="text">お気入りに追加しました</div>
 					<CardMedia
+						onClick={()=> Route.push('image', { id: dat.imageID })}
 						className="CardMedia"
-						image={'' && window.app.images.find(dat.imageID).url}
+						image={window.app.images.find(dat.imageID).url}
 						title="Contemplative Reptile"
 					/>
 				</div>

@@ -31,6 +31,24 @@ body > .fullscreenImage > .imageContainer > img {
   background-color: #ccc;
   border-radius: 6px;
 }
+.Favorite .Avatar {
+  background-color: #3e4db8;
+}
+.Favorite .ListItemText > span {
+  font-size: 14px;
+  font-weight: bold;
+}
+.Favorite .ListItemText > p {
+  font-size: 10px;
+  position: absolute;
+  right: 12px;
+  top: 12px;
+}
+.Favorite .text {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
 
 
 .LayerBase {
@@ -47,7 +65,7 @@ body > .fullscreenImage > .imageContainer > img {
 }
 
 
-.Dialog-margin-small [class*="MuiDialog-paper"] {
+.Dialog-margin-small [role="document"] > div {
   margin: 5px;
 }
 
