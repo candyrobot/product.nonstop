@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
+import Toast from '../object/Toast';
 import IconButton from '@material-ui/core/IconButton';
 import ReportIcon from '@material-ui/icons/Report';
 import GridListTileImage from '../component.env/GridListTileImage';
@@ -21,6 +22,7 @@ export default class extends Component {
 			// document.app.DialogCanDoWithKakin.xxx('保存するには課金します');
 		// }
 		else {
+			new Toast('タップで閉じる', true);
 			const imageUrl = window.app.images.find(this.props.imageID).url;
 			const $el = $(`<div class="fullscreenImage"><div class="imageContainer"><img src="${imageUrl}"></div></div>`)
 			.appendTo('body')
