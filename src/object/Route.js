@@ -62,15 +62,14 @@ class Route {
     // if (!window.history.state)
     //   return;
 
-    this.saveState();
-  }
-
-  saveState() {
-    this.replaceHistory(Object.assign(window.history.state || {}, {
-      forAppBar_scrollTop: $('.forAppBar').scrollTop(),
+    this.updateState({
       imagesHorizontal_scrollLeft: $('.component-images-horizontal').scrollLeft(),
       areaRecommendation_open: $('.area-recommendation').is(':visible')
-    }));
+    });
+  }
+
+  updateState(newState) {
+    this.replaceHistory(Object.assign(window.history.state || {}, newState));
   }
 
   replaceHistory(state) {
