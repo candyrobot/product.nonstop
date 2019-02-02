@@ -28,7 +28,7 @@ export default class {
   favorites = []
   constructor() {
 
-    if (query('utm_source') === 'homescreen') {
+    if (query('utm_source', true) === 'homescreen') {
       window.slack.postMessage('ホーム画面からアクセスされました');
     }
 

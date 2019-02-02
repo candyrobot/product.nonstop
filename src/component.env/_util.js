@@ -98,11 +98,17 @@ export const isAndroid = function() {
 - query('fuga') // エラー
 - query('hogera') // undefined
 */
-export const query = window.query = function(name) {
+export const query = window.query = function(name, isRaw = false) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
     var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
     var results = regex.exec(window.location.search);
-    return results === null ? undefined : JSON.parse(decodeURIComponent( results[1].replace(/\+/g, ' ') ));
+    if (results === null)
+      return undefined;
+    var decoded = decodeURIComponent( results[1].replace(/\+/g, ' ') );
+    if (isRaw)
+      return decoded;
+    else
+      return JSON.parse(decoded);
 }
 
 /**
