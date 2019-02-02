@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Grow from '@material-ui/core/Grow';
-import Route from '../object.env/Route';
 import './PaperUser.css';
 
 // TODO: 他... の部分を黒グラデ白文字にしたい
@@ -50,7 +49,7 @@ export default class extends Component {
           >
             <div
               className="image"
-              onClick={()=> Route.push('image', { id: image.id })}
+              onClick={()=> window.Route.push('image', { id: image.id })}
               style={{ backgroundImage: `url(${image.url})` }}
               >
             </div>

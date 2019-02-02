@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import Grow from '@material-ui/core/Grow';
-import Route from '../object.env/Route';
-
 import '../component.env/Pic.css';
 import ButtonToggleFavorite from '../component.env/ButtonToggleFavorite';
 
@@ -12,7 +10,7 @@ export default class extends Component {
   image
 
   pushRoute() {
-    Route.push('image', { id: this.image.id });
+    window.Route.push('image', { id: this.image.id });
   }
 
   render() {

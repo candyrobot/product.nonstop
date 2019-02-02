@@ -5,7 +5,6 @@ import {
 	countUp,
 	query
 } from '../component.env/_util';
-import Route from '../object.env/Route';
 import User from '../model/User';
 import AppBar from '../component/AppBar';
 // import GridListImage from '../component/GridListImage';
@@ -21,7 +20,7 @@ export default class extends Component {
 	// onScroll(v) {
 	// 	const y = $(v.target).scrollTop();
 
-	// 	Route.replaceHistory(Object.assign(window.history.state || {}, {
+	// 	window.Route.replaceHistory(Object.assign(window.history.state || {}, {
 	// 		forAppBar_scrollTop: y,
 	// 	}));
 	// }
@@ -91,7 +90,7 @@ export default class extends Component {
 	}
 
 	getReactListProps() {
-		if (Route.is('user')) {
+		if (window.Route.is('user')) {
 			return this.getReactListUser();
 		}
 		else {
