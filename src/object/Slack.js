@@ -51,9 +51,9 @@ export const slackMessage = {
 	${username}さんが画像を投稿しました
 	`,
 	like: (username, imageID)=> `
-	${username}さんが画像ID:${imageID}をお気入りに入れました
+	${username}さんが画像ID: ${imageID} をお気入りに入れました
 	`,
 	unlike: (username, imageID)=> `
-	${username}さんが画像ID:${imageID}をお気入りから外しました
+	${username}さんが画像ID: ${imageID} をお気入りから外しました
 	`,
 };
