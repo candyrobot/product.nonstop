@@ -48,7 +48,7 @@ export default class extends Component {
 		const data = window.app.favorites;
 		return {
 			length: data.length,
-			itemRenderer: function(i, key) {
+			itemRenderer: (i, key)=> {
 				return <Favorite key={key} dat={data[i]} />;
 			},
 		}
@@ -59,7 +59,7 @@ export default class extends Component {
 		const data = this.getImages();
 		return {
 			length: data.length,
-			itemRenderer: function(i, key) {
+			itemRenderer: (i, key)=> {
 				if (i === 0)
 					return [
 						<AdvancedImage key="AdvancedImage" imageID={imageID} />,
@@ -80,7 +80,7 @@ export default class extends Component {
 		const data = this.getImages();
 		return {
 			length: data.length,
-			itemRenderer: function(i, key) {
+			itemRenderer: (i, key)=> {
 				if (i === 0 || i % 12)
 					return <Image key={key} dat={data[i]} />;
 				else
