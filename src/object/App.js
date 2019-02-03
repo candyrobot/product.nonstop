@@ -28,46 +28,23 @@ function initializeRouteAndRedirect() {
   // INFO: doAfterPushingの挙動が同じ場合、rootは使わないほうがいい。current(bool)を得るためのisメソッドをもうひとつ書くことになる。
   // TODO: つまり初回のアクセスでもなんらかのクエリを持たさないといけないということ。
 
-  const routes = [
-    {
-      default: true,
-      variable: 'imagesSortedByNewer',
-      query: { method: 'image' },
-    },
-    {
-      variable: 'imagesSortedByPopular',
-      query: { method: 'image', param: { sortBy: 'favorite' } },
-    },
-    {
-      variable: 'image',
-      query: { method: 'image', param: { id: -1 } },
-      doAfterPushing: function(inherit) {
-        window.app.images = window.app.images.shuffle();
-        $('.forAppBar').scrollTop(0);
-        inherit();
-        // inheritを実行しなければ、newした時に設定したdoAfterPushingを実行しない。
-      }
-    },
-    {
-      variable: 'user',
-      query: { method: 'user' },
-    },
-    {
-      variable: 'myFavorites',
-      query: { method: 'favorite' },
-    },
-  ];
-
-  window.Route = new Route({
-    routes,
-    doAfterPushing: function() {
-      if (!document.app)
-        return;
-
-      document.app.setState({});
-      document.app.recommendation.setState({ open: false });
-    }
-  });
+  window.Route = new Route([{
+    default: true,
+    variable: 'imagesSortedByNewer',
+    query: { method: 'image' },
+  }, {
+    variable: 'imagesSortedByPopular',
+    query: { method: 'image', param: { sortBy: 'favorite' } },
+  }, {
+    variable: 'image',
+    query: { method: 'image', param: { id: -1 } }
+  }, {
+    variable: 'user',
+    query: { method: 'user' },
+  }, {
+    variable: 'myFavorites',
+    query: { method: 'favorite' },
+  }]);
 }
 
 export default class {

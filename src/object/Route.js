@@ -8,11 +8,16 @@ import {
 // 使い方: Route.is('imagesSortedByPopular')
 
 class Route {
-  routes = [];
 
-  constructor(setup = {}) {
-    this.doAfterPushing = setup.doAfterPushing || function() {};
-    setup.routes.forEach((r)=> this.set(r));
+  routes = [];
+  doWhen = {
+    beforePushing: ()=> {},
+    afterPushing: ()=> {},
+    popstate: ()=> {},
+  };
+
+  constructor(routes) {
+    this.routes = routes;
 
     // INFO: redirect
     this.routes
@@ -39,7 +44,7 @@ class Route {
    * @param  {object} param    [description]
    */
   push(variable, param) {
-    this.doBeforePushing();
+    this.doWhen.beforePushing();
 
     const route = this.routes.where({ variable })[0];
     let url = '';
@@ -53,19 +58,12 @@ class Route {
       url += `&param=${JSON.stringify(route.query.param)}`;
 
     const title = url;
-    window.history.pushState({url, title}, title, url);
-    route.doAfterPushing ? route.doAfterPushing(this.doAfterPushing) : this.doAfterPushing();
+    const state = { url, title, variable };
+    window.history.pushState(state, title, url);
+
+    this.doWhen.afterPushing(state);
+
     return this;
-  }
-
-  doBeforePushing() {
-    // if (!window.history.state)
-    //   return;
-
-    this.updateState({
-      imagesHorizontal_scrollLeft: $('.component-images-horizontal').scrollLeft(),
-      areaRecommendation_open: $('.area-recommendation').is(':visible')
-    });
   }
 
   updateState(newState) {
@@ -77,8 +75,13 @@ class Route {
     window.history.replaceState(state, title, url);
   }
 
-  set(o) {
-    this.routes.push(o);
+  on(eventName, fn) {
+    if (eventName === 'popstate')
+      $(window).on('popstate', (e)=> {
+        fn(e);
+      });
+    else
+      this.doWhen[eventName] = fn;
   }
 }
 

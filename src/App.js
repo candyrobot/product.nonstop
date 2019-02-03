@@ -8,6 +8,17 @@
 // 80点の導線✨
 // 80点の導線✨
 // - スクロールが初期化されない
+
+// read
+// - newpage: 0
+// - popstate:
+//   - after: read
+// save
+// - pushstate
+//   - before: save
+// - popstate
+//   - before: save
+
 // - お気に入りしたのか分かりづらい。レコメンドの上に固定表示で
 // - スクロール記憶されている？
 // - タップが反応しないときがある
@@ -60,29 +71,62 @@ export default class extends Component {
     DialogReport: false,
   };
 
+  saveHistoryState() {
+    window.Route.updateState({
+      LayerBase_scrollTop: $('.LayerBase .ReactList').scrollTop(),
+      imagesHorizontal_scrollLeft: $('.component-images-horizontal').scrollLeft(),
+      areaRecommendation_open: $('.area-recommendation').is(':visible')
+    });
+  }
+
   constructor() {
     super();
 
     // TODO: 動いていない
     startLoading();
 
-    document.app = this;
+    window.Route.on('afterPushing', (state)=> {
+      if (state.variable === 'image')
+        window.app.images = window.app.images.shuffle();
+      this.setState({});
+      this.recommendation.setState({ open: false });
+    });
 
-    $(window).on('popstate', (e)=> {
-      document.app.recommendation.setState({ open: window.history.state && window.history.state.areaRecommendation_open });
+    window.Route.on('beforePushing', ()=> {
+
+      console.log('top:', $('.LayerBase .ReactList').scrollTop())
+
+      this.saveHistoryState();
+
+      console.log(window.history.state)
+    });
+
+    window.Route.on('popstate', ()=> {
+      debugger;
+      this.recommendation.setState({ open: window.history.state && window.history.state.areaRecommendation_open });
       this.setState({});
     });
+
+    // $(window).on('hashchange', ()=> {
+    //   debugger;
+    // })
+
 
     window.app.doAfterLoading = ()=> {
       stopLoading();
       this.setState({});
     };
 
+
     setInterval(()=> {
       this.setState({ DialogLetsShareOpen: true });
     },
     // INFO: 2.5分
-    1000 * 60 * 2.5);
+    // 1000 * 60 * 2.5
+    // INFO: 5分
+    1000 * 60 * 5);
+
+    document.app = this;
   }
 
   render() {
