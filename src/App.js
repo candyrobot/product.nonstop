@@ -62,7 +62,8 @@ export default class extends Component {
 
   updateHistoryState() {
     window.Route.updateState({
-      LayerBase_scrollTop: $('.LayerBase .ReactList').scrollTop(),
+      // x: LayerBase_scrollTop: $('.LayerBase .ReactList').scrollTop(),
+      LayerBase_scrollIndex: this.cLayerBase.getScrollIndex(),
       imagesHorizontal_scrollLeft: $('.component-images-horizontal').scrollLeft(),
       areaRecommendation_open: $('.area-recommendation').is(':visible')
     });
@@ -83,24 +84,19 @@ export default class extends Component {
     });
 
     window.Route.on('beforePushing', ()=> {
-
-      // console.log('top:', $('.LayerBase .ReactList').scrollTop())
-
       this.updateHistoryState();
-
-      // console.log(window.history.state)
     });
 
     window.Route.on('popstate', ()=> {
       this.setState({});
       const {
-        LayerBase_scrollTop,
+        LayerBase_scrollIndex,
         imagesHorizontal_scrollLeft,
         areaRecommendation_open
       } = this.readHistoryState();
 
       this.cRecommendation.setState({ open: !!areaRecommendation_open });
-      this.cLayerBase.setState({ scrollTop: LayerBase_scrollTop || 0 });
+      this.cLayerBase.setState({ scrollIndex: LayerBase_scrollIndex || 0 });
     });
 
 

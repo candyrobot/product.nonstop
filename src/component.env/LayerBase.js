@@ -18,16 +18,15 @@ export default class extends Component {
 	cReactList = null;
 
 	state = {
-		scrollTop: 0
+		scrollIndex: 0
 	};
 
-	componentWillReceiveProps(nextProps) {
-		this.cReactList.scrollTo(this.getIndexFromScroll(this.state.scrollTop));
+	componentDidUpdate(prevProps, prevState) {
+		this.cReactList.scrollTo(this.state.scrollIndex);
 	}
 
-	getIndexFromScroll(scrollTop) {
+	getScrollIndex() {
 		const i = $('.LayerBase .ReactList [data-react-list-index]').inView().data('react-list-index');
-		console.log(4, i);
 		return i;
 	}
 
