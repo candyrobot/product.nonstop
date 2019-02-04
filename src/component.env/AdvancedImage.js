@@ -32,15 +32,6 @@ export default class extends Component {
 		}
 	};
 
-	handleClickFavorite = (instance)=> {
-		if (instance.on);
-		else {
-			document.app.cRecommendation.setState({ open: true });
-			// TODO:
-			// window.app.session || countUp('favoriteCount') % 3 === 0 && new DrawerLetsSignup().create();
-		}
-	};
-
 	handleClose = ()=> {
 		this.setState({ open: false });
 	};
@@ -52,9 +43,7 @@ export default class extends Component {
 		<div className="Image" style={{ position: 'relative', width: '100%' }}>
 			<GridListTileImage
 				onClick={this.handleClickThumbnail}
-				onClickOnFavorite={this.handleClickFavorite}
 				className="main"
-				guide={!window.app.session}
 				image={window.app.images.find(imageID)}
 			/>
 

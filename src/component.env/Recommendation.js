@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import GridListTileImage from '../component.env/GridListTileImage';
+// import CImage from '../component.env/Image';
 
 class ComponentImagesHorizontal extends Component {
 
@@ -38,7 +39,8 @@ class ComponentImagesHorizontal extends Component {
 				onScroll={(v)=> this.onScroll(v)}
 			>
 				{this.getImages().map((image, i)=> {
-					return <GridListTileImage key={i} image={image} />
+					return <GridListTileImage hasFav={true} key={i} image={image} />
+					// return <CImage key={i} dat={image} />
 				})}
 			</ul>
 		);

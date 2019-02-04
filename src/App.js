@@ -7,12 +7,9 @@
 // 80点の導線✨
 // 80点の導線✨
 // 80点の導線✨
-// - お気に入りしたのか分かりづらい。レコメンドの上に固定表示で
 //============================================================================
 
 import React, { Component } from 'react';
-import Fab from '@material-ui/core/Fab';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import $ from 'jquery';
 import 'jquery.transit';
 import './object/$';
@@ -29,7 +26,7 @@ import {
 import './component.env/dialog.css';
 import Overlays from './component.env/_overlays';
 import LayerBase from './component.env/LayerBase';
-import Recommendation from './component.env/Recommendation';
+import LayerFront from './component.env/LayerFront';
 import DialogWhatIsThisApp from './component.env/DialogWhatIsThisApp';
 import DialogLetsShare from './component.env/DialogLetsShare';
 
@@ -111,9 +108,6 @@ export default class extends Component {
   }
 
   render() {
-
-    const imageID = query('method') === 'image' && query('param') && query('param').id;
-
     return (
     <div className="App">
 
@@ -143,46 +137,7 @@ export default class extends Component {
       <LayerBase ref={(c)=> this.cLayerBase = c} />
 
       {/*INFO: LayerBaseより手前にだしたいものはこの中へ（position: fixed非推奨。ボタンが被る）*/}
-      <div className="component-layer layer-2" style={{ top: 55 }}>
-
-        {/*<Conspicuous showingIndex={this.state.conspicuousShowingIndex} />*/}
-
-        <div className="frombottom">
-          {imageID ?
-            <Fab
-              variant="extended"
-              size="medium"
-              aria-label="Add"
-            >
-              <PlayArrowIcon className="poyooon" />
-            </Fab>
-            :
-            <Fab
-              onClick={()=> $('#component-login').show(300).find('.toSwitchSignUp').click()}
-              variant="extended"
-              size="medium"
-              className="button"
-              aria-label="Add"
-              style={{ margin: '0 10px 25px' }}
-            >
-              <PlayArrowIcon className="poyooon" />
-              ログイン
-
-              <div className="balloon" position="top">
-                新しい画像 毎日20枚以上更新！🌟
-                {/*
-                👇登録してアプリのようにホーム画面に追加しよう！
-                🌟このアプリをホーム画面に追加できるようになりました*/}
-              </div>
-            </Fab>
-          }
-          <Recommendation
-            initialDisplayNum="6"
-            ref={(c)=> this.cRecommendation = c}
-            imageID={imageID}
-          />
-        </div>
-      </div>
+      <LayerFront />
     </div>
     );
   }

@@ -131,9 +131,17 @@ body > .fullscreenImage > .imageContainer > img {
 }
 
 
+.LayerFront .Fab {
+  margin-left: auto;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+
 .Dialog-margin-small [role="document"] > div {
   margin: 5px;
 }
+
 
 .component-layer .row {
   text-align: right;

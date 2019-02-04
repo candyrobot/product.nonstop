@@ -17,11 +17,12 @@ export default class extends Component {
     // TODO: transition
     // INFO: https://material-ui.com/utils/transitions/
 
-    this.image = this.props.image;
-    const { onClick, className, style, guide, onClickOnFavorite } = this.props;
+    const { image, onClick, className, style } = this.props;
 
-    if (!this.image)
+    if (!image)
       return null;
+
+    this.image = image;
 
     return (
     <Grow in={true}
@@ -29,25 +30,24 @@ export default class extends Component {
     >
         {/*ref={(node)=> $(node).inView().length}*/}
       <GridListTile
-        style={style}
         className="Pic fas fa-unlink"
-        key={this.image.id} cols={this.image.featured ? 2 : 1} rows={this.image.featured ? 2 : 1}>
+        key={image.id} cols={image.featured ? 2 : 1} rows={image.featured ? 2 : 1}>
         <div
           className={'Pic-background ' + className}
-          style={{ backgroundImage: `url(${this.image.url})` }}
+          style={{ backgroundImage: `url(${image.url})` }}
           onClick={()=> onClick ? onClick(this.pushRoute) : this.pushRoute()}
         >
-          <GridListTileBar
-            style={{ background: 'initial' }}
-            title={this.image.id}
-            titlePosition="bottom"
-            actionIcon={<ButtonToggleFavorite
-              image={this.image}
-              guide={guide}
-              onClick={onClickOnFavorite}
-              />}
-            actionPosition="right"
-          />
+          {this.props.hasFav &&
+            <GridListTileBar
+              style={{ background: 'initial' }}
+              title={image.id}
+              titlePosition="bottom"
+              actionIcon={<ButtonToggleFavorite
+                image={image}
+                />}
+              actionPosition="right"
+            />
+          }
         </div>
       </GridListTile>
     </Grow>
