@@ -136,12 +136,19 @@ export const getCount = (key)=> {
 };
 
 export const startLoading = function() {
-  $('.loadingLine').show(300);
-  return setTimeout(()=> stopLoading(), 5000);
+  const $el = $(`
+<div class="loadingLine">
+  <span class="expand"></span>
+</div>
+  `).appendTo('body').show(300);
+  setTimeout(()=> stopLoading($el), 5000);
+  return $el;
 };
 
-export const stopLoading = window.stopLoading = function() {
-  return $('.loadingLine').hide(300);
+export const stopLoading = function($el) {
+  $el.hide(300, ()=> {
+    $el.remove();
+  });
 };
 
 // INFO: https://qiita.com/peutes/items/d74e5758a36478fbc039

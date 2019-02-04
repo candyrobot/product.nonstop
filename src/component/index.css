@@ -101,6 +101,8 @@ input, .button {
   top: 0px;
   font-size: 1.3em;
 }
+
+
 .poyooon {
   animation: poyooon 1.8s linear 0s infinite;
 }
@@ -133,13 +135,18 @@ input, .button {
     transform: scale(1, 1) translate(0%, 0%);
   }
 }
+
+
 .loadingLine {
   display: none;
-  position: relative;
+  position: fixed;
+  left: 0;
+  top: 0;
   height: 3px;
-  /*background-color: white;*/
+  width: 100%;
   background-color: black;
   box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+  z-index: 1400;
 }
 .loadingLine .expand {
   width: 100%;
@@ -159,6 +166,8 @@ input, .button {
     width: 100%;
   }
 }
+
+
 .frombottom {
   position: absolute;
   left: 0;

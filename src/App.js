@@ -93,11 +93,10 @@ export default class extends Component {
     });
 
 
-    // TODO: 動いていない
-    startLoading();
+    const $el = startLoading();
 
     window.app.doAfterLoading = ()=> {
-      stopLoading();
+      stopLoading($el);
       this.setState({});
     };
 
@@ -137,9 +136,6 @@ export default class extends Component {
       <Overlays />
 
       <div id="layer-appMessages" className="component-layer" style={{ zIndex: 1301 }}>
-        <div className="loadingLine">
-          <span className="expand"></span>
-        </div>
         <div className="alerts"></div>
       </div>
 
