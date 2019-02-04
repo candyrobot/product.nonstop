@@ -141,7 +141,7 @@ export const startLoading = function() {
   <span class="expand"></span>
 </div>
   `).appendTo('body').show(300);
-  setTimeout(()=> stopLoading($el), 5000);
+  setTimeout(()=> stopLoading($el), 1000 * 10);
   return $el;
 };
 
