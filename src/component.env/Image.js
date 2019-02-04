@@ -13,6 +13,7 @@ export default class extends Component {
 		const dat = this.props.dat;
 		return (
 		<div
+			{...this.props}
 			style={{ backgroundImage: `url(${dat.url})` }}
 			className="Image"
 			cols="2"

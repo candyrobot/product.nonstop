@@ -16,7 +16,7 @@ export default class extends Component {
 	render() {
 		const dat = this.props.dat;
 		return (
-			<ListItem className="Favorite">
+			<ListItem className="Favorite" {...this.props}>
 				<Avatar className="Avatar">
 					<PetsIcon />
 				</Avatar>

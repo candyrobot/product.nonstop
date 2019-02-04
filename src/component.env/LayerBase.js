@@ -26,9 +26,9 @@ export default class extends Component {
 	}
 
 	getIndexFromScroll(scrollTop) {
-		// TODO:
-		console.log(4)
-		return 30;
+		const i = $('.LayerBase .ReactList [data-react-list-index]').inView().data('react-list-index');
+		console.log(4, i);
+		return i;
 	}
 
 	getImages() {
@@ -43,7 +43,7 @@ export default class extends Component {
 		return {
 			length: data.length,
 			itemRenderer: (i, key)=> {
-				return <Favorite key={key} dat={data[i]} />;
+				return <Favorite data-react-list-index={i} key={key} dat={data[i]} />;
 			},
 		}
 	}
@@ -60,12 +60,12 @@ export default class extends Component {
 						<h5 className="headline" key="headline">
 							関連
 						</h5>,
-						<Image key={key} dat={data[i]} />
+						<Image data-react-list-index={i} key={key} dat={data[i]} />
 					]
 				if (i === 0 || i % 12)
-					return <Image key={key} dat={data[i]} />;
+					return <Image data-react-list-index={i} key={key} dat={data[i]} />;
 				else
-					return [<Banner key="banner" />, <Image key={key} dat={data[i]} />];
+					return [<Banner key="banner" />, <Image data-react-list-index={i} key={key} dat={data[i]} />];
 			},
 		}
 	}
@@ -76,9 +76,9 @@ export default class extends Component {
 			length: data.length,
 			itemRenderer: (i, key)=> {
 				if (i === 0 || i % 12)
-					return <Image key={key} dat={data[i]} />;
+					return <Image data-react-list-index={i} key={key} dat={data[i]} />;
 				else
-					return [<Banner key="banner" />, <Image key={key} dat={data[i]} />];
+					return [<Banner key="banner" />, <Image data-react-list-index={i} key={key} dat={data[i]} />];
 			},
 		}
 	}
