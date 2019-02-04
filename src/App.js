@@ -7,9 +7,6 @@
 // 80点の導線✨
 // 80点の導線✨
 // 80点の導線✨
-// - スクロールが初期化されない
-// - スクロール記憶されている？
-// - Hideakiを別のhostingへ
 // - お気に入りしたのか分かりづらい。レコメンドの上に固定表示で
 // - localstorageを使ったキャッシュ（高速化）
 // - タップが反応しないときがある
@@ -37,10 +34,6 @@ import LayerBase from './component.env/LayerBase';
 import Recommendation from './component.env/Recommendation';
 import DialogWhatIsThisApp from './component.env/DialogWhatIsThisApp';
 import DialogLetsShare from './component.env/DialogLetsShare';
-
-
-// INFO: これが何なのかは秀明にきいてねw
-import Hideaki from './component.env/Hideaki';
 
 // disableUsersZoom();
 
@@ -149,11 +142,6 @@ export default class extends Component {
         </div>
         <div className="alerts"></div>
       </div>
-
-
-      {/* INFO: from this line z-index: 1400 */}
-
-      {query('hideaki') === 1 && <Hideaki />}
 
 
       {/* INFO: from this line z-index: initial */}
