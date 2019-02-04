@@ -15,27 +15,21 @@ import Banner from '../component.env/Banner';
 
 export default class extends Component {
 
-	// elForAppBar
+	cReactList = null;
 
-	// onScroll(v) {
-	// 	const y = $(v.target).scrollTop();
+	state = {
+		scrollTop: 0
+	};
 
-	// 	window.Route.replaceHistory(Object.assign(window.history.state || {}, {
-	// 		forAppBar_scrollTop: y,
-	// 	}));
-	// }
+	componentWillReceiveProps(nextProps) {
+		this.cReactList.scrollTo(this.getIndexFromScroll(this.state.scrollTop));
+	}
 
-	// ref(el) {
-	// 	const y = window.history.state && window.history.state.forAppBar_scrollTop || 0;
-	// 	this.elForAppBar = el;
-	// 	this.doAfterRendering(()=> {
-	// 		$(el).scrollTop(y);
-	// 		{/*TODO: 無限ループ問題*/}
-	// 		// this.bindScrollEnd(el, ()=> {
-	// 		// 	document.app.setState({ DialogLetsShareOpen: true });
-	// 		// });
-	// 	});
-	// }
+	getIndexFromScroll(scrollTop) {
+		// TODO:
+		console.log(4)
+		return 30;
+	}
 
 	getImages() {
 		// INFO: 源のdataを書き換えてはいけない
@@ -108,7 +102,7 @@ export default class extends Component {
 			<AppBar style={{ zIndex: 1, boxShadow: '0 2px 10px rgba(0,0,0,.5)' }} />
 
 			<div className="ReactList scroll" style={{ overflow: 'auto', maxHeight: '100%' }}>
-				<ReactList {...this.getReactListProps()} />
+				<ReactList ref={(c)=> this.cReactList = c} {...this.getReactListProps()} />
 			</div>
 		</div>
 		);

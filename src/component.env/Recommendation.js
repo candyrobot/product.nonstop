@@ -50,7 +50,6 @@ export default class extends Component {
 
 	constructor(props) {
 		super(props);
-		this.props.instance && this.props.instance(this);
 		this.state = {
 			open: this.props.open
 		};

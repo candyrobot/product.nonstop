@@ -35,7 +35,7 @@ export default class extends Component {
 	handleClickFavorite = (instance)=> {
 		if (instance.on);
 		else {
-			document.app.recommendation.setState({ open: true });
+			document.app.cRecommendation.setState({ open: true });
 			// TODO:
 			// window.app.session || countUp('favoriteCount') % 3 === 0 && new DrawerLetsSignup().create();
 		}

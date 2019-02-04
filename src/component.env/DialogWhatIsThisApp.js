@@ -26,23 +26,3 @@ export default class extends React.Component {
 		);
 	}
 }
-
-		// <DialogSlide initialize={{ open: this.props.initialize.open }} ref={(c)=> this.DialogWhatIsThisApp = c }>
-		// 	<DialogTitle id="alert-dialog-slide-title">
-		// 		{"Use Google's location service?"}
-		// 	</DialogTitle>
-		// 	<DialogContent>
-		// 		<DialogContentText id="alert-dialog-slide-description">
-		// 			Let Google help apps determine location. This means sending anonymous location data to
-		// 			Google, even when no apps are running.
-		// 		</DialogContentText>
-		// 	</DialogContent>
-		// 	<DialogActions>
-		// 		<Button onClick={this.handleClose} color="primary">
-		// 			Disagree
-		// 		</Button>
-		// 		<Button onClick={this.handleClose} color="primary">
-		// 			Agree
-		// 		</Button>
-		// 	</DialogActions>
-		// </DialogSlide>

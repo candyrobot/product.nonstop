@@ -8,19 +8,10 @@
 // 80点の導線✨
 // 80点の導線✨
 // - スクロールが初期化されない
-
-// read
-// - newpage: 0
-// - popstate:
-//   - after: read
-// save
-// - pushstate
-//   - before: save
-// - popstate
-//   - before: save
-
-// - お気に入りしたのか分かりづらい。レコメンドの上に固定表示で
 // - スクロール記憶されている？
+// - Hideakiを別のhostingへ
+// - お気に入りしたのか分かりづらい。レコメンドの上に固定表示で
+// - localstorageを使ったキャッシュ（高速化）
 // - タップが反応しないときがある
 // - スクロールが読み込まれない @画像一覧
 //============================================================================
@@ -58,11 +49,9 @@ window.app = new App();
 
 export default class extends Component {
 
-  // INFO: 子コンポーネント
-  recommendation = null;
-
-  // INFO: このアプリが何なのかを示すDialog
-  DialogWhatIsThisApp = null;
+  // INFO: 子コンポーネントら
+  cRecommendation = null;
+  cLayerBase = null;
 
   state = {
     conspicuousShowingIndex: 2,
@@ -71,7 +60,7 @@ export default class extends Component {
     DialogReport: false,
   };
 
-  saveHistoryState() {
+  updateHistoryState() {
     window.Route.updateState({
       LayerBase_scrollTop: $('.LayerBase .ReactList').scrollTop(),
       imagesHorizontal_scrollLeft: $('.component-images-horizontal').scrollLeft(),
@@ -79,38 +68,44 @@ export default class extends Component {
     });
   }
 
+  readHistoryState() {
+    return window.history.state;
+  }
+
   constructor() {
     super();
-
-    // TODO: 動いていない
-    startLoading();
 
     window.Route.on('afterPushing', (state)=> {
       if (state.variable === 'image')
         window.app.images = window.app.images.shuffle();
       this.setState({});
-      this.recommendation.setState({ open: false });
+      this.cRecommendation.setState({ open: false });
     });
 
     window.Route.on('beforePushing', ()=> {
 
-      console.log('top:', $('.LayerBase .ReactList').scrollTop())
+      // console.log('top:', $('.LayerBase .ReactList').scrollTop())
 
-      this.saveHistoryState();
+      this.updateHistoryState();
 
-      console.log(window.history.state)
+      // console.log(window.history.state)
     });
 
     window.Route.on('popstate', ()=> {
-      debugger;
-      this.recommendation.setState({ open: window.history.state && window.history.state.areaRecommendation_open });
       this.setState({});
+      const {
+        LayerBase_scrollTop,
+        imagesHorizontal_scrollLeft,
+        areaRecommendation_open
+      } = this.readHistoryState();
+
+      this.cRecommendation.setState({ open: !!areaRecommendation_open });
+      this.cLayerBase.setState({ scrollTop: LayerBase_scrollTop || 0 });
     });
 
-    // $(window).on('hashchange', ()=> {
-    //   debugger;
-    // })
 
+    // TODO: 動いていない
+    startLoading();
 
     window.app.doAfterLoading = ()=> {
       stopLoading();
@@ -167,7 +162,7 @@ export default class extends Component {
 
       {/* INFO: from this line z-index: initial */}
 
-      <LayerBase />
+      <LayerBase ref={(c)=> this.cLayerBase = c} />
 
       {/*INFO: LayerBaseより手前にだしたいものはこの中へ（position: fixed非推奨。ボタンが被る）*/}
       <div className="component-layer layer-2" style={{ top: 55 }}>
@@ -194,7 +189,7 @@ export default class extends Component {
           */}
           <Recommendation
             initialDisplayNum="6"
-            instance={(o)=> this.recommendation = o}
+            ref={(c)=> this.cRecommendation = c}
             imageID={imageID}
           />
         </div>
