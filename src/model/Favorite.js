@@ -12,7 +12,7 @@ export default new class {
       new Toast('ログインするとお気入りに保存できます', true);
       return;
     }
-    startLoading();
+    const $el = startLoading();
     $.ajax({
       type: 'POST',
       url: domain + '/favorites',
@@ -30,7 +30,7 @@ export default new class {
       window.app.favorites.push(favorites[0]);
       instance.setState({});
     })
-    .always(stopLoading);
+    .always(()=> stopLoading($el));
   }
 
   delete(imageID, instance) {
@@ -38,7 +38,7 @@ export default new class {
       new Toast('ログインするとお気入りに保存できます', true);
       return;
     }
-    startLoading();
+    const $el = startLoading();
     $.ajax({
       type: 'DELETE',
       url: domain + '/favorites',
@@ -56,6 +56,6 @@ export default new class {
     .fail(function(dat) {
       return new Toast(dat.responseJSON.toast, true);
     })
-    .always(stopLoading);
+    .always(()=> stopLoading($el));
   }
 }

@@ -145,7 +145,7 @@ export const startLoading = function() {
   return $el;
 };
 
-export const stopLoading = function($el) {
+export const stopLoading = function($el = $('body > .loadingLine')) {
   $el.hide(300, ()=> {
     $el.remove();
   });
