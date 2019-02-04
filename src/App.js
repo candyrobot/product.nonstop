@@ -11,6 +11,7 @@
 //============================================================================
 
 import React, { Component } from 'react';
+import Fab from '@material-ui/core/Fab';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import $ from 'jquery';
 import 'jquery.transit';
@@ -147,23 +148,34 @@ export default class extends Component {
         {/*<Conspicuous showingIndex={this.state.conspicuousShowingIndex} />*/}
 
         <div className="frombottom">
-          {/*新しい画像 毎日20枚以上更新！
-          <Fab
-            onClick={()=> $('#component-login').show(300).find('.toSwitchSignUp').click()}
-            variant="extended"
-            size="medium"
-            className="button"
-            aria-label="Add"
-            style={{ margin: '0 10px 25px' }}
-          >
-            <PlayArrowIcon className="poyooon" />
-            ログイン
-            <div className="balloon" position="top">
-              👇登録してアプリのようにホーム画面に追加しよう！
-              🌟このアプリをホーム画面に追加できるようになりました
-            </div>
-          </Fab>
-          */}
+          {imageID ?
+            <Fab
+              variant="extended"
+              size="medium"
+              aria-label="Add"
+            >
+              <PlayArrowIcon className="poyooon" />
+            </Fab>
+            :
+            <Fab
+              onClick={()=> $('#component-login').show(300).find('.toSwitchSignUp').click()}
+              variant="extended"
+              size="medium"
+              className="button"
+              aria-label="Add"
+              style={{ margin: '0 10px 25px' }}
+            >
+              <PlayArrowIcon className="poyooon" />
+              ログイン
+
+              <div className="balloon" position="top">
+                新しい画像 毎日20枚以上更新！🌟
+                {/*
+                👇登録してアプリのようにホーム画面に追加しよう！
+                🌟このアプリをホーム画面に追加できるようになりました*/}
+              </div>
+            </Fab>
+          }
           <Recommendation
             initialDisplayNum="6"
             ref={(c)=> this.cRecommendation = c}
