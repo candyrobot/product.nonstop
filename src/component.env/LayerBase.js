@@ -22,7 +22,7 @@ export default class extends Component {
 	};
 
 	componentDidUpdate(prevProps, prevState) {
-		this.cReactList.scrollTo(this.state.scrollIndex);
+		this.cReactList && this.cReactList.scrollTo(this.state.scrollIndex);
 	}
 
 	getScrollIndex() {
@@ -101,7 +101,10 @@ export default class extends Component {
 			<AppBar style={{ zIndex: 1, boxShadow: '0 2px 10px rgba(0,0,0,.5)' }} />
 
 			<div className="ReactList scroll" style={{ overflow: 'auto', maxHeight: '100%' }}>
-				<ReactList ref={(c)=> this.cReactList = c} {...this.getReactListProps()} />
+				{this.getReactListProps().length === 0 ?
+					<p style={{ color: 'white', textAlign: 'center' }}>まだ何もありません</p> :
+					<ReactList ref={(c)=> this.cReactList = c} {...this.getReactListProps()} />
+				}
 			</div>
 		</div>
 		);
