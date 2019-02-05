@@ -4,13 +4,13 @@ import AddHomescreenIcon from '@material-ui/icons/AddToHomeScreen';
 // import AddHomescreenIcon from '@material-ui/icons/GetApp';
 import $ from 'jquery';
 import {
-  query,
-  showHowToAddToHomescreen
+  query
 } from '../component.env/_util';
 import Button from '../component/Button';
 import Recommendation from '../component.env/Recommendation';
 import ButtonToggleFavorite from '../component.env/ButtonToggleFavorite';
 import OverlayToSign from '../component.env/OverlayToSign';
+import OverlayHowToAddToHomescreen from '../component.env/OverlayHowToAddToHomescreen';
 
 export default class extends Component {
 
@@ -55,7 +55,7 @@ export default class extends Component {
           else if (window.app.isLogined() && !window.app.isAddedToHomescreen()) {
             return <Button
               style={{ fontSize: 12 }}
-              onClick={()=> showHowToAddToHomescreen()}
+              onClick={()=> OverlayHowToAddToHomescreen.create()}
               icon={<AddHomescreenIcon className="poyooon" />}
               primary={'やり方を見る: スマホのホーム画面に追加💡'}
               secondary={'アプリのようにホーム画面に追加しよう！🌟'}

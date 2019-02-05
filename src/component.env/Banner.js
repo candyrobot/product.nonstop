@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import {
-	showHowToAddToHomescreen
-} from '../component.env/_util';
+import OverlayHowToAddToHomescreen from '../component.env/OverlayHowToAddToHomescreen';
 
 export default class extends Component {
 	render() {
 		return (
 		<div
 			className="Banner"
-			onClick={()=> showHowToAddToHomescreen()}
+			onClick={()=> OverlayHowToAddToHomescreen.create()}
 		>
 			スマホのホーム画面にこのアプリを追加することができるのです
 			<i>(ここをタップ)</i>

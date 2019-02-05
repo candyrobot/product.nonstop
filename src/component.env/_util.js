@@ -70,22 +70,6 @@ const isEmpty = function(dat) {
   return false;
 };
 
-export const showWebview = function(url) {
-  startLoading();
-  $('#webview').fadeIn(400);
-  $('#webview iframe').attr('src', url);
-  $('#webview iframe').animate({
-    top: 0
-  }, 500);
-  $('#webview .close').on('click', function() {
-    $('#webview iframe').removeAttr('style');
-    $('#webview iframe').removeAttr('src');
-  });
-  $('#webview iframe').on('load', function() {
-    stopLoading();
-  });
-};
-
 export const isAndroid = function() {
   return navigator.userAgent.indexOf('Android') > 0;
 };
@@ -181,12 +165,4 @@ export function disableUsersZoom() {
     }
     lastTouch = now;
   }, true);
-}
-
-export function showHowToAddToHomescreen() {
-  if (isAndroid()) {
-    return showWebview('https://www.youtube.com/embed/f9MsSWxJXhc');
-  } else {
-    return showWebview('https://www.youtube.com/embed/8iueP5sRQ-Y');
-  }
 }

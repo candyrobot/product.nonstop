@@ -34,9 +34,6 @@
   font-weight: bold;
 }
 #webview iframe {
-  position: relative;
-  top: 100%;
-  /* アニメーション用 */
   display: block;
   height: calc(100% - 105px);
   background-color: black;

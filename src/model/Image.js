@@ -60,6 +60,8 @@ export default window.Image = new class {
 
 	// TODO: Arrayをextendsしたら引数をとる
 	excludeIFavorited(images) {
+		if (window.app === undefined)
+			return [];
 		return images.filter((i)=> {
 			return !window.app.favorites.where({imageID: i.id, userID: window.app.session.id}).length
 		});
