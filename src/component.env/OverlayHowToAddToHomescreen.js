@@ -10,7 +10,7 @@ import './overlay.css';
 export default new class extends Element {
 
 	isAndroid() {
-		isAndroid()
+		return isAndroid()
 	}
 
 	doAfterCreate($el) {
@@ -29,18 +29,24 @@ export default new class extends Element {
 				<div class="component-mediabox">
 					<img src="https://nonstop-vr.firebaseapp.com//icons.nonstop/icon-384x384.png" />
 					<div class="desc">
-						<b>👇 やり方を動画で解説</b><br />
 						（右のようなアイコンです）
-						<!--
-						${this.isAndroid() ? 'Chrome' : 'Safari'}でホーム画面に
-						<br />追加できます。
-						-->
+						<ol>
+							<li>${this.isAndroid() ? 'Chrome' : 'Safari'}で開く</li>
+							<li>${this.isAndroid() ? '右上の設定を開く' : '下から設定を開く'}</li>
+							<li>ホーム画面に追加する旨${this.isAndroid() ? '' : 'のアイコン'}をタップ</li>
+						</ol>
 					</div>
 				</div>
+
+				<h5>👇 やり方を動画で解説</h5>
+				<iframe frameBorder="0" allowFullScreen
+					allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+				></iframe>
+
+				<!--
 				<div class="frombottom">
-					<iframe frameBorder="0" allowFullScreen
-						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
 				</div>
+				-->
 				<div class="close" onClick="${e}.delete()">×</div>
 			</div>
 		</div>

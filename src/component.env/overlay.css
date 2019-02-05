@@ -45,7 +45,8 @@
 }
 .OverlayHowToAddToHomescreen iframe {
   display: block;
-  height: calc(100% - 130px);
+  width: 100%;
+  /*height: calc(100% - 130px);*/
   background-color: black;
   box-shadow: 0 0px 10px rgba(0, 0, 0, .4);
 }
