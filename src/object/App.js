@@ -54,10 +54,6 @@ export default class {
   favorites = []
   constructor() {
 
-    if (query('utm_source', true) === 'homescreen') {
-      window.slack.postMessage('ホーム画面からアクセスされました');
-    }
-
     initializeRouteAndRedirect();
 
     let n = 0;
@@ -105,7 +101,7 @@ export default class {
   }
 
   isAdmin() {
-    return this.isLoaded() && this.isLogined() && this.session && this.session.id === 1
+    return this.isLogined() && this.session && this.session.id === 1
   }
 
   isLoaded() {
@@ -113,7 +109,11 @@ export default class {
   }
 
   isLogined() {
-    return this.session;
+    return this.isLoaded() && this.session;
+  }
+
+  isAddedToHomescreen() {
+    return !!JSON.parse(localStorage.getItem('app.nonstop.addedToHomescreen'));
   }
 
   favorite(param) {
@@ -134,6 +134,14 @@ export default class {
 
   _doAfterAllLoading() {
     this.images = this.images.shuffle();
+
+
+    if (query('utm_source', true) === 'homescreen') {
+      window.slack.postMessage('ホーム画面からアクセスされました userID: ' + window.app.session.id);
+      localStorage.setItem('app.nonstop.addedToHomescreen', true);
+    }
+    
+
     this.doAfterLoading();
   }
 }

@@ -5,6 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Avatar from '@material-ui/core/Avatar';
 import PetsIcon from '@material-ui/icons/Pets';
+import Toast from '../object/Toast';
 
 export default class extends Component {
 	getName(dat) {
@@ -17,11 +18,12 @@ export default class extends Component {
 		const dat = this.props.dat;
 		return (
 			<ListItem className="Favorite" {...this.props}>
-				<Avatar className="Avatar">
+				<Avatar className="Avatar" onClick={()=> new Toast('近日解禁🌟', true)}>
 					<PetsIcon />
 				</Avatar>
 				<div style={{ width: '100%', marginLeft: 5 }}>
 					<ListItemText
+						onClick={()=> new Toast('近日解禁🌟', true)}
 						className="ListItemText"
 						// INFO: https://qiita.com/ryounagaoka/items/4736c225bdd86a74d59c
 						primary={this.getName(dat)}

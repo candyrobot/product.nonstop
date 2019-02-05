@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
-	isAndroid,
-	showWebview
+	showHowToAddToHomescreen
 } from '../component.env/_util';
 
 export default class extends Component {
@@ -9,13 +8,7 @@ export default class extends Component {
 		return (
 		<div
 			className="Banner"
-			onClick={()=> {
-				if (isAndroid()) {
-					return showWebview('https://www.youtube.com/embed/f9MsSWxJXhc');
-				} else {
-					return showWebview('https://www.youtube.com/embed/8iueP5sRQ-Y');
-				}
-			}}
+			onClick={()=> showHowToAddToHomescreen()}
 		>
 			スマホのホーム画面にこのアプリを追加することができるのです
 			<i>(ここをタップ)</i>

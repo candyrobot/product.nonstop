@@ -173,3 +173,11 @@ export function disableUsersZoom() {
     lastTouch = now;
   }, true);
 }
+
+export function showHowToAddToHomescreen() {
+  if (isAndroid()) {
+    return showWebview('https://www.youtube.com/embed/f9MsSWxJXhc');
+  } else {
+    return showWebview('https://www.youtube.com/embed/8iueP5sRQ-Y');
+  }
+}

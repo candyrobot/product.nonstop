@@ -61,10 +61,10 @@ export default class extends Component {
 						</h5>,
 						<Image data-react-list-index={i} key={key} dat={data[i]} />
 					]
-				if (i === 0 || i % 12)
-					return <Image data-react-list-index={i} key={key} dat={data[i]} />;
-				else
+				if (!window.app.isAddedToHomescreen() && !(i === 0) && !(i % 12))
 					return [<Banner key="banner" />, <Image data-react-list-index={i} key={key} dat={data[i]} />];
+				else
+					return <Image data-react-list-index={i} key={key} dat={data[i]} />;
 			},
 		}
 	}
@@ -74,10 +74,10 @@ export default class extends Component {
 		return {
 			length: data.length,
 			itemRenderer: (i, key)=> {
-				if (i === 0 || i % 12)
-					return <Image data-react-list-index={i} key={key} dat={data[i]} />;
-				else
+				if (!window.app.isAddedToHomescreen() && !(i === 0) && !(i % 12))
 					return [<Banner key="banner" />, <Image data-react-list-index={i} key={key} dat={data[i]} />];
+				else
+					return <Image data-react-list-index={i} key={key} dat={data[i]} />;
 			},
 		}
 	}

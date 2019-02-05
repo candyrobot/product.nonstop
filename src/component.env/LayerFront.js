@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Fab from '@material-ui/core/Fab';
-import Icon from '@material-ui/core/Icon';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import $ from 'jquery';
 import {
-  query
+  query,
+  showHowToAddToHomescreen
 } from '../component.env/_util';
+import Button from '../component/Button';
 import Recommendation from '../component.env/Recommendation';
 import ButtonToggleFavorite from '../component.env/ButtonToggleFavorite';
 
@@ -29,33 +29,40 @@ export default class extends Component {
       {/*<Conspicuous showingIndex={this.state.conspicuousShowingIndex} />*/}
 
       <div className="frombottom">
-        {imageID ?
-          <ButtonToggleFavorite
-            fab={true}
-            image={window.app.images.find(imageID)}
-            guide={!window.app.session}
-            onClick={this.onClickOnFavorite}
-          />
-          :
-          <Fab
-            onClick={()=> $('#component-login').show(300)}
-            variant="extended"
-            size="medium"
-            className="button"
-            aria-label="Add"
-            style={{ margin: '0 10px 25px' }}
-          >
-            <PlayArrowIcon className="poyooon" />
-            ログイン
+        {(()=> {
 
-            <div className="balloon" position="top">
-              新しい画像 毎日20枚以上更新！🌟
-              {/*
-              👇登録してアプリのようにホーム画面に追加しよう！
-              🌟このアプリをホーム画面に追加できるようになりました*/}
-            </div>
-          </Fab>
-        }
+          if (imageID) {
+            return <ButtonToggleFavorite
+              rounded={true}
+              image={window.app.images.find(imageID)}
+              guide={!window.app.session}
+              onClick={this.onClickOnFavorite}
+            />
+          }
+
+          else if (!window.app.isLogined()) {
+            return <Button
+              onClick={()=> $('#component-login').show(300)}
+              icon={<PlayArrowIcon className="poyooon" />}
+              primary={'ログイン'}
+              secondary={'新しい画像 毎日20枚以上更新！🌟'}
+            />
+          }
+
+          else if (window.app.isLogined() && !window.app.isAddedToHomescreen()) {
+            return <Button
+              onClick={()=> showHowToAddToHomescreen()}
+              icon={<PlayArrowIcon className="poyooon" />}
+              primary={'やり方を見る: スマホのホーム画面に追加💡'}
+              secondary={'アプリのようにホーム画面に追加しよう！🌟'}
+            />
+          }
+
+          else {
+            return null;
+          }
+          
+        })()}
         <Recommendation
           initialDisplayNum="6"
           ref={(c)=> document.app.cRecommendation = c}
@@ -66,10 +73,3 @@ export default class extends Component {
     );
   }
 }
-
-          // <Fab color="secondary" className="Fab" aria-label="Edit">
-          //   <Icon>edit_icon</Icon>
-          // </Fab>
-
-
-
