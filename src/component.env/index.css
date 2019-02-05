@@ -20,10 +20,10 @@ body > .fullscreenImage > .imageContainer > img {
 .headline {
   width: 100%;
   color: white;
-  marginTop: 5;
-  marginBottom: 0;
-  padding: 10;
-  backgroundColor: #ffffff14;
+  margin-top: 5px;
+  margin-bottom: 0;
+  padding: 10px;
+  background-color: #ffffff14;
 }
 
 
@@ -51,6 +51,12 @@ body > .fullscreenImage > .imageContainer > img {
   font-size: 14px;
   font-weight: bold;
   color: red;
+}
+
+
+.AdvancedImage {
+  width: 100%;
+  height: 77vh;
 }
 
 

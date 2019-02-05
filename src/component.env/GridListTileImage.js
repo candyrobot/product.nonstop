@@ -17,7 +17,7 @@ export default class extends Component {
     // TODO: transition
     // INFO: https://material-ui.com/utils/transitions/
 
-    const { image, onClick, className, style } = this.props;
+    const { image, onClick, className } = this.props;
 
     if (!image)
       return null;

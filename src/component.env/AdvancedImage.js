@@ -30,19 +30,23 @@ export default class extends Component {
 		}
 	};
 
+// <GridListTileImage
+// 				onClick={this.handleClickThumbnail}
+// 				className="main"
+// 				image={window.app.images.find(imageID)}
+// 			/>
+
+
 	render() {
 		const imageID = this.props.imageID;
 
 		return (
-		<div className="Image" style={{ position: 'relative', width: '100%' }}>
-			<GridListTileImage
-				onClick={this.handleClickThumbnail}
-				className="main"
-				image={window.app.images.find(imageID)}
-			/>
+		<div className="AdvancedImage">
+			{/*<img onClick={this.handleClickThumbnail} src={window.app.images.find(imageID).url} />*/}
 
 			{window.app.isAdmin() ?
-				<h3 style={{ color: 'white' }}
+				<h3
+					className="ReportIcon"
 					onClick={(e)=> {
 						window.Image.delete(imageID);
 					}}>
