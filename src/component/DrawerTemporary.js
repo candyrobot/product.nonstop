@@ -13,6 +13,7 @@ import Toast from '../object/Toast';
 import {
   logout
 } from '../component.env/_util';
+import OverlayToSign from '../component.env/OverlayToSign';
 
 export default class extends React.Component {
 
@@ -48,7 +49,7 @@ export default class extends React.Component {
               <ListItem
                 button
                 onClick={()=> {
-                  $('#component-login').show(300);
+                  OverlayToSign.create();
                   this.setState({ left: false });
                 }}
               >

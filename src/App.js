@@ -24,7 +24,7 @@ import {
   disableUsersZoom
 } from './component.env/_util';
 import './component.env/dialog.css';
-import Overlays from './component.env/_overlays';
+// import Overlays from './component.env/_overlays';
 import LayerBase from './component.env/LayerBase';
 import LayerFront from './component.env/LayerFront';
 import DialogWhatIsThisApp from './component.env/DialogWhatIsThisApp';
@@ -111,9 +111,6 @@ export default class extends Component {
     return (
     <div className="App">
 
-
-      {/* INFO: from this line z-index: 1300 */}
-
       <DrawerTemporary classes={{}} />
 
       {!window.app.isLogined() &&
@@ -123,16 +120,19 @@ export default class extends Component {
         <DialogLetsShare open={this.state.DialogLetsShareOpen} onClose={()=> this.setState({ DialogLetsShareOpen: false })} />}
 
 
-      {/* INFO: from this line z-index: 1301 */}
+      {/*  
+      TODO:
+      material-uiの`z-index: 1300`などを持ってるコンポーネントらは、<App>の外にappendしている。
+      よって、いくらここで大きい数値を与えても、手前にはこない
+      need fix.
+      */}
 
-      <Overlays />
+      {/*<Overlays />*/}
 
       <div id="layer-appMessages" className="component-layer" style={{ zIndex: 1301 }}>
         <div className="alerts"></div>
       </div>
 
-
-      {/* INFO: from this line z-index: initial */}
 
       <LayerBase ref={(c)=> this.cLayerBase = c} />
 

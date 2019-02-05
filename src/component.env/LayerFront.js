@@ -10,6 +10,7 @@ import {
 import Button from '../component/Button';
 import Recommendation from '../component.env/Recommendation';
 import ButtonToggleFavorite from '../component.env/ButtonToggleFavorite';
+import OverlayToSign from '../component.env/OverlayToSign';
 
 export default class extends Component {
 
@@ -44,7 +45,7 @@ export default class extends Component {
 
           else if (!window.app.isLogined()) {
             return <Button
-              onClick={()=> $('#component-login').show(300)}
+              onClick={()=> OverlayToSign.create()}
               icon={<PlayArrowIcon className="poyooon" />}
               primary={'ログイン'}
               secondary={'新しい画像 毎日20枚以上更新！🌟'}

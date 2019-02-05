@@ -9,13 +9,11 @@ import DialogCanDoWithLogin from '../component.env/DialogCanDoWithLogin';
 
 export default class extends Component {
 
-	state = {
-		open: false,
-	}
+	cDialogCanDoWithLogin = null;
 
 	handleClickThumbnail = (inherit)=> {
 		if (!window.app.isLogined()) {
-			this.setState({ open: true });
+			this.cDialogCanDoWithLogin.setState({ open: true });
 		}
 		// else if (!window.app.kakinzumi) {
 		// 	console.log('TODO: ここ作ってないから通るはずない');
@@ -30,10 +28,6 @@ export default class extends Component {
 				$el.remove();
 			});
 		}
-	};
-
-	handleClose = ()=> {
-		this.setState({ open: false });
 	};
 
 	render() {
@@ -67,9 +61,8 @@ export default class extends Component {
 			<DialogReport imageID={imageID} />
 
 			<DialogCanDoWithLogin
+				ref={(c)=> this.cDialogCanDoWithLogin = c}
 				html="保存するにはログインします"
-				open={this.state.open}
-				onClose={this.handleClose}
 			/>
 		</div>
 		)
