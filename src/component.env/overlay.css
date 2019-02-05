@@ -29,13 +29,43 @@
   text-align: center;
 }
 
-#webview p {
+
+.OverlayHowToAddToHomescreen .component-overlay {
+  padding: 20px;
+}
+.OverlayHowToAddToHomescreen .frombottom {
+  padding: 20px;
+}
+.OverlayHowToAddToHomescreen h4 {
+  margin: 0 0 10px;
+}
+.OverlayHowToAddToHomescreen p {
   padding-left: 10px;
   font-weight: bold;
 }
-#webview iframe {
+.OverlayHowToAddToHomescreen iframe {
   display: block;
-  height: calc(100% - 105px);
+  height: calc(100% - 130px);
   background-color: black;
   box-shadow: 0 0px 10px rgba(0, 0, 0, .4);
 }
+.OverlayHowToAddToHomescreen .component-mediabox {
+  position: relative;
+  padding-right: 90px;
+}
+.OverlayHowToAddToHomescreen .component-mediabox img {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 75px;
+  height: 75px;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px #0074bb;
+}
+.OverlayHowToAddToHomescreen .component-mediabox .title {
+  margin: 0 0 5px;
+}
+.OverlayHowToAddToHomescreen .component-mediabox .desc {
+  font-size: 14px;
+}
+

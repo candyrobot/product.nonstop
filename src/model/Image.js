@@ -62,7 +62,7 @@ export default window.Image = new class {
 	excludeIFavorited(images) {
 		if (window.app === undefined)
 			return [];
-		console.log(images);
+		console.log(window.app.session);
 		return images.filter((i)=> {
 			if (i === undefined)
 				return false;
