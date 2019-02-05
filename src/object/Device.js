@@ -18,7 +18,7 @@ export default window.Device = {
 				alert(this.message);
 
 			this.$input =
-			$('<input type="file" accept="image/*,video/*" multiple />')
+			$('<input type="file" accept="image/*,video/*" style="display: none" multiple />')
 			.appendTo('body')
 			.on('change', (e)=> {
 				this.upload(e.target.files);
