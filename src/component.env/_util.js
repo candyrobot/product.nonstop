@@ -14,9 +14,12 @@ export const signup = function() {
     return;
   }
   startLoading();
-  $.post(domain + '/users/', dat).fail(function(dat) {
+  $.post(domain + '/users/', dat)
+  .fail(function(dat) {
     new Toast(dat.responseJSON.toast, true);
-  }).done(function() {
+    stopLoading();
+  })
+  .done(function() {
     window.slack.postMessage(window.slackMessage.signup('新しい人'));
 
     login(dat);
@@ -45,6 +48,7 @@ export const login = function(dat) {
   })
   .fail(function(dat) {
     new Toast(dat.responseJSON.toast, true);
+    stopLoading();
   })
   .done(function(dat) {
     window.slack.postMessage(window.slackMessage.login(`${dat.session.id} ${dat.session.email}`));
@@ -141,11 +145,16 @@ export const startLoading = function() {
   <span class="expand"></span>
 </div>
   `).appendTo('body').show(300);
-  setTimeout(()=> stopLoading($el), 1000 * 10);
+  const t = setTimeout(()=> {
+    stopLoading($el);
+    new Toast('ネットワーク環境をお確かめの上、リロードしてください', true);
+  }, 1000 * 10);
+  (window.timers || (window.timers = [])).push(t);
   return $el;
 };
 
 export const stopLoading = function($el = $('body > .loadingLine')) {
+  clearTimeout((window.timers || (window.timers = [])).pop());
   $el.hide(300, ()=> {
     $el.remove();
   });
