@@ -69,6 +69,7 @@ export default class extends Component {
         window.app.images = window.app.images.shuffle();
       this.setState({});
       this.cRecommendation.setState({ open: false });
+      this.cLayerBase.setState({ scrollIndex: 0 });
     });
 
     window.Route.on('beforePushing', ()=> {
@@ -120,7 +121,7 @@ export default class extends Component {
         <DialogLetsShare open={this.state.DialogLetsShareOpen} onClose={()=> this.setState({ DialogLetsShareOpen: false })} />}
 
 
-      {/*  
+      {/*
       TODO:
       material-uiの`z-index: 1300`などを持ってるコンポーネントらは、<App>の外にappendしている。
       よって、いくらここで大きい数値を与えても、手前にはこない
