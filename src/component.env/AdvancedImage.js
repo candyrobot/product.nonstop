@@ -19,30 +19,23 @@ export default class extends Component {
 		// 	console.log('TODO: ここ作ってないから通るはずない');
 			// document.app.DialogCanDoWithKakin.xxx('保存するには課金します');
 		// }
-		else {
-			new Toast('タップで閉じる', true);
-			const imageUrl = window.app.images.find(this.props.imageID).url;
-			const $el = $(`<div class="fullscreenImage"><div class="imageContainer"><img src="${imageUrl}"></div></div>`)
-			.appendTo('body')
-			.on('click', function() {
-				$el.remove();
-			});
-		}
+		// else {
+		// 	new Toast('タップで閉じる', true);
+		// 	const imageUrl = window.app.images.find(this.props.imageID).url;
+		// 	const $el = $(`<div class="fullscreenImage"><div class="imageContainer"><img src="${imageUrl}"></div></div>`)
+		// 	.appendTo('body')
+		// 	.on('click', function() {
+		// 		$el.remove();
+		// 	});
+		// }
 	};
-
-// <GridListTileImage
-// 				onClick={this.handleClickThumbnail}
-// 				className="main"
-// 				image={window.app.images.find(imageID)}
-// 			/>
-
 
 	render() {
 		const imageID = this.props.imageID;
 
 		return (
 		<div className="AdvancedImage">
-			{/*<img onClick={this.handleClickThumbnail} src={window.app.images.find(imageID).url} />*/}
+			<img onClick={this.handleClickThumbnail} src={window.app.images.find(imageID).url} />
 
 			{window.app.isAdmin() ?
 				<h3

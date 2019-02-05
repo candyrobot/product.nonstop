@@ -57,6 +57,13 @@ body > .fullscreenImage > .imageContainer > img {
 .AdvancedImage {
   width: 100%;
   height: 77vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.AdvancedImage img {
+  display: block;
+  width: 100%;
 }
 
 
