@@ -74,6 +74,7 @@ input {
   background-color: #70c9ff !important;
   background: linear-gradient(to bottom, #70c9ff 0%,#49ace5 100%) !important;
   color: white !important;
+  text-shadow: 0 1px 1px #2085bd;
   font-weight: bold !important;
   box-shadow: 0 1px 5px #009fff85;
   text-decoration: none;

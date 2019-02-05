@@ -62,7 +62,10 @@ export default window.Image = new class {
 	excludeIFavorited(images) {
 		if (window.app === undefined)
 			return [];
+		console.log(images);
 		return images.filter((i)=> {
+			if (i === undefined)
+				return false;
 			return !window.app.favorites.where({imageID: i.id, userID: window.app.session.id}).length
 		});
 	}

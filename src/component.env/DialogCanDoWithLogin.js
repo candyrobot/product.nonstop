@@ -27,7 +27,7 @@ export default class extends React.Component {
 
 	render() {
 		return (
-		<DialogSlide className='Dialog-margin-small' onClose={this.handleClose} open={this.state.open}>
+		<DialogSlide className='Dialog-margin-small' onClose={()=> this.handleClose()} open={this.state.open}>
 			<div
 				id="component-letsSignup"
 				className="component-suggestion paper"
