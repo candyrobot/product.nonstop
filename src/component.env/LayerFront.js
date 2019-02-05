@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import AddHomescreenIcon from '@material-ui/icons/AddToHomeScreen';
+// import AddHomescreenIcon from '@material-ui/icons/GetApp';
 import $ from 'jquery';
 import {
   query,
@@ -51,8 +53,9 @@ export default class extends Component {
 
           else if (window.app.isLogined() && !window.app.isAddedToHomescreen()) {
             return <Button
+              style={{ fontSize: 12 }}
               onClick={()=> showHowToAddToHomescreen()}
-              icon={<PlayArrowIcon className="poyooon" />}
+              icon={<AddHomescreenIcon className="poyooon" />}
               primary={'やり方を見る: スマホのホーム画面に追加💡'}
               secondary={'アプリのようにホーム画面に追加しよう！🌟'}
             />
@@ -61,7 +64,7 @@ export default class extends Component {
           else {
             return null;
           }
-          
+
         })()}
         <Recommendation
           initialDisplayNum="6"

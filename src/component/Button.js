@@ -4,7 +4,7 @@ import Fab from '@material-ui/core/Fab';
 export default class extends React.Component {
 
 	render() {
-		const { onClick, icon, primary, secondary } = this.props;
+		const { onClick, icon, primary, secondary, style } = this.props;
 		return (
 			<Fab
 				onClick={()=> onClick()}
@@ -12,9 +12,9 @@ export default class extends React.Component {
 				size="medium"
 				className="button"
 				aria-label="Add"
-				style={{ margin: '0 10px 25px' }}
+				style={Object.assign({ margin: '0 10px 25px' }, style)}
 			>
-				<icon />
+				{icon}
 				{primary}
 
 				<div className="balloon" position="top">
