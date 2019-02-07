@@ -133,9 +133,6 @@ export default class {
   }
 
   _doAfterAllLoading() {
-    this.images = this.images.shuffle();
-
-
     if (query('utm_source', true) === 'homescreen') {
       window.slack.postMessage('ホーム画面からアクセスされました userID: ' + window.app.session.id);
       localStorage.setItem('app.nonstop.addedToHomescreen', true);

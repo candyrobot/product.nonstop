@@ -49,7 +49,7 @@ export default window.Image = new class {
 			images = this.sortByRelated(imageID);
 		}
 		else {
-			images = window.app.images;
+			images = window.app.images.shuffle(imageID);
 		}
 		return this.excludeIFavorited(images.exclude({ id: imageID }));
 	}

@@ -169,15 +169,86 @@ Array.prototype.serialize = function() {
   }, []);
 };
 
+Array.prototype.shuffle = function(seed) {
+  if (seed === undefined)
+    return this;
+
+  var number = getAnyCharNumber(seed);
+  var cloned = this.clone();
+  
+  // x:
+  // return this.map((v, i)=> {
+  //   var n = number * i;
+  //   var j = getNumberNoRerationTo(n, 0, this.length - 1);
+  //   return getNumberNoRerationTo(n, 0, this.length - 1);
+  // });
+
+  for(var i = this.length - 1; i > 0; i--){
+      var n = number * i;
+      var r = getNumberNoRerationTo(n, 0, this.length - 1);
+      var tmp = cloned[i];
+      cloned[i] = cloned[r];
+      cloned[r] = tmp;
+  }
+
+  return cloned;
+};
+
 // INFO: https://sbfl.net/blog/2017/06/01/javascript-reproducible-random/
 // INFO: Google: 疑似乱数, シード値
 // INFO: https://qiita.com/komaji504/items/62a0f8ea43053e90555a
-Array.prototype.shuffle = function() {
-  for(var i = this.length - 1; i > 0; i--){
-      var r = Math.floor(Math.random() * (i + 1));
-      var tmp = this[i];
-      this[i] = this[r];
-      this[r] = tmp;
-  }
-  return this;
-};
+// Array.prototype.shuffle = function() {
+//   for(var i = this.length - 1; i > 0; i--){
+//       var r = Math.floor(Math.random() * (i + 1));
+//       var tmp = this[i];
+//       this[i] = this[r];
+//       this[r] = tmp;
+//   }
+//   return this;
+// };
+
+function increaseRandomPower(n, n2) {
+  return n * n2 + 13;
+}
+// var nRandromByI = n / (i + 1);
+// console.log(nRandromByI, images.length % nRandromByI)
+
+/**
+ * INFO: 一意の、だけど全く関係のない結果を返す
+ * @param {int} - 整数で
+ * @return {int} - 整数
+ */
+function getNumberNoRerationTo(n, min, max) {
+  var f = intToFloatIsFirst(n);
+  return Math.floor( f * (max - min + 1) ) + min;
+}
+
+// INFO: 整数を小数点第一位に変換する 23 -> 0.23
+function intToFloatIsFirst(n) {
+  var l = n.toString().length;
+  var p = 1;
+  for (var i=0; i<l; i++)
+    p = p * 10;
+  return n / p;
+}
+
+function getAnyCharNumber(str) {
+  return getCharNumber(toZenkaku(str));
+}
+
+function toZenkaku(str) {
+  return str.toString().replace(/[A-Za-z0-9]/g, function(s) {
+    return String.fromCharCode(s.charCodeAt(0) + 0xFEE0);
+  });
+}
+
+function getCharNumber(zenkaku) {
+  const a = escape(zenkaku).split('%u');
+  a.shift();
+  const n10 = a.reduce((p, n16)=> p + change16to10(n16), 0);
+  return n10;
+}
+
+function change16to10(str) {
+  return parseInt(str, 16);
+}

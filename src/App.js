@@ -66,8 +66,6 @@ export default class extends Component {
     super();
 
     window.Route.on('afterPushing', (state)=> {
-      if (state.variable === 'image')
-        window.app.images = window.app.images.shuffle();
       this.setState({});
       this.cRecommendation.setState({ open: false });
       this.cLayerBase.setState({ scrollIndex: 0 });
