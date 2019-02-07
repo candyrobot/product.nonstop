@@ -172,27 +172,62 @@ Array.prototype.serialize = function() {
 Array.prototype.shuffle = function(seed) {
   if (seed === undefined)
     return this;
-
-  var number = getAnyCharNumber(seed);
-  var cloned = this.clone();
-  
-  // x:
-  // return this.map((v, i)=> {
-  //   var n = number * i;
-  //   var j = getNumberNoRerationTo(n, 0, this.length - 1);
-  //   return getNumberNoRerationTo(n, 0, this.length - 1);
-  // });
-
+  const sosu = 31;
+  const seedNum = getAnyCharNumber(seed);
+  const gr2 = (x)=> Math.abs(sosu * x + seedNum);
+  const cloned = this.clone();
+  // console.log(seedNum);
   for(var i = this.length - 1; i > 0; i--){
-      var n = number * i;
-      var r = getNumberNoRerationTo(n, 0, this.length - 1);
+      var r = seedNum * gr2(i) % this.length;
       var tmp = cloned[i];
       cloned[i] = cloned[r];
       cloned[r] = tmp;
   }
-
   return cloned;
 };
+
+// Array.prototype.shuffle = function(seed) {
+//   if (seed === undefined)
+//     return this;
+
+//   const HASH_INCREMENT = 0x61c88647
+//   const seedNum = getAnyCharNumber(seed);
+//   const gr2 = (x)=> Math.abs(x * HASH_INCREMENT);
+//   const cloned = this.clone();
+//   console.log(seedNum);
+//   for(var i = this.length - 1; i > 0; i--){
+//       var r = seedNum * gr2(i) % this.length;
+//       var tmp = cloned[i];
+//       cloned[i] = cloned[r];
+//       cloned[r] = tmp;
+//   }
+//   return cloned;
+// };
+
+// Array.prototype.shuffle = function(seed) {
+//   if (seed === undefined)
+//     return this;
+
+//   var number = getAnyCharNumber(seed);
+//   var cloned = this.clone();
+
+//   // x:
+//   // return this.map((v, i)=> {
+//   //   var n = number * i;
+//   //   var j = getNumberNoRerationTo(n, 0, this.length - 1);
+//   //   return getNumberNoRerationTo(n, 0, this.length - 1);
+//   // });
+
+//   for(var i = this.length - 1; i > 0; i--){
+//       var n = number * i;
+//       var r = getNumberNoRerationTo(n, 0, this.length - 1);
+//       var tmp = cloned[i];
+//       cloned[i] = cloned[r];
+//       cloned[r] = tmp;
+//   }
+
+//   return cloned;
+// };
 
 // INFO: https://sbfl.net/blog/2017/06/01/javascript-reproducible-random/
 // INFO: Google: 疑似乱数, シード値
