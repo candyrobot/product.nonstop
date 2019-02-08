@@ -213,6 +213,16 @@ function increaseRandomPower(n, n2) {
 // var nRandromByI = n / (i + 1);
 // console.log(nRandromByI, images.length % nRandromByI)
 
+function increaseRandomPower2(n, n2, n3) {
+  var a = n + 13;
+  var b = a * (n2 || a) * a;
+  return b - (n3 || a);
+}
+
+function getHitoketame(n) {
+  return parseInt(n.toString()[n.toString().length - 1]);
+}
+
 /**
  * INFO: 一意の、だけど全く関係のない結果を返す
  * @param {int} - 整数で
