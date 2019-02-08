@@ -6,9 +6,6 @@ import ButtonToggleFavorite from '../component.env/ButtonToggleFavorite';
 import Banner from '../component.env/Banner';
 
 export default class extends Component {
-	isNotFavoritedAnybody(dat) {
-		return !window.app.favorites.where({ imageID: dat.id }).length
-	}
 	render() {
 		const dat = this.props.dat;
 		return (
@@ -21,7 +18,7 @@ export default class extends Component {
 		>
 			<GridListTileBar
 				style={{ background: 'initial' }}
-				title={this.isNotFavoritedAnybody(dat) ? 'New' : ''}
+				title={Image.isEnoughToShowRecommendation(dat.id) ? '' : 'New'}
 				titlePosition="bottom"
 				actionIcon={<ButtonToggleFavorite image={dat} />}
 				actionPosition="right"

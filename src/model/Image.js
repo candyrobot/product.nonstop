@@ -45,13 +45,18 @@ export default window.Image = new class {
 
 	sortByRelatedEffort(imageID) {
 		let images;
-		if (window.app.favorites.where({ imageID }).length > 3) {
+		if (this.isEnoughToShowRecommendation(imageID)) {
 			images = this.sortByRelated(imageID);
 		}
 		else {
 			images = window.app.images.shuffle(imageID);
 		}
 		return this.excludeIFavorited(images.exclude({ id: imageID }));
+	}
+
+	// INFO: sortByRelatedアルゴリズムに必要なfavrite数があればtrue
+	isEnoughToShowRecommendation(imageID) {
+		return window.app.favorites.where({ imageID }).length > 3
 	}
 
 	filterByMyFavorite() {
