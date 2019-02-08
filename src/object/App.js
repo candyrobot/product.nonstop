@@ -3,6 +3,7 @@ import '../object/Array';
 import '../object/FileList';
 import '../object/firebase';
 import Route from '../object/Route';
+import LocalStorage from '../object/LocalStorage';
 import Image from '../model/Image';
 import {
   domain,
@@ -54,6 +55,9 @@ export default class {
   favorites = []
   constructor() {
 
+    // TODO: created_atの値を文字列にしないとstringifyしたときに復元不可な値になってしまう
+    // this.images = LocalStorage.read('images');
+
     initializeRouteAndRedirect();
 
     let n = 0;
@@ -68,10 +72,13 @@ export default class {
     window.firebase.firestore().getImages((images)=> {
       n++; console.log('firebase done.');
 
-      this.images = this.images.concat(images);
-
-      if (n === 2)
+      if (n === 2) {
+        this.images = this.images.concat(images);
         this._doAfterAllLoading();
+      }
+      else {
+        this.images = images;
+      }
     });
 
     // TODO: herokuが重い。改善しないと表示が遅い
@@ -93,10 +100,13 @@ export default class {
       // INFO: firebaseと統一しておく
       dat.images = dat.images.map((i)=> (i.created_at = new Date(i.created_at), i));
 
-      this.images = this.images.concat(dat.images);
-
-      if (n === 2)
+      if (n === 2) {
+        this.images = this.images.concat(dat.images);
         this._doAfterAllLoading();
+      }
+      else {
+        this.images = dat.images;
+      }
     });
   }
 

@@ -15,6 +15,7 @@ import 'jquery.transit';
 import './object/$';
 import './object/Slack';
 import App from './object/App';
+import LocalStorage from './object/LocalStorage';
 import DrawerTemporary from './component/DrawerTemporary';
 import './component/balloon.css';
 import {
@@ -90,6 +91,7 @@ export default class extends Component {
     const $el = startLoading();
 
     window.app.doAfterLoading = ()=> {
+      LocalStorage.create({ images: window.app.images });
       stopLoading($el);
       this.setState({});
     };
