@@ -29,6 +29,7 @@ import './component.env/dialog.css';
 import LayerBase from './component.env/LayerBase';
 import LayerFront from './component.env/LayerFront';
 import DialogWhatIsThisApp from './component.env/DialogWhatIsThisApp';
+import DialogAsHinanbasho from './component.env/DialogAsHinanbasho';
 import DialogLetsShare from './component.env/DialogLetsShare';
 
 // disableUsersZoom();
@@ -45,6 +46,7 @@ export default class extends Component {
   state = {
     conspicuousShowingIndex: 2,
     DialogWhatIsThisAppOpen: true,
+    DialogAsHinanbashoOpen: false,
     DialogLetsShareOpen: true,
     DialogReport: false,
   };
@@ -115,7 +117,13 @@ export default class extends Component {
       <DrawerTemporary classes={{}} />
 
       {!window.app.isLogined() &&
-        <DialogWhatIsThisApp open={this.state.DialogWhatIsThisAppOpen} onClose={()=> this.setState({ DialogWhatIsThisAppOpen: false })} />}
+        <DialogWhatIsThisApp open={this.state.DialogWhatIsThisAppOpen} onClose={()=> {
+          this.setState({ DialogWhatIsThisAppOpen: false });
+          this.setState({ DialogAsHinanbashoOpen: true })
+        }} />}
+
+      {!window.app.isLogined() &&
+        <DialogAsHinanbasho open={this.state.DialogAsHinanbashoOpen} onClose={()=> this.setState({ DialogAsHinanbashoOpen: false })} />}
 
       {window.app.isLogined() &&
         <DialogLetsShare open={this.state.DialogLetsShareOpen} onClose={()=> this.setState({ DialogLetsShareOpen: false })} />}

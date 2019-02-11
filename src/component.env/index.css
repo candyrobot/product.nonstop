@@ -151,6 +151,29 @@ body > .fullscreenImage > .imageContainer > img {
 }
 
 
+.DialogAsHinanbasho [role="document"] > div {
+  margin: 5px;
+}
+.DialogAsHinanbasho .body {
+  padding: 20px;
+  color: white;
+  background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+}
+.DialogAsHinanbasho h3 {
+  margin: 0px 0 10px;
+  text-align: center;
+  font-size: 24px;
+}
+.DialogAsHinanbasho p:nth-child(2) {
+  margin: 15px 0;
+}
+.DialogAsHinanbasho p {
+  margin: 3px 0;
+  font-size: 12px;
+  text-align: center;
+}
+
+
 .Dialog-margin-small [role="document"] > div {
   margin: 5px;
 }

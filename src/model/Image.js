@@ -65,7 +65,7 @@ export default window.Image = new class {
 
 	// TODO: Arrayをextendsしたら引数をとる
 	excludeIFavorited(images) {
-		if (window.app === undefined)
+		if (window.app === undefined || window.app.session === undefined)
 			return [];
 		console.log(window.app.session);
 		return images.filter((i)=> {
