@@ -1,3 +1,5 @@
+import Firestore from '../object/Firestore';
+
 export default new class {
   sortByMostHavingFavorites() {
     if (!window.app)
@@ -7,5 +9,9 @@ export default new class {
       const b = window.app.favorites.where({userID: uB.id}).length;
       return a > b ? -1 : 1;
     });
+  }
+
+  update(userID, hash) {
+    Firestore.update('users', userID, hash);
   }
 }

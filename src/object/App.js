@@ -5,6 +5,7 @@ import '../object/firebase';
 import Route from '../object/Route';
 import LocalStorage from '../object/LocalStorage';
 import Image from '../model/Image';
+import User from '../model/User';
 import {
   domain,
   query
@@ -59,6 +60,11 @@ export default class {
     // this.images = LocalStorage.read('images');
 
     initializeRouteAndRedirect();
+
+    if (LocalStorage.read('addedToHomescreen') && window.app && window.app.session) {
+      User.update(window.app.session.id, { isAddedToHomescreen: true });
+      console.log('isAddedToHomescreen', '更新しました');
+    }
 
     let n = 0;
 
