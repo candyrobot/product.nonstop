@@ -34,7 +34,11 @@ export default class extends Component {
 		// INFO: 源のdataを書き換えてはいけない
 		// Object.assign(window.app, window.app[query('method')](query('param')));
 		const dat = window.app[query('method')](query('param'));
-		return dat.images.filter((i)=> !i.deleteFlag);
+		dat.images.filter((i)=> !i.deleteFlag);
+
+		// if (Unlock.is('MaxImages'))
+
+		return dat;
 	}
 
 	getReactListUser() {
