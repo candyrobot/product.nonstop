@@ -102,7 +102,7 @@ export default class extends Component {
 
 			<div className="ReactList scroll" style={{ overflow: 'auto', maxHeight: '100%' }}>
 				{this.getReactListProps().length === 0 ?
-					<p style={{ color: 'white', textAlign: 'center' }}>nothing or loading...</p> :
+					<p style={{ color: 'white', textAlign: 'center' }}>loading, or nothing...</p> :
 					<ReactList ref={(c)=> this.cReactList = c} {...this.getReactListProps()} />
 				}
 			</div>

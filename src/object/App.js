@@ -50,10 +50,13 @@ function initializeRouteAndRedirect() {
 }
 
 export default class {
+
   doAfterLoading = function() {};
-  images = []
-  users = []
-  favorites = []
+  images = [];
+  users = [];
+  favorites = [];
+  isLoaded = false;
+
   constructor() {
 
     // TODO: created_atの値を文字列にしないとstringifyしたときに復元不可な値になってしまう
@@ -120,12 +123,8 @@ export default class {
     return this.isLogined() && this.session && this.session.id === 1
   }
 
-  isLoaded() {
-    return this.session !== undefined;
-  }
-
   isLogined() {
-    return this.isLoaded() && this.session;
+    return this.session;
   }
 
   isAddedToHomescreen() {
@@ -149,6 +148,7 @@ export default class {
   }
 
   _doAfterAllLoading() {
+    this.isLoaded = true;
     if (query('utm_source', true) === 'homescreen') {
       window.slack.postMessage('ホーム画面からアクセスされました userID: ' + window.app.session.id);
       localStorage.setItem('app.nonstop.addedToHomescreen', true);
