@@ -11,6 +11,8 @@ export default class extends React.Component {
 
 	onClick() {
 		localStorage.setItem('app.nonstop.time.lastShared', new Date().getTime())
+		if (window.app.session)
+			window.slack.postMessage(window.app.session.id + 'さんが拡散しようとしています');
 	}
 
 	shouldOpen() {
