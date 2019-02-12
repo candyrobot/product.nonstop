@@ -33,7 +33,7 @@ export default new class extends Element {
 						<ol>
 							<li>${this.isAndroid() ? 'Chrome' : 'Safari'}で開く</li>
 							<li>${this.isAndroid() ? '右上の設定を開く' : '下から設定を開く'}</li>
-							<li>ホーム画面に追加する旨${this.isAndroid() ? '' : 'のアイコン'}をタップ</li>
+							<li>"ホーム画面に追加する"旨${this.isAndroid() ? '' : 'のアイコン'}をタップ</li>
 						</ol>
 					</div>
 				</div>
