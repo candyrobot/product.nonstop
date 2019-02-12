@@ -1,4 +1,4 @@
-export default new class {
+export default window.LocalStorage = new class {
 	prefix = 'app.nonstop.';
 
 	create(hash) {

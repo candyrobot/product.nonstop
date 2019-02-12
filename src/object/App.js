@@ -56,18 +56,19 @@ export default class {
   users = [];
   favorites = [];
   isLoaded = false;
+  isJustAddedToHomescreen = false;
 
   constructor() {
 
     // TODO: created_atの値を文字列にしないとstringifyしたときに復元不可な値になってしまう
     // this.images = LocalStorage.read('images');
 
-    initializeRouteAndRedirect();
-
-    if (LocalStorage.read('addedToHomescreen') && window.app && window.app.session) {
-      User.update(window.app.session.id, { isAddedToHomescreen: true });
-      console.log('isAddedToHomescreen', '更新しました');
+    if (query('utm_source', true) === 'homescreen') {
+      this.isJustAddedToHomescreen = true;
+      LocalStorage.create({ addedToHomescreen: true });
     }
+
+    initializeRouteAndRedirect();
 
     let n = 0;
 
@@ -128,7 +129,7 @@ export default class {
   }
 
   isAddedToHomescreen() {
-    return !!JSON.parse(localStorage.getItem('app.nonstop.addedToHomescreen'));
+    return LocalStorage.read('addedToHomescreen');
   }
 
   favorite(param) {
@@ -149,11 +150,14 @@ export default class {
 
   _doAfterAllLoading() {
     this.isLoaded = true;
-    if (query('utm_source', true) === 'homescreen') {
+    if (this.isJustAddedToHomescreen) {
       window.slack.postMessage('ホーム画面からアクセスされました userID: ' + window.app.session.id);
-      localStorage.setItem('app.nonstop.addedToHomescreen', true);
     }
-    
+
+    if (LocalStorage.read('addedToHomescreen') && window.app.session.id) {
+      User.update(window.app.session.id, { addedToHomescreen: true });
+      console.log('isAddedToHomescreen', '更新しました');
+    }
 
     this.doAfterLoading();
   }
