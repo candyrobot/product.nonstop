@@ -16,4 +16,24 @@ export default new class {
 		});
 		return { done: (_fn)=> fn = _fn }
 	}
+
+	readUsers() {
+		let fn = function() {};
+		this.read('users').done((querySnapshot)=> {
+			const a = [];
+			querySnapshot.forEach((doc) => {
+				a.push({
+					id: doc.id,
+					addedToHomescreen: doc.get('addedToHomescreen'),
+					limitShowingImages: doc.get('limitShowingImages')
+				});
+			});
+			fn(a);
+		});
+		return { done: (_fn)=> fn = _fn }
+	}
+
+	readImages() {
+
+	}
 }

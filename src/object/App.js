@@ -4,6 +4,7 @@ import '../object/FileList';
 import '../object/firebase';
 import Route from '../object/Route';
 import LocalStorage from '../object/LocalStorage';
+import Firestore from '../object/Firestore';
 import Image from '../model/Image';
 import User from '../model/User';
 import {
@@ -73,12 +74,24 @@ export default class {
     Promise.all([
       this.readImages(),
       this.readAll(),
+      this.readUsers()
     ])
     .then((data)=> {
       const images = data[0];
       const dat = data[1];
+      const users = data[2];
 
       dat.images.concat(images);
+
+
+      // INFO: マージする
+      users.forEach((_u)=> {
+        const u = dat.users.find(_u.id);
+        if (u === undefined)
+          return;
+        Object.assign(u, _u);
+      });
+
 
       this.users = dat.users;
       this.images = dat.images;
@@ -89,13 +102,18 @@ export default class {
     });
   }
 
+  readUsers() {
+    return new Promise(function(resolve) {
+      Firestore.readUsers().done(resolve);
+    });
+  }
+
   readImages() {
     return new Promise(function(resolve) {
       window.firebase.firestore().getImages((images)=> {
         console.log('firebase done.');
         resolve(images);
       });
-
     })
   }
 
@@ -114,7 +132,8 @@ export default class {
         console.log('heroku done.');
 
         // INFO: firebaseと統一しておく
-        dat.images = dat.images.map((i)=> (i.created_at = new Date(i.created_at), i));
+        dat.images = dat.images.map((v)=> (v.created_at = new Date(v.created_at), v));
+        dat.users = dat.users.map((v)=> (v.id = v.id.toString(), v));
 
         resolve(dat);
       });
