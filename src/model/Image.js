@@ -1,3 +1,4 @@
+import Firestore from '../object/Firestore';
 // TODO: Arrayをextendsして
 // window.images = new Image(...dat.images);
 // window.images.sortByNewer()と使えるようにしたい
@@ -9,7 +10,7 @@ export default window.Image = new class {
 	}
 
 	delete(imageID) {
-		window.firebase.firestore().delete(imageID);
+		Firestore.update('images', imageID, { deleteFlag: true }) 
 		alert('削除しました');
 	}
 
@@ -67,7 +68,6 @@ export default window.Image = new class {
 	excludeIFavorited(images) {
 		if (window.app === undefined || window.app.session === undefined)
 			return [];
-		console.log(window.app.session);
 		return images.filter((i)=> {
 			if (i === undefined)
 				return false;

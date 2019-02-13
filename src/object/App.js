@@ -77,11 +77,14 @@ export default class {
       this.readUsers()
     ])
     .then((data)=> {
+      this.isLoaded = true;
+
+
       const images = data[0];
       const dat = data[1];
       const users = data[2];
 
-      dat.images.concat(images);
+      dat.images = dat.images.concat(images);
 
 
       // INFO: マージする
@@ -98,21 +101,34 @@ export default class {
       this.favorites = dat.favorites;
       this.session = dat.session;
 
-      this._doAfterAllLoading();
+
+      if (this.isJustAddedToHomescreen) {
+        window.slack.postMessage('ホーム画面からアクセスされました userID: ' + window.app.session.id);
+      }
+
+      if (LocalStorage.read('addedToHomescreen') && window.app.session.id) {
+        User.update(window.app.session.id, { addedToHomescreen: true });
+        console.log('isAddedToHomescreen', '更新しました');
+      }
+
+      this.doAfterLoading();
     });
   }
 
   readUsers() {
     return new Promise(function(resolve) {
-      Firestore.readUsers().done(resolve);
+      Firestore.readUsers().done((d)=> {
+        console.log('firebase users done.');
+        resolve(d);
+      });
     });
   }
 
   readImages() {
     return new Promise(function(resolve) {
-      window.firebase.firestore().getImages((images)=> {
-        console.log('firebase done.');
-        resolve(images);
+      Firestore.readImages().done((d)=> {
+        console.log('firebase images done.');
+        resolve(d);
       });
     })
   }
@@ -167,19 +183,5 @@ export default class {
     return {
       images: param && param.id ? Image.sortByRelatedEffort(param.id) : Image.sortByNewer()
     };
-  }
-
-  _doAfterAllLoading() {
-    this.isLoaded = true;
-    if (this.isJustAddedToHomescreen) {
-      window.slack.postMessage('ホーム画面からアクセスされました userID: ' + window.app.session.id);
-    }
-
-    if (LocalStorage.read('addedToHomescreen') && window.app.session.id) {
-      User.update(window.app.session.id, { addedToHomescreen: true });
-      console.log('isAddedToHomescreen', '更新しました');
-    }
-
-    this.doAfterLoading();
   }
 }

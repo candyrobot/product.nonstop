@@ -34,6 +34,24 @@ export default new class {
 	}
 
 	readImages() {
+		let fn = function() {};
+		this.read('images').done((querySnapshot)=> {
+			const a = [];
+			querySnapshot.forEach((doc) => {
+				a.push({
+					id: doc.id,
+					url: doc.get('url') || this._getDownloadURL(doc.get('filePath')),
+					created_at: doc.get('created_at').toDate(),
+					deleteFlag: doc.get('deleteFlag')
+				});
+			});
+			fn(a);
+		});
+		return { done: (_fn)=> fn = _fn }
+	}
 
+	_getDownloadURL(filePath) {
+		const bucketName = window.config.projectId + '.appspot.com';
+		return `https://firebasestorage.googleapis.com/v0/b/${bucketName}/o/${encodeURIComponent(filePath)}?alt=media`;
 	}
 }

@@ -33,8 +33,8 @@ export default class extends Component {
 	getImages() {
 		// INFO: 源のdataを書き換えてはいけない
 		// Object.assign(window.app, window.app[query('method')](query('param')));
-		const dat = window.app[query('method')](query('param'));
-		dat.images.filter((i)=> !i.deleteFlag);
+		let dat = window.app[query('method')](query('param'));
+		dat = dat.images.filter((i)=> !i.deleteFlag);
 
 		// if (Unlock.is('MaxImages'))
 

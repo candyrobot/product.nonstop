@@ -14,12 +14,4 @@ export default window.User = new class {
   update(userID, hash) {
     Firestore.update('users', userID, hash);
   }
-
-  read() {
-    Firestore.read('users').done((querySnapshot)=> {
-      console.log(2, querySnapshot);
-      // TODO: herokuのあとに呼んでwindow.app.usersとマージ
-      debugger;
-    });
-  }
 }
