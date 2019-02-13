@@ -25,7 +25,7 @@ export default new class {
 				a.push({
 					id: doc.id,
 					addedToHomescreen: doc.get('addedToHomescreen'),
-					limitShowingImages: doc.get('limitShowingImages')
+					isUnlockedShowingImagesLimited: doc.get('isUnlockedShowingImagesLimited')
 				});
 			});
 			fn(a);

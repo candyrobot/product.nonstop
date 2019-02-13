@@ -31,14 +31,18 @@ export default class extends Component {
 	}
 
 	getImages() {
+		if (!window.app.isLoaded)
+			return [];
+
 		// INFO: 源のdataを書き換えてはいけない
 		// Object.assign(window.app, window.app[query('method')](query('param')));
-		let dat = window.app[query('method')](query('param'));
-		dat = dat.images.filter((i)=> !i.deleteFlag);
+		let images = window.app[query('method')](query('param')).images;
+		images = images.filter((v)=> !v.deleteFlag);
 
-		// if (Unlock.is('MaxImages'))
+		if (!window.app.users.find(window.app.session.id).isUnlockedShowingImagesLimited)
+			images = images.filter((_, i)=> i < 80);
 
-		return dat;
+		return images;
 	}
 
 	getReactListUser() {
