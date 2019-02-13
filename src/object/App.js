@@ -70,53 +70,55 @@ export default class {
 
     initializeRouteAndRedirect();
 
-    let n = 0;
+    Promise.all([
+      this.readImages(),
+      this.readAll(),
+    ])
+    .then((data)=> {
+      const images = data[0];
+      const dat = data[1];
 
-    // Server.firestore.load((images)=> {
-
-    // });
-    // Server.heroku.load((dat)=> {
-    //   this.isLoadedSessionData = true;
-    // });
-
-    window.firebase.firestore().getImages((images)=> {
-      n++; console.log('firebase done.');
-
-      if (n === 2) {
-        this.images = this.images.concat(images);
-        this._doAfterAllLoading();
-      }
-      else {
-        this.images = images;
-      }
-    });
-
-    // TODO: herokuが重い。改善しないと表示が遅い
-    // いやfirebaseのほうが遅い
-    $.ajax({
-      type: 'GET',
-      url: domain + '/application' + window.location.search,
-      headers: {
-        'X-CSRF-Token': localStorage.getItem('app.nonstop.session.token')
-      }
-    })
-    .done((dat)=> {
-      n++; console.log('heroku done.');
+      dat.images.concat(images);
 
       this.users = dat.users;
+      this.images = dat.images;
       this.favorites = dat.favorites;
       this.session = dat.session;
 
-      // INFO: firebaseと統一しておく
-      dat.images = dat.images.map((i)=> (i.created_at = new Date(i.created_at), i));
+      this._doAfterAllLoading();
+    });
+  }
 
-      if (n === 2) {
-        this.images = this.images.concat(dat.images);
-        this._doAfterAllLoading();
-      }
-      else {
-        this.images = dat.images;
-      }
+  readImages() {
+    return new Promise(function(resolve) {
+      window.firebase.firestore().getImages((images)=> {
+        console.log('firebase done.');
+        resolve(images);
+      });
+
+    })
+  }
+
+  readAll() {
+    return new Promise(function(resolve) {
+      // TODO: herokuが重い。改善しないと表示が遅い
+      // いやfirebaseのほうが遅い
+      $.ajax({
+        type: 'GET',
+        url: domain + '/application' + window.location.search,
+        headers: {
+          'X-CSRF-Token': localStorage.getItem('app.nonstop.session.token')
+        }
+      })
+      .done((dat)=> {
+        console.log('heroku done.');
+
+        // INFO: firebaseと統一しておく
+        dat.images = dat.images.map((i)=> (i.created_at = new Date(i.created_at), i));
+
+        resolve(dat);
+      });
+
     });
   }
 
