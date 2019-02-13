@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import Toast from '../object/Toast';
+import Firestorage from '../object/Firestorage';
 import {
 	countUp
 } from '../component.env/_util';
@@ -31,7 +32,7 @@ export default window.Device = {
 			const toast = new Toast('アップロードを開始します');
 			let n = 1;
 			files.forEach((f)=> {
-				window.firebase.storage().upload(f)
+				Firestorage.upload(f)
 				.done((dat)=> {
 					window.slack.postMessage(window.slackMessage.postImage(
 						window.app.session ? `${window.app.session.id} ${window.app.session.email}` : '未ログイン'

@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import '../object/Array';
 import '../object/FileList';
-import '../object/firebase';
 import Route from '../object/Route';
 import LocalStorage from '../object/LocalStorage';
 import Firestore from '../object/Firestore';
