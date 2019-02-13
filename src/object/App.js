@@ -61,8 +61,7 @@ export default class {
 
   constructor() {
 
-    // TODO: created_atの値を文字列にしないとstringifyしたときに復元不可な値になってしまう
-    // this.images = LocalStorage.read('images');
+    this.images = LocalStorage.read('images');
 
     if (query('utm_source', true) === 'homescreen') {
       this.isJustAddedToHomescreen = true;
@@ -148,7 +147,7 @@ export default class {
         console.log('heroku done.');
 
         // INFO: firebaseと統一しておく
-        dat.images = dat.images.map((v)=> (v.created_at = new Date(v.created_at), v));
+        dat.images = dat.images.map((v)=> (v.created_at = new Date(v.created_at).getTime(), v));
         dat.users = dat.users.map((v)=> (v.id = v.id.toString(), v));
 
         resolve(dat);

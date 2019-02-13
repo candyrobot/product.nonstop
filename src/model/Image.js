@@ -31,7 +31,7 @@ export default window.Image = new class {
 
 	sortByNewer() {
 		return window.app.images.sort((iA, iB)=> {
-			return iA.created_at.getTime() > iB.created_at.getTime() ? -1 : 1;
+			return iA.created_at > iB.created_at ? -1 : 1;
 		});
 	}
 

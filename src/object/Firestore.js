@@ -41,7 +41,7 @@ export default new class {
 				a.push({
 					id: doc.id,
 					url: doc.get('url') || this._getDownloadURL(doc.get('filePath')),
-					created_at: doc.get('created_at').toDate(),
+					created_at: doc.get('created_at').toDate().getTime(),
 					deleteFlag: doc.get('deleteFlag')
 				});
 			});
