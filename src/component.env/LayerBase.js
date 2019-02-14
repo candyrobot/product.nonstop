@@ -21,11 +21,9 @@ const ItemMaster = new class {
 		// INFO: 源のdataを書き換えてはいけない
 		// Object.assign(window.app, window.app[query('method')](query('param')));
 		let images = window.app[query('method')](query('param')).images;
+		images = images.filter((v)=> !v.deleteFlag);
 		images.forEach((v, i)=> {
-			if (window.me && i > window.me.imageMaxDisplableNum)
-				return;
-			
-			if (v.deleteFlag)
+			if (window.me && i >= window.me.imageMaxDisplableNum)
 				return;
 
 			if (!window.app.isAddedToHomescreen() && !(i === 0) && !(i % 12)) {
@@ -77,12 +75,18 @@ export default class extends Component {
 		if (window.me && !window.me.isUnlockedShowingImagesLimited)
 			items.push(
 			<div className="Tile2 paper" key={'Tile2'}>
-				<h3>
-					ツイートしてもっと見る
+				<h3 style={{ fontSize: 30 }}>
+					おっと！
 				</h3>
 				<p>
-					ツイートして今日は無制限に画像を閲覧しましょう！
+					<b>まだ無数にあります！</b>が、<br />
+					これ以上はツイート（拡散）して頂きたいです！<br />
+					{/*もっと画像を増やしてもらうために😋<br />*/}
 				</p>
+				{/*
+				<p style={{ fontSize: 10, fontWeight: 'bold' }}>
+					ツイートして今日は無制限に画像を閲覧しましょう！
+				</p>*/}
 				<p>
 					<a
 						{...getPropsToShare()}
@@ -90,7 +94,7 @@ export default class extends Component {
 						className="button"
 						>
 						<i className="fab fa-twitter" style={{ paddingRight: 5 }}></i>
-						もっと見る🌟
+						もっと見るために拡散🌟
 					</a>
 				</p>
 			</div>);

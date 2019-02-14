@@ -134,6 +134,7 @@ body > .fullscreenImage > .imageContainer > img {
 
 
 .Tile2 {
+  width: 100%;
   text-align: center;
   background-image: linear-gradient(to right top, #ff684b, #ff863a, #ffa624, #ffc706, #ffe800);
   color: white;
@@ -142,7 +143,7 @@ body > .fullscreenImage > .imageContainer > img {
   margin: 10px 0 0;
 }
 .Tile2 p {
-  font-size: 12px;
+  font-size: 13px;
 }
 
 
