@@ -18,6 +18,9 @@ class Me {
   constructor(user) {
     Object.assign(this, user);
 
+    if (this.isJustShared())
+      this.isUnlockedShowingImagesLimited = true;
+
     this.imageMaxDisplableNum =
       this.isUnlockedShowingImagesLimited ?
         Infinity : 80;
