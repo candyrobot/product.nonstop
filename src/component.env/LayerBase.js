@@ -39,7 +39,7 @@ export default class extends Component {
 		let images = window.app[query('method')](query('param')).images;
 		images = images.filter((v)=> !v.deleteFlag);
 
-		if (!window.app.users.find(window.app.session.id).isUnlockedShowingImagesLimited)
+		if (window.app.isLogined() && !window.app.users.find(window.app.session.id).isUnlockedShowingImagesLimited)
 			images = images.filter((_, i)=> i < 80);
 
 		return images;

@@ -23,6 +23,7 @@ export default class extends React.Component {
 		return (new Date().getTime() - iPast) > 1000 * 60 * 60 * 24;
 	}
 
+	// TODO: DRYに
 	render() {
 		const t = encodeURI('Tumblrより画像収拾が8.3倍捗ると話題『nonStop』　pic.twitter.com/WREvim9ydM　リンク: ');
 		const u = encodeURI('https://nonstop-vr.firebaseapp.com/');
@@ -35,9 +36,7 @@ export default class extends React.Component {
 			open={this.shouldOpen() && this.props.open}
 			onClose={this.props.onClose}
 		>
-			<div id="component-LetsShare"
-				className="component-suggestion paper"
-			>
+			<div className="component-suggestion paper">
 				<h3 style={{ fontSize: 18, textIndent: '.5em' }}>
 					このアプリを拡散希望🌟
 				</h3>
