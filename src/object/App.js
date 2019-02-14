@@ -16,6 +16,8 @@ class Me {
   imageMaxDisplableNum = -1;
 
   constructor(user) {
+    window.slack.postMessage(`アクセスされました userID: ${window.app.session.id}`);
+
     Object.assign(this, user);
 
     if (this.isJustShared())
