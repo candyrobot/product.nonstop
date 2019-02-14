@@ -9,22 +9,15 @@ import DialogSlide from '../component/DialogSlide';
 import {
   getPropsToShare,
 } from '../component.env/_util';
+import LocalStorage from '../object/LocalStorage';
 
 export default class extends React.Component {
-
-	shouldOpen() {
-		const v = localStorage.getItem('app.nonstop.time.lastShared');
-		if (v === null)
-			return true;
-		const iPast = parseInt(localStorage.getItem('app.nonstop.time.lastShared'));
-		return (new Date().getTime() - iPast) > 1000 * 60 * 60 * 24;
-	}
 
 	render() {
 		return (
 		<DialogSlide
 			className='Dialog-margin-small'
-			open={this.shouldOpen() && this.props.open}
+			open={!window.me.isJustShared() && this.props.open}
 			onClose={this.props.onClose}
 		>
 			<div className="component-suggestion paper">
@@ -53,10 +46,3 @@ export default class extends React.Component {
 		);
 	}
 }
-				// <p>
-				// 	まだまだ画像不足！<br />
-				// 	拡散して毎日画像を投稿してもらおう！
-				// </p>
-				// <p>
-				// 	ツイートするだけ！
-				// </p>

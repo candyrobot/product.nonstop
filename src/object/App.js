@@ -18,9 +18,17 @@ class Me {
   constructor(user) {
     Object.assign(this, user);
 
-    this.imageMaxDisplableNum = 
+    this.imageMaxDisplableNum =
       this.isUnlockedShowingImagesLimited ?
         Infinity : 80;
+  }
+
+  isJustShared() {
+    const v = LocalStorage.read('time.lastShared');
+    if (v === null)
+      return false;
+    const iPast = parseInt(LocalStorage.read('time.lastShared'));
+    return (new Date().getTime() - iPast) <= 1000 * 60 * 60 * 24;
   }
 }
 
