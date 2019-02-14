@@ -11,18 +11,18 @@ import {
   query
 } from '../component.env/_util';
 
-// const Server = {
-//   firestore: {
-//     load: ()=> {
+class Me {
 
-//     }
-//   },
-//   heroku: {
-//     load: ()=> {
+  imageMaxDisplableNum = -1;
 
-//     }
-//   }
-// };
+  constructor(user) {
+    Object.assign(this, user);
+
+    this.imageMaxDisplableNum = 
+      this.isUnlockedShowingImagesLimited ?
+        Infinity : 80;
+  }
+}
 
 function initializeRouteAndRedirect() {
   // queryはユーザーに知られることを前提に書こう。URLで表現される。
@@ -98,6 +98,10 @@ export default class {
       this.images = dat.images;
       this.favorites = dat.favorites;
       this.session = dat.session;
+
+
+      if (this.session)
+        window.me = new Me(this.users.find(this.session.id));
 
 
       if (this.isJustAddedToHomescreen) {

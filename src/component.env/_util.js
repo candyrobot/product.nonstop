@@ -5,6 +5,22 @@ import Toast from '../object/Toast';
 // export const domain = "http://0.0.0.0:3000";
 export const domain = "https://with-one-account-prd.herokuapp.com";
 
+export const getPropsToShare = function() {
+  const t = encodeURI('Tumblrより画像収拾が8.3倍捗ると話題『nonStop』　pic.twitter.com/WREvim9ydM　リンク: ');
+  const u = encodeURI('https://nonstop-vr.firebaseapp.com/');
+  const h = encodeURI('nonstopVr');
+  const o = encodeURI(window.location.href);
+  return {
+    href: `https://twitter.com/intent/tweet?text=${t}&url=${u}&original_referer=${o}&hashtags=${h}`,
+    onClick: ()=> {
+      localStorage.setItem('app.nonstop.time.lastShared', new Date().getTime())
+      if (window.app.session)
+        window.slack.postMessage(window.app.session.id + 'さんが拡散しようとしています');
+    },
+    target: '_blank'
+  };
+};
+
 export const signup = function() {
   var dat;
   dat = {};

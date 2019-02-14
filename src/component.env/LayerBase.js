@@ -3,7 +3,8 @@ import ReactList from 'react-list';
 import $ from 'jquery';
 import {
 	countUp,
-	query
+	query,
+	getPropsToShare
 } from '../component.env/_util';
 import User from '../model/User';
 import AppBar from '../component/AppBar';
@@ -12,6 +13,31 @@ import AdvancedImage from '../component.env/AdvancedImage';
 import Image from '../component.env/Image';
 import Favorite from '../component.env/Favorite';
 import Banner from '../component.env/Banner';
+
+const ItemMaster = new class {
+	get() {
+		const items = [];
+
+		// INFO: 源のdataを書き換えてはいけない
+		// Object.assign(window.app, window.app[query('method')](query('param')));
+		let images = window.app[query('method')](query('param')).images;
+		images.forEach((v, i)=> {
+			if (window.me && i > window.me.imageMaxDisplableNum)
+				return;
+			
+			if (v.deleteFlag)
+				return;
+
+			if (!window.app.isAddedToHomescreen() && !(i === 0) && !(i % 12)) {
+				items.push(<Banner data-react-list-index={i} key={i+'Banner'} />)
+			}
+
+			items.push(<Image data-react-list-index={i} key={i} dat={v} />);
+		});
+
+		return items;
+	}
+}
 
 export default class extends Component {
 
@@ -30,19 +56,68 @@ export default class extends Component {
 		return i;
 	}
 
-	getImages() {
+	// TODO: 別クラスに移動させたい（移動先未定）
+	_isSinglePage() {
+		return !!query('param') && query('param').id;
+	}
+
+	getItems() {
+		let items = [];
+
 		if (!window.app.isLoaded)
-			return [];
+			return items;
 
-		// INFO: 源のdataを書き換えてはいけない
-		// Object.assign(window.app, window.app[query('method')](query('param')));
-		let images = window.app[query('method')](query('param')).images;
-		images = images.filter((v)=> !v.deleteFlag);
+		if (query('method') === 'image' && this._isSinglePage()) {
+			items.push(<AdvancedImage key="AdvancedImage" imageID={query('param').id} />);
+			items.push(<h5 className="headline" key="headline">関連</h5>);
+		}
 
-		if (window.app.isLogined() && !window.app.users.find(window.app.session.id).isUnlockedShowingImagesLimited)
-			images = images.filter((_, i)=> i < 80);
+		items = items.concat(ItemMaster.get());
 
-		return images;
+		if (window.me && !window.me.isUnlockedShowingImagesLimited)
+			items.push(
+			<div className="Tile2 paper" key={'Tile2'}>
+				<h3>
+					ツイートしてもっと見る
+				</h3>
+				<p>
+					ツイートして今日は無制限に画像を閲覧しましょう！
+				</p>
+				<p>
+					<a
+						{...getPropsToShare()}
+						style={{ padding: '.5em 1em' }}
+						className="button"
+						>
+						<i className="fab fa-twitter" style={{ paddingRight: 5 }}></i>
+						もっと見る🌟
+					</a>
+				</p>
+			</div>);
+		else
+			items.push(
+			<div className="Tile2 paper" key={'Tile2'}>
+				<h3>
+					これ以上ありません↓
+				</h3>
+				<p>
+					まだまだ画像不足！<br />
+					このサービスをお好きでしたら、
+					ぜひツイートして画像をもっと投稿してもらいましょう！
+				</p>
+				<p>
+					<a
+						{...getPropsToShare()}
+						style={{ padding: '.5em 1em' }}
+						className="button"
+						>
+						<i className="fab fa-twitter" style={{ paddingRight: 5 }}></i>
+						画像をもっと増やしてもらう🌟
+					</a>
+				</p>
+			</div>);
+
+		return items;
 	}
 
 	getReactListUser() {
@@ -55,51 +130,14 @@ export default class extends Component {
 		}
 	}
 
-	getReactListImage() {
-		const imageID = query('method') === 'image' && query('param') && query('param').id;
-		const data = this.getImages();
-		return {
-			length: data.length,
-			itemRenderer: (i, key)=> {
-				if (i === 0)
-					return [
-						<AdvancedImage key="AdvancedImage" imageID={imageID} />,
-						<h5 className="headline" key="headline">
-							関連
-						</h5>,
-						<Image data-react-list-index={i} key={key} dat={data[i]} />
-					]
-				if (!window.app.isAddedToHomescreen() && !(i === 0) && !(i % 12))
-					return [<Banner key="banner" />, <Image data-react-list-index={i} key={key} dat={data[i]} />];
-				else
-					return <Image data-react-list-index={i} key={key} dat={data[i]} />;
-			},
-		}
-	}
-
-	getReactListImages() {
-		const data = this.getImages();
-		return {
-			length: data.length,
-			itemRenderer: (i, key)=> {
-				if (!window.app.isAddedToHomescreen() && !(i === 0) && !(i % 12))
-					return [<Banner key="banner" />, <Image data-react-list-index={i} key={key} dat={data[i]} />];
-				else
-					return <Image data-react-list-index={i} key={key} dat={data[i]} />;
-			},
-		}
-	}
-
 	getReactListProps() {
 		if (window.Route.is('user')) {
 			return this.getReactListUser();
 		}
-		else {
-			const imageID = query('method') === 'image' && query('param') && query('param').id;
-			if (imageID)
-				return this.getReactListImage();
-			else
-				return this.getReactListImages();
+		const items = this.getItems();
+		return {
+			length: items.length,
+			itemRenderer: (i)=> items[i]
 		}
 	}
 
