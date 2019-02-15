@@ -19,6 +19,9 @@ export default window.Image = new class {
 	// }
 
 	sortByRelated(imageID) {
+		if (!window.app.isLogined())
+			return [];
+
 		return window.app.images
 		.map((i)=> {
 			i.relatedScore = window.app.favorites.where({imageID: imageID})
@@ -30,12 +33,18 @@ export default window.Image = new class {
 	}
 
 	sortByNewer() {
+		if (!window.app.isLogined())
+			return [];
+
 		return window.app.images.sort((iA, iB)=> {
 			return iA.created_at > iB.created_at ? -1 : 1;
 		});
 	}
 
 	sortByFavorites() {
+		if (!window.app.isLogined())
+			return [];
+
 		return window.app.images
 		.map((i)=> {
 			i.favorites = window.app.favorites.where({ imageID: i.id });
@@ -45,6 +54,9 @@ export default window.Image = new class {
 	}
 
 	sortByRelatedEffort(imageID) {
+		if (!window.app.isLogined())
+			return [];
+
 		let images;
 		if (this.isEnoughToShowRecommendation(imageID)) {
 			images = this.sortByRelated(imageID);
@@ -57,17 +69,24 @@ export default window.Image = new class {
 
 	// INFO: sortByRelatedアルゴリズムに必要なfavrite数があればtrue
 	isEnoughToShowRecommendation(imageID) {
+		if (!window.app.isLogined())
+			return [];
+
 		return window.app.favorites.where({ imageID }).length > 3
 	}
 
 	filterByMyFavorite() {
+		if (!window.app.isLogined())
+			return [];
+
 		return window.app.images.filter((i)=> window.app.favorites.where({ imageID: i.id, userID: window.app.session.id }).length);
 	}
 
 	// TODO: Arrayをextendsしたら引数をとる
 	excludeIFavorited(images) {
-		if (window.app === undefined || window.app.session === undefined)
+		if (!window.app.isLogined())
 			return [];
+
 		return images.filter((i)=> {
 			if (i === undefined)
 				return false;
@@ -76,6 +95,9 @@ export default window.Image = new class {
 	}
 
 	isIFavorited(imageID) {
+		if (!window.app.isLogined())
+			return [];
+
 		return !!window.app.favorites.where({imageID: imageID, userID: window.app.session.id}).length;
 	}
 }
