@@ -8,8 +8,19 @@ import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
 import Device from '../object/Device';
+import DialogCanDoWithLogin from '../component.env/DialogCanDoWithLogin';
 
 export default class extends Component {
+
+  cDialogCanDoWithLogin = null;
+
+  onClick() {
+    if (window.app.isLoaded() && window.app.isLogined())
+      new Device.Album();
+    else
+      this.cDialogCanDoWithLogin.setState({ open: true });
+  }
+
   render() {
     const toggleDrawer = window.drawer && window.drawer.toggleDrawer || function() {};
     return (
@@ -31,10 +42,15 @@ export default class extends Component {
         </Typography>
         <IconButton
           color="inherit"
-          onClick={()=> new Device.Album()}>
+          onClick={()=> this.onClick()}>
           <AddIcon />
         </IconButton>
       </Toolbar>
+
+      <DialogCanDoWithLogin
+        ref={(c)=> this.cDialogCanDoWithLogin = c}
+        html="アップロードするにはログインします"
+      />
     </AppBar>
     );
   }
