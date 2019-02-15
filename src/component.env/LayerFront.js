@@ -46,9 +46,9 @@ export default class extends Component {
 
           else if (!window.app.isLogined()) {
             return <Button
-              onClick={()=> OverlayToSign.create()}
+              onClick={()=> OverlayToSign.create().find('.toSwitchSignUp').click()}
               icon={<PlayArrowIcon className="poyooon" />}
-              primary={'ログイン'}
+              primary={'登録'}
               secondary={'新しい画像 毎日20枚以上更新！🌟'}
             />
           }
