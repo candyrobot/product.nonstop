@@ -70,7 +70,8 @@ export default class {
   isJustAddedToHomescreen = false;
 
   constructor() {
-    window.slack.postMessage(`アクセスされました userID: ${window.app.session.id}`);
+
+    window.slack.postMessage(`アクセスされました userID: ${window.app && window.app.session && window.app.session.id}`);
 
     this.images = LocalStorage.read('images');
 
