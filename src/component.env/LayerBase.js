@@ -62,7 +62,7 @@ export default class extends Component {
 	getItems() {
 		let items = [];
 
-		if (!window.app.isLoaded)
+		if (!window.app.isLoaded())
 			return items;
 
 		if (query('method') === 'image' && this._isSinglePage()) {

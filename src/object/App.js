@@ -66,7 +66,7 @@ export default class {
   images = [];
   users = [];
   favorites = [];
-  isLoaded = false;
+  loaded = false;
   isJustAddedToHomescreen = false;
 
   constructor() {
@@ -88,7 +88,7 @@ export default class {
       this.readUsers()
     ])
     .then((data)=> {
-      this.isLoaded = true;
+      this.loaded = true;
 
 
       const images = data[0];
@@ -170,6 +170,10 @@ export default class {
       });
 
     });
+  }
+
+  isLoaded() {
+    return this.loaded;
   }
 
   isAdmin() {

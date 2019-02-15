@@ -19,7 +19,7 @@ export default window.Image = new class {
 	// }
 
 	sortByRelated(imageID) {
-		if (!window.app.isLoaded)
+		if (!window.app.isLoaded())
 			return [];
 
 		return window.app.images
@@ -33,7 +33,7 @@ export default window.Image = new class {
 	}
 
 	sortByNewer() {
-		if (!window.app.isLoaded)
+		if (!window.app.isLoaded())
 			return [];
 
 		return window.app.images.sort((iA, iB)=> {
@@ -42,7 +42,7 @@ export default window.Image = new class {
 	}
 
 	sortByFavorites() {
-		if (!window.app.isLoaded)
+		if (!window.app.isLoaded())
 			return [];
 
 		return window.app.images
@@ -54,7 +54,7 @@ export default window.Image = new class {
 	}
 
 	sortByRelatedEffort(imageID) {
-		if (!window.app.isLoaded)
+		if (!window.app.isLoaded())
 			return [];
 
 		let images;
@@ -68,7 +68,7 @@ export default window.Image = new class {
 	}
 
 	shuffle(imageID) {
-		if (!window.app.isLoaded)
+		if (!window.app.isLoaded())
 			return [];
 
 		return window.app.images.shuffle(imageID);
@@ -76,14 +76,14 @@ export default window.Image = new class {
 
 	// INFO: sortByRelatedアルゴリズムに必要なfavrite数があればtrue
 	isEnoughToShowRecommendation(imageID) {
-		if (!window.app.isLoaded)
+		if (!window.app.isLoaded())
 			return [];
 
 		return window.app.favorites.where({ imageID }).length > 3
 	}
 
 	filterByMyFavorite() {
-		if (!window.app.isLoaded)
+		if (!window.app.isLoaded())
 			return [];
 
 		return window.app.images.filter((i)=> window.app.favorites.where({ imageID: i.id, userID: window.app.session.id }).length);
@@ -91,7 +91,7 @@ export default window.Image = new class {
 
 	// TODO: Arrayをextendsしたら引数をとる
 	excludeIFavorited(images) {
-		if (!window.app.isLoaded)
+		if (!window.app.isLoaded())
 			return [];
 
 		return images.filter((i)=> {
@@ -102,7 +102,7 @@ export default window.Image = new class {
 	}
 
 	isIFavorited(imageID) {
-		if (!window.app.isLoaded)
+		if (!window.app.isLoaded())
 			return [];
 
 		return !!window.app.favorites.where({imageID: imageID, userID: window.app.session.id}).length;
