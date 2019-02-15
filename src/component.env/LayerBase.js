@@ -22,7 +22,7 @@ const ItemMaster = new class {
 		// INFO: 源のdataを書き換えてはいけない
 		// Object.assign(window.app, window.app[query('method')](query('param')));
 		let images = window.app[query('method')](query('param')).images;
-		
+
 		images = images.filter((v)=> !v.deleteFlag);
 
 		images.forEach((v, i)=> {
@@ -43,12 +43,12 @@ const ItemMaster = new class {
 function PleaseShareToSeeMore() {
 	return (
 	<div className="Tile2 paper" key={'Tile2'}>
-		<h3 style={{ fontSize: 30 }}>
-			おっと！
+		<h3 style={{ fontSize: 22 }}>
+			楽しんでいただけてますか？
 		</h3>
 		<p>
-			<b>まだ無数にあります！</b>が、<br />
-			これ以上はツイート（拡散）して頂きたいです！<br />
+			これ以上見るにはツイート（拡散）して下さい<br />
+			<b>まだ無数にあります！</b><br />
 			{/*もっと画像を増やしてもらうために😋<br />*/}
 		</p>
 		{/*
@@ -149,11 +149,11 @@ export default class extends Component {
 		items = items.concat(ItemMaster.get());
 
 		if (!window.Me.isLogined())
-			items.push(<PleaseSignupToSeeMore />);
+			items.push(<PleaseSignupToSeeMore key="PleaseSignupToSeeMore" />);
 		else if (!window.Me.isJustShared())
-			items.push(<PleaseShareToSeeMore />);
+			items.push(<PleaseShareToSeeMore key="PleaseShareToSeeMore" />);
 		else
-			items.push(<NothingToShow />);
+			items.push(<NothingToShow key="NothingToShow" />);
 
 		return items;
 	}

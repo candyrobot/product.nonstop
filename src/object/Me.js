@@ -13,7 +13,11 @@ export default window.Me = new class Me {
 	}
 
 	getImageMaxDisplableNum() {
-		return this.isLogined() && this.isJustShared() ? Infinity : 70;
+		if (!this.isLogined())
+			return 50;
+		if (!this.isJustShared())
+			return 100;
+		return Infinity;
 	}
 
 	isJustShared() {
