@@ -62,9 +62,16 @@ export default window.Image = new class {
 			images = this.sortByRelated(imageID);
 		}
 		else {
-			images = window.app.images.shuffle(imageID);
+			images = this.shuffle(imageID);
 		}
 		return this.excludeIFavorited(images.exclude({ id: imageID }));
+	}
+
+	shuffle(imageID) {
+		if (!window.app.isLoaded)
+			return [];
+
+		return window.app.images.shuffle(imageID);
 	}
 
 	// INFO: sortByRelatedアルゴリズムに必要なfavrite数があればtrue

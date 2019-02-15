@@ -7,6 +7,7 @@ import {
   query
 } from '../component.env/_util';
 import Button from '../component/Button';
+import BottomNavigation from '../component.env/BottomNavigation';
 import Recommendation from '../component.env/Recommendation';
 import ButtonToggleFavorite from '../component.env/ButtonToggleFavorite';
 import OverlayToSign from '../component.env/OverlayToSign';
@@ -72,6 +73,7 @@ export default class extends Component {
           ref={(c)=> document.app.cRecommendation = c}
           imageID={imageID}
         />
+        {/*<BottomNavigation />*/}
       </div>
     </div>
     );

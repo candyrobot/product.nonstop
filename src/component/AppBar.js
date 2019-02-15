@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -9,7 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
 import Device from '../object/Device';
 
-export default class extends React.Component {
+export default class extends Component {
   render() {
     const toggleDrawer = window.drawer && window.drawer.toggleDrawer || function() {};
     return (

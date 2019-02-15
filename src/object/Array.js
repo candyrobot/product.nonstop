@@ -169,14 +169,27 @@ Array.prototype.serialize = function() {
   }, []);
 };
 
+// INFO: https://sbfl.net/blog/2017/06/01/javascript-reproducible-random/
+// INFO: Google: 疑似乱数, シード値
+// INFO: https://qiita.com/komaji504/items/62a0f8ea43053e90555a
 Array.prototype.shuffle = function(seed) {
-  if (seed === undefined)
-    return this;
+  const cloned = this.clone();
+
+  if (seed === undefined) {
+    for(var i = this.length - 1; i > 0; i--){
+        var r = Math.floor(Math.random() * (i + 1));
+        var tmp = cloned[i];
+        cloned[i] = cloned[r];
+        cloned[r] = tmp;
+    }
+    return cloned;
+  }
+
   const sosu = 31;
   const seedNum = getAnyCharNumber(seed);
   const gr2 = (x)=> Math.abs(sosu * x + seedNum);
-  const cloned = this.clone();
   // console.log(seedNum);
+  
   for(var i = this.length - 1; i > 0; i--){
       var r = seedNum * gr2(i) % this.length;
       var tmp = cloned[i];
@@ -227,19 +240,6 @@ Array.prototype.shuffle = function(seed) {
 //   }
 
 //   return cloned;
-// };
-
-// INFO: https://sbfl.net/blog/2017/06/01/javascript-reproducible-random/
-// INFO: Google: 疑似乱数, シード値
-// INFO: https://qiita.com/komaji504/items/62a0f8ea43053e90555a
-// Array.prototype.shuffle = function() {
-//   for(var i = this.length - 1; i > 0; i--){
-//       var r = Math.floor(Math.random() * (i + 1));
-//       var tmp = this[i];
-//       this[i] = this[r];
-//       this[r] = tmp;
-//   }
-//   return this;
 // };
 
 function increaseRandomPower(n, n2) {
