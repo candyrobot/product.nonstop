@@ -161,6 +161,10 @@ body > .fullscreenImage > .imageContainer > img {
 }
 
 
+.LayerFront {
+  /*INFO: TwitterのWebViewで見ると下部がかくれるから*/
+  bottom: 50px;
+}
 .LayerFront .rounded {
   margin-left: auto;
   margin-right: 10px;
@@ -210,12 +214,10 @@ body > .fullscreenImage > .imageContainer > img {
 
 
 .area-recommendation {
-  position: relative;
   z-index: 1;
-}
-.area-recommendation {
   position: relative;
-  padding-bottom: 25px;
+  padding-bottom: 75px;
+  margin-bottom: -50px;
   background-color: rgba(0, 0, 0, 1);
   color: white;
 }
