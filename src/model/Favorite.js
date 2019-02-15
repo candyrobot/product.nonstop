@@ -3,11 +3,13 @@ import Toast from '../object/Toast';
 import {
   domain,
   startLoading,
-  stopLoading
+  stopLoading,
+  getName
 } from '../component.env/_util';
 
 export default new class {
   create(imageID, instance) {
+    window.slack.postMessage(`${getName()}さん 画像ID: ${imageID} お気入りボタン クリックしました`);
     if (!window.app.session) {
       new Toast('ログインするとお気入りに保存できます', true);
       return;
@@ -25,8 +27,6 @@ export default new class {
       new Toast(dat.responseJSON.toast, true);
     })
     .done((favorites)=> {
-      window.slack.postMessage(window.slackMessage.like(`${window.app.session.id} ${window.app.session.email}`, imageID));
-
       window.app.favorites.push(favorites[0]);
       instance.setState({});
     })
@@ -34,6 +34,7 @@ export default new class {
   }
 
   delete(imageID, instance) {
+    window.slack.postMessage(`${getName()}さん 画像ID: ${imageID} 否お気入りボタン クリックしました`);
     if (!window.app.session) {
       new Toast('ログインするとお気入りに保存できます', true);
       return;
@@ -48,8 +49,6 @@ export default new class {
       }
     })
     .done(()=> {
-      window.slack.postMessage(window.slackMessage.unlike(`${window.app.session.id} ${window.app.session.email}`, imageID));
-
       window.app.favorites = window.app.favorites.exclude({ imageID, userID: window.app.session.id });
       instance.setState({});
     })

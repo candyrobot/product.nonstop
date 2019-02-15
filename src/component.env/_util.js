@@ -5,6 +5,13 @@ import Toast from '../object/Toast';
 // export const domain = "http://0.0.0.0:3000";
 export const domain = "https://with-one-account-prd.herokuapp.com";
 
+export const getName = function() {
+  if (window.app && window.app.session && window.app.session.id)
+    return `${window.app.session.id} ${window.app.session.email}`;
+  else
+    return undefined;
+}
+
 export const getPropsToShare = function() {
   const t = encodeURI('Tumblrより画像収拾が8.3倍捗ると話題『nonStop』　pic.twitter.com/WREvim9ydM　リンク: ');
   const u = encodeURI('https://nonstop-vr.firebaseapp.com/');
