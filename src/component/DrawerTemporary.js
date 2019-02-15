@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
+import Badge from '@material-ui/core/Badge';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
@@ -77,10 +78,12 @@ export default class extends React.Component {
                 this.setState({ left: false });
               }}
             >
-              <ListItemText
-                primary="みんな"
-                secondary={<small style={{ fontWeight: 'bold' }}>（利用者数 1,520人以上）</small>}
-              />
+              <Badge badgeContent={window.app.favorites.length} color="error" max={Infinity}>
+                <ListItemText
+                  primary="みんな"
+                  secondary={<small style={{ fontWeight: 'bold' }}>（利用者数 {window.app.favorites.length}人以上）</small>}
+                />
+              </Badge>
             </ListItem>
             <ListItem
               button
