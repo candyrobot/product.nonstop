@@ -23,6 +23,7 @@ export const getPropsToShare = function() {
       localStorage.setItem('app.nonstop.time.lastShared', new Date().getTime())
       if (window.app.session)
         window.slack.postMessage(window.app.session.id + 'さんが拡散しようとしています');
+      document.app.setState({});
     },
     target: '_blank'
   };

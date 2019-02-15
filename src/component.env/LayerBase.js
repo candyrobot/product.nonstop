@@ -13,6 +13,7 @@ import AdvancedImage from '../component.env/AdvancedImage';
 import Image from '../component.env/Image';
 import Favorite from '../component.env/Favorite';
 import Banner from '../component.env/Banner';
+import OverlayToSign from '../component.env/OverlayToSign';
 
 const ItemMaster = new class {
 	get() {
@@ -25,7 +26,7 @@ const ItemMaster = new class {
 		images = images.filter((v)=> !v.deleteFlag);
 
 		images.forEach((v, i)=> {
-			if (window.Me && i >= window.Me.imageMaxDisplableNum)
+			if (window.Me && i >= window.Me.getImageMaxDisplableNum())
 				return;
 
 			if (!window.Me.isAddedToHomescreen() && !(i === 0) && !(i % 12)) {
@@ -37,6 +38,79 @@ const ItemMaster = new class {
 
 		return items;
 	}
+}
+
+function PleaseShareToSeeMore() {
+	return (
+	<div className="Tile2 paper" key={'Tile2'}>
+		<h3 style={{ fontSize: 30 }}>
+			おっと！
+		</h3>
+		<p>
+			<b>まだ無数にあります！</b>が、<br />
+			これ以上はツイート（拡散）して頂きたいです！<br />
+			{/*もっと画像を増やしてもらうために😋<br />*/}
+		</p>
+		{/*
+		<p style={{ fontSize: 10, fontWeight: 'bold' }}>
+			ツイートして今日は無制限に画像を閲覧しましょう！
+		</p>*/}
+		<p>
+			<a
+				{...getPropsToShare()}
+				style={{ padding: '.5em 1em' }}
+				className="button"
+				>
+				<i className="fab fa-twitter" style={{ paddingRight: 5 }}></i>
+				もっと見るために拡散🌟
+			</a>
+		</p>
+	</div>
+	);
+}
+
+function NothingToShow() {
+	return (
+	<div className="Tile2 paper" key={'Tile2'}>
+		<h3>
+			これ以上ありません↓
+		</h3>
+		<p>
+			まだまだ画像不足！<br />
+			このサービスをお好きでしたら、
+			ぜひツイートして画像をもっと投稿してもらいましょう！
+		</p>
+		<p>
+			<a
+				{...getPropsToShare()}
+				style={{ padding: '.5em 1em' }}
+				className="button"
+				>
+				<i className="fab fa-twitter" style={{ paddingRight: 5 }}></i>
+				画像をもっと増やしてもらう🌟
+			</a>
+		</p>
+	</div>
+	);
+}
+
+function PleaseSignupToSeeMore() {
+	return (
+	<div className="PleaseSignupToSeeMore Tile2 paper" key={'Tile2'}>
+		<h3 style={{ fontSize: 30 }}>
+			おっと！
+		</h3>
+		<p>
+			これ以上はログインして閲覧することが出来ます<br />
+			<b style={{ fontSize: 15 }}>登録してあなただけのお気入りBOXを🌟</b>
+		</p>
+		<p>
+			<span className="button-plane" onClick={()=> OverlayToSign.create()}>ログイン</span>
+			　
+			<button className="button" onClick={()=> OverlayToSign.create().find('.toSwitchSignUp').click()}>アカウント作成</button>
+		</p>
+	</div>
+	)
 }
 
 export default class extends Component {
@@ -74,54 +148,12 @@ export default class extends Component {
 
 		items = items.concat(ItemMaster.get());
 
-		if (window.Me && !window.Me.isUnlockedShowingImagesLimited())
-			items.push(
-			<div className="Tile2 paper" key={'Tile2'}>
-				<h3 style={{ fontSize: 30 }}>
-					おっと！
-				</h3>
-				<p>
-					<b>まだ無数にあります！</b>が、<br />
-					これ以上はツイート（拡散）して頂きたいです！<br />
-					{/*もっと画像を増やしてもらうために😋<br />*/}
-				</p>
-				{/*
-				<p style={{ fontSize: 10, fontWeight: 'bold' }}>
-					ツイートして今日は無制限に画像を閲覧しましょう！
-				</p>*/}
-				<p>
-					<a
-						{...getPropsToShare()}
-						style={{ padding: '.5em 1em' }}
-						className="button"
-						>
-						<i className="fab fa-twitter" style={{ paddingRight: 5 }}></i>
-						もっと見るために拡散🌟
-					</a>
-				</p>
-			</div>);
+		if (!window.Me.isLogined())
+			items.push(<PleaseSignupToSeeMore />);
+		else if (!window.Me.isJustShared())
+			items.push(<PleaseShareToSeeMore />);
 		else
-			items.push(
-			<div className="Tile2 paper" key={'Tile2'}>
-				<h3>
-					これ以上ありません↓
-				</h3>
-				<p>
-					まだまだ画像不足！<br />
-					このサービスをお好きでしたら、
-					ぜひツイートして画像をもっと投稿してもらいましょう！
-				</p>
-				<p>
-					<a
-						{...getPropsToShare()}
-						style={{ padding: '.5em 1em' }}
-						className="button"
-						>
-						<i className="fab fa-twitter" style={{ paddingRight: 5 }}></i>
-						画像をもっと増やしてもらう🌟
-					</a>
-				</p>
-			</div>);
+			items.push(<NothingToShow />);
 
 		return items;
 	}

@@ -2,28 +2,18 @@ import LocalStorage from '../object/LocalStorage';
 
 export default window.Me = new class Me {
 
-	imageMaxDisplableNum = 80;
-
-	unlockedShowingImagesLimited = false;
-
 	session = null;
 
 	assign(user) {
 		Object.assign(this, user);
-
-		if (this.isJustShared())
-			this.unlockedShowingImagesLimited = true;
-
-		if (this.unlockedShowingImagesLimited)
-			this.imageMaxDisplableNum = Infinity;
 	}
 
 	setSession(session) {
 		this.session = session;
 	}
 
-	isUnlockedShowingImagesLimited() {
-		return this.unlockedShowingImagesLimited;
+	getImageMaxDisplableNum() {
+		return this.isLogined() && this.isJustShared() ? Infinity : 70;
 	}
 
 	isJustShared() {

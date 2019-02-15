@@ -27,15 +27,6 @@ body > .fullscreenImage > .imageContainer > img {
 }
 
 
-.ReactList {
-  padding-bottom: 100px;
-}
-.ReactList > div {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-
 .Image {
   position: relative;
   background-size: cover;
@@ -153,6 +144,9 @@ body > .fullscreenImage > .imageContainer > img {
   position: relative;
   flex-direction: column;
 }
+.LayerBase .ReactList {
+  padding-bottom: 150px;
+}
 .LayerBase .ReportIcon {
   position: fixed;
   right: 0;
@@ -254,6 +248,19 @@ body > .fullscreenImage > .imageContainer > img {
 }
 
 
+.PleaseSignupToSeeMore .button-plane {
+  display: inline-block;
+  padding: 0 20px;
+  line-height: 35px;
+  font-size: 15px;
+  border-radius: 3px;
+  border: none;
+}
+.PleaseSignupToSeeMore .button-plane:active {
+  background: #e0e0e0;
+}
+
+
 .starbacks {
   background: url(../img/starbacks.jpg) center red;
   background-size: cover;
@@ -278,4 +285,10 @@ body > .fullscreenImage > .imageContainer > img {
   font-size: 10px;
   padding-left: 1.5em;
   text-indent: -14px;
+}
+
+
+.ReactList > div {
+  display: flex;
+  flex-wrap: wrap;
 }
