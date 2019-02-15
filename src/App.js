@@ -116,16 +116,16 @@ export default class extends Component {
 
       <DrawerTemporary classes={{}} />
 
-      {window.app.isLoaded() && !window.app.isLogined() &&
+      {window.app.isLoaded() && !window.Me.isLogined() &&
         <DialogWhatIsThisApp open={this.state.DialogWhatIsThisAppOpen} onClose={()=> {
           this.setState({ DialogWhatIsThisAppOpen: false });
           this.setState({ DialogAsHinanbashoOpen: true })
         }} />}
 
-      {window.app.isLoaded() && !window.app.isLogined() &&
+      {window.app.isLoaded() && !window.Me.isLogined() &&
         <DialogAsHinanbasho open={this.state.DialogAsHinanbashoOpen} onClose={()=> this.setState({ DialogAsHinanbashoOpen: false })} />}
 
-      {window.app.isLoaded() && window.app.isLogined() &&
+      {window.app.isLoaded() && window.Me.isLogined() &&
         <DialogLetsShare open={this.state.DialogLetsShareOpen} onClose={()=> this.setState({ DialogLetsShareOpen: false })} />}
 
 

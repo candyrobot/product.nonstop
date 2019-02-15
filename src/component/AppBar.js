@@ -15,7 +15,7 @@ export default class extends Component {
   cDialogCanDoWithLogin = null;
 
   onClick() {
-    if (window.app.isLoaded() && window.app.isLogined())
+    if (window.app.isLoaded() && window.Me.isLogined())
       new Device.Album();
     else
       this.cDialogCanDoWithLogin.setState({ open: true });

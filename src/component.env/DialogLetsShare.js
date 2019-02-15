@@ -17,7 +17,7 @@ export default class extends React.Component {
 		return (
 		<DialogSlide
 			className='Dialog-margin-small'
-			open={!window.me.isJustShared() && this.props.open}
+			open={!window.Me.isJustShared() && this.props.open}
 			onClose={this.props.onClose}
 		>
 			<div className="component-suggestion paper">

@@ -12,7 +12,7 @@ export default class extends Component {
 	cDialogCanDoWithLogin = null;
 
 	handleClickThumbnail = (inherit)=> {
-		if (!window.app.isLogined()) {
+		if (!window.Me.isLogined()) {
 			this.cDialogCanDoWithLogin.setState({ open: true });
 		}
 		// else if (!window.app.kakinzumi) {
@@ -37,7 +37,7 @@ export default class extends Component {
 		<div className="AdvancedImage">
 			<img onClick={this.handleClickThumbnail} src={window.app.images.find(imageID).url} />
 
-			{window.app.isAdmin() ?
+			{window.Me.isAdmin() ?
 				<h3
 					className="ReportIcon"
 					onClick={(e)=> {

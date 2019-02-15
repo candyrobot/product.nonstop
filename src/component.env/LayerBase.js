@@ -21,12 +21,14 @@ const ItemMaster = new class {
 		// INFO: 源のdataを書き換えてはいけない
 		// Object.assign(window.app, window.app[query('method')](query('param')));
 		let images = window.app[query('method')](query('param')).images;
+		
 		images = images.filter((v)=> !v.deleteFlag);
+
 		images.forEach((v, i)=> {
-			if (window.me && i >= window.me.imageMaxDisplableNum)
+			if (window.Me && i >= window.Me.imageMaxDisplableNum)
 				return;
 
-			if (!window.app.isAddedToHomescreen() && !(i === 0) && !(i % 12)) {
+			if (!window.Me.isAddedToHomescreen() && !(i === 0) && !(i % 12)) {
 				items.push(<Banner data-react-list-index={i} key={i+'Banner'} />)
 			}
 
@@ -72,7 +74,7 @@ export default class extends Component {
 
 		items = items.concat(ItemMaster.get());
 
-		if (window.me && !window.me.isUnlockedShowingImagesLimited)
+		if (window.Me && !window.Me.isUnlockedShowingImagesLimited())
 			items.push(
 			<div className="Tile2 paper" key={'Tile2'}>
 				<h3 style={{ fontSize: 30 }}>

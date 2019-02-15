@@ -4,36 +4,13 @@ import '../object/FileList';
 import Route from '../object/Route';
 import LocalStorage from '../object/LocalStorage';
 import Firestore from '../object/Firestore';
+import Me from '../object/Me';
 import Image from '../model/Image';
 import User from '../model/User';
 import {
   domain,
   query
 } from '../component.env/_util';
-
-class Me {
-
-  imageMaxDisplableNum = -1;
-
-  constructor(user) {
-    Object.assign(this, user);
-
-    if (this.isJustShared())
-      this.isUnlockedShowingImagesLimited = true;
-
-    this.imageMaxDisplableNum =
-      this.isUnlockedShowingImagesLimited ?
-        Infinity : 80;
-  }
-
-  isJustShared() {
-    const v = LocalStorage.read('time.lastShared');
-    if (v === null)
-      return false;
-    const iPast = parseInt(LocalStorage.read('time.lastShared'));
-    return (new Date().getTime() - iPast) <= 1000 * 60 * 60 * 24;
-  }
-}
 
 function initializeRouteAndRedirect() {
   // queryはユーザーに知られることを前提に書こう。URLで表現される。
@@ -113,8 +90,12 @@ export default class {
       this.session = dat.session;
 
 
-      if (this.session)
-        window.me = new Me(this.users.find(this.session.id));
+      if (this.session) {
+        // TODO: window.app.session を廃止して window.Me.session にしたい。
+        // したら Me.assign(dat.session) だけで良くなる
+        Me.setSession(this.session);
+        Me.assign(this.users.find(this.session.id));
+      }
 
 
       if (this.isJustAddedToHomescreen) {
@@ -174,18 +155,6 @@ export default class {
 
   isLoaded() {
     return this.loaded;
-  }
-
-  isAdmin() {
-    return this.isLogined() && this.session && this.session.id === 1
-  }
-
-  isLogined() {
-    return this.session;
-  }
-
-  isAddedToHomescreen() {
-    return LocalStorage.read('addedToHomescreen');
   }
 
   favorite(param) {

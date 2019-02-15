@@ -44,7 +44,7 @@ export default class extends Component {
             />
           }
 
-          else if (!window.app.isLogined()) {
+          else if (!window.Me.isLogined()) {
             return <Button
               onClick={()=> OverlayToSign.create().find('.toSwitchSignUp').click()}
               icon={<PlayArrowIcon className="poyooon" />}
@@ -53,7 +53,7 @@ export default class extends Component {
             />
           }
 
-          else if (window.app.isLogined() && !window.app.isAddedToHomescreen()) {
+          else if (window.Me.isLogined() && !window.Me.isAddedToHomescreen()) {
             return <Button
               style={{ fontSize: 12 }}
               onClick={()=> OverlayHowToAddToHomescreen.create()}
