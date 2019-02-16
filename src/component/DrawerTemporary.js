@@ -15,6 +15,7 @@ import {
   logout
 } from '../component.env/_util';
 import OverlayToSign from '../component.env/OverlayToSign';
+import DialogCanDoWithLogin from '../component.env/DialogCanDoWithLogin';
 
 export default class extends React.Component {
 
@@ -89,7 +90,8 @@ export default class extends React.Component {
               button
               selected={this.state.selectedIndex === 2}
               onClick={()=> {
-                window.Me.isLogined() ? new Toast('近日解禁🌟', true) : new Toast('ログインすると閲覧できます', true)
+                window.Me.isLogined() ? new Toast('近日解禁🌟', true) :
+                  this.cDialogCanDoWithLogin.setState({ open: true })
               }}
             >
               <ListItemText>
@@ -155,6 +157,11 @@ export default class extends React.Component {
           </List>
         </div>
       </div>
+
+      <DialogCanDoWithLogin
+        ref={(c)=> this.cDialogCanDoWithLogin = c}
+        html="閲覧するにはログインします"
+      />
     </Drawer>
     );
   }
