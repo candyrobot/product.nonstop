@@ -15,18 +15,20 @@ export default class extends Component {
 		if (!window.Me.isLogined()) {
 			this.cDialogCanDoWithLogin.setState({ open: true });
 		}
+		else {
+			new Toast('タップで閉じる', true);
+			const imageUrl = window.app.images.find(this.props.imageID).url;
+			const $el = $(`<div class="fullscreenImage"><div class="imageContainer"><img src="${imageUrl}"></div></div>`)
+			.appendTo('body')
+			.on('click', function() {
+				$el.remove();
+			});
+		}
 		// else if (!window.app.kakinzumi) {
 		// 	console.log('TODO: ここ作ってないから通るはずない');
 			// document.app.DialogCanDoWithKakin.xxx('保存するには課金します');
 		// }
 		// else {
-		// 	new Toast('タップで閉じる', true);
-		// 	const imageUrl = window.app.images.find(this.props.imageID).url;
-		// 	const $el = $(`<div class="fullscreenImage"><div class="imageContainer"><img src="${imageUrl}"></div></div>`)
-		// 	.appendTo('body')
-		// 	.on('click', function() {
-		// 		$el.remove();
-		// 	});
 		// }
 	};
 
@@ -59,7 +61,7 @@ export default class extends Component {
 
 			<DialogCanDoWithLogin
 				ref={(c)=> this.cDialogCanDoWithLogin = c}
-				html="保存するにはログインします"
+				html="拡大するにはログインします"
 			/>
 		</div>
 		)
