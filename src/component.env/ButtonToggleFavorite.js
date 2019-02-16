@@ -39,7 +39,7 @@ export default class extends Component {
         <FavoriteIcon />
         {guide && (
           <div className="balloon" position="left" style={{ left: -5 }}>
-            タップして "お気入り" に入れると…　<span role="img" aria-label="→">👉</span>
+            {guide}　<span role="img" aria-label="→">👉</span>
           </div>
         )}
       </Wrap>

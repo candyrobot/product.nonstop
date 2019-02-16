@@ -39,7 +39,7 @@ export default class extends Component {
             return <ButtonToggleFavorite
               rounded={true}
               image={window.app.images.find(imageID)}
-              guide={!window.app.session}
+              guide={'タップして "お気入り" へ'}
               onClick={this.onClickOnFavorite}
             />
           }
