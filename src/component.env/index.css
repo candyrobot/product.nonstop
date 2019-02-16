@@ -144,7 +144,7 @@ body > .fullscreenImage > .imageContainer > img {
   position: relative;
   flex-direction: column;
 }
-.LayerBase .ReactList {
+.LayerBase .ReactList > div {
   padding-bottom: 150px;
 }
 .LayerBase .ReportIcon {
