@@ -17,6 +17,11 @@ body > .fullscreenImage > .imageContainer > img {
 }
 
 
+.DialogSlide .close {
+  color: white;
+}
+
+
 .headline {
   width: 100%;
   color: white;
