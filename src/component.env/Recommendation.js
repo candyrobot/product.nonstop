@@ -68,13 +68,14 @@ export default class extends Component {
 	}
 
 	render() {
+		const imageID = this.props.imageID;
 		return (
 		<div
 			ref={(el)=> this.state.open ? this.open(el) : $(el).hide(300)}
 			className="area-recommendation"
 		>
 			<h4>関連</h4>
-			<ComponentImagesHorizontal />
+			<ComponentImagesHorizontal imageID={imageID} />
 			<div className="close" onClick={()=> this.close()}>×</div>
 		</div>
 		);
