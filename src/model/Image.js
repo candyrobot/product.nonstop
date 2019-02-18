@@ -71,7 +71,7 @@ export default window.Image = new class {
 		if (!window.app.isLoaded())
 			return [];
 
-		return window.app.images.shuffle(imageID);
+		return this.sortByNewer().shuffle(imageID);
 	}
 
 	// INFO: sortByRelatedアルゴリズムに必要なfavrite数があればtrue
