@@ -5,6 +5,7 @@ import Route from '../object/Route';
 import LocalStorage from '../object/LocalStorage';
 import Firestore from '../object/Firestore';
 import Me from '../object/Me';
+import Toast from '../object/Toast';
 import Image from '../model/Image';
 import User from '../model/User';
 import {
@@ -58,6 +59,10 @@ export default class {
     }
 
     initializeRouteAndRedirect();
+
+    setTimeout(()=> {
+      new Toast('タップして拡大できます', true);
+    }, 1000 * 15);
 
     Promise.all([
       this.readImages(),
