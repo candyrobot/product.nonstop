@@ -31,7 +31,10 @@ export default class extends React.Component {
 				aria-describedby="alert-dialog-slide-description"
 			>
 				{this.props.children}
-				<div className="close" onClick={()=> this.setState({ open: false })}>×</div>
+				<div className="close" onClick={()=> {
+					this.setState({ open: false });
+					this.props.onClose();
+				}}>×</div>
 			</Dialog>
 		);
 	}
