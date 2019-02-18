@@ -60,10 +60,6 @@ export default class {
 
     initializeRouteAndRedirect();
 
-    setTimeout(()=> {
-      new Toast('タップして拡大できます', true);
-    }, 1000 * 15);
-
     Promise.all([
       this.readImages(),
       this.readAll(),
@@ -111,6 +107,14 @@ export default class {
         User.update(window.app.session.id, { addedToHomescreen: true });
         console.log('isAddedToHomescreen', '更新しました');
       }
+
+
+      if (!Me.isLogined()) {
+        setTimeout(()=> {
+          new Toast('タップして拡大できます', true);
+        }, 1000 * 15);
+      }
+
 
       this.doAfterLoading();
     });
