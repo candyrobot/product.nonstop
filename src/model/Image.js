@@ -4,7 +4,10 @@ import Firestore from '../object/Firestore';
 // window.images.sortByNewer()と使えるようにしたい
 export default window.Image = new class {
 
-	// INFO: CRUDから命名
+	setData(data) {
+		this.data = data;
+	}
+
 	create(files) {
 
 	}
@@ -14,12 +17,8 @@ export default window.Image = new class {
 		alert('削除しました');
 	}
 
-	// 命名だけよかった
-	// saveUrl(url) {
-	// }
-
 	sortByRelated(imageID) {
-		if (!window.app.isLoaded())
+		if (this.data === undefined)
 			return [];
 
 		return window.app.images
@@ -33,7 +32,7 @@ export default window.Image = new class {
 	}
 
 	sortByNewer() {
-		if (!window.app.isLoaded())
+		if (this.data === undefined)
 			return [];
 
 		return window.app.images.sort((iA, iB)=> {
@@ -42,7 +41,7 @@ export default window.Image = new class {
 	}
 
 	sortByFavorites() {
-		if (!window.app.isLoaded())
+		if (this.data === undefined)
 			return [];
 
 		return window.app.images
@@ -54,7 +53,7 @@ export default window.Image = new class {
 	}
 
 	sortByRelatedEffort(imageID) {
-		if (!window.app.isLoaded())
+		if (this.data === undefined)
 			return [];
 
 		let images;
@@ -68,7 +67,7 @@ export default window.Image = new class {
 	}
 
 	shuffle(imageID) {
-		if (!window.app.isLoaded())
+		if (this.data === undefined)
 			return [];
 
 		return this.sortByNewer().shuffle(imageID);
@@ -76,14 +75,14 @@ export default window.Image = new class {
 
 	// INFO: sortByRelatedアルゴリズムに必要なfavrite数があればtrue
 	isEnoughToShowRecommendation(imageID) {
-		if (!window.app.isLoaded())
+		if (this.data === undefined)
 			return [];
 
 		return window.app.favorites.where({ imageID }).length > 3
 	}
 
 	filterByMyFavorite() {
-		if (!window.app.isLoaded())
+		if (this.data === undefined)
 			return [];
 
 		return window.app.images.filter((i)=> window.app.favorites.where({ imageID: i.id, userID: window.app.session.id }).length);
@@ -91,8 +90,8 @@ export default window.Image = new class {
 
 	// TODO: Arrayをextendsしたら引数をとる
 	excludeIFavorited(images) {
-		if (!window.app.isLoaded())
-			return [];
+		if (this.data === undefined || !window.Me.isLogined())
+			return images;
 
 		return images.filter((i)=> {
 			if (i === undefined)
@@ -102,7 +101,7 @@ export default window.Image = new class {
 	}
 
 	isIFavorited(imageID) {
-		if (!window.app.isLoaded())
+		if (this.data === undefined)
 			return [];
 
 		return !!window.app.favorites.where({imageID: imageID, userID: window.app.session.id}).length;

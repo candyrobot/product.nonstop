@@ -138,9 +138,6 @@ export default class extends Component {
 	getItems() {
 		let items = [];
 
-		if (!window.app.isLoaded())
-			return items;
-
 		if (query('method') === 'image' && this._isSinglePage()) {
 			items.push(<AdvancedImage key="AdvancedImage" imageID={query('param').id} />);
 			items.push(<h5 className="headline" key="headline">関連</h5>);

@@ -51,7 +51,11 @@ export default class {
 
     window.slack.postMessage(`アクセスされました userID: ${window.app && window.app.session && window.app.session.id}`);
 
-    this.images = LocalStorage.read('images');
+    this.users = LocalStorage.read('users') || [];
+    this.images = LocalStorage.read('images') || [];
+    this.favorites = LocalStorage.read('favorites') || [];
+
+    Image.setData(this.images);
 
     if (query('utm_source', true) === 'homescreen') {
       this.isJustAddedToHomescreen = true;
@@ -91,6 +95,8 @@ export default class {
       this.session = dat.session;
 
 
+      Image.setData(this.images);
+
       if (this.session) {
         // TODO: window.app.session を廃止して window.Me.session にしたい。
         // したら Me.assign(dat.session) だけで良くなる
@@ -114,6 +120,13 @@ export default class {
           new Toast('タップして拡大できます', true);
         }, 1000 * 15);
       }
+
+
+      LocalStorage.create({
+        users: window.app.users,
+        images: window.app.images,
+        favorites: window.app.favorites,
+      });
 
 
       this.doAfterLoading();
