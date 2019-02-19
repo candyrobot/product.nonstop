@@ -93,7 +93,6 @@ export default class extends Component {
     const $el = startLoading();
 
     window.app.doAfterLoading = ()=> {
-      LocalStorage.create({ images: window.app.images });
       stopLoading($el);
       this.setState({});
     };
