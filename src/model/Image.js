@@ -82,9 +82,9 @@ export default window.Image = new class {
 	}
 
 	filterByMyFavorite() {
-		if (this.data === undefined)
+		if (this.data === undefined || !window.Me.isLogined())
 			return [];
-
+		
 		return window.app.images.filter((i)=> window.app.favorites.where({ imageID: i.id, userID: window.app.session.id }).length);
 	}
 

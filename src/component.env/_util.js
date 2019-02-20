@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import Toast from '../object/Toast';
+import LocalStorage from '../object/LocalStorage';
 
 // ！！！！！注意間違えて本番にやらないように！！！！！
 // export const domain = "http://0.0.0.0:3000";
@@ -20,7 +21,7 @@ export const getPropsToShare = function() {
   return {
     href: `https://twitter.com/intent/tweet?text=${t}&url=${u}&original_referer=${o}&hashtags=${h}`,
     onClick: ()=> {
-      localStorage.setItem('app.nonstop.time.lastShared', new Date().getTime())
+      LocalStorage.create({ 'time.lastShared': new Date().getTime() });
       if (window.app.session)
         window.slack.postMessage(window.app.session.id + 'さんが拡散しようとしています');
       document.app.setState({});
@@ -75,9 +76,13 @@ export const login = function(dat) {
     stopLoading();
   })
   .done(function(dat) {
-    window.slack.postMessage(window.slackMessage.login(`${dat.session.id} ${dat.session.email}`));
+    window.slack.postMessage(window.slackMessage.login(getName()));
 
-  	localStorage.setItem('app.nonstop.session.token', dat.session.token);
+    LocalStorage.create({
+      'session.token': dat.session.token,
+      'session.id': dat.session.id,
+    });
+
     setTimeout(()=> window.location.reload(), 1000);
   });
 };

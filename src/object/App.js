@@ -159,7 +159,7 @@ export default class {
         type: 'GET',
         url: domain + '/application' + window.location.search,
         headers: {
-          'X-CSRF-Token': localStorage.getItem('app.nonstop.session.token')
+          'X-CSRF-Token': LocalStorage.read('session.token')
         }
       })
       .done((dat)=> {

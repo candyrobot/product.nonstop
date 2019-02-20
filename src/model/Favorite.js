@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import Toast from '../object/Toast';
+import LocalStorage from '../object/LocalStorage';
 import {
   domain,
   startLoading,
@@ -20,7 +21,7 @@ export default new class {
       url: domain + '/favorites',
       data: { imageID },
       headers: {
-        'X-CSRF-Token': localStorage.getItem('app.nonstop.session.token')
+        'X-CSRF-Token': LocalStorage.read('session.token')
       }
     })
     .fail((dat)=> {
@@ -45,7 +46,7 @@ export default new class {
       url: domain + '/favorites',
       data: { imageID },
       headers: {
-        'X-CSRF-Token': localStorage.getItem('app.nonstop.session.token')
+        'X-CSRF-Token': LocalStorage.read('session.token')
       }
     })
     .done(()=> {

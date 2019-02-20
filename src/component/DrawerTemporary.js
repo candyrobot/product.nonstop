@@ -12,7 +12,8 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import Toast from '../object/Toast';
 import {
-  logout
+  logout,
+  getName
 } from '../component.env/_util';
 import OverlayToSign from '../component.env/OverlayToSign';
 import DialogCanDoWithLogin from '../component.env/DialogCanDoWithLogin';
@@ -127,6 +128,7 @@ export default class extends React.Component {
               onClick={()=> {
                 window.Route.push('myFavorites');
                 this.setState({ left: false });
+                window.slack.postMessage(`${getName()}さんが Drawerの"お気に入り" をタップしました`);
               }}
             >{/*
               <ListItemIcon>
