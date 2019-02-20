@@ -10,7 +10,8 @@ import Image from '../model/Image';
 import User from '../model/User';
 import {
   domain,
-  query
+  query,
+  getName
 } from '../component.env/_util';
 
 function initializeRouteAndRedirect() {
@@ -49,7 +50,7 @@ export default class {
 
   constructor() {
 
-    window.slack.postMessage(`アクセスされました userID: ${window.app && window.app.session && window.app.session.id}`);
+    window.slack.postMessage(`アクセスされました userID: ${getName()}`);
 
     this.users = LocalStorage.read('users') || [];
     this.images = LocalStorage.read('images') || [];

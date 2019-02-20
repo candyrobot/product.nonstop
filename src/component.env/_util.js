@@ -9,6 +9,8 @@ export const domain = "https://with-one-account-prd.herokuapp.com";
 export const getName = function() {
   if (window.app && window.app.session && window.app.session.id)
     return `${window.app.session.id} ${window.app.session.email}`;
+  else if (LocalStorage.read('session.id'))
+    return LocalStorage.read('session.id');
   else
     return undefined;
 }
