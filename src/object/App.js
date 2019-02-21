@@ -171,4 +171,10 @@ export default class {
       images: param && param.id ? Image.sortByRelatedEffort(param.id) : Image.sortByNewer()
     };
   }
+
+  pickup() {
+    return {
+      
+    }
+  }
 }

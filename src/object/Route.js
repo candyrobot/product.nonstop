@@ -20,8 +20,8 @@ class Route {
     this.routes = routes;
   }
 
-  is(variable) {
-    const route = this.routes.where({ variable })[0];
+  is(key) {
+    const route = this.routes.where({ key })[0];
     return (
       query('method') === route.query.method
       && JSON.stringify(query('param')) === JSON.stringify(route.query.param)
@@ -36,21 +36,21 @@ class Route {
     
     // return routes.filter((v)=> {
     //   return query('method') === v.method && query('param') === v.param
-    // })[0].variable
+    // })[0].key
   }
 
   redirectToDefault() {
-    this.push(this.routes.where({ default: true })[0].variable);
+    this.push(this.routes.where({ default: true })[0].key);
   }
 
   /**
-   * @param  {string} variable [description]
-   * @param  {object} param    [description]
+   * @param  {string} key   [description]
+   * @param  {object} param [description]
    */
-  push(variable, param) {
+  push(key, param) {
     this.doWhen.beforePushing();
 
-    const route = this.routes.where({ variable })[0];
+    const route = this.routes.where({ key })[0];
     let url = '';
 
     if (route.query.method)
@@ -62,7 +62,7 @@ class Route {
       url += `&param=${JSON.stringify(route.query.param)}`;
 
     const title = url;
-    const state = { url, title, variable };
+    const state = { url, title, key };
     window.history.pushState(state, title, url);
 
     this.doWhen.afterPushing(state);

@@ -5,20 +5,30 @@ import Route from '../object/Route';
 // INFO: doAfterPushingの挙動が同じ場合、rootは使わないほうがいい。current(bool)を得るためのisメソッドをもうひとつ書くことになる。
 // TODO: つまり初回のアクセスでもなんらかのクエリを持たさないといけないということ。
 
-export default new Route([{
-	default: true,
-	variable: 'imagesSortedByNewer',
-	query: { method: 'image' },
-}, {
-	variable: 'imagesSortedByPopular',
-	query: { method: 'image', param: { sortBy: 'favorite' } },
-}, {
-	variable: 'image',
-	query: { method: 'image', param: { id: -1 } }
-}, {
-	variable: 'user',
-	query: { method: 'user' },
-}, {
-	variable: 'myFavorites',
-	query: { method: 'favorite' },
-}]);
+export default new Route([
+	{
+		default: true,
+		key: 'imagesSortedByNewer',
+		query: { method: 'image' },
+	},
+	{
+		key: 'imagesSortedByPopular',
+		query: { method: 'image', param: { sortBy: 'favorite' } },
+	},
+	{
+		key: 'pickup',
+		query: { method: 'pickup' },
+	},
+	{
+		key: 'image',
+		query: { method: 'image', param: { id: -1 } }
+	},
+	{
+		key: 'user',
+		query: { method: 'user' },
+	},
+	{
+		key: 'myFavorites',
+		query: { method: 'favorite' },
+	},
+]);
