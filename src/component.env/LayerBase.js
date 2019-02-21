@@ -22,7 +22,7 @@ const ItemMaster = new class {
 
 		// INFO: 源のdataを書き換えてはいけない
 		// Object.assign(window.app, window.app[query('method')](query('param')));
-		let images = window.app[query('method')](query('param')).images;
+		// let images = window.app[query('method')](query('param')).images;
 
 		images = images.filter((v)=> !v.deleteFlag);
 

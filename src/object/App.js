@@ -155,26 +155,4 @@ export default class {
   isLoaded() {
     return this.loaded;
   }
-
-  favorite(param) {
-    return {
-      images: Image.filterByMyFavorite(),
-    }
-  }
-
-  user() {
-    return this
-  }
-
-  image(param) {
-    return {
-      images: param && param.id ? Image.sortByRelatedEffort(param.id) : Image.sortByNewer()
-    };
-  }
-
-  pickup() {
-    return {
-      
-    }
-  }
 }

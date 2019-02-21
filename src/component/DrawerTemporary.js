@@ -92,8 +92,10 @@ export default class extends React.Component {
               button
               selected={this.state.selectedIndex === 2}
               onClick={()=> {
-                window.Me.isLogined() ? new Toast('近日解禁🌟', true) :
-                  this.cDialogCanDoWithLogin.setState({ open: true })
+                // window.Me.isLogined() ? new Toast('近日解禁🌟', true) :
+                //   this.cDialogCanDoWithLogin.setState({ open: true });
+
+                Route.push('pickup');
               }}
             >
               <ListItemText>
