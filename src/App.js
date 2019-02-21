@@ -16,6 +16,7 @@ import './object/$';
 import './object/Slack';
 import App from './object/App';
 import LocalStorage from './object/LocalStorage';
+import Route from './object.env/Route';
 import DrawerTemporary from './component/DrawerTemporary';
 import './component/balloon.css';
 import {
@@ -52,7 +53,7 @@ export default class extends Component {
   };
 
   updateHistoryState() {
-    window.Route.updateState({
+    Route.updateState({
       // x: LayerBase_scrollTop: $('.LayerBase .ReactList').scrollTop(),
       LayerBase_scrollIndex: this.cLayerBase.getScrollIndex(),
       imagesHorizontal_scrollLeft: $('.component-images-horizontal').scrollLeft(),
@@ -67,17 +68,17 @@ export default class extends Component {
   constructor() {
     super();
 
-    window.Route.on('afterPushing', (state)=> {
+    Route.on('afterPushing', (state)=> {
       this.setState({});
       this.cRecommendation.setState({ open: false });
       this.cLayerBase.setState({ scrollIndex: 0 });
     });
 
-    window.Route.on('beforePushing', ()=> {
+    Route.on('beforePushing', ()=> {
       this.updateHistoryState();
     });
 
-    window.Route.on('popstate', ()=> {
+    Route.on('popstate', ()=> {
       this.setState({});
       const {
         LayerBase_scrollIndex,

@@ -1,11 +1,11 @@
 import $ from 'jquery';
 import '../object/Array';
 import '../object/FileList';
-import Route from '../object/Route';
 import LocalStorage from '../object/LocalStorage';
 import Firestore from '../object/Firestore';
 import Me from '../object/Me';
 import Toast from '../object/Toast';
+import Route from '../object.env/Route';
 import Image from '../model/Image';
 import User from '../model/User';
 import {
@@ -13,31 +13,6 @@ import {
   query,
   getName
 } from '../component.env/_util';
-
-function initializeRouteAndRedirect() {
-  // queryはユーザーに知られることを前提に書こう。URLで表現される。
-
-  // INFO: doAfterPushingの挙動が同じ場合、rootは使わないほうがいい。current(bool)を得るためのisメソッドをもうひとつ書くことになる。
-  // TODO: つまり初回のアクセスでもなんらかのクエリを持たさないといけないということ。
-
-  window.Route = new Route([{
-    default: true,
-    variable: 'imagesSortedByNewer',
-    query: { method: 'image' },
-  }, {
-    variable: 'imagesSortedByPopular',
-    query: { method: 'image', param: { sortBy: 'favorite' } },
-  }, {
-    variable: 'image',
-    query: { method: 'image', param: { id: -1 } }
-  }, {
-    variable: 'user',
-    query: { method: 'user' },
-  }, {
-    variable: 'myFavorites',
-    query: { method: 'favorite' },
-  }]);
-}
 
 export default class {
 
@@ -63,7 +38,8 @@ export default class {
       LocalStorage.create({ addedToHomescreen: true });
     }
 
-    initializeRouteAndRedirect();
+    if (Route.getCurrent() === undefined)
+      Route.redirectToDefault();
 
     Promise.all([
       this.readImages(),

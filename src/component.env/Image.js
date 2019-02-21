@@ -7,6 +7,7 @@ import Banner from '../component.env/Banner';
 import {
   getName
 } from '../component.env/_util';
+import Route from '../object.env/Route';
 
 export default class extends Component {
 	render() {
@@ -18,7 +19,7 @@ export default class extends Component {
 			className="Image"
 			cols="2"
 			onClick={()=> {
-				window.Route.push('image', { id: dat.id });
+				Route.push('image', { id: dat.id });
 				window.slack.postMessage(`${getName()}さんが ${dat.id} をタップしました`);
 			}}
 		>

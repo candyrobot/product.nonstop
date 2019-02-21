@@ -4,13 +4,14 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import Grow from '@material-ui/core/Grow';
 import '../component.env/Pic.css';
 import ButtonToggleFavorite from '../component.env/ButtonToggleFavorite';
+import Route from '../object.env/Route';
 
 export default class extends Component {
 
   image
 
   pushRoute() {
-    window.Route.push('image', { id: this.image.id });
+    Route.push('image', { id: this.image.id });
   }
 
   render() {

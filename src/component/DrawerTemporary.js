@@ -11,6 +11,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import Toast from '../object/Toast';
+import Route from '../object.env/Route';
 import {
   logout,
   getName
@@ -61,9 +62,9 @@ export default class extends React.Component {
             )}
             <ListItem
               button
-              selected={window.Route.is('imagesSortedByNewer')}
+              selected={Route.is('imagesSortedByNewer')}
               onClick={()=> {
-                window.Route.push('imagesSortedByNewer');
+                Route.push('imagesSortedByNewer');
                 this.setState({ left: false });
               }}
             >{/*
@@ -74,9 +75,9 @@ export default class extends React.Component {
             </ListItem>
             <ListItem
               button
-              selected={window.Route.is('user')}
+              selected={Route.is('user')}
               onClick={()=> {
-                window.Route.push('user');
+                Route.push('user');
                 this.setState({ left: false });
               }}
             >
@@ -124,9 +125,9 @@ export default class extends React.Component {
               button
               disabled={!(window.app && window.app.session)}
               selected={this.state.selectedIndex === 2}
-              selected={window.Route.is('myFavorites')}
+              selected={Route.is('myFavorites')}
               onClick={()=> {
-                window.Route.push('myFavorites');
+                Route.push('myFavorites');
                 this.setState({ left: false });
                 window.slack.postMessage(`${getName()}さんが Drawerの"お気に入り" をタップしました`);
               }}

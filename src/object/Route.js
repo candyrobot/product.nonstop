@@ -18,11 +18,6 @@ class Route {
 
   constructor(routes) {
     this.routes = routes;
-
-    // INFO: redirect
-    this.routes
-      .filter((v)=> v.query.method === query('method')).length === 0 &&
-        this.push(this.routes.where({ default: true })[0].variable);
   }
 
   is(variable) {
@@ -33,11 +28,20 @@ class Route {
     );
   }
 
-  // getCurrent() {
-  //   return routes.filter((v)=> {
-  //     return query('method') === v.method && query('param') === v.param
-  //   })[0].variable
-  // }
+  // TODO: routesに登録していない場合はundefinedを返す
+  getCurrent() {
+    
+    if (this.routes.filter((v)=> v.query.method === query('method')).length === 0)
+      return undefined;
+    
+    // return routes.filter((v)=> {
+    //   return query('method') === v.method && query('param') === v.param
+    // })[0].variable
+  }
+
+  redirectToDefault() {
+    this.push(this.routes.where({ default: true })[0].variable);
+  }
 
   /**
    * @param  {string} variable [description]

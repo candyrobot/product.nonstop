@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactList from 'react-list';
 import $ from 'jquery';
+import Route from '../object.env/Route';
 import {
 	countUp,
 	query,
@@ -166,7 +167,7 @@ export default class extends Component {
 	}
 
 	getReactListProps() {
-		if (window.Route.is('user')) {
+		if (Route.is('user')) {
 			return this.getReactListUser();
 		}
 		const items = this.getItems();
