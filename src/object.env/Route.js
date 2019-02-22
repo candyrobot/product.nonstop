@@ -16,8 +16,8 @@ export default new Route([
 		query: { method: 'image', param: { sortBy: 'favorite' } },
 	},
 	{
-		key: 'pickup',
-		query: { method: 'pickup' },
+		key: 'hot',
+		query: { method: 'hot' },
 	},
 	{
 		key: 'image',

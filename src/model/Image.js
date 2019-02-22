@@ -21,8 +21,7 @@ export default window.Image = new class {
 		if (this.data === undefined)
 			return [];
 
-		return window.app.images
-		.map((i)=> {
+		return this.data.map((i)=> {
 			i.relatedScore = window.app.favorites.where({imageID: imageID})
 			.reduce((n, f)=> {
 				return n + window.app.favorites.where({imageID: i.id, userID: f.userID}).length;
@@ -35,7 +34,7 @@ export default window.Image = new class {
 		if (this.data === undefined)
 			return [];
 
-		return window.app.images.sort((iA, iB)=> {
+		return this.data.sort((iA, iB)=> {
 			return iA.created_at > iB.created_at ? -1 : 1;
 		});
 	}
@@ -44,8 +43,7 @@ export default window.Image = new class {
 		if (this.data === undefined)
 			return [];
 
-		return window.app.images
-		.map((i)=> {
+		return this.data.map((i)=> {
 			i.favorites = window.app.favorites.where({ imageID: i.id });
 			return i;
 		})
@@ -85,7 +83,14 @@ export default window.Image = new class {
 		if (this.data === undefined || !window.Me.isLogined())
 			return [];
 		
-		return window.app.images.filter((i)=> window.app.favorites.where({ imageID: i.id, userID: window.app.session.id }).length);
+		return this.data.filter((i)=> window.app.favorites.where({ imageID: i.id, userID: window.app.session.id }).length);
+	}
+
+	filterByHot() {
+		if (this.data === undefined)
+			return this.data;
+
+		return this.sortByNewer().exclude({ isNotHot: true });
 	}
 
 	// TODO: Arrayをextendsしたら引数をとる

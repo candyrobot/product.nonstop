@@ -172,9 +172,9 @@ export default class {
     };
   }
 
-  pickup() {
+  hot() {
     return {
-      
+      images: Image.filterByHot()
     }
   }
 }
