@@ -26,13 +26,14 @@ export default class extends React.Component {
 	}
 
 	render() {
+		const html = this.state.html || this.props.html;
 		return (
 		<DialogSlide className='Dialog-margin-small' onClose={()=> this.handleClose()} open={this.state.open}>
 			<div
 				id="component-letsSignup"
 				className="component-suggestion paper"
 			>
-				{this.props.html}
+				{html}
 				<h3>登録してあなただけのお気入りBOXを🌟</h3>
 				<p>
 					<span className="button-plane" onClick={()=> this.open()}>ログイン</span>

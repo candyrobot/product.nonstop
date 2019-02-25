@@ -32,6 +32,7 @@ import LayerFront from './component.env/LayerFront';
 import DialogWhatIsThisApp from './component.env/DialogWhatIsThisApp';
 import DialogAsHinanbasho from './component.env/DialogAsHinanbasho';
 import DialogLetsShare from './component.env/DialogLetsShare';
+import DialogCanDoWithLogin from './component.env/DialogCanDoWithLogin';
 
 // disableUsersZoom();
 
@@ -117,16 +118,23 @@ export default class extends Component {
       <DrawerTemporary classes={{}} />
 
       {window.app.isLoaded() && !window.Me.isLogined() &&
+        <DialogCanDoWithLogin ref={(c)=> window.cDialogCanDoWithLogin = c} />
+      }
+
+      {window.app.isLoaded() && !window.Me.isLogined() &&
         <DialogWhatIsThisApp open={this.state.DialogWhatIsThisAppOpen} onClose={()=> {
           this.setState({ DialogWhatIsThisAppOpen: false });
           this.setState({ DialogAsHinanbashoOpen: true })
-        }} />}
+        }} />
+      }
 
       {window.app.isLoaded() && !window.Me.isLogined() &&
-        <DialogAsHinanbasho open={this.state.DialogAsHinanbashoOpen} onClose={()=> this.setState({ DialogAsHinanbashoOpen: false })} />}
+        <DialogAsHinanbasho open={this.state.DialogAsHinanbashoOpen} onClose={()=> this.setState({ DialogAsHinanbashoOpen: false })} />
+      }
 
       {window.app.isLoaded() && window.Me.isLogined() &&
-        <DialogLetsShare open={this.state.DialogLetsShareOpen} onClose={()=> this.setState({ DialogLetsShareOpen: false })} />}
+        <DialogLetsShare open={this.state.DialogLetsShareOpen} onClose={()=> this.setState({ DialogLetsShareOpen: false })} />
+      }
 
 
       {/*

@@ -12,7 +12,7 @@ export default new class {
   create(imageID, instance) {
     window.slack.postMessage(`${getName()}さん 画像ID: ${imageID} お気入りボタン クリックしました`);
     if (!window.app.session) {
-      new Toast('ログインするとお気入りに保存できます', true);
+      window.cDialogCanDoWithLogin.setState({ open: true, html: 'ログインするとお気入りに保存できます' });
       return;
     }
     const $el = startLoading();
@@ -37,7 +37,7 @@ export default new class {
   delete(imageID, instance) {
     window.slack.postMessage(`${getName()}さん 画像ID: ${imageID} 否お気入りボタン クリックしました`);
     if (!window.app.session) {
-      new Toast('ログインするとお気入りに保存できます', true);
+      window.cDialogCanDoWithLogin.setState({ open: true, html: 'ログインするとお気入りに保存できます' });
       return;
     }
     const $el = startLoading();
