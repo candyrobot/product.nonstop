@@ -1,24 +1,35 @@
 import $ from 'jquery';
 import Toast from '../object/Toast';
+import LocalStorage from '../object/LocalStorage';
 
 // ！！！！！注意間違えて本番にやらないように！！！！！
 // export const domain = "http://0.0.0.0:3000";
 export const domain = "https://with-one-account-prd.herokuapp.com";
 
-$.ajaxSetup({
-  headers: {
-  	'X-CSRF-Token': localStorage.getItem('app.nonstop.session.token')
-  }
-});
+export const getName = function() {
+  if (window.app && window.app.session && window.app.session.id)
+    return `${window.app.session.id} ${window.app.session.email}`;
+  else if (LocalStorage.read('session.id'))
+    return LocalStorage.read('session.id');
+  else
+    return undefined;
+}
 
-export const loadImage = ()=> {
-  $('[data-load-image]:not([style*="background"])').inView().each(function() {
-    var url = $(this).data('load-image');
-    console.log(url);
-    $(this).css({
-      backgroundImage: `url(${url})`
-    });
-  });
+export const getPropsToShare = function() {
+  const t = encodeURI('Tumblrより画像収拾が8.3倍捗ると話題『nonStop』　pic.twitter.com/WREvim9ydM　リンク: ');
+  const u = encodeURI('https://nonstop-vr.firebaseapp.com/');
+  const h = encodeURI('nonstopVr');
+  const o = encodeURI(window.location.href);
+  return {
+    href: `https://twitter.com/intent/tweet?text=${t}&url=${u}&original_referer=${o}&hashtags=${h}`,
+    onClick: ()=> {
+      LocalStorage.create({ 'time.lastShared': new Date().getTime() });
+      if (window.app.session)
+        window.slack.postMessage(window.app.session.id + 'さんが拡散しようとしています');
+      document.app.setState({});
+    },
+    target: '_blank'
+  };
 };
 
 export const signup = function() {
@@ -30,16 +41,21 @@ export const signup = function() {
     return;
   }
   startLoading();
-  $.post(domain + '/users/', dat).fail(function(dat) {
+  $.post(domain + '/users/', dat)
+  .fail(function(dat) {
     new Toast(dat.responseJSON.toast, true);
-  }).done(function() {
-    window.login(dat);
+    stopLoading();
+  })
+  .done(function() {
+    window.slack.postMessage(window.slackMessage.signup('新しい人'));
+
+    login(dat);
   });
 };
 
 export const logout = function() {
   localStorage.removeItem('app.nonstop.session.token')
-  setTimeout('window.location.href = "/"', 1000);
+  setTimeout(()=> { window.location.href = '/'; }, 1000);
 };
 
 export const login = function(dat) {
@@ -52,13 +68,24 @@ export const login = function(dat) {
     return;
   }
   startLoading();
-  return $.post(domain + '/users/login', dat)
+  return $.ajax({
+    type: 'POST',
+    url: domain + '/users/login',
+    data: dat,
+  })
   .fail(function(dat) {
     new Toast(dat.responseJSON.toast, true);
+    stopLoading();
   })
   .done(function(dat) {
-  	localStorage.setItem('app.nonstop.session.token', dat.session.token);
-    setTimeout('window.location.reload()', 1000);
+    window.slack.postMessage(window.slackMessage.login(getName()));
+
+    LocalStorage.create({
+      'session.token': dat.session.token,
+      'session.id': dat.session.id,
+    });
+
+    setTimeout(()=> window.location.reload(), 1000);
   });
 };
 
@@ -74,22 +101,6 @@ const isEmpty = function(dat) {
   return false;
 };
 
-export const showWebview = function(url) {
-  startLoading();
-  $('#webview').fadeIn(400);
-  $('#webview iframe').attr('src', url);
-  $('#webview iframe').animate({
-    top: 0
-  }, 500);
-  $('#webview .close').on('click', function() {
-    $('#webview iframe').removeAttr('style');
-    $('#webview iframe').removeAttr('src');
-  });
-  $('#webview iframe').on('load', function() {
-    stopLoading();
-  });
-};
-
 export const isAndroid = function() {
   return navigator.userAgent.indexOf('Android') > 0;
 };
@@ -99,18 +110,24 @@ export const isAndroid = function() {
 @param {string} name - 引数にURLクエリのkeyをいれると、jsが評価できる値を返す
 
 例)クエリが次の場合: `?hoge={}&foo=[1,2]&bar=true&piyo&fuga=hensu`
-- getUrlParameter('hoge') // {}
-- getUrlParameter('foo') // [1,2]
-- getUrlParameter('bar') // true
-- getUrlParameter('piyo') // null
-- getUrlParameter('fuga') // エラー
-- getUrlParameter('hogera') // null
+- query('hoge') // {}
+- query('foo') // [1,2]
+- query('bar') // true
+- query('piyo') // undefined
+- query('fuga') // エラー
+- query('hogera') // undefined
 */
-export function getUrlParameter(name) {
+export const query = window.query = function(name, isRaw = false) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
     var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
     var results = regex.exec(window.location.search);
-    return results === null ? null : JSON.parse(decodeURIComponent( results[1].replace(/\+/g, ' ') ));
+    if (results === null)
+      return undefined;
+    var decoded = decodeURIComponent( results[1].replace(/\+/g, ' ') );
+    if (isRaw)
+      return decoded;
+    else
+      return JSON.parse(decoded);
 }
 
 /**
@@ -138,10 +155,45 @@ export const getCount = (key)=> {
 };
 
 export const startLoading = function() {
-  $('.loadingLine').show(300);
-  return setTimeout('stopLoading()', 5000);
+  const $el = $(`
+<div class="loadingLine">
+  <span class="expand"></span>
+</div>
+  `).appendTo('body').show(300);
+  const t = setTimeout(()=> {
+    stopLoading($el);
+    new Toast('ネットワーク環境をお確かめの上、リロードしてください', true);
+  }, 1000 * 10);
+  (window.timers || (window.timers = [])).push(t);
+  return $el;
 };
 
-export const stopLoading = window.stopLoading = function() {
-  return $('.loadingLine').hide(300);
+export const stopLoading = function($el = $('body > .loadingLine')) {
+  clearTimeout((window.timers || (window.timers = [])).pop());
+  $el.hide(300, ()=> {
+    $el.remove();
+  });
 };
+
+// INFO: https://qiita.com/peutes/items/d74e5758a36478fbc039
+// document.addEventListener('touchend', event => {
+//   event.preventDefault();
+// }, false);
+export function disableUsersZoom() {
+  // for zoom with multiple fingers
+  document.addEventListener('touchstart', event => {
+    if (event.touches.length > 1) {
+      event.preventDefault();
+    }
+  }, true);
+
+  // for zoom with double tap.
+  let lastTouch = 0;
+  document.addEventListener('touchend', event => {
+    const now = window.performance.now();
+    if (now - lastTouch <= 500) {
+      event.preventDefault();
+    }
+    lastTouch = now;
+  }, true);
+}

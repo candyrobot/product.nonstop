@@ -1,10 +1,8 @@
 import $ from 'jquery';
 import Toast from '../object/Toast';
+import Firestorage from '../object/Firestorage';
 import {
-	getCount,
-	countUp,
-	domain,
-	toast
+	countUp
 } from '../component.env/_util';
 
 export default window.Device = {
@@ -19,9 +17,9 @@ export default window.Device = {
 		constructor() {
 			if(countUp('Device.Album') < 3)
 				alert(this.message);
-			
-			this.$input = 
-			$('<input type="file" accept="image/*,video/*" multiple />')
+
+			this.$input =
+			$('<input type="file" accept="image/*,video/*" style="display: none" multiple />')
 			.appendTo('body')
 			.on('change', (e)=> {
 				this.upload(e.target.files);
@@ -34,15 +32,19 @@ export default window.Device = {
 			const toast = new Toast('アップロードを開始します');
 			let n = 1;
 			files.forEach((f)=> {
-				window.firebase.storage().upload(f)
+				Firestorage.upload(f)
 				.done((dat)=> {
-						// TODO: ひとつずつsetStateしていきたい
-						if(n === files.length) {
-							setTimeout('window.location.reload()', 1000);
-							toast.destroy();
-						}
-						toast.html(`アップロード中 ${n}/${files.length}個完了`);
-						n++;
+					window.slack.postMessage(window.slackMessage.postImage(
+						window.app.session ? `${window.app.session.id} ${window.app.session.email}` : '未ログイン'
+					));
+
+					// TODO: ひとつずつsetStateしていきたい
+					if(n === files.length) {
+						setTimeout(()=> window.location.reload(), 1000);
+						toast.destroy();
+					}
+					toast.html(`アップロード中 ${n}/${files.length}個完了`);
+					n++;
 				});
 			});
 

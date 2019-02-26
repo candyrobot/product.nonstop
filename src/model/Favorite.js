@@ -1,47 +1,61 @@
 import $ from 'jquery';
 import Toast from '../object/Toast';
+import LocalStorage from '../object/LocalStorage';
 import {
   domain,
   startLoading,
-  stopLoading
+  stopLoading,
+  getName
 } from '../component.env/_util';
 
 export default new class {
-  create(imageID) {
-    if (!window.dat.session) {
-      new Toast('ログインするとお気入りに保存できます', true);
+  create(imageID, instance) {
+    window.slack.postMessage(`${getName()}さん 画像ID: ${imageID} お気入りボタン クリックしました`);
+    if (!window.app.session) {
+      window.cDialogCanDoWithLogin.setState({ open: true, html: 'ログインするとお気入りに保存できます' });
       return;
     }
-    startLoading();
-    $.post(domain + '/favorites', { imageID })
+    const $el = startLoading();
+    $.ajax({
+      type: 'POST',
+      url: domain + '/favorites',
+      data: { imageID },
+      headers: {
+        'X-CSRF-Token': LocalStorage.read('session.token')
+      }
+    })
     .fail((dat)=> {
       new Toast(dat.responseJSON.toast, true);
     })
     .done((favorites)=> {
-      window.dat.favorites.push(favorites[0]);
-      window.app.setState({});
+      window.app.favorites.push(favorites[0]);
+      instance.setState({});
     })
-    .always(stopLoading);
+    .always(()=> stopLoading($el));
   }
 
-  delete(imageID) {
-    if (!window.dat.session) {
-      new Toast('ログインするとお気入りに保存できます', true);
+  delete(imageID, instance) {
+    window.slack.postMessage(`${getName()}さん 画像ID: ${imageID} 否お気入りボタン クリックしました`);
+    if (!window.app.session) {
+      window.cDialogCanDoWithLogin.setState({ open: true, html: 'ログインするとお気入りに保存できます' });
       return;
     }
-    startLoading();
+    const $el = startLoading();
     $.ajax({
       type: 'DELETE',
       url: domain + '/favorites',
-      data: { imageID }
+      data: { imageID },
+      headers: {
+        'X-CSRF-Token': LocalStorage.read('session.token')
+      }
     })
     .done(()=> {
-      window.dat.favorites = window.dat.favorites.exclude({ imageID, userID: window.dat.session.id });
-      window.app.setState({});
+      window.app.favorites = window.app.favorites.exclude({ imageID, userID: window.app.session.id });
+      instance.setState({});
     })
     .fail(function(dat) {
       return new Toast(dat.responseJSON.toast, true);
     })
-    .always(stopLoading);
+    .always(()=> stopLoading($el));
   }
 }

@@ -1,158 +1,160 @@
+
+//============================================================================
+// 80点の導線✨
+// 80点の導線✨
+// 80点の導線✨
+// 80点の導線✨
+// 80点の導線✨
+// 80点の導線✨
+// 80点の導線✨
+//============================================================================
+
 import React, { Component } from 'react';
 import $ from 'jquery';
 import 'jquery.transit';
 import './object/$';
-import './object/Array';
-import './object/FileList';
-import './object/firebase';
-import './component.env/Route';
-import Image from './model/Image';
+import './object/Slack';
+import App from './object/App';
+import LocalStorage from './object/LocalStorage';
+import Route from './object.env/Route';
+import DrawerTemporary from './component/DrawerTemporary';
+import './component/balloon.css';
 import {
-  domain,
-  getUrlParameter,
-  loadImage
+  startLoading,
+  stopLoading,
+  query,
+  disableUsersZoom
 } from './component.env/_util';
-import {
-  DrawerConspicuous,
-  DrawerLetsSignup,
-  DrawerLetsShare
-} from './component.env/drawer';
-import Overlays from './component.env/_overlays';
-// import GridList from './component.env/GridList';
-import GridListImage from './component/GridListImage';
-import BottomNavigation from './component.env/bottomNavigation';
+import './component.env/dialog.css';
+// import Overlays from './component.env/_overlays';
+import LayerBase from './component.env/LayerBase';
+import LayerFront from './component.env/LayerFront';
+import DialogWhatIsThisApp from './component.env/DialogWhatIsThisApp';
+import DialogAsHinanbasho from './component.env/DialogAsHinanbasho';
+import DialogLetsShare from './component.env/DialogLetsShare';
+import DialogCanDoWithLogin from './component.env/DialogCanDoWithLogin';
 
-// INFO: https://qiita.com/peutes/items/d74e5758a36478fbc039
-// document.addEventListener('touchend', event => {
-//   event.preventDefault();
-// }, false);
-disableUsersZoom();
-function disableUsersZoom() {
-  // for zoom with multiple fingers
-  document.addEventListener('touchstart', event => {
-    if (event.touches.length > 1) {
-      event.preventDefault();
-    }
-  }, true);
-
-  // for zoom with double tap.
-  let lastTouch = 0;
-  document.addEventListener('touchend', event => {
-    const now = window.performance.now();
-    if (now - lastTouch <= 500) {
-      event.preventDefault();
-    }
-    lastTouch = now;
-  }, true);
-}
+// disableUsersZoom();
 
 window.$ = $;
+window.app = new App();
 
 export default class extends Component {
+
+  // INFO: 子コンポーネントら
+  cRecommendation = null;
+  cLayerBase = null;
+
+  state = {
+    conspicuousShowingIndex: 2,
+    DialogWhatIsThisAppOpen: true,
+    DialogAsHinanbashoOpen: false,
+    DialogLetsShareOpen: true,
+    DialogReport: false,
+  };
+
+  updateHistoryState() {
+    Route.updateState({
+      // x: LayerBase_scrollTop: $('.LayerBase .ReactList').scrollTop(),
+      LayerBase_scrollIndex: this.cLayerBase.getScrollIndex(),
+      imagesHorizontal_scrollLeft: $('.component-images-horizontal').scrollLeft(),
+      areaRecommendation_open: $('.area-recommendation').is(':visible')
+    });
+  }
+
+  readHistoryState() {
+    return window.history.state;
+  }
+
   constructor() {
     super();
 
-    window.app = this;
-
-    // INFO: .stateは使わない方針のほうが良いかもしれない
-    // this.state = {
-    //   images: []
-    // };
-
-    this.initializeApp();
-
-    $(window).on('popstate', (e)=> {
+    Route.on('afterPushing', (state)=> {
       this.setState({});
+      this.cRecommendation.setState({ open: false });
+      this.cLayerBase.setState({ scrollIndex: 0 });
     });
-  }
 
-  initializeApp() {
-    $(window).on('scroll', loadImage);
+    Route.on('beforePushing', ()=> {
+      this.updateHistoryState();
+    });
 
-    $.get(domain + '/application' + window.location.search, (dat)=> {
-
-      // INFO: firebaseと統一しておく
-      dat.images = dat.images.map((i)=> (i.created_at = new Date(i.created_at), i));
-
-      console.log(dat);
-      window.dat = dat;
-
+    Route.on('popstate', ()=> {
       this.setState({});
-      loadImage();
+      const {
+        LayerBase_scrollIndex,
+        imagesHorizontal_scrollLeft,
+        areaRecommendation_open
+      } = this.readHistoryState();
 
-      window.firebase.firestore().getImages((images)=> {
-        // INFO: .stateは使わない方針のほうが良いかもしれない
-        // this.state.images = this.state.images.concat(images);
-
-        // TODO: for dev
-        window.dat.images = window.dat.images.concat(images);
-
-        this.setState({});
-        loadImage();
-      });
-
-      window.Route.refresh();
-
-      $('#component-logout h1').text(window.dat.session.id);
-      $('#component-logout h5').text(window.dat.session.email);
-      if(window.dat.session) {
-        // setInterval(()=> {
-        //   new DrawerLetsShare().create();
-        // }, 1000 * 60 * 1);
-      }
-      else {
-        new DrawerConspicuous().create();
-        setTimeout(()=> {
-          new DrawerLetsSignup().create();
-        }, 1000 * 30);
-      }
+      this.cRecommendation.setState({ open: !!areaRecommendation_open });
+      this.cLayerBase.setState({ scrollIndex: LayerBase_scrollIndex || 0 });
     });
+
+
+    const $el = startLoading();
+
+    window.app.doAfterLoading = ()=> {
+      stopLoading($el);
+      this.setState({});
+    };
+
+
+    setInterval(()=> {
+      this.setState({ DialogLetsShareOpen: true });
+    },
+    // INFO: 2.5分
+    // 1000 * 60 * 2.5
+    // INFO: 5分
+    1000 * 60 * 5);
+
+    document.app = this;
   }
 
   render() {
-    let image;
-    if (getUrlParameter('method') === 'images')
-      image = getUrlParameter('param');
-
     return (
     <div className="App">
-      <div className="layer-1">
-        {
-          image && image.id
-          ?
-          (
-          <div className="fluid" testImageId={image.id}>
-            <img src={window.dat.images.find(image.id).url} />
-          </div>
-          )
-          :undefined
-        }
-        <GridListImage images={Image.sortByNewer()} />
-      </div>
 
-      <div className="component-layer layer-2">
-        <div id="drawer"></div>
-        <div className="frombottom">
-          <div className="row" id="layer2-row1"></div>
-          <div className="area-recommendation" style={{display: 'none'}}>
-            <h4>関連</h4>
-            <div className="component-images-horizontal"></div>
-            <div className="close" onClick={(e)=> $(e.target).parent().hide(300)}>×</div>
-          </div>
-          <BottomNavigation setState={(v)=> {
-            this.setState(v);
-          }} />
-        </div>
-      </div>
+      <DrawerTemporary classes={{}} />
 
-      <Overlays />
+      {window.app.isLoaded() && !window.Me.isLogined() &&
+        <DialogCanDoWithLogin ref={(c)=> window.cDialogCanDoWithLogin = c} />
+      }
 
-      <div id="layer-appMessages" className="component-layer">
-        <div className="loadingLine">
-          <span className="expand"></span>
-        </div>
+      {window.app.isLoaded() && !window.Me.isLogined() &&
+        <DialogWhatIsThisApp open={this.state.DialogWhatIsThisAppOpen} onClose={()=> {
+          this.setState({ DialogWhatIsThisAppOpen: false });
+          this.setState({ DialogAsHinanbashoOpen: true })
+        }} />
+      }
+
+      {window.app.isLoaded() && !window.Me.isLogined() &&
+        <DialogAsHinanbasho open={this.state.DialogAsHinanbashoOpen} onClose={()=> this.setState({ DialogAsHinanbashoOpen: false })} />
+      }
+
+      {window.app.isLoaded() && window.Me.isLogined() &&
+        <DialogLetsShare open={this.state.DialogLetsShareOpen} onClose={()=> this.setState({ DialogLetsShareOpen: false })} />
+      }
+
+
+      {/*
+      TODO:
+      material-uiの`z-index: 1300`などを持ってるコンポーネントらは、<App>の外にappendしている。
+      よって、いくらここで大きい数値を与えても、手前にはこない
+      need fix.
+      */}
+
+      {/*<Overlays />*/}
+
+      <div id="layer-appMessages" className="component-layer" style={{ zIndex: 1301 }}>
         <div className="alerts"></div>
       </div>
+
+
+      <LayerBase ref={(c)=> this.cLayerBase = c} />
+
+      {/*INFO: LayerBaseより手前にだしたいものはこの中へ（position: fixed非推奨。ボタンが被る）*/}
+      <LayerFront />
     </div>
     );
   }

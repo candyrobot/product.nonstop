@@ -1,3 +1,12 @@
+import Random from './Math';
+
+
+// WARN: ！！！元の配列を破壊しないで！！！
+// WARN: ！！！元の配列を破壊しないで！！！
+// WARN: ！！！元の配列を破壊しないで！！！
+// でも同じポインタが欲しい時(=参照渡ししたい時)もあるからoptionalで
+
+
 /**
  * 非破壊型
  * sample: `[0,1].merge(1, [0,0]) => [0,0,0]`
@@ -160,13 +169,131 @@ Array.prototype.serialize = function() {
   }, []);
 };
 
+// INFO: https://sbfl.net/blog/2017/06/01/javascript-reproducible-random/
+// INFO: Google: 疑似乱数, シード値
 // INFO: https://qiita.com/komaji504/items/62a0f8ea43053e90555a
-Array.prototype.shuffle = function() {
-  for(var i = this.length - 1; i > 0; i--){
-      var r = Math.floor(Math.random() * (i + 1));
-      var tmp = this[i];
-      this[i] = this[r];
-      this[r] = tmp;
+Array.prototype.shuffle = function(seed) {
+  const cloned = this.clone();
+
+  if (seed === undefined) {
+    for(var i = this.length - 1; i > 0; i--){
+        var r = Math.floor(Math.random() * (i + 1));
+        var tmp = cloned[i];
+        cloned[i] = cloned[r];
+        cloned[r] = tmp;
+    }
+    return cloned;
   }
-  return this;
+
+  const sosu = 31;
+  const seedNum = getAnyCharNumber(seed);
+  const gr2 = (x)=> Math.abs(sosu * x + seedNum);
+  // console.log(seedNum);
+  
+  for(var i = this.length - 1; i > 0; i--){
+      var r = seedNum * gr2(i) % this.length;
+      var tmp = cloned[i];
+      cloned[i] = cloned[r];
+      cloned[r] = tmp;
+  }
+  return cloned;
 };
+
+// Array.prototype.shuffle = function(seed) {
+//   if (seed === undefined)
+//     return this;
+
+//   const HASH_INCREMENT = 0x61c88647
+//   const seedNum = getAnyCharNumber(seed);
+//   const gr2 = (x)=> Math.abs(x * HASH_INCREMENT);
+//   const cloned = this.clone();
+//   console.log(seedNum);
+//   for(var i = this.length - 1; i > 0; i--){
+//       var r = seedNum * gr2(i) % this.length;
+//       var tmp = cloned[i];
+//       cloned[i] = cloned[r];
+//       cloned[r] = tmp;
+//   }
+//   return cloned;
+// };
+
+// Array.prototype.shuffle = function(seed) {
+//   if (seed === undefined)
+//     return this;
+
+//   var number = getAnyCharNumber(seed);
+//   var cloned = this.clone();
+
+//   // x:
+//   // return this.map((v, i)=> {
+//   //   var n = number * i;
+//   //   var j = getNumberNoRerationTo(n, 0, this.length - 1);
+//   //   return getNumberNoRerationTo(n, 0, this.length - 1);
+//   // });
+
+//   for(var i = this.length - 1; i > 0; i--){
+//       var n = number * i;
+//       var r = getNumberNoRerationTo(n, 0, this.length - 1);
+//       var tmp = cloned[i];
+//       cloned[i] = cloned[r];
+//       cloned[r] = tmp;
+//   }
+
+//   return cloned;
+// };
+
+function increaseRandomPower(n, n2) {
+  return n * n2 + 13;
+}
+// var nRandromByI = n / (i + 1);
+// console.log(nRandromByI, images.length % nRandromByI)
+
+function increaseRandomPower2(n, n2, n3) {
+  var a = n + 13;
+  var b = a * (n2 || a) * a;
+  return b - (n3 || a);
+}
+
+function getHitoketame(n) {
+  return parseInt(n.toString()[n.toString().length - 1]);
+}
+
+/**
+ * INFO: 一意の、だけど全く関係のない結果を返す
+ * @param {int} - 整数で
+ * @return {int} - 整数
+ */
+function getNumberNoRerationTo(n, min, max) {
+  var f = intToFloatIsFirst(n);
+  return Math.floor( f * (max - min + 1) ) + min;
+}
+
+// INFO: 整数を小数点第一位に変換する 23 -> 0.23
+function intToFloatIsFirst(n) {
+  var l = n.toString().length;
+  var p = 1;
+  for (var i=0; i<l; i++)
+    p = p * 10;
+  return n / p;
+}
+
+function getAnyCharNumber(str) {
+  return getCharNumber(toZenkaku(str));
+}
+
+function toZenkaku(str) {
+  return str.toString().replace(/[A-Za-z0-9]/g, function(s) {
+    return String.fromCharCode(s.charCodeAt(0) + 0xFEE0);
+  });
+}
+
+function getCharNumber(zenkaku) {
+  const a = escape(zenkaku).split('%u');
+  a.shift();
+  const n10 = a.reduce((p, n16)=> p + change16to10(n16), 0);
+  return n10;
+}
+
+function change16to10(str) {
+  return parseInt(str, 16);
+}

@@ -1,6 +1,7 @@
 import $ from 'jquery';
 // Usage1
 // 	new Toast('message', 10000 or true);
+//  trueにすると自動で消える
 
 // Usage2
 // 	const o = new Toast('message');

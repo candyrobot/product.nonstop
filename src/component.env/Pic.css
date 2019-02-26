@@ -1,6 +1,7 @@
 .Pic {
   position: relative;
   padding: 1px;
+  display: block;
 }
 .Pic:before {
   position: absolute;
@@ -10,14 +11,15 @@
   color: #0050a7a8;
   font-size: 40px;
 }
-.Pic .background {
+.Pic-background {
   display: block;
   position: relative;
   background-size: cover;
   background-position: center;
   background-color: rgba(255,255,255,.09);
+  background-repeat: no-repeat;
 }
-.Pic .background:after {
+.Pic-background:after {
   content: "";
   display: block;
   padding-top: 100%;
@@ -36,4 +38,11 @@
   right: 11px;
   bottom: 8px;
   font-size: 25px;
+}
+
+.Pic-background.main {
+  background-size: contain;
+}
+.Pic-background.main:after {
+  padding-top: 77vh;
 }
