@@ -146,12 +146,14 @@ export default class extends Component {
 
 		items = items.concat(ItemMaster.get());
 
-		if (!window.Me.isLogined())
-			items.push(<PleaseSignupToSeeMore key="PleaseSignupToSeeMore" />);
-		else if (!window.Me.isJustShared())
-			items.push(<PleaseShareToSeeMore key="PleaseShareToSeeMore" />);
-		else
-			items.push(<NothingToShow key="NothingToShow" />);
+		if (window.app.isLoaded()) {
+			if (!window.Me.isLogined())
+				items.push(<PleaseSignupToSeeMore key="PleaseSignupToSeeMore" />);
+			else if (!window.Me.isJustShared())
+				items.push(<PleaseShareToSeeMore key="PleaseShareToSeeMore" />);
+			else
+				items.push(<NothingToShow key="NothingToShow" />);
+		}
 
 		return items;
 	}
