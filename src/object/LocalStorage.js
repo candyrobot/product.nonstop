@@ -8,6 +8,11 @@ export default window.LocalStorage = new class {
 	}
 
 	read(key) {
-		return JSON.parse(localStorage.getItem(this.prefix + key));
+		try {
+			return JSON.parse(localStorage.getItem(this.prefix + key));
+		}
+		catch (e) {
+			return localStorage.getItem(this.prefix + key);
+		}
 	}
 }
