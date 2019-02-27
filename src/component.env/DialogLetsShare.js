@@ -16,6 +16,7 @@ export default class extends React.Component {
 	render() {
 		return (
 		<DialogSlide
+			timeToLockClosing={1000 * 5}
 			className='Dialog-margin-small'
 			open={!window.Me.isJustShared() && this.props.open}
 			onClose={this.props.onClose}

@@ -197,6 +197,9 @@ body > .fullscreenImage > .imageContainer > img {
 .Dialog-margin-small [role="document"] > div {
   margin: 5px;
 }
+.Dialog-margin-small .close {
+  color: #888;
+}
 
 
 .component-layer .row {
