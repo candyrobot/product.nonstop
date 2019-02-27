@@ -15,6 +15,12 @@ export const getName = function() {
     return undefined;
 }
 
+export const openNewTabToShare = function() {
+  const { href, onClick, target } = getPropsToShare();
+  onClick();
+  window.open(href, target);
+};
+
 export const getPropsToShare = function() {
   const t = encodeURI('Tumblrより画像収拾が8.3倍捗ると話題『nonStop』　pic.twitter.com/WREvim9ydM　リンク: ');
   const u = encodeURI('https://nonstop-vr.firebaseapp.com/');

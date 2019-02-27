@@ -4,7 +4,8 @@ import AddHomescreenIcon from '@material-ui/icons/AddToHomeScreen';
 // import AddHomescreenIcon from '@material-ui/icons/GetApp';
 import $ from 'jquery';
 import {
-  query
+  query,
+  openNewTabToShare
 } from '../component.env/_util';
 import Button from '../component/Button';
 import BottomNavigation from '../component.env/BottomNavigation';
@@ -51,6 +52,16 @@ export default class extends Component {
               primary={'アカウント作成'}
               secondary={'新しい画像 毎日20枚以上更新！🌟'}
             />
+          }
+
+          else if (!window.Me.isJustShared()) {
+            return <Button
+              style={{ fontSize: 12 }}
+              onClick={()=> openNewTabToShare()}
+              primary={'拡散してどんどん画像を増やしてもらおう🌟'}
+              secondary={'このアプリをシェアしたい！'}
+            >
+            </Button>
           }
 
           else if (window.Me.isLogined() && !window.Me.isAddedToHomescreen()) {
