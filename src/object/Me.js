@@ -16,7 +16,7 @@ export default window.Me = new class Me {
 		if (!this.isLogined())
 			return 50;
 		if (!this.isJustShared())
-			return 100;
+			return 120;
 		return Infinity;
 	}
 
