@@ -119,9 +119,19 @@ Array.prototype.where = function(hash) {
   return a;
 };
 
-// rubyでいうfind
-Array.prototype.find = function(id) {
-  return this.filter((dat)=> dat.id == id )[0];
+/**
+ * rubyでいうfind
+ * @param
+ * @param {bool} - trueでindexを返す
+*/
+Array.prototype.find = function(id, indexReturn) {
+  let i;
+  if (indexReturn) {
+    this.forEach((dat, _i)=> { if (dat.id == id) i = _i });
+    return i;
+  }
+  else
+    return this.filter((dat)=> dat.id == id )[0];
 };
 
 // INFO: whereの逆。除く
@@ -189,7 +199,7 @@ Array.prototype.shuffle = function(seed) {
   const seedNum = getAnyCharNumber(seed);
   const gr2 = (x)=> Math.abs(sosu * x + seedNum);
   // console.log(seedNum);
-  
+
   for(var i = this.length - 1; i > 0; i--){
       var r = seedNum * gr2(i) % this.length;
       var tmp = cloned[i];
