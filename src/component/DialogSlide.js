@@ -23,7 +23,7 @@ export default class extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		this.setState({ open: nextProps.open });
-		
+
 
 		if (this.props.timeToLockClosing && nextProps.open === true) {
 			this.setTimeouts();
@@ -38,6 +38,9 @@ export default class extends React.Component {
 		setTimeout(()=> this.reduceCount(), 3000);
 		setTimeout(()=> this.reduceCount(), 4000);
 		setTimeout(()=> this.reduceCount(), 5000);
+		setTimeout(()=> this.reduceCount(), 6000);
+		setTimeout(()=> this.reduceCount(), 7000);
+		setTimeout(()=> this.reduceCount(), 8000);
 	}
 
 	reduceCount() {
