@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Swipeable from 'react-swipeable';
 import $ from 'jquery';
+import {
+	getName
+} from '../component.env/_util';
 import Image from '../model/Image';
 import Toast from '../object/Toast';
 import Route from '../object.env/Route';
@@ -37,26 +40,22 @@ export default class extends Component {
 
 	onSwipedRight() {
 		const images = Image.sortByNewer();
-		let prevImage = null;
-		for (let i=0; i<images.length; i++) {
-			if (images[i].id == this.props.imageID);
-				prevImage = images[i-1];
-		}
-		console.log(prevImage.id);
-		Route.push('image', { id: prevImage.id });
-		// window.slack.postMessage(`${getName()}さんが ${dat.id} をタップしました`);
+		const index = images.find(this.props.imageID, true);
+		const targetImage = images[index - 1];
+		if (targetImage === undefined)
+			return;
+		Route.push('image', { id: targetImage.id });
+		window.slack.postMessage(`${getName()}さんが ${targetImage.id} をflickしました`);
 	}
 
 	onSwipedLeft() {
 		const images = Image.sortByNewer();
-		let nextImage = null;
-		for (let i=0; i<images.length; i++) {
-			if (images[i].id == this.props.imageID);
-				nextImage = images[i+1];
-		}
-		console.log(nextImage.id);
-		Route.push('image', { id: nextImage.id });
-		// window.slack.postMessage(`${getName()}さんが ${dat.id} をタップしました`);
+		const index = images.find(this.props.imageID, true);
+		const targetImage = images[index + 1];
+		if (targetImage === undefined)
+			return;
+		Route.push('image', { id: targetImage.id });
+		window.slack.postMessage(`${getName()}さんが ${targetImage.id} をflickしました`);
 	}
 
 	render() {

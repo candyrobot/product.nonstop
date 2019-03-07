@@ -127,7 +127,7 @@ Array.prototype.where = function(hash) {
 Array.prototype.find = function(id, indexReturn) {
   let i;
   if (indexReturn) {
-    this.filter((dat)=> dat.id == id )[0];
+    this.forEach((dat, _i)=> { if (dat.id == id) i = _i });
     return i;
   }
   else
