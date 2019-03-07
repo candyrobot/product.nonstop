@@ -152,11 +152,20 @@ body > .fullscreenImage > .imageContainer > img {
 .LayerBase .ReactList > div {
   padding-bottom: 150px;
 }
+.LayerBase .ReactList article {
+  width: 100%;
+}
 .LayerBase .ReportIcon {
   position: fixed;
   right: 0;
   top: 55px;
   color: white;
+}
+
+
+.ReactList > div {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 
@@ -295,8 +304,3 @@ body > .fullscreenImage > .imageContainer > img {
   text-indent: -14px;
 }
 
-
-.ReactList > div {
-  display: flex;
-  flex-wrap: wrap;
-}
