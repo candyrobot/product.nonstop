@@ -65,6 +65,7 @@ export default class extends Component {
 		<Swipeable
 			onSwipedLeft={(e)=> this.onSwipedLeft(e)}
 			onSwipedRight={(e)=> this.onSwipedRight(e)}
+			nodeName={'article'}
 		>
 			<div className="AdvancedImage">
 				<img onClick={this.handleClickThumbnail} src={window.app.images.find(imageID).url} />
