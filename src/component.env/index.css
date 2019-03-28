@@ -170,13 +170,21 @@ body > .fullscreenImage > .imageContainer > img {
 
 
 .LayerFront {
-  /*INFO: TwitterのWebViewで見ると下部がかくれるから*/
-  bottom: 50px;
+  /*INFO: TwitterのWebViewで見ると下部がかくれるから(50px)*/
+  /*BottomNavigationの高さ(56px)*/
+  bottom: calc(50px + 56px);
 }
 .LayerFront .rounded {
   margin-left: auto;
   margin-right: 10px;
   margin-bottom: 10px;
+}
+
+.BottomNavigation {
+  position: fixed;
+  bottom: 0px;
+  padding: 0 0 106px 0;
+  width: 100%;
 }
 
 

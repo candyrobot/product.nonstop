@@ -84,9 +84,10 @@ export default class extends Component {
           ref={(c)=> document.app.cRecommendation = c}
           imageID={imageID}
         />
-        {/*<BottomNavigation />*/}
       </div>
+      <BottomNavigation />
     </div>
     );
   }
 }
+ 

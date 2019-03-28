@@ -12,7 +12,7 @@ export default class extends Component {
 	beforeY = 0;
 
 	isScrollStopping(y) {
-		return y === this.beforeY;
+		return y === this.beforeY; 
 	}
 
 	constructor() {
@@ -28,7 +28,7 @@ export default class extends Component {
 			}
 
 			this.beforeY = y;
-		}, 50);
+		}, 700);
 	}
 
 	handleChange = (event, value) => {
